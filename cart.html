@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Vimal Aqua</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">Vimal <span>Aqua</span></div>
+
+```
+<ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="fish.html">Fish</a></li>
+    <li><a href="aquariums.html">Aquariums</a></li>
+    <li><a href="accessories.html">Accessories</a></li>
+    <li><a href="plants.html">Plants</a></li>
+    <li><a href="cart.html">Cart</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+</ul>
+```
+
+</nav>
+
+<section class="cart-section">
+
+```
+<h1>🛒 Shopping Cart</h1>
+
+<div class="cart-layout">
+
+    <div id="cart-items"></div>
+
+    <div class="order-summary">
+
+        <h2>Order Summary</h2>
+
+        <h3 id="total">Total: ₹0</h3>
+
+        <a href="checkout.html" class="checkout-btn">
+            Proceed to Checkout
+        </a>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<script>
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let total = 0;
+let html = "";
+
+cart.forEach(item => {
+
+    total += item.price;
+
+    html += `
+    <div class="cart-card">
+
+        <img src="${item.image || 'images/noimage.jpg'}"
+             class="cart-image"
+             alt="${item.name}">
+
+        <div class="cart-details">
+
+            <h3>${item.name}</h3>
+
+            <p>Premium Aquarium Product</p>
+
+            <p class="cart-price">₹${item.price}</p>
+
+            <div class="qty-box">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+            </div>
+
+        </div>
+
+    </div>
+    `;
+});
+
+if(cart.length === 0){
+    html = `
+    <div class="cart-card">
+        <h3>Your cart is empty.</h3>
+    </div>
+    `;
+}
+
+document.getElementById("cart-items").innerHTML = html;
+
+document.getElementById("total").innerText =
+"Total: ₹" + total;
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Vimal Aqua</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">Vimal <span>Aqua</span></div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fish.html">Fish</a></li>
+        <li><a href="aquariums.html">Aquariums</a></li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="plants.html">Plants</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="checkout-section">
+
+    <h1>Checkout</h1>
+
+    <p class="subtitle">
+        Complete your order details and payment.
+    </p>
+
+    <div class="checkout-container">
+
+        <div class="customer-form">
+
+            <h2>Customer Details</h2>
+
+            <input type="text" placeholder="Full Name">
+
+            <input type="tel" placeholder="Mobile Number">
+
+            <textarea placeholder="Delivery Address"></textarea>
+
+        </div>
+
+        <div class="payment-box">
+
+            <h2>Scan & Pay</h2>
+
+            <img src="images/payment-qr.png"
+                 alt="UPI QR"
+                 class="qr-code">
+
+            <p><strong>UPI ID:</strong> yourupi@upi</p>
+
+            <h3 id="checkout-total">
+                Total Amount: ₹0
+            </h3>
+
+            <a href="success.html" class="pay-btn">
+    Place Order
+</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+let total = 0;
+
+cart.forEach(item => {
+    total += item.price;
+});
+
+document.getElementById("checkout-total")
+.innerText = "Total Amount: ₹" + total;
+
+</script>
+
+</body>
+</html>

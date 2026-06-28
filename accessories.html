@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessories - Vimal Aqua</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">Vimal <span>Aqua</span></div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fish.html">Fish</a></li>
+        <li><a href="aquariums.html">Aquariums</a></li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="fish-section">
+
+    <h1>Aquarium Accessories</h1>
+
+    <p class="subtitle">
+        Premium accessories to keep your aquarium healthy and beautiful.
+    </p>
+
+    <section class="products">
+
+        <div class="product-card">
+            <img src="images/filter.jpg" alt="Filter">
+
+            <h2>Aquarium Filter</h2>
+
+            <p class="description">
+                Powerful filtration for crystal-clear water.
+            </p>
+
+            <p class="price">₹1200</p>
+
+            <button onclick="addToCart('Aquarium Filter',1200)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/airpump.jpg" alt="Air Pump">
+
+            <h2>Air Pump</h2>
+
+            <p class="description">
+                Provides oxygen and improves water circulation.
+            </p>
+
+            <p class="price">₹750</p>
+
+            <button onclick="addToCart('Air Pump',750)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/light.jpg" alt="LED Light">
+
+            <h2>LED Aquarium Light</h2>
+
+            <p class="description">
+                Bright lighting to enhance fish and plant colors.
+            </p>
+
+            <p class="price">₹999</p>
+
+            <button onclick="addToCart('LED Aquarium Light',999)">
+                Add to Cart
+            </button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/food.jpg" alt="Fish Food">
+
+            <h2>Premium Fish Food</h2>
+
+            <p class="description">
+                Nutritious food for healthy growth and vibrant colors.
+            </p>
+
+            <p class="price">₹250</p>
+
+            <button onclick="addToCart('Premium Fish Food',250)">
+                Add to Cart
+            </button>
+        </div>
+
+    </section>
+
+    <div class="cart-container">
+        <a href="cart.html" class="cart-btn">
+            🛒 View Cart
+        </a>
+    </div>
+
+</section>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
