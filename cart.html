@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquariums - Vimal Aqua</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">Vimal <span>Aqua</span></div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fish.html">Fish</a></li>
+        <li><a href="aquariums.html">Aquariums</a></li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="cart-section">
+
+```
+<h1>🛒 Shopping Cart</h1>
+
+<div class="cart-layout">
+
+    <div id="cart-items"></div>
+
+    <div class="order-summary">
+
+        <h2>Order Summary</h2>
+
+        <h3 id="total">Total: ₹0</h3>
+
+        <a href="checkout.html" class="checkout-btn">
+            Proceed to Checkout
+        </a>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function renderCart() {
+
+    let total = 0;
+    let html = "";
+
+    cart.forEach((item, index) => {
+
+        total += item.price * item.qty;
+
+        html += `
+        <div class="cart-card">
+
+            <img src="${item.image || 'images/noimage.jpg'}"
+                 class="cart-image"
+                 alt="${item.name}">
+
+            <div class="cart-details">
+
+                <h3>${item.name}</h3>
+                <p class="cart-price">₹${item.price}</p>
+
+                <div class="qty-box">
+
+                    <button onclick="decreaseQty(${index})">-</button>
+
+                    <span>${item.qty}</span>
+
+                    <button onclick="increaseQty(${index})">+</button>
+
+                </div>
+
+                <button class="remove-btn" onclick="removeItem(${index})">
+                    Remove
+                </button>
+
+            </div>
+
+        </div>
+        `;
+    });
+
+    if (cart.length === 0) {
+        html = `
+        <div class="cart-card">
+            <h3>Your cart is empty 🛒</h3>
+        </div>
+        `;
+    }
+
+    document.getElementById("cart-items").innerHTML = html;
+    document.getElementById("total").innerText = "Total: ₹" + total;
+}
+
+function increaseQty(index) {
+    cart[index].qty += 1;
+    saveCart();
+    renderCart();
+}
+
+function decreaseQty(index) {
+    if (cart[index].qty > 1) {
+        cart[index].qty -= 1;
+    } else {
+        cart.splice(index, 1);
+    }
+    saveCart();
+    renderCart();
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    saveCart();
+    renderCart();
+}
+
+// initialize qty if missing
+cart = cart.map(item => ({
+    ...item,
+    qty: item.qty || 1
+}));
+
+renderCart();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vimal Aqua</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">Vimal <span>Farms</span></div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="fish.html">Fish</a></li>
+        <li><a href="aquariums.html">Aquariums</a></li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+</nav>
+<section class="fish-section">
+
+<h1>Live Fish Collection</h1>
+
+<p class="subtitle">
+    Discover healthy, vibrant and premium ornamental fish for your aquarium.
+</p>
+
+<section class="products">
+
+    <div class="product-card">
+    <img src="images/koi.jpg" alt="Koi Fish">
+    <h2>Koi Fish</h2>
+    <p class="description">Premium Japanese ornamental koi.</p>
+    <p class="price">₹500</p>
+    <button onclick="addToCart('Koi Fish',500)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/goldfish.jpg" alt="Gold Fish">
+    <h2>Gold Fish</h2>
+    <p class="description">Popular beginner-friendly aquarium fish.</p>
+    <p class="price">₹100</p>
+    <button onclick="addToCart('Gold Fish',100)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/angel.jpg" alt="Angel Fish">
+    <h2>Angel Fish</h2>
+    <p class="description">Elegant freshwater ornamental fish.</p>
+    <p class="price">₹150</p>
+    <button onclick="addToCart('Angel Fish',150)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/betta.jpg" alt="Betta Fish">
+    <h2>Betta Fish</h2>
+    <p class="description">Colorful fighter fish with flowing fins.</p>
+    <p class="price">₹250</p>
+    <button onclick="addToCart('Betta Fish',250)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/guppy.jpg" alt="Guppy">
+    <h2>Guppy</h2>
+    <p class="description">Small vibrant fish ideal for community tanks.</p>
+    <p class="price">₹80</p>
+    <button onclick="addToCart('Guppy',80)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/sailfinmolly.jpg" alt="Sailfin Molly">
+
+    <h2>Sailfin Molly</h2>
+
+    <p class="description">
+        Elegant freshwater fish with a large sail-like dorsal fin, perfect for community aquariums.
+    </p>
+
+    <p class="price">₹120</p>
+
+    <button onclick="addToCart('Sailfin Molly',120)">
+        Add to Cart
+    </button>
+</div>
+
+<div class="product-card">
+    <img src="images/silvermolly.jpg" alt="Silver Sailfin Molly">
+    <h2>Silver Sailfin Molly</h2>
+    <p class="description">Hardy fish suitable for beginners.</p>
+    <p class="price">₹70</p>
+    <button onclick="addToCart('Silver Sailfin Molly',70)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/platy.jpg" alt="Platy">
+    <h2>Platy</h2>
+    <p class="description">Peaceful and colorful freshwater fish.</p>
+    <p class="price">₹60</p>
+    <button onclick="addToCart('Platy',60)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/swordtail.jpg" alt="Swordtail">
+    <h2>Swordtail</h2>
+    <p class="description">Active fish with a distinctive tail.</p>
+    <p class="price">₹80</p>
+    <button onclick="addToCart('Swordtail',80)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/discus.jpg" alt="Discus">
+    <h2>Discus Fish</h2>
+    <p class="description">Premium show fish with stunning colors.</p>
+    <p class="price">₹800</p>
+    <button onclick="addToCart('Discus Fish',800)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/oscar.jpg" alt="Oscar Fish">
+    <h2>Oscar Fish</h2>
+    <p class="description">Intelligent and interactive cichlid.</p>
+    <p class="price">₹450</p>
+    <button onclick="addToCart('Oscar Fish',450)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/flowerhorn.jpg" alt="Flowerhorn">
+    <h2>Flowerhorn</h2>
+    <p class="description">Popular ornamental cichlid with unique markings.</p>
+    <p class="price">₹1500</p>
+    <button onclick="addToCart('Flowerhorn',1500)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/arowana.jpg" alt="Arowana">
+    <h2>Silver Arowana</h2>
+    <p class="description">Premium aquarium fish with majestic appearance.</p>
+    <p class="price">₹3000</p>
+    <button onclick="addToCart('Silver Arowana',3000)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/neon_tetra.jpg" alt="Neon Tetra">
+    <h2>Neon Tetra</h2>
+    <p class="description">Small glowing blue-red schooling fish.</p>
+    <p class="price">₹40</p>
+    <button onclick="addToCart('Neon Tetra',40)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/corydoras.jpg" alt="Corydoras Catfish">
+    <h2>Corydoras Catfish</h2>
+    <p class="description">Bottom-cleaner peaceful aquarium fish.</p>
+    <p class="price">₹90</p>
+    <button onclick="addToCart('Corydoras Catfish',90)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/ram_cichlid.jpg" alt="Ram Cichlid">
+    <h2>Ram Cichlid</h2>
+    <p class="description">Colorful dwarf cichlid for planted tanks.</p>
+    <p class="price">₹200</p>
+    <button onclick="addToCart('Ram Cichlid',200)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/black_molly.jpg" alt="Black Molly">
+    <h2>Black Molly</h2>
+    <p class="description">Hardy black-colored livebearer fish.</p>
+    <p class="price">₹60</p>
+    <button onclick="addToCart('Black Molly',60)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/clown_loach.jpg" alt="Clown Loach">
+    <h2>Clown Loach</h2>
+    <p class="description">Striped playful bottom-dwelling fish.</p>
+    <p class="price">₹250</p>
+    <button onclick="addToCart('Clown Loach',250)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/green_severum.jpg" alt="Green Severum">
+    <h2>Green Severum</h2>
+    <p class="description">Calm and large freshwater cichlid.</p>
+    <p class="price">₹600</p>
+    <button onclick="addToCart('Green Severum',600)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/gourami.jpg" alt="Gourami">
+    <h2>Gourami</h2>
+    <p class="description">Peaceful labyrinth fish with elegant fins.</p>
+    <p class="price">₹120</p>
+    <button onclick="addToCart('Gourami',120)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/pearl_gourami.jpg" alt="Pearl Gourami">
+    <h2>Pearl Gourami</h2>
+    <p class="description">Beautiful dotted pattern aquarium fish.</p>
+    <p class="price">₹180</p>
+    <button onclick="addToCart('Pearl Gourami',180)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/hatchetfish.jpg" alt="Hatchetfish">
+    <h2>Hatchetfish</h2>
+    <p class="description">Unique surface-dwelling jumping fish.</p>
+    <p class="price">₹150</p>
+    <button onclick="addToCart('Hatchetfish',150)">Add to Cart</button>
+</div>
+
+<div class="product-card">
+    <img src="images/pleco.jpg" alt="Plecostomus">
+    <h2>Plecostomus</h2>
+    <p class="description">Algae-eating bottom cleaner fish.</p>
+    <p class="price">₹300</p>
+    <button onclick="addToCart('Plecostomus',300)">Add to Cart</button>
+</div>
+</section>
+
+<div class="cart-container">
+    <a href="cart.html" class="cart-btn">
+        🛒 View Cart
+    </a>
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
