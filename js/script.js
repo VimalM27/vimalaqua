@@ -203,3 +203,29 @@ function addToCart(name, price, image) {
 
     alert("Added to cart!");
 }
+
+function searchProducts(){
+
+    let input =
+    document.getElementById("searchInput")
+    .value.toLowerCase();
+
+    let cards =
+    document.querySelectorAll(".product-card");
+
+    cards.forEach(card => {
+
+        let productName =
+        card.querySelector("h2")
+        .innerText.toLowerCase();
+
+        if(productName.includes(input)){
+            card.style.display = "block";
+        }
+        else{
+            card.style.display = "none";
+        }
+
+    });
+
+}
