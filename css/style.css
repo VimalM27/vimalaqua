@@ -665,6 +665,178 @@ margin-top:20px;
     margin:0;
     padding:0;
 }
+
+.user-actions{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.user-actions a{
+    text-decoration:none;
+    color:white;
+    background:#00b4d8;
+    padding:8px 15px;
+    border-radius:20px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.user-actions a:hover{
+    background:#0077b6;
+}
+.about-section{
+    padding:120px 20px 60px;
+    background:#f8fbff;
+    text-align:center;
+}
+
+.about-section h1{
+    font-size:42px;
+    color:#023e8a;
+    margin-bottom:15px;
+}
+
+.subtitle{
+    font-size:18px;
+    color:#555;
+    margin-bottom:40px;
+}
+
+.about-card{
+    max-width:900px;
+    margin:0 auto 30px;
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.about-card h2{
+    color:#0077b6;
+    margin-bottom:15px;
+}
+
+.about-card p{
+    font-size:16px;
+    line-height:1.8;
+    color:#555;
+    margin-bottom:15px;
+}
+
+.about-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.info-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.info-card:hover{
+    transform:translateY(-8px);
+}
+
+.info-card h2{
+    color:#0096c7;
+    margin-bottom:10px;
+    font-size:24px;
+}
+
+.info-card p{
+    color:#666;
+    line-height:1.6;
+}
+.login-container{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#caf0f8,#90e0ef);
+    padding:20px;
+}
+
+.login-card{
+    width:100%;
+    max-width:420px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    text-align:center;
+}
+
+.login-card h1{
+    color:#023e8a;
+    margin-bottom:10px;
+}
+
+.login-subtitle{
+    color:#666;
+    margin-bottom:30px;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px 18px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+    outline:none;
+    box-sizing:border-box;
+}
+
+.input-group input:focus{
+    border-color:#00b4d8;
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#00b4d8;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.login-btn:hover{
+    background:#0077b6;
+}
+
+.login-links{
+    margin-top:15px;
+}
+
+.login-links a{
+    text-decoration:none;
+    color:#0077b6;
+}
+
+.signup-text{
+    margin-top:25px;
+    color:#666;
+}
+
+.signup-text a{
+    text-decoration:none;
+    color:#0077b6;
+    font-weight:bold;
+}
 /* =========================
    MOBILE RESPONSIVE DESIGN
    ========================= */
@@ -685,11 +857,31 @@ margin-top:20px;
         gap:10px; 
         margin-top:10px; 
     } 
-
+   
     .search-box{
         width:100%;
         margin:10px 0;
     }
+    .about-section{
+        padding:100px 15px 40px;
+    }
+
+    .about-section h1{
+        font-size:30px;
+    }
+
+    .subtitle{
+        font-size:16px;
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .about-card{
+        padding:25px;
+    }
+
 
     .hero-content{ 
         padding:0 20px; 
