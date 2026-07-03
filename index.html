@@ -15,15 +15,14 @@
     </div>
 
     <div class="search-box">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search Fish, Aquariums, Plants..."
-            onkeyup="searchProducts()">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search Fish, Aquariums, Plants..."
+        onkeypress="if(event.key==='Enter') searchProducts()">
 
-        <button type="button">🔍</button>
-    </div>
-
+    <button type="button" onclick="searchProducts()">🔍</button>
+</div>
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
@@ -166,6 +165,6 @@
     <p>© 2026 Vimal Aqua Farms. All Rights Reserved.</p>
 
 </footer>
-
+<script src="js/script.js"></script>
 </body>
 </html>

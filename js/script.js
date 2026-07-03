@@ -208,24 +208,24 @@ function searchProducts(){
 
     let input =
     document.getElementById("searchInput")
-    .value.toLowerCase();
+    .value.toLowerCase().trim();
 
-    let cards =
-    document.querySelectorAll(".product-card");
-
-    cards.forEach(card => {
-
-        let productName =
-        card.querySelector("h2")
-        .innerText.toLowerCase();
-
-        if(productName.includes(input)){
-            card.style.display = "block";
-        }
-        else{
-            card.style.display = "none";
-        }
-
-    });
-
+    if(input.includes("koi")){
+        window.location.href = "koi.html";
+    }
+    else if(input.includes("fish")){
+        window.location.href = "fish.html";
+    }
+    else if(input.includes("aquarium")){
+        window.location.href = "aquariums.html";
+    }
+    else if(input.includes("plant")){
+        window.location.href = "plants.html";
+    }
+    else if(input.includes("accessory") || input.includes("food")){
+        window.location.href = "accessories.html";
+    }
+    else{
+        alert("No matching product found");
+    }
 }
