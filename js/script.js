@@ -204,28 +204,56 @@ function addToCart(name, price, image) {
     alert("Added to cart!");
 }
 
-function searchProducts(){
+function searchProducts() {
 
-    let input =
-    document.getElementById("searchInput")
-    .value.toLowerCase().trim();
+    let input = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
 
     if(input.includes("koi")){
         window.location.href = "koi.html";
     }
-    else if(input.includes("fish")){
+
+    else if(input.includes("fish") ||
+            input.includes("goldfish") ||
+            input.includes("guppy") ||
+            input.includes("angel")){
         window.location.href = "fish.html";
     }
-    else if(input.includes("aquarium")){
+
+    else if(input.includes("aquarium") ||
+            input.includes("tank")){
         window.location.href = "aquariums.html";
     }
-    else if(input.includes("plant")){
+
+    else if(input.includes("plant") ||
+            input.includes("plants")){
         window.location.href = "plants.html";
     }
-    else if(input.includes("accessory") || input.includes("food")){
+
+    else if(input.includes("food") ||
+            input.includes("accessories") ||
+            input.includes("filter") ||
+            input.includes("pump")){
         window.location.href = "accessories.html";
     }
+
     else{
-        alert("No matching product found");
+        alert("No matching product found.");
     }
+}
+    <script>
+function closePopup(){
+    document.getElementById("offerPopup").style.display="none";
+}
+
+window.onload = function(){
+    setTimeout(function(){
+        document.getElementById("offerPopup").style.display="flex";
+    },2000);
+}
+</script>
+
 }

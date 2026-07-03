@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div id="offerPopup" class="popup-overlay">
+
+    <div class="popup-box">
+
+        <span class="close-popup" onclick="closePopup()">&times;</span>
+
+        <h2>Welcome to Vimal Aqua Farms</h2>
+
+        <p>Get updates on new fish arrivals, aquarium offers and special discounts.</p>
+
+        <img src="images/banner.jpg" alt="Offer">
+
+        <input type="email" id="emailInput" placeholder="Enter your email">
+
+<button onclick="getAccess()">Get Access</button>
+
+    </div>
+
+</div>
 
 <nav class="navbar">
 
@@ -18,19 +37,19 @@
     <input
         type="text"
         id="searchInput"
-        placeholder="Search Fish, Aquariums, Plants..."
-        onkeypress="if(event.key==='Enter') searchProducts()">
+        placeholder="Search Fish, Aquariums, Plants...">
 
     <button type="button" onclick="searchProducts()">🔍</button>
 </div>
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
         <li><a href="fish.html">Fish</a></li>
         <li><a href="aquariums.html">Aquariums</a></li>
         <li><a href="accessories.html">Accessories</a></li>
         <li><a href="plants.html">Plants</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <a href="cart.html" class="cart-link">🛒</a>
     </ul>
 
     <div class="user-actions">
@@ -166,5 +185,27 @@
 
 </footer>
 <script src="js/script.js"></script>
+<script>
+function closePopup() {
+    document.getElementById("offerPopup").style.display = "none";
+}
+</script>
+<script>
+function getAccess(){
+
+    let email = document.getElementById("emailInput").value;
+
+    if(email === ""){
+        alert("Please enter your email");
+        return;
+    }
+
+    localStorage.setItem("subscriberEmail", email);
+
+    alert("Subscription successful!");
+
+    document.getElementById("offerPopup").style.display = "none";
+}
+</script>
 </body>
 </html>
