@@ -256,4 +256,31 @@ window.onload = function(){
 }
 </script>
 
+function openImagePopup(imageSrc){
+    document.getElementById("popupImage").src = imageSrc;
+    document.getElementById("imagePopup").style.display = "flex";
+}
+
+function closeImagePopup(){
+    document.getElementById("imagePopup").style.display = "none";
+}
+document.addEventListener("DOMContentLoaded", function(){
+
+    const images = document.querySelectorAll(".product-card img");
+
+    images.forEach(img => {
+        img.addEventListener("click", function(){
+            openImagePopup(this.src);
+        });
+    });
+
+});
+
+function openImagePopup(imageSrc){
+    document.getElementById("popupImage").src = imageSrc;
+    document.getElementById("imagePopup").style.display = "flex";
+}
+
+function closeImagePopup(){
+    document.getElementById("imagePopup").style.display = "none";
 }
