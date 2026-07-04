@@ -25,10 +25,10 @@
 
 <section class="checkout-section">
 
-    <h1>Checkout</h1>
+    <h1>Secure Checkout</h1>
 
     <p class="subtitle">
-        Complete your order details and payment.
+        Complete your order and enjoy premium aquatic products.
     </p>
 
     <div class="checkout-container">
@@ -37,11 +37,13 @@
 
             <h2>Customer Details</h2>
 
-            <input type="text" placeholder="Full Name">
+            <input type="text" placeholder="Full Name" required>
 
-            <input type="tel" placeholder="Mobile Number">
+            <input type="tel" placeholder="Mobile Number" required>
 
-            <textarea placeholder="Delivery Address"></textarea>
+            <input type="email" placeholder="Email Address">
+
+            <textarea placeholder="Delivery Address" rows="5"></textarea>
 
         </div>
 
@@ -50,18 +52,18 @@
             <h2>Scan & Pay</h2>
 
             <img src="images/payment-qr.png"
-                 alt="UPI QR"
+                 alt="UPI QR Code"
                  class="qr-code">
 
-            <p><strong>UPI ID:</strong> yourupi@upi</p>
+            <p><strong>UPI ID:</strong> vimalaqua@upi</p>
 
             <h3 id="checkout-total">
                 Total Amount: ₹0
             </h3>
 
             <a href="success.html" class="pay-btn">
-    Place Order
-</a>
+                Place Order
+            </a>
 
         </div>
 
@@ -70,19 +72,16 @@
 </section>
 
 <script>
-
-let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 let total = 0;
 
 cart.forEach(item => {
-    total += item.price;
+    total += item.price * (item.qty || 1);
 });
 
-document.getElementById("checkout-total")
-.innerText = "Total Amount: ₹" + total;
-
+document.getElementById("checkout-total").innerText =
+"Total Amount: ₹" + total;
 </script>
 
 </body>

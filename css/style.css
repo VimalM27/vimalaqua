@@ -161,22 +161,30 @@
 }
 .checkout-section{
     min-height:100vh;
-    background:#1f2937;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#0f172a);
     color:white;
-    padding:140px 50px 50px;
+    padding:120px 40px 60px;
 }
 
 .checkout-section h1{
     text-align:center;
-    font-size:50px;
+    font-size:48px;
+    color:#00d4ff;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#d1d5db;
+    margin-bottom:40px;
 }
 
 .checkout-container{
-    display:flex;
-    gap:40px;
-    justify-content:center;
-    flex-wrap:wrap;
-    margin-top:40px;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+    max-width:1200px;
+    margin:auto;
 }
 
 .customer-form,
@@ -184,26 +192,52 @@
     background:#374151;
     padding:30px;
     border-radius:15px;
-    width:450px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+.customer-form h2,
+.payment-box h2{
+    color:#00d4ff;
+    margin-bottom:20px;
 }
 
 .customer-form input,
 .customer-form textarea{
     width:100%;
     padding:15px;
-    margin:10px 0;
+    margin-bottom:15px;
     border:none;
     border-radius:8px;
+    background:#4b5563;
+    color:white;
+}
+
+.customer-form input::placeholder,
+.customer-form textarea::placeholder{
+    color:#d1d5db;
 }
 
 .customer-form textarea{
     height:120px;
+    resize:none;
 }
 
 .qr-code{
-    width:250px;
+    width:220px;
     display:block;
-    margin:auto;
+    margin:20px auto;
+    border-radius:10px;
+}
+
+.payment-box p{
+    text-align:center;
+    margin:10px 0;
+}
+
+#checkout-total{
+    text-align:center;
+    color:#00d4ff;
+    margin-top:20px;
 }
 
 .pay-btn{
@@ -214,14 +248,24 @@
     color:white;
     text-decoration:none;
     padding:15px;
-    border-radius:8px;
+    border-radius:10px;
     font-weight:bold;
+    transition:0.3s;
+}
+
+.pay-btn:hover{
+    background:#0077b6;
+    transform:translateY(-2px);
 }
 .page-hero{
     height:40vh;
-    background:url("../images/aqua-bg.jpg");
-    background-size:cover;
-    background-position:center;
+
+    background:linear-gradient(
+        135deg,
+        #0f172a,
+        #1e3a5f,
+        #00b4d8
+    );
 
     color:white;
 
@@ -390,7 +434,34 @@ border:none;
 border-radius:8px;
 cursor:pointer;
 }
+.cart-empty{
+    background:#374151;
+    color:white;
+    text-align:center;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
 
+.cart-empty h3{
+    color:#00d4ff;
+    margin-bottom:15px;
+}
+
+.cart-empty p{
+    color:#d1d5db;
+    margin-bottom:20px;
+}
+
+.cart-empty .shop-btn{
+    display:inline-block;
+    padding:12px 25px;
+    background:#00b4d8;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+}
 .cart-container{
 margin-top:50px;
 }
@@ -404,23 +475,14 @@ border-radius:10px;
 font-weight:bold;
 }
 .cart-card{
-    background:#374151;
-    padding:25px;
-    border-radius:15px;
-    margin-bottom:20px;
     display:flex;
-    justify-content:space-between;
-    align-items:center;
+    gap:20px;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:15px;
+    background:#374151;
     box-shadow:0 5px 15px rgba(0,0,0,0.3);
-}
-.cart-card {
-    display: flex;
-    gap: 15px;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 10px;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    align-items:center;
 }
 
 .cart-image {
@@ -541,9 +603,10 @@ margin-bottom:20px;
 color:white;
 }
 .cart-section{
-background:#f5f5f5;
-min-height:100vh;
-padding:120px 40px;
+    min-height:100vh;
+    padding:120px 40px 50px;
+    background:linear-gradient(135deg,#0f172a,#1e293b,#0f172a);
+    color:white;
 }
 
 .cart-layout{
@@ -572,11 +635,19 @@ border-radius:10px;
 .cart-details{
 flex:1;
 }
+.cart-details h3{
+    color:white;
+}
+
+.order-summary h2,
+.order-summary h3{
+    color:white;
+}
 
 .cart-price{
-font-size:24px;
-font-weight:bold;
-color:#00b894;
+    font-size:24px;
+    font-weight:bold;
+    color:#00d4ff;
 }
 .why-us,
 .reviews{
@@ -643,13 +714,13 @@ color:white;
 border-radius:5px;
 cursor:pointer;
 }
-
 .order-summary{
-background:white;
-padding:25px;
-border-radius:15px;
-height:fit-content;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    background:#374151;
+    padding:25px;
+    border-radius:15px;
+    height:fit-content;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    color:white;
 }
 
 .checkout-btn{
@@ -1147,7 +1218,26 @@ body{
         font-size:22px;
         text-align:center;
     }
+    .checkout-container{
+        grid-template-columns:1fr;
+    }
 
+    .checkout-section{
+        padding:100px 20px 40px;
+    }
+
+    .customer-form,
+    .payment-box{
+        width:100%;
+    }
+
+    .checkout-section h1{
+        font-size:36px;
+    }
+
+    .qr-code{
+        width:180px;
+    }
     .search-box{
         width:100%;
         max-width:320px;

@@ -96,12 +96,14 @@ function renderCart() {
     });
 
     if (cart.length === 0) {
-        html = `
-        <div class="cart-card">
-            <h3>Your cart is empty 🛒</h3>
-        </div>
-        `;
-    }
+    html = `
+    <div class="cart-empty">
+        <h3>Your cart is empty 🛒</h3>
+        <p>Explore our fish, aquariums and accessories.</p>
+        <a href="fish.html" class="shop-btn">Shop Now</a>
+    </div>
+    `;
+}
 
     document.getElementById("cart-items").innerHTML = html;
     document.getElementById("total").innerText = "Total: ₹" + total;
