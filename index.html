@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vimal Aqua Farms</title>
+    <title>Vimal Farms</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -13,25 +13,33 @@
 
         <span class="close-popup" onclick="closePopup()">&times;</span>
 
-        <h2>Welcome to Vimal Aqua Farms</h2>
+        <h2>Welcome to Vimal Farms</h2>
 
-        <p>Get updates on new fish arrivals, aquarium offers and special discounts.</p>
+        <p>
+            Get updates on Fish, Birds, Dogs, Cats, Small pets, Aquariums,
+            Pet Foods, Accessories, Special Offers and New Arrivals.
+        </p>
 
-        <img src="images/banner.jpg" alt="Offer">
+        <img src="images/banner.jpg" alt="Vimal Pets">
+
         <input type="tel"
-       id="phoneInput"
-       placeholder="Enter your phone number">
+               id="phoneInput"
+               placeholder="Enter your phone number">
 
-<button onclick="getAccess()">Get Updates</button>
+        <button onclick="getAccess()">
+            Get Updates
+        </button>
 
     </div>
+
+</div>
 
 </div>
 
 <nav class="navbar">
 
     <div class="logo">
-        <a href="index.html">Vimal <span>Aqua Farms</span></a>
+        <a href="index.html">Vimal <span>Farms</span></a>
     </div>
 
     <div class="search-box">
@@ -43,38 +51,103 @@
     <button type="button" onclick="searchProducts()">🔍</button>
 </div>
     <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="fish.html">Fish</a></li>
-        <li><a href="aquariums.html">Aquariums</a></li>
-        <li><a href="accessories.html">Accessories</a></li>
-        <li><a href="plants.html">Plants</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <a href="cart.html" class="cart-link">🛒</a>
-    </ul>
 
-    <div class="user-actions">
-        <a href="login.html" class="login-link">👤 Login</a>
-    </div>
+    <li><a href="index.html">Home</a></li>
+
+    <li class="dropdown">
+        <a href="#">Pets ▼</a>
+
+        <div class="dropdown-content">
+            <a href="fish.html">🐟 Fish</a>
+            <a href="birds.html">🦜 Birds</a>
+            <a href="dogs.html">🐶 Dogs</a>
+            <a href="cats.html">🐱 Cats</a>
+            <a href="small-pets.html">🐹 Small Pets</a>
+            <a href="aquariums.html">🏠 Aquariums</a>
+        </div>
+    </li>
+
+    <li><a href="foods.html">Pet Foods</a></li>
+
+    <li><a href="accessories.html">Accessories</a></li>
+
+    <li><a href="about.html">About</a></li>
+
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="cart.html" class="cart-link">🛒</a></li>
+</ul>
+
+<div class="user-actions">
+    <a href="login.html" class="login-link">
+        👤 Login
+    </a>
+
+</div>
 
 </nav>
     <section class="hero">
 
-        <video autoplay muted loop playsinline class="bg-video">
-            <source src="videos/aquarium.mp4" type="video/mp4">
-        </video>
+    <img src="images/home.png" alt="Background" class="bg-image">
 
-        <div class="overlay"></div>
+    <div class="overlay"></div>
 
-        <div class="hero-content">
-            <h1>Premium Aquarium Fish & Accessories</h1>
+    <div class="hero-content">
+        <h1>Premium Pets & Pet Care</h1>
 
-            <p>
-                Healthy Fish • Quality Products • Expert Guidance
-            </p>
+<p>
+Healthy Pets • Quality Food • Premium Accessories
+</p>
 
-            <a href="fish.html" class="shop-btn">Shop Now</a>
-        </div>
+        <a href="pets.html" class="shop-btn">Shop Now</a>
+    </div>
+
+</section>
+<section class="pet-categories">
+
+    <h2>Shop By Pet</h2>
+
+    <div class="pet-grid">
+
+        <a href="dogs.html" class="pet-item">
+            <img src="images/Dog-icon.jpg" alt="Dogs">
+            <span>Dogs</span>
+        </a>
+
+        <a href="cats.html" class="pet-item">
+            <img src="images/cat-icon.jpg" alt="Cats">
+            <span>Cats</span>
+        </a>
+
+        <a href="birds.html" class="pet-item">
+            <img src="images/bird-icon.jpg" alt="Birds">
+            <span>Birds</span>
+        </a>
+
+        <a href="fish.html" class="pet-item">
+            <img src="images/fish-icon.jpg" alt="Fish">
+            <span>Fish</span>
+        </a>
+        <a href="small-pets.html" class="pet-item">
+            <img src="images/small-icon.jpg" alt="Small Pets">
+            <span>Small Pets</span>
+        </a>
+        <a href="aquariums.html" class="pet-item">
+            <img src="images/aquarium-icon.jpg" alt="Aquariums">
+            <span>Aquariums</span>
+        </a>
+
+        <a href="foods.html" class="pet-item">
+            <img src="images/food-icon.jpg" alt="Pet Food">
+            <span>Pet Food</span>
+        </a>
+
+        <a href="accessories.html" class="pet-item">
+            <img src="images/accessory-icon.jpg" alt="Accessories">
+            <span>Accessories</span>
+        </a>
+
+    </div>
+
 </section>
 <section class="why-us">
 
@@ -83,23 +156,23 @@
     <div class="features">
 
         <div class="feature-card">
-            <h3>🐟 Healthy Fish</h3>
-            <p>Premium quality ornamental fish sourced with care.</p>
+            <h3>🐾 Healthy Pets</h3>
+            <p>Well-cared pets including fish, birds, dogs, cats and more.</p>
         </div>
 
         <div class="feature-card">
-            <h3>🚚 Safe Delivery</h3>
-            <p>Secure packaging to ensure fish arrive safely.</p>
+            <h3>🍖 Premium Pet Food</h3>
+            <p>Nutritious food from trusted brands for all pets.</p>
         </div>
 
         <div class="feature-card">
-            <h3>🌟 Expert Guidance</h3>
-            <p>Professional support for aquarium setup and care.</p>
+            <h3>🎯 Quality Accessories</h3>
+            <p>Everything your pet needs for comfort, care and happiness.</p>
         </div>
 
         <div class="feature-card">
-            <h3>💰 Best Prices</h3>
-            <p>Affordable pricing on fish, tanks and accessories.</p>
+            <h3>⭐ Expert Support</h3>
+            <p>Professional guidance for pet care, feeding and maintenance.</p>
         </div>
 
     </div>
@@ -109,18 +182,18 @@
 <section class="stats">
 
     <div class="stat-box">
-        <h2>500+</h2>
+        <h2>1000+</h2>
         <p>Happy Customers</p>
     </div>
 
     <div class="stat-box">
-        <h2>100+</h2>
-        <p>Fish Varieties</p>
+        <h2>200+</h2>
+        <p>Pet Varieties</p>
     </div>
 
     <div class="stat-box">
-        <h2>50+</h2>
-        <p>Aquarium Products</p>
+        <h2>500+</h2>
+        <p>Pet Products</p>
     </div>
 
     <div class="stat-box">
@@ -138,19 +211,19 @@
 
         <div class="review-card">
             <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>"Excellent quality fish and fast service."</p>
+            <p>"Amazing collection of pets and excellent customer service."</p>
             <h4>— Arun Kumar</h4>
         </div>
 
         <div class="review-card">
             <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>"Beautiful aquarium setup. Highly recommended."</p>
+            <p>"Bought accessories and pet food. Great quality and pricing."</p>
             <h4>— Priya S</h4>
         </div>
 
         <div class="review-card">
             <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p>"Healthy fish and professional guidance."</p>
+            <p>"Healthy pets, fast delivery and professional guidance."</p>
             <h4>— Karthik R</h4>
         </div>
 
@@ -162,9 +235,9 @@
 
     <div class="footer-content">
 
-        <h2>Vimal Aqua Farms</h2>
+        <h2>Vimal Farms</h2>
 
-        <p>Premium Aquarium Fish, Aquariums & Accessories</p>
+        <p>Your Trusted Pet Store & Aquarium Destination</p>
 
         <div class="footer-contact">
             <p>📞 +91 78 4545 2727</p>
@@ -175,7 +248,7 @@
         <hr>
 
         <p class="copyright">
-            © 2026 Vimal Aqua Farms. All Rights Reserved.
+            © 2026 Vimal Farms. All Rights Reserved.
         </p>
 
     </div>

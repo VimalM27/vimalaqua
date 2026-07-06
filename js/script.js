@@ -275,12 +275,3 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
 });
-
-function openImagePopup(imageSrc){
-    document.getElementById("popupImage").src = imageSrc;
-    document.getElementById("imagePopup").style.display = "flex";
-}
-
-function closeImagePopup(){
-    document.getElementById("imagePopup").style.display = "none";
-}

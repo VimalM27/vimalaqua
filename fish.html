@@ -3,38 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vimal Aqua Farms - Live Fish Collection</title>
+    <title>Vimal Farms - Live Fish Collection</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <nav class="navbar">
-    <div class="logo">Vimal <span>Aqua Farms</span></div>
+    <div class="logo">Vimal <span>Farms</span></div>
 
     <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="fish.html">Fish</a></li>
-        <li><a href="aquariums.html">Aquariums</a></li>
-        <li><a href="accessories.html">Accessories</a></li>
-        <li><a href="plants.html">Plants</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <a href="cart.html" class="cart-link">🛒</a>
-    </ul>
+
+    <li><a href="index.html">Home</a></li>
+
+    <li class="dropdown">
+        <a href="#">Pets ▼</a>
+
+        <div class="dropdown-content">
+            <a href="fish.html">🐟 Fish</a>
+            <a href="birds.html">🦜 Birds</a>
+            <a href="dogs.html">🐶 Dogs</a>
+            <a href="cats.html">🐱 Cats</a>
+            <a href="small-pets.html">🐹 Small Pets</a>
+            <a href="aquariums.html">🏠 Aquariums</a>
+        </div>
+    </li>
+
+    <li><a href="foods.html">Pet Foods</a></li>
+
+    <li><a href="accessories.html">Accessories</a></li>
+
+    <li><a href="about.html">About</a></li>
+
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="cart.html" class="cart-link">🛒</a></li>
+</ul>
+
+<div class="user-actions">
+    <a href="login.html" class="login-link">
+        👤 Login
+    </a>
+
+</div>
 </nav>
-<section class="fish-section">
+<section class="fish-hero">
 
-<h1>Live Fish Collection</h1>
+    <video autoplay muted loop playsinline class="fish-video">
+        <source src="videos/aquarium.mp4" type="video/mp4">
+    </video>
 
-<p class="subtitle">
-    Discover healthy, vibrant and premium ornamental fish for your aquarium.
-</p>
+    <div class="fish-overlay"></div>
+
+    <div class="fish-content">
+        <h1>Live Fish Collection</h1>
+
+        <p class="subtitle">
+            Discover healthy, vibrant and premium ornamental fish for your aquarium.
+        </p>
+    </div>
+<div id="imagePopup" class="image-popup">
+
+    <span class="close-image" onclick="closeImagePopup()">&times;</span>
+
+    <div class="popup-content">
+
+        <img id="popupImage" src="" alt="Product Image">
+
+        <h2 id="popupTitle"></h2>
+
+        <p id="popupPrice"></p>
+
+    </div>
+
+</div>
+</section>
+
 
 <section class="products">
 
     <div class="product-card">
     <a href="koi.html">
-        <img src="images/koi.jpg" alt="Koi Fish">
+        <img src="images/koi.jpg" alt="Koi Fish" onclick="openImagePopup(this.src)">
     </a>
     <h2>Koi Fish</h2>
     <p class="description">Premium Japanese ornamental koi.</p>
@@ -281,7 +329,29 @@
     <img id="popupImage" src="" alt="Product Image">
 </div>
 
-<script src="js/script.js"></script>
+<script>
 
+document.querySelectorAll(".product-card").forEach(card => {
+
+    card.querySelector("img").addEventListener("click", function(){
+
+        let image = this.src;
+        let title = card.querySelector("h2").innerText;
+        let price = card.querySelector(".price").innerText;
+
+        document.getElementById("popupImage").src = image;
+        document.getElementById("popupTitle").innerText = title;
+        document.getElementById("popupPrice").innerText = price;
+
+        document.getElementById("imagePopup").style.display = "flex";
+    });
+
+});
+
+function closeImagePopup(){
+    document.getElementById("imagePopup").style.display = "none";
+}
+
+</script>
 </body>
 </html>
