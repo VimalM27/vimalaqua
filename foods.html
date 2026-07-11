@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Foods - Vimal Farms</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">Vimal <span>Farms</span></div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="dropdown">
+            <a href="#">Pets ▼</a>
+
+            <div class="dropdown-content">
+                <a href="fish.html">🐟 Fish</a>
+                <a href="birds.html">🦜 Birds</a>
+                <a href="dogs.html">🐶 Dogs</a>
+                <a href="cats.html">🐱 Cats</a>
+                <a href="small-pets.html">🐹 Small Pets</a>
+            </div>
+        </li>
+
+        <li><a href="foods.html">Pet Foods</a></li>
+        <li class="dropdown">
+            <a href="accessories.html">Accessories ▼</a>
+            <div class="dropdown-content">
+                <a href="accessories.html">Accessories</a>
+                <a href="aquariums.html">Aquariums</a>
+            </div>
+        </li>
+        <li><a href="accessories.html">Accessories</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html" class="cart-link">🛒</a></li>
+    </ul>
+
+    <div class="user-actions">
+        <a href="login.html" class="login-link">👤 Login</a>
+    </div>
+</nav>
+
+<section class="fish-section">
+    <h1>Premium Pet Foods</h1>
+
+    <p class="subtitle">
+        Nutritious and high-quality food for fish, dogs, cats, birds, and small pets.
+    </p>
+
+    <section class="products">
+        <div class="product-card">
+            <img src="images/food.jpg" alt="Premium Fish Food">
+            <h2>Premium Fish Food</h2>
+            <p class="description">Balanced nutrition for healthy growth and vibrant colors.</p>
+            <p class="price">₹250</p>
+            <button onclick="addToCart('Premium Fish Food',250)">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/food-icon.jpg" alt="Dog Food">
+            <h2>Premium Dog Food</h2>
+            <p class="description">Protein-rich food for strong muscles and active dogs.</p>
+            <p class="price">₹650</p>
+            <button onclick="addToCart('Premium Dog Food',650)">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/food.jpg" alt="Cat Food">
+            <h2>Whisker Cat Food</h2>
+            <p class="description">Delicious cat food packed with essential vitamins and minerals.</p>
+            <p class="price">₹700</p>
+            <button onclick="addToCart('Whisker Cat Food',700)">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/food-icon.jpg" alt="Bird Food">
+            <h2>Bird Seed Mix</h2>
+            <p class="description">Healthy seed blend for colorful and energetic birds.</p>
+            <p class="price">₹320</p>
+            <button onclick="addToCart('Bird Seed Mix',320)">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/food.jpg" alt="Small Pet Food">
+            <h2>Small Pet Crunch</h2>
+            <p class="description">Crisp and nutritious pellets for small pets and hamsters.</p>
+            <p class="price">₹180</p>
+            <button onclick="addToCart('Small Pet Crunch',180)">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="images/food-icon.jpg" alt="Reptile Food">
+            <h2>Reptile Nutrition Blend</h2>
+            <p class="description">Balanced food for reptiles with strong growth support.</p>
+            <p class="price">₹450</p>
+            <button onclick="addToCart('Reptile Nutrition Blend',450)">Add to Cart</button>
+        </div>
+    </section>
+
+    <div class="cart-container">
+        <a href="cart.html" class="cart-btn">🛒 View Cart</a>
+    </div>
+</section>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>

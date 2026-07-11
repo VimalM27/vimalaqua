@@ -15,6 +15,133 @@ function addToCart(name, price){
 
     alert(name + " added to cart");
 }
+
+const searchItems = [
+    { label: "Koi Fish", page: "fish.html" },
+    { label: "Gold Fish", page: "fish.html" },
+    { label: "Angel Fish", page: "fish.html" },
+    { label: "Betta Fish", page: "fish.html" },
+    { label: "Guppy", page: "fish.html" },
+    { label: "Sailfin Molly", page: "fish.html" },
+    { label: "Platy", page: "fish.html" },
+    { label: "Swordtail", page: "fish.html" },
+    { label: "Discus Fish", page: "fish.html" },
+    { label: "Oscar Fish", page: "fish.html" },
+    { label: "Flowerhorn", page: "fish.html" },
+    { label: "Silver Arowana", page: "fish.html" },
+    { label: "Aquariums", page: "aquariums.html" },
+    { label: "Plants", page: "plants.html" },
+    { label: "Pet Foods", page: "foods.html" },
+    { label: "Accessories", page: "accessories.html" },
+    { label: "Dogs", page: "dogs.html" },
+    { label: "Cats", page: "cats.html" },
+    { label: "Birds", page: "birds.html" },
+    { label: "Small Pets", page: "small-pets.html" },
+    { label: "Pets", page: "pets.html" }
+];
+
+function getCurrentPageName() {
+    return window.location.pathname.split("/").pop().split("?")[0] || "index.html";
+}
+
+function getSearchSuggestions(query) {
+    const term = (query || "").toLowerCase().trim();
+
+    if (!term) {
+        return [];
+    }
+
+    const currentPage = getCurrentPageName();
+    const pageProducts = Array.from(document.querySelectorAll(".product-card h2"))
+        .map(node => node.textContent.trim())
+        .filter(Boolean);
+
+    const pageSpecific = pageProducts
+        .filter(name => name.toLowerCase().includes(term))
+        .map(name => ({ label: name, page: currentPage }));
+
+    if (pageSpecific.length) {
+        return pageSpecific.slice(0, 8);
+    }
+
+    return searchItems
+        .filter(item => item.label.toLowerCase().includes(term))
+        .slice(0, 8);
+}
+
+function renderSearchSuggestions(query) {
+    const suggestionsBox = document.getElementById("searchSuggestions");
+
+    if (!suggestionsBox) {
+        return;
+    }
+
+    const matches = getSearchSuggestions(query);
+
+    if (!matches.length) {
+        suggestionsBox.innerHTML = "";
+        suggestionsBox.classList.remove("show");
+        return;
+    }
+
+    suggestionsBox.innerHTML = matches.map(item => `
+        <button type="button" class="search-suggestion-item" data-page="${item.page}" data-label="${item.label}">
+            ${item.label}
+        </button>
+    `).join("");
+
+    suggestionsBox.classList.add("show");
+}
+
+function highlightProduct(label) {
+    const cards = Array.from(document.querySelectorAll(".product-card"));
+    const target = cards.find(card => card.textContent.includes(label));
+
+    if (!target) {
+        return false;
+    }
+
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+    target.classList.add("highlight-product");
+    setTimeout(() => target.classList.remove("highlight-product"), 2200);
+    return true;
+}
+
+function navigateToSearchItem(page, label) {
+    const currentPage = getCurrentPageName();
+
+    if (page && page !== currentPage) {
+        window.location.href = page;
+        return;
+    }
+
+    if (label) {
+        const found = highlightProduct(label);
+        if (!found) {
+            window.location.href = currentPage;
+        }
+    }
+}
+
+function searchProducts() {
+    const input = document.getElementById("searchInput")?.value.toLowerCase().trim() || "";
+
+    if (!input) {
+        alert("Please enter a search term.");
+        return;
+    }
+
+    const matches = getSearchSuggestions(input);
+
+    if (matches.length) {
+        const firstMatch = matches[0];
+        navigateToSearchItem(firstMatch.page, firstMatch.label);
+    } else {
+        alert("No matching product found.");
+    }
+}
+
+window.searchProducts = searchProducts;
 const fishes = [
 
 {
@@ -204,58 +331,6 @@ function addToCart(name, price, image) {
     alert("Added to cart!");
 }
 
-function searchProducts() {
-
-    let input = document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-    if(input.includes("koi")){
-        window.location.href = "koi.html";
-    }
-
-    else if(input.includes("fish") ||
-            input.includes("goldfish") ||
-            input.includes("guppy") ||
-            input.includes("angel")){
-        window.location.href = "fish.html";
-    }
-
-    else if(input.includes("aquarium") ||
-            input.includes("tank")){
-        window.location.href = "aquariums.html";
-    }
-
-    else if(input.includes("plant") ||
-            input.includes("plants")){
-        window.location.href = "plants.html";
-    }
-
-    else if(input.includes("food") ||
-            input.includes("accessories") ||
-            input.includes("filter") ||
-            input.includes("pump")){
-        window.location.href = "accessories.html";
-    }
-
-    else{
-        alert("No matching product found.");
-    }
-}
-    <script>
-function closePopup(){
-    document.getElementById("offerPopup").style.display="none";
-}
-
-window.onload = function(){
-    setTimeout(function(){
-        document.getElementById("offerPopup").style.display="flex";
-    },2000);
-}
-</script>
-
 function openImagePopup(imageSrc){
     document.getElementById("popupImage").src = imageSrc;
     document.getElementById("imagePopup").style.display = "flex";
@@ -264,8 +339,8 @@ function openImagePopup(imageSrc){
 function closeImagePopup(){
     document.getElementById("imagePopup").style.display = "none";
 }
-document.addEventListener("DOMContentLoaded", function(){
 
+document.addEventListener("DOMContentLoaded", function(){
     const images = document.querySelectorAll(".product-card img");
 
     images.forEach(img => {
@@ -274,4 +349,52 @@ document.addEventListener("DOMContentLoaded", function(){
         });
     });
 
+    const searchInput = document.getElementById("searchInput");
+    const searchButton = document.querySelector(".search-box button");
+    const suggestionsBox = document.getElementById("searchSuggestions");
+
+    if (searchInput) {
+        searchInput.addEventListener("input", function(){
+            renderSearchSuggestions(this.value);
+        });
+
+        searchInput.addEventListener("focus", function(){
+            renderSearchSuggestions(this.value);
+        });
+
+        searchInput.addEventListener("keydown", function(event){
+            if (event.key === "Enter") {
+                event.preventDefault();
+                searchProducts();
+            }
+
+            if (event.key === "Escape") {
+                suggestionsBox?.classList.remove("show");
+            }
+        });
+    }
+
+    if (searchButton) {
+        searchButton.addEventListener("click", function(event){
+            event.preventDefault();
+            searchProducts();
+        });
+    }
+
+    if (suggestionsBox) {
+        suggestionsBox.addEventListener("click", function(event){
+            const suggestionButton = event.target.closest(".search-suggestion-item");
+
+            if (suggestionButton) {
+                event.preventDefault();
+                navigateToSearchItem(suggestionButton.dataset.page, suggestionButton.dataset.label);
+            }
+        });
+    }
+
+    document.addEventListener("click", function(event){
+        if (!event.target.closest(".search-box")) {
+            suggestionsBox?.classList.remove("show");
+        }
+    });
 });
