@@ -416,3 +416,85 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     });
 });
+<script>
+
+function sendMail(){
+
+const name=document.getElementById("name").value.trim();
+const email=document.getElementById("email").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const subject=document.getElementById("subject").value.trim();
+const message=document.getElementById("message").value.trim();
+
+if(name==""){
+alert("Enter your name");
+return;
+}
+
+if(email==""){
+alert("Enter your email");
+return;
+}
+
+const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(!emailPattern.test(email)){
+alert("Enter a valid email");
+return;
+}
+
+if(!/^[0-9]{10}$/.test(phone)){
+alert("Enter a valid 10 digit mobile number");
+return;
+}
+
+if(subject==""){
+alert("Enter subject");
+return;
+}
+
+if(message==""){
+alert("Enter your message");
+return;
+}
+
+const params={
+
+from_name:name,
+from_email:email,
+phone:phone,
+subject:subject,
+message:message,
+time:new Date().toLocaleString()
+
+};
+
+emailjs.send(
+"service_etdxaxq",
+"template_ts6zubd",
+params
+)
+
+.then(function(){
+
+alert("Message sent successfully!");
+
+document.getElementById("name").value="";
+document.getElementById("email").value="";
+document.getElementById("phone").value="";
+document.getElementById("subject").value="";
+document.getElementById("message").value="";
+
+})
+
+.catch(function(error){
+
+alert("Failed to send message!");
+
+console.log(error);
+
+});
+
+}
+
+</script>

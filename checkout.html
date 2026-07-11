@@ -50,67 +50,131 @@
 
 </div>
 </nav>
+<section class="checkout-page">
 
-<section class="checkout-section">
+    <div class="checkout-header">
 
-    <h1>Secure Checkout</h1>
+        <h1>🛒 Secure Checkout</h1>
 
-    <p class="subtitle">
-        Complete your order and enjoy premium aquatic products.
-    </p>
+        <p>
+            Complete your purchase securely with Vimal Farms
+        </p>
 
-    <div class="checkout-container">
+    </div>
 
-        <div class="customer-form">
+    <div class="checkout-wrapper">
 
-            <h2>Customer Details</h2>
+        <!-- LEFT -->
 
-            <input type="text" placeholder="Full Name" required>
+        <div class="checkout-form">
 
-            <input type="tel" placeholder="Mobile Number" required>
+    <h2>Customer Information</h2>
 
-            <input type="email" placeholder="Email Address">
+    <input
+        type="text"
+        id="customerName"
+        placeholder="👤 Full Name"
+        required>
 
-            <textarea placeholder="Delivery Address" rows="5"></textarea>
+    <input
+        type="tel"
+        id="customerPhone"
+        placeholder="📞 Mobile Number"
+        maxlength="10"
+        required>
 
-        </div>
+    <input
+        type="email"
+        id="customerEmail"
+        placeholder="✉ Email Address">
 
-        <div class="payment-box">
+    <textarea
+        id="customerAddress"
+        rows="5"
+        placeholder="🏠 Delivery Address"></textarea>
 
-            <h2>Scan & Pay</h2>
+</div>
+
+        <!-- RIGHT -->
+
+        <div class="order-summary">
+
+            <h2>Order Summary</h2>
 
             <img src="images/payment-qr.png"
-                 alt="UPI QR Code"
-                 class="qr-code">
+            class="checkout-qr">
 
-            <p><strong>UPI ID:</strong> vimalaqua@upi</p>
+            <div class="summary-row">
+                <span>Delivery</span>
+                <span>FREE</span>
+            </div>
 
-            <h3 id="checkout-total">
-                Total Amount: ₹0
-            </h3>
+            <div class="summary-row">
+                <span>Payment</span>
+                <span>UPI</span>
+            </div>
 
-            <a href="success.html" class="pay-btn">
-                Place Order
-            </a>
+            <div class="summary-row total-row">
+
+                <span>Total</span>
+
+                <span id="checkout-total">₹0</span>
+
+            </div>
+
+            <p class="upi-id">
+
+                UPI ID :
+                <strong>vimalaqua@upi</strong>
+
+            </p>
+
+            <button
+class="checkout-btn"
+id="placeOrderBtn">
+
+✔ Place Order
+
+</button>
 
         </div>
+
+    </div>
+
+    <div class="trust-section">
+
+        <div>🔒 Secure Payment</div>
+
+        <div>🚚 Free Delivery</div>
+
+        <div>✔ Trusted Store</div>
+
+        <div>💬 24×7 Support</div>
 
     </div>
 
 </section>
 
 <script>
+
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 let total = 0;
 
-cart.forEach(item => {
-    total += item.price * (item.qty || 1);
+cart.forEach(item=>{
+
+total += item.price * (item.qty || 1);
+
 });
 
-document.getElementById("checkout-total").innerText =
-"Total Amount: ₹" + total;
+document.getElementById("checkout-total").innerText="₹"+total;
+
 </script>
+
+<script src="js/checkout.js"></script>
+
+</body>
+</html>
 
 </body>
 </html>

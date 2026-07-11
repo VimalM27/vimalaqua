@@ -13,58 +13,41 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </head>
 
 <body>
-
-<!-- Navbar -->
 <nav class="navbar">
+    <div class="logo">
+        <a href="index.html">Vimal <span>Farms</span></a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
 
-<div class="logo">
-<a href="index.html">Vimal <span>Farms</span></a>
-</div>
+        <li class="dropdown">
+            <a href="#">Pets ▼</a>
 
-<ul class="nav-links">
+            <div class="dropdown-content">
+                <a href="fish.html">🐟 Fish</a>
+                <a href="birds.html">🦜 Birds</a>
+                <a href="dogs.html">🐶 Dogs</a>
+                <a href="cats.html">🐱 Cats</a>
+                <a href="small-pets.html">🐹 Small Pets</a>
+            </div>
+        </li>
 
-<li><a href="index.html">Home</a></li>
+        <li><a href="foods.html">Pet Foods</a></li>
+        <li class="dropdown">
+            <a href="accessories.html">Accessories ▼</a>
+            <div class="dropdown-content">
+                <a href="accessories.html">Accessories</a>
+                <a href="aquariums.html">Aquariums</a>
+            </div>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html" class="cart-link">🛒</a></li>
+    </ul>
 
-<li class="dropdown">
-
-<a href="#">Pets ▼</a>
-
-<div class="dropdown-content">
-
-<a href="fish.html">🐟 Fish</a>
-
-<a href="birds.html">🦜 Birds</a>
-
-<a href="dogs.html">🐶 Dogs</a>
-
-<a href="cats.html">🐱 Cats</a>
-
-<a href="small-pets.html">🐹 Small Pets</a>
-
-</div>
-
-</li>
-
-<li><a href="foods.html">Pet Foods</a></li>
-
-<li><a href="accessories.html">Accessories</a></li>
-
-<li><a href="about.html">About</a></li>
-
-<li><a href="contact.html">Contact</a></li>
-
-<li><a href="cart.html">🛒</a></li>
-
-</ul>
-
-<div class="user-actions">
-
-<a href="login.html" class="login-link">
-👤 Login
-</a>
-
-</div>
-
+    <div class="user-actions">
+        <a href="login.html" class="login-link">👤 Login</a>
+    </div>
 </nav>
 
 
@@ -72,7 +55,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <div class="contact-hero">
 
-<div class="hero-text">
+<div class="hero-text contact-text">
 
 <h1>Let's Connect</h1>
 
@@ -88,12 +71,6 @@ premium pet foods, aquariums and accessories.
 
 </div>
 
-<div class="hero-image">
-
-<img src="images/contact-pets.png">
-
-</div>
-
 </div>
 
 
@@ -102,6 +79,8 @@ premium pet foods, aquariums and accessories.
 <div class="contact-left">
 
 <h2>Get in Touch</h2>
+
+<div class="contact-grid">
 
 <div class="contact-box">
 
@@ -159,13 +138,24 @@ premium pet foods, aquariums and accessories.
 
 </div>
 
+</div>
+
 <div class="social-contact">
 
-<a href="#"><i class="fab fa-instagram"></i></a>
+    <!-- Website -->
+    <a href="https://www.vimal27.in" target="_blank" class="contact-link">
+        <i class="fa-solid fa-globe"></i>
+    </a>
 
-<a href="#"><i class="fab fa-youtube"></i></a>
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/vimalm27_official/" target="_blank" class="contact-link">
+        <i class="fab fa-instagram"></i>
+    </a>
 
-<a href="#"><i class="fab fa-facebook"></i></a>
+    <!-- YouTube -->
+    <a href="https://www.youtube.com/@VimalM27" target="_blank" class="contact-link">
+        <i class="fab fa-youtube"></i>
+    </a>
 
 </div>
 
@@ -177,21 +167,24 @@ premium pet foods, aquariums and accessories.
 <h2>Send a Message</h2>
 
 <form>
+<input type="text" id="name" placeholder="Full Name" required>
 
-<input type="text" placeholder="Full Name">
+<input type="email" id="email" placeholder="Email Address" required>
 
-<input type="email" placeholder="Email Address">
+<input type="tel"
+       id="phone"
+       placeholder="Mobile Number"
+       maxlength="10"
+       required>
 
-<input type="tel" placeholder="Mobile Number" maxlength="10">
+<input type="text" id="subject" placeholder="Subject" required>
 
-<input type="text" placeholder="Subject">
+<textarea id="message"
+placeholder="Your Message"
+required></textarea>
 
-<textarea rows="6" placeholder="Your Message"></textarea>
-
-<button type="submit">
-
-Send Message
-
+<button type="button" onclick="sendMail()">
+    Send Message
 </button>
 
 </form>
@@ -213,6 +206,38 @@ loading="lazy">
 </div>
 
 </section>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("_bKOBVl00wVYTb-9k");
+
+function sendMail(){
+
+    const params = {
+        from_name: document.getElementById("name").value,
+        from_email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        subject: document.getElementById("subject").value,
+        message: document.getElementById("message").value,
+        time: new Date().toLocaleString()
+    };
+
+    emailjs.send(
+        "service_etdxaxq",
+        "template_ts6zubd",
+        params
+    )
+    .then(function(response){
+        alert("Email Sent Successfully!");
+        console.log(response);
+    })
+    .catch(function(error){
+        alert("Email Failed");
+        console.log(error);
+    });
+
+}
+</script>
 
 </body>
 
