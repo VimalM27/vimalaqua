@@ -1,18 +1,35 @@
-function addToCart(name, price){
+function parsePrice(price) {
+    if (typeof price === "number" && Number.isFinite(price)) {
+        return price;
+    }
 
-    let cart =
-        JSON.parse(localStorage.getItem("cart")) || [];
+    if (typeof price === "string") {
+        const cleaned = price.replace(/[^\d.]/g, "");
+        const parsed = parseFloat(cleaned);
+        return Number.isFinite(parsed) ? parsed : 0;
+    }
 
-    cart.push({
-        name:name,
-        price:price
-    });
+    return 0;
+}
 
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
+function addToCart(name, price, image) {
+    const parsedPrice = parsePrice(price);
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
+    let existing = cart.find(item => item.name === name);
+
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        cart.push({
+            name: name,
+            price: parsedPrice,
+            image: image || "",
+            qty: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
     alert(name + " added to cart");
 }
 
@@ -309,28 +326,6 @@ container.innerHTML = html;
 
 }
 
-function addToCart(name, price, image) {
-
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    let existing = cart.find(item => item.name === name);
-
-    if (existing) {
-        existing.qty += 1;
-    } else {
-        cart.push({
-            name: name,
-            price: price,
-            image: image,
-            qty: 1
-        });
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    alert("Added to cart!");
-}
-
 function openImagePopup(imageSrc){
     document.getElementById("popupImage").src = imageSrc;
     document.getElementById("imagePopup").style.display = "flex";
@@ -346,6 +341,29 @@ document.addEventListener("DOMContentLoaded", function(){
     images.forEach(img => {
         img.addEventListener("click", function(){
             openImagePopup(this.src);
+        });
+    });
+
+    document.querySelectorAll(".product-card button").forEach(button => {
+        if (button.getAttribute("data-cart-bound") === "true" || button.onclick) {
+            return;
+        }
+
+        const card = button.closest(".product-card");
+        if (!card) {
+            return;
+        }
+
+        const name = button.dataset.name || card.querySelector("h2")?.textContent?.trim() || "";
+        const price = button.dataset.price || card.querySelector(".price")?.textContent?.trim() || "0";
+        const image = button.dataset.image || card.querySelector("img")?.getAttribute("src") || "";
+
+        button.setAttribute("data-cart-bound", "true");
+        button.addEventListener("click", function(){
+            if (button.textContent.trim().toLowerCase().includes("contact for price")) {
+                return;
+            }
+            addToCart(name, price, image);
         });
     });
 
