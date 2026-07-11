@@ -22,13 +22,15 @@
 
         <img src="images/banner.jpg" alt="Vimal Pets">
 
-        <input type="tel"
-               id="phoneInput"
-               placeholder="Enter your phone number">
+        <input
+    type="tel"
+    id="phone"
+    placeholder="Enter Mobile Number"
+    maxlength="10">
 
-        <button onclick="getAccess()">
-            Get Updates
-        </button>
+<button onclick="subscribeUser()">
+    Get Updates
+</button>
 
     </div>
 
@@ -42,10 +44,15 @@
     </div>
 
     <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search Fish, Aquariums, Plants..." autocomplete="off">
-        <button type="button" onclick="searchProducts()">🔍</button>
-        <div id="searchSuggestions" class="search-suggestions"></div>
-    </div>
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search pets, foods, accessories...">
+
+    <button onclick="searchWebsite()">
+        🔍
+    </button>
+</div>
 
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
@@ -270,6 +277,95 @@ function getAccess(){
 
     document.getElementById("offerPopup").style.display = "none";
 }
+</script>
+<script>
+
+const phoneInput = document.getElementById("phone");
+
+/* Allow only numbers */
+
+phoneInput.addEventListener("input", function () {
+
+    this.value = this.value.replace(/\D/g, "");
+
+    if(this.value.length > 10){
+        this.value = this.value.slice(0,10);
+    }
+
+});
+
+
+function subscribeUser(){
+
+    const number = phoneInput.value.trim();
+
+    if(number === ""){
+        alert("Please enter your mobile number.");
+        phoneInput.focus();
+        return;
+    }
+
+    if(number.length !== 10){
+        alert("Mobile number must contain exactly 10 digits.");
+        phoneInput.focus();
+        return;
+    }
+
+    alert("🎉 Thank you for subscribing to Vimal Farms!");
+
+    document.querySelector(".popup-overlay").style.display="none";
+
+}
+
+</script>
+<script>
+function searchWebsite() {
+
+    let search = document.getElementById("searchInput").value.toLowerCase().trim();
+
+    if(search === "dog" || search === "dogs"){
+        window.location.href="dogs.html";
+    }
+
+    else if(search === "cat" || search === "cats"){
+        window.location.href="cats.html";
+    }
+
+    else if(search === "bird" || search === "birds"){
+        window.location.href="birds.html";
+    }
+
+    else if(search === "fish"){
+        window.location.href="fish.html";
+    }
+
+    else if(search === "small pet" || search === "rabbit" || search === "hamster"){
+        window.location.href="small-pets.html";
+    }
+
+    else if(search === "food" || search === "pet food"){
+        window.location.href="foods.html";
+    }
+
+    else if(search === "accessories"){
+        window.location.href="accessories.html";
+    }
+
+    else if(search === "aquarium" || search === "tank"){
+        window.location.href="aquariums.html";
+    }
+
+    else{
+        alert("No matching product found.");
+    }
+}
+</script>
+<script>
+document.getElementById("searchInput").addEventListener("keypress", function(e){
+    if(e.key==="Enter"){
+        searchWebsite();
+    }
+});
 </script>
 </body>
 </html>
