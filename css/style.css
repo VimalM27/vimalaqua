@@ -567,12 +567,9 @@ color:var(--blue);
     justify-content:center;
     align-items:center;
     text-align:center;
+    overflow: hidden;
 }
-.hero{
-    position:relative;
-    height:100vh;
-    overflow:hidden;
-}
+
 .page-content{
     padding-top:120px;
     padding-left:50px;
