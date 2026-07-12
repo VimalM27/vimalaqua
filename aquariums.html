@@ -9,48 +9,78 @@
 <body>
 
 <nav class="navbar">
-    <div class="logo">Vimal <span>Farms</span></div>
-
-    <ul class="nav-links">
-
-    <li><a href="index.html">Home</a></li>
-
-    <li class="dropdown">
-        <a href="#">Pets ▼</a>
-
-        <div class="dropdown-content">
-            <a href="fish.html">🐟 Fish</a>
-            <a href="birds.html">🦜 Birds</a>
-            <a href="dogs.html">🐶 Dogs</a>
-            <a href="cats.html">🐱 Cats</a>
-            <a href="small-pets.html">🐹 Small Pets</a>
-        </div>
-    </li>
-
-    <li><a href="foods.html">Pet Foods</a></li>
-
-    <li class="dropdown">
-        <a href="accessories.html">Accessories ▼</a>
-        <div class="dropdown-content">
-            <a href="accessories.html">Accessories</a>
-            <a href="aquariums.html">Aquariums</a>
-        </div>
-    </li>
-
-    <li><a href="about.html">About</a></li>
-
-    <li><a href="contact.html">Contact</a></li>
-    <li><a href="cart.html" class="cart-link">🛒</a></li>
-</ul>
-
-<div class="user-actions">
-    <a href="login.html" class="login-link">
-        👤 Login
-    </a>
-
+    <div class="mobile-menu-btn" onclick="openMenu()">
+    ☰
 </div>
+<div class="logo">
+    <a href="index.html">
+        <img src="images/logo.png" alt="Vimal Farms Logo">
+        <span>Vimal Farms</span>
+    </a>
+</div>
+<a href="login.html" class="mobile-login">
+    👤
+</a>
+    <div class="search-box">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search pets, foods, accessories...">
+
+    <button onclick="searchWebsite()">
+        🔍
+    </button>
+</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="dropdown">
+            <a href="#">Pets ▼</a>
+
+            <div class="dropdown-content">
+                <a href="fish.html">🐟 Fish</a>
+                <a href="birds.html">🦜 Birds</a>
+                <a href="dogs.html">🐶 Dogs</a>
+                <a href="cats.html">🐱 Cats</a>
+                <a href="small-pets.html">🐹 Small Pets</a>
+            </div>
+        </li>
+
+        <li><a href="foods.html">Pet Foods</a></li>
+        <li class="dropdown">
+            <a href="accessories.html">Accessories ▼</a>
+            <div class="dropdown-content">
+                <a href="accessories.html">Accessories</a>
+                <a href="aquariums.html">Aquariums</a>
+            </div>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html" class="cart-link">🛒</a></li>
+    </ul>
+
+    <div class="user-actions">
+        <a href="login.html" class="login-link">👤 Login</a>
+    </div>
 </nav>
-<section class="fish-section">
+    <div id="mobileMenu" class="mobile-menu">
+
+<span class="close-menu" onclick="closeMenu()">✕</span>
+
+<a href="index.html">🏠 Home</a>
+<a href="fish.html">🐟 Fish</a>
+<a href="birds.html">🦜 Birds</a>
+<a href="dogs.html">🐶 Dogs</a>
+<a href="cats.html">🐱 Cats</a>
+<a href="small-pets.html">🐹 Small Pets</a>
+<a href="foods.html">🍖 Pet Foods</a>
+<a href="accessories.html">🛍 Accessories</a>
+<a href="aquariums.html">🐠 Aquariums</a>
+<a href="about.html">ℹ About</a>
+<a href="contact.html">📞 Contact</a>
+<a href="cart.html">🛒 Cart</a>
+
+</div><section class="fish-section">
 
     <h1>Aquariums</h1>
 
