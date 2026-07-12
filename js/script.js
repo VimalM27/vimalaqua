@@ -485,3 +485,26 @@ function addToCart(name, price, image) {
     localStorage.setItem("cart", JSON.stringify(cart));
     alert(name + " added to cart!");
 }
+function toggleDropdown(event, trigger) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const content = trigger.nextElementSibling;
+    const isOpen = content.classList.contains("show");
+
+    document.querySelectorAll(".dropdown-content.show").forEach(el => {
+        el.classList.remove("show");
+    });
+
+    if (!isOpen) {
+        content.classList.add("show");
+    }
+}
+
+document.addEventListener("click", function(event){
+    if (!event.target.closest(".dropdown")) {
+        document.querySelectorAll(".dropdown-content.show").forEach(el => {
+            el.classList.remove("show");
+        });
+    }
+});

@@ -2368,18 +2368,21 @@ border-radius:20px;
 
 .dropdown{
     position:relative;
+    height:100%;
+    display:flex;
+    align-items:center;
 }
 
 .dropdown-content{
     display:none;
     position:absolute;
-    top:42px;
+    top:100%;
     left:0;
+    margin-top:0;
     background:linear-gradient(145deg, #0f172a, #1e293b);
     border:1px solid rgba(255,255,255,0.12);
     border-radius:14px;
-    width:220px;
-    overflow:hidden;
+    width:200px;
     box-shadow:0 16px 36px rgba(0,0,0,0.22);
     z-index:1200;
 }
@@ -2394,17 +2397,16 @@ border-radius:20px;
     font-size:15px;
     font-weight:500;
     transition:all 0.25s ease;
+    border-radius:14px;
 }
-
+.dropdown-content.show{
+    display:block;
+    animation:dropdownFade 0.3s ease;
+}
 .dropdown-content a:hover{
     background:linear-gradient(90deg, #00b4d8, #0096c7);
     color:white;
     padding-left:22px;
-}
-
-.dropdown:hover .dropdown-content{
-    display:block;
-    animation:dropdownFade 0.3s ease;
 }
 
 @keyframes dropdownFade{

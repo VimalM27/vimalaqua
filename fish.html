@@ -35,25 +35,24 @@
         <li><a href="index.html">Home</a></li>
 
         <li class="dropdown">
-            <a href="#">Pets ▼</a>
-
-            <div class="dropdown-content">
-                <a href="fish.html">🐟 Fish</a>
-                <a href="birds.html">🦜 Birds</a>
-                <a href="dogs.html">🐶 Dogs</a>
-                <a href="cats.html">🐱 Cats</a>
-                <a href="small-pets.html">🐹 Small Pets</a>
-            </div>
-        </li>
+    <a href="#" onclick="toggleDropdown(event, this)">Pets ▼</a>
+    <div class="dropdown-content">
+        <a href="fish.html">🐟 Fish</a>
+        <a href="birds.html">🦜 Birds</a>
+        <a href="dogs.html">🐶 Dogs</a>
+        <a href="cats.html">🐱 Cats</a>
+        <a href="small-pets.html">🐹 Small Pets</a>
+    </div>
+</li>
 
         <li><a href="foods.html">Pet Foods</a></li>
         <li class="dropdown">
-            <a href="accessories.html">Accessories ▼</a>
-            <div class="dropdown-content">
-                <a href="accessories.html">Accessories</a>
-                <a href="aquariums.html">Aquariums</a>
-            </div>
-        </li>
+    <a href="accessories.html" onclick="toggleDropdown(event, this)">Accessories ▼</a>
+    <div class="dropdown-content">
+        <a href="accessories.html">Accessories</a>
+        <a href="aquariums.html">Aquariums</a>
+    </div>
+</li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="cart.html" class="cart-link">🛒</a></li>
@@ -115,16 +114,12 @@
 
 <section class="products">
 
-    <div class="product-card">
-    <a href="koi.html">
-        <img src="images/koi.jpg" alt="Koi Fish" onclick="openImagePopup(this.src)">
-    </a>
+<div class="product-card">
+    <img src="images/koi.jpg" alt="Koi Fish" onclick="openImagePopup(this.src)">
     <h2>Koi Fish</h2>
     <p class="description">Premium Japanese ornamental koi.</p>
     <p class="price">₹500</p>
-    <button onclick="addToCart('Koi Fish',500,'images/koi.jpg')">
-    Add to Cart
-</button>
+    <button onclick="addToCart('Koi Fish',500,'images/koi.jpg')">Add to Cart</button>
 </div>
 
 <div class="product-card">

@@ -17,7 +17,7 @@ body{
     padding:0 5%;
     background:#081b3c;
     display:flex;
-    align-items:center;
+    align-items:stretch;
     justify-content:space-between;
     gap:20px;
     z-index:9999;
@@ -56,7 +56,7 @@ body{
 }
 .nav-links{
     display:flex;
-    align-items:center;
+    align-items:stretch;
     gap:25px;
     list-style:none;
     flex-shrink:1;
@@ -93,25 +93,7 @@ body{
     text-decoration:none;
     font-weight:500;
 }
-.dropdown-content{
-    display:none;
-    position:absolute;
-    top:40px;
-    background:#fff;
-    min-width:220px;
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 10px 20px rgba(0,0,0,.2);
-    z-index:10001;
-}
-.dropdown-content a{
-    display:block;
-    padding:12px;
-    color:#222;
-}
-.dropdown:hover .dropdown-content{
-    display:block;
-}
+
 .mobile-menu-btn,
 .mobile-login,
 .mobile-menu{
