@@ -23,9 +23,6 @@ body{
     z-index:9999;
     box-shadow:0 5px 20px rgba(0,0,0,.2);
 }
-.logo{
-    flex-shrink:0;
-}
 .search-box{
     display:flex;
     align-items:center;
@@ -85,19 +82,8 @@ body{
     flex-shrink:0;
 }
 /*================ NAVBAR ================*/
-.logo a{
-    display:flex;
-    align-items:center;
-    text-decoration:none;
-    gap:10px;
-}
 .logo img{
     height:48px;
-}
-.logo span{
-    font-size:30px;
-    font-weight:700;
-    color:#fff;
 }
 .nav-links li{
     position:relative;
