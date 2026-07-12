@@ -193,7 +193,6 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let total = 0;
 
 cart.forEach(item=>{
-
 total += item.price * (item.qty || 1);
 
 });
@@ -201,7 +200,7 @@ total += item.price * (item.qty || 1);
 document.getElementById("checkout-total").innerText="₹"+total;
 
 </script>
-
+<script src="js/script.js"></script>
 <script src="js/checkout.js"></script>
 <script src="js/navbar.js"></script>
 </body>

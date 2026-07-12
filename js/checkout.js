@@ -41,14 +41,13 @@ return;
 // Read Cart
 const cart=JSON.parse(localStorage.getItem("cart")) || [];
 
-// Calculate Total
 let total=0;
 
 cart.forEach(item=>{
-total += item.price * (item.qty || 1);
+    const price = parsePrice(item.price);
+    total += price * (item.qty || 1);
 });
 
-// Save Order
 const order={
 
 customer:{
@@ -69,8 +68,6 @@ date:new Date().toLocaleString()
 localStorage.setItem("currentOrder",JSON.stringify(order));
 
 alert("Customer Details Saved Successfully!");
-
-// We will connect payment in the next step
 
 console.log(order);
 

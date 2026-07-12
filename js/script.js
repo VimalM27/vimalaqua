@@ -11,28 +11,6 @@ function parsePrice(price) {
 
     return 0;
 }
-
-function addToCart(name, price, image) {
-    const parsedPrice = parsePrice(price);
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-    let existing = cart.find(item => item.name === name);
-
-    if (existing) {
-        existing.qty += 1;
-    } else {
-        cart.push({
-            name: name,
-            price: parsedPrice,
-            image: image || "",
-            qty: 1
-        });
-    }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert(name + " added to cart");
-}
-
 const searchItems = [
     { label: "Koi Fish", page: "fish.html" },
     { label: "Gold Fish", page: "fish.html" },
@@ -416,8 +394,6 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     });
 });
-<script>
-
 function sendMail(){
 
 const name=document.getElementById("name").value.trim();
@@ -496,8 +472,6 @@ console.log(error);
 });
 
 }
-
-</script>
 function addToCart(name, price, image) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let existing = cart.find(item => item.name === name);

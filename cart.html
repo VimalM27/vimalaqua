@@ -105,6 +105,8 @@
 
 </section>
 
+<script src="js/script.js"></script>
+<script src="js/navbar.js"></script>
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -118,8 +120,8 @@ function renderCart() {
     let html = "";
 
     cart.forEach((item, index) => {
-
-        total += item.price * item.qty;
+        const price = parsePrice(item.price);
+        total += price * item.qty;
 
         html += `
         <div class="cart-card">
@@ -131,7 +133,7 @@ function renderCart() {
             <div class="cart-details">
 
                 <h3>${item.name}</h3>
-                <p class="cart-price">₹${item.price}</p>
+                <p class="cart-price">₹${price}</p>
 
                 <div class="qty-box">
 
@@ -157,8 +159,8 @@ function renderCart() {
     html = `
     <div class="cart-empty">
         <h3>Your cart is empty 🛒</h3>
-        <p>Explore our fish, aquariums and accessories.</p>
-        <a href="fish.html" class="shop-btn">Shop Now</a>
+        <p>Explore our fish,dogs,cat,other pets, aquariums and accessories.</p>
+        <a href="pets.html" class="shop-btn">Shop Now</a>
     </div>
     `;
 }
@@ -188,8 +190,6 @@ function removeItem(index) {
     saveCart();
     renderCart();
 }
-
-// initialize qty if missing
 cart = cart.map(item => ({
     ...item,
     qty: item.qty || 1
@@ -197,7 +197,5 @@ cart = cart.map(item => ({
 
 renderCart();
 </script>
-<script src="js/navbar.js"></script>
-<script src="js/script.js"></script>
 </body>
 </html>
