@@ -4,6 +4,11 @@
     box-sizing:border-box;
     font-family:Arial,sans-serif;
 }
+html, body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
 :root{
     --navy-light:#1e293b;
     --card:#1a2238;
@@ -604,12 +609,14 @@ color:var(--blue);
     filter:brightness(1.1);
 }
 /*================ HERO =================*/
-.hero-logo{
-    height:60px;
-    width:auto;
-    object-fit:contain;
-    display:block;
-    margin:0 auto 10px;
+.hero-logo {
+    position: absolute;
+    top: 20px;         /* small fixed gap from the navbar/top of hero */
+    left: 20px;         /* flush to the left edge */
+    width: 150px;       /* fixed size instead of % so it stays compact in the corner */
+    max-width: 18%;     /* safety cap so it doesn't grow too big on huge screens */
+    z-index: 3;
+    pointer-events: none;
 }
 
 .hero{
@@ -1786,41 +1793,41 @@ tures{
 .logo{
     flex:1;
 }
-.fish-hero{
-    position:relative;
-    height:50vh;
-    overflow:hidden;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+.fish-hero {
+    position: relative;
+    height: 50vh;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-.fish-video{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.fish-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.fish-overlay{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.5);
+.fish-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
 }
 
-.fish-content{
-    position:relative;
-    z-index:2;
-    color:white;
+.fish-content {
+    position: relative;
+    z-index: 2;
+    color: white;
 }
-
 .fish-content h1{
     font-size:55px;
     margin-bottom:15px;
@@ -3403,6 +3410,11 @@ font-size:32px;
 
 }
 @media(max-width:768px){
+    .hero-logo {
+        top: 12px;
+        left: 12px;
+        width: 90px;
+    }
     .products{
         display:grid;
         grid-template-columns:repeat(2,1fr);
@@ -3479,4 +3491,30 @@ font-size:32px;
         font-family:Arial,Helvetica,sans-serif !important;
         font-style:normal !important;
     }
+}
+html {
+    height: 100%;
+    overflow: hidden;   /* html no longer scrolls at all */
+}
+
+body {
+    height: 100%;
+    overflow-y: auto;   /* body is now the ONLY thing that scrolls */
+    overflow-x: hidden;
+}
+body {
+    padding-top: 100px;   /* matches .navbar height in navbar.css */
+}
+.nav-links a,
+.nav-links .dropdown > a {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
 }
