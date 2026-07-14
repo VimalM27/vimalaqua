@@ -241,13 +241,21 @@
         cursor:pointer;
         margin-bottom:20px;
     }
-    .hero{
-        height:340px;
+     .hero {
+        height: auto;        /* was: 75vh — let it grow to fit content instead of clipping it */
+        min-height: 75vh;    /* keeps it reasonably tall on mobile */
+        padding: 100px 20px 40px;  /* room so content isn't jammed against the top edge */
     }
-    .hero-content h1{
-        font-size:1.8rem;
+
+    .hero-content {
+        padding: 25px 20px;  /* slightly tighter than desktop so it fits better on small screens */
     }
-    .hero-content p{
-        font-size:.95rem;
+
+    .hero-content h1 {
+        font-size: 28px;     /* your current 34px is a bit large + causes the box to grow taller than 75vh */
+    }
+
+    .hero-content p {
+        font-size: 15px;
     }
 }

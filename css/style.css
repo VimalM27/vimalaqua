@@ -651,6 +651,18 @@ color:var(--blue);
     background:rgba(0,0,0,.45);
     z-index:1;
 }
+.popup-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.popup-logo-wrap .popup-logo-text {
+    color: #d4af37;
+    font-size: 28px;
+    font-family: 'Yellowtail', cursive;
+}
 .popup-overlay{
     position:fixed;
     top:0;
@@ -1615,15 +1627,6 @@ font-weight:bold;
     align-items:center;
     background:rgba(0,0,0,.25);
     z-index:99999;
-}.popup-box{
-    width:90%;
-    max-width:520px;   /* was 700+ */
-    background:#fff;
-    border-radius:20px;
-    overflow:hidden;
-    position:relative;
-    box-shadow:0 20px 50px rgba(0,0,0,.25);
-    animation:popupShow .35s ease;
 }
 .popup-box img{
     width:100%;
@@ -2010,6 +2013,13 @@ color:#00c8ff;
 font-size:18px;
 line-height:1.8;
 color:#d6e6ff;
+}
+.contact-link.whatsapp {
+    background: #25D366;
+}
+
+.contact-link.telegram {
+    background: #229ED9;
 }
 
 .contact-link.web{ background:#0f172a; }
@@ -3085,19 +3095,23 @@ font-size:32px;
     padding:10px 22px;
     font-size:15px;
 }
+ .hero {
+        height: auto;        /* was: 75vh — let it grow to fit content instead of clipping it */
+        min-height: 75vh;    /* keeps it reasonably tall on mobile */
+        padding: 100px 20px 40px;  /* room so content isn't jammed against the top edge */
+    }
 
-.hero{
-    height:75vh;
-}
+    .hero-content {
+        padding: 25px 20px;  /* slightly tighter than desktop so it fits better on small screens */
+    }
 
-.hero-content h1{
-    font-size:34px;
-}
+    .hero-content h1 {
+        font-size: 28px;     /* your current 34px is a bit large + causes the box to grow taller than 75vh */
+    }
 
-.hero-content p{
-    font-size:16px;
-}
-
+    .hero-content p {
+        font-size: 15px;
+    }
 .shop-btn{
     padding:10px 22px;
     font-size:15px;
@@ -3198,13 +3212,6 @@ font-size:32px;
     .login-card{
         width:90%;
         padding:25px;
-    }
-
-    /* Popup */
-
-    .popup-box{
-        width:90%;
-        padding:20px;
     }
 
 }
@@ -3517,4 +3524,135 @@ body {
 .nav-links li {
     display: flex;
     align-items: center;
+}
+.footer-brand {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 0 auto 15px !important;
+}
+
+.footer-brand-img {
+    height: 70px !important;
+    width: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.footer-brand-text {
+    color: #d4af37 !important;
+    font-size: 26px !important;
+    font-family: 'Yellowtail', cursive !important;
+}
+.popup-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: rgba(0,0,0,.5) !important;
+    z-index: 99999 !important;
+}
+
+.popup-box {
+    position: relative !important;
+    width: 90% !important;
+    max-width: 420px !important;
+    background: #fff !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    box-shadow: 0 25px 60px rgba(0,0,0,.3) !important;
+    animation: popupShow .35s ease;
+}
+
+.popup-header {
+    background: linear-gradient(135deg, #071A3D, #0d2b63) !important;
+    padding: 40px 30px 30px !important;
+    text-align: center !important;
+}
+
+.popup-logo-wrap {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-bottom: 4px !important;
+}
+
+.popup-logo {
+    height: 90px !important;
+    width: auto !important;
+    object-fit: contain !important;
+    margin-bottom: 0 !important;
+}
+
+.popup-logo-text {
+    color: #d4af37 !important;
+    font-size: 28px !important;
+    font-family: 'Yellowtail', cursive !important;
+}
+
+.popup-header h2 {
+    color: #fff !important;
+    font-size: 24px !important;
+    margin-bottom: 8px !important;
+}
+
+.popup-header p {
+    color: #cbd5e1 !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+}
+
+.popup-content {
+    padding: 25px 30px 30px !important;
+}
+
+.popup-content input {
+    width: 100% !important;
+    padding: 14px 16px !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    font-size: 15px !important;
+    margin-bottom: 16px !important;
+    outline: none;
+}
+
+.popup-content button {
+    width: 100% !important;
+    padding: 14px !important;
+    border: none !important;
+    border-radius: 10px !important;
+    background: #00b4d8 !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+}
+
+.close-popup {
+    position: absolute !important;
+    top: 14px !important;
+    right: 14px !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    color: #fff !important;
+    background: rgba(255,255,255,.2) !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    z-index: 10;
+}
+
+@keyframes popupShow {
+    from { opacity: 0; transform: scale(.9); }
+    to { opacity: 1; transform: scale(1); }
 }
