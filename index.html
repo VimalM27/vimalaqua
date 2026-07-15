@@ -13,8 +13,7 @@
 
     <div class="popup-box">
 
-        <span class="close-popup" onclick="closePopup()">&times;</span>
-
+        <span class="close-popup" id="closePopupBtn">&times;</span>
         <div class="popup-header">
             <div class="popup-logo-wrap">
                 <img src="images/vimallogo.png?v=2" alt="Vimal Farms" class="popup-logo">
@@ -315,50 +314,42 @@
 emailjs.init("_bKOBVl00wVYTb-9k");
 </script>
 <script>
+function closePopup() {
+    document.getElementById("offerPopup").style.display = "none";
+}
+
+document.getElementById("closePopupBtn").addEventListener("click", closePopup);
+
+document.getElementById("offerPopup").addEventListener("click", function(e){
+    if (e.target === this) closePopup();
+});
+
 function subscribeUser(){
 
     const phone = document.getElementById("phone").value.trim();
 
-    // Check mobile number
     if(!/^[0-9]{10}$/.test(phone)){
         alert("Please enter a valid 10-digit mobile number.");
         return;
     }
 
-    // Current date & time
     const time = new Date().toLocaleString();
+
+    // Close immediately so the user isn't stuck waiting on the network call
+    closePopup();
 
     emailjs.send(
         "service_etdxaxq",
         "template_kxcs0p4",
-        {
-            phone: phone,
-            time: time
-        }
+        { phone: phone, time: time }
     )
     .then(function(){
-
         alert("Thank you for subscribing!");
-
-        document.getElementById("phone").value="";
-
-        closePopup();
-
+        document.getElementById("phone").value = "";
     })
     .catch(function(error){
-
         console.log(error);
-
-        alert("Something went wrong. Please try again.");
-
     });
-
-}
-</script>
-<script src="js/script.js"></script>
-<script>
-function closePopup() {
-    document.getElementById("offerPopup").style.display = "none";
 }
 </script>
 <script>
