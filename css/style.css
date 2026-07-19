@@ -23,7 +23,7 @@ html, body {
     background:var(--card);
     color:var(--text);
 }
-.fish-section,{
+.fish-section{
     background:linear-gradient(
         135deg,
         var(--navy),
