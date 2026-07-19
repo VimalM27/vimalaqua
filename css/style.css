@@ -3656,12 +3656,13 @@ body {
     to { opacity: 1; transform: scale(1); }
 }
 .welcome-text {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-weight: 600;
-    color: #ffd700;
-    font-size: 36px;
-    margin: 0 0 4px 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-size: 16px;
+    margin: 0 0 6px 0;
 }
 .youtube-section {
     text-align: center;
