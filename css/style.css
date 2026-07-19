@@ -3424,11 +3424,11 @@ font-size:32px;
         width: 90px;
     }
     .products{
-        display:grid;
-        grid-template-columns:repeat(2,1fr);
-        gap:10px;
-        padding:12px;
-    }
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    padding:12px;
+}
 
     .product-card{
         background:#fff;
@@ -3446,10 +3446,10 @@ font-size:32px;
 
     .product-card img{
     width:100%;
-    height:140px;
+    height:140px;   /* or your updated value */
     object-fit:contain;
     background:#fff;
-    padding:8px;
+    padding:8px;      ← this pads all 4 sides of the image
     flex-shrink:0;
 }
 
