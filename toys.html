@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Toys | Vimal Farms</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="mobile-menu-btn" onclick="openMenu()">☰</div>
+    <div class="logo">
+        <a href="index.html" class="logo-link">
+            <img src="images/vimallogo.png?v=2" alt="Vimal Farms" class="navbar-logo">
+            <span class="logo-text">Farms</span>
+        </a>
+    </div>
+    <a href="login.html" class="mobile-login">👤</a>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search pets, foods, accessories...">
+        <button onclick="searchWebsite()">🔍</button>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event, this)">Pets ▼</a>
+            <div class="dropdown-content">
+                <a href="fish.html">🐟 Fish</a>
+                <a href="birds.html">🦜 Birds</a>
+                <a href="dogs.html">🐶 Dogs</a>
+                <a href="cats.html">🐱 Cats</a>
+                <a href="small-pets.html">🐹 Small Pets</a>
+            </div>
+        </li>
+        <li><a href="foods.html">Pet Foods</a></li>
+        <li class="dropdown">
+            <a href="accessories.html" onclick="toggleDropdown(event, this)">Accessories ▼</a>
+            <div class="dropdown-content">
+                <a href="accessories.html">Accessories</a>
+                <a href="aquariums.html">Aquariums</a>
+                <a href="toys.html">Toys</a>
+            </div>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html" class="cart-link">🛒</a></li>
+    </ul>
+    <div class="user-actions">
+        <a href="login.html" class="login-link">👤 Login</a>
+    </div>
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+    <span class="close-menu" onclick="closeMenu()">✕</span>
+    <a href="index.html">🏠 Home</a>
+    <a href="fish.html">🐟 Fish</a>
+    <a href="birds.html">🦜 Birds</a>
+    <a href="dogs.html">🐶 Dogs</a>
+    <a href="cats.html">🐱 Cats</a>
+    <a href="small-pets.html">🐹 Small Pets</a>
+    <a href="foods.html">🍖 Pet Foods</a>
+    <a href="accessories.html">🛍 Accessories</a>
+    <a href="aquariums.html">🐠 Aquariums</a>
+    <a href="toys.html">🧸 Toys</a>
+    <a href="about.html">ℹ About</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+</div>
+
+<section class="page-hero">
+    <div class="hero-content">
+        <h1>Pet Toys</h1>
+        <p>Fun, safe, and durable toys for every kind of pet</p>
+    </div>
+</section>
+
+<section class="products">
+
+    <div class="product-card">
+        <a href="#">
+            <img src="images/toy-chew-bone.jpg" alt="Chew Bone">
+            <h2>Chew Bone Toy</h2>
+            <p class="description">Durable rubber chew toy, gentle on gums, great for teething pups.</p>
+            <p class="price">₹199</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <a href="#">
+            <img src="images/toy-feather-wand.jpg" alt="Feather Wand">
+            <h2>Feather Wand</h2>
+            <p class="description">Interactive teaser wand to keep your cat active and engaged.</p>
+            <p class="price">₹149</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <a href="#">
+            <img src="images/toy-parrot-swing.jpg" alt="Bird Swing">
+            <h2>Bird Swing Toy</h2>
+            <p class="description">Colorful wooden swing perch for birds, easy to attach to any cage.</p>
+            <p class="price">₹249</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <a href="#">
+            <img src="images/toy-squeaky-ball.jpg" alt="Squeaky Ball">
+            <h2>Squeaky Ball</h2>
+            <p class="description">Bouncy, squeaky rubber ball built for hours of fetch.</p>
+            <p class="price">₹99</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <a href="#">
+            <img src="images/toy-tunnel.jpg" alt="Small Pet Tunnel">
+            <h2>Small Pet Tunnel</h2>
+            <p class="description">Collapsible tunnel for rabbits, hamsters and guinea pigs to explore.</p>
+            <p class="price">₹299</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+        <a href="#">
+            <img src="images/toy-cat-tree.jpg" alt="Cat Scratch Post">
+            <h2>Cat Scratch Post</h2>
+            <p class="description">Sisal-wrapped scratch post to protect your furniture and keep claws healthy.</p>
+            <p class="price">₹599</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
+
+</section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-brand">
+            <img src="images/vimallogo.png?v=2" alt="Vimal Farms" class="footer-brand-img">
+            <span class="footer-brand-text">Farms</span>
+        </div>
+        <p>Your Trusted Pet Store & Aquarium Destination</p>
+        <div class="footer-contact">
+            <p>📞 +91 78 4545 2727</p>
+            <p>📧 vimal@vimal27.in</p>
+            <p>📍 Coimbatore, Tamil Nadu, India</p>
+        </div>
+        <div class="social-contact">
+            <a href="https://wa.me/917845452727" target="_blank" class="contact-link whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://t.me/yourtelegramusername" target="_blank" class="contact-link telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://www.instagram.com/vimalm27_official/" target="_blank" class="contact-link instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@VimalM27" target="_blank" class="contact-link youtube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <hr>
+        <p class="copyright">© 2026 Vimal Farms. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="js/navbar.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
