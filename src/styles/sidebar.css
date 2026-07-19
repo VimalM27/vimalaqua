@@ -1,0 +1,88 @@
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--ink);
+  color: #EDEEF6;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 18px;
+  position: relative;
+}
+
+/* perforated edge, like a ticket stub torn from the app shell */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 1px;
+  background-image: radial-gradient(circle, var(--paper) 2px, transparent 2.5px);
+  background-size: 100% 16px;
+  background-repeat: repeat-y;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 8px 28px 8px;
+}
+
+.sidebar-mark {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  background: var(--amber);
+  color: var(--ink);
+  padding: 4px 7px;
+  border-radius: 4px;
+}
+
+.sidebar-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: #fff;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.sidebar-link {
+  text-decoration: none;
+  color: #B9BEDA;
+  font-size: 14.5px;
+  font-weight: 500;
+  padding: 11px 12px;
+  border-radius: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.sidebar-link.active {
+  background: var(--ink-2);
+  color: #fff;
+}
+
+.sidebar-footer {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-link.logout {
+  color: #E3A798;
+}
+
+.sidebar-link.logout:hover {
+  background: rgba(217, 99, 74, 0.15);
+  color: #fff;
+}
