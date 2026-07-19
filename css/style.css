@@ -1472,7 +1472,15 @@ margin-top:50px;
     font-weight:600;
     margin:0;
 }
+.product-card a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
 
+.product-card a:hover {
+    text-decoration: none;
+}
 .cart-price{
     font-size:20px;
     font-weight:700;
@@ -3251,11 +3259,6 @@ font-size:32px;
 
 
 /* Product Link */
-
-.product-card a{
-    display:block;
-}
-
 /* Extra mobile overrides (do not change existing rules) */
 @media (max-width:480px) {
 

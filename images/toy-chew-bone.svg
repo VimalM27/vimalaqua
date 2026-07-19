@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Chew bone toy illustration">
+  <rect width="400" height="300" rx="24" fill="#fff7e6"/>
+  <circle cx="200" cy="150" r="115" fill="#f8c471"/>
+  <rect x="120" y="95" width="160" height="110" rx="55" fill="#8b5a2b"/>
+  <rect x="145" y="72" width="110" height="38" rx="18" fill="#a96b33"/>
+  <rect x="142" y="182" width="116" height="18" rx="9" fill="#6b3f1d"/>
+  <path d="M168 111c12-20 52-20 64 0" stroke="#d8b27a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <circle cx="175" cy="145" r="6" fill="#fff9d8"/>
+  <circle cx="225" cy="145" r="6" fill="#fff9d8"/>
+</svg>
