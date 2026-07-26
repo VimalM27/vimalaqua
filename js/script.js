@@ -483,7 +483,8 @@ function addToCart(name, price, image) {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert(name + " added to cart!");
+    showToast(name + " added to cart!");
+    updateCartBadge();
 }
 function toggleDropdown(event, trigger) {
     event.preventDefault();
@@ -508,3 +509,42 @@ document.addEventListener("click", function(event){
         });
     }
 });
+// Show toast instead of alert
+function showToast(message) {
+    let toast = document.getElementById('cartToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'cartToast';
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2000); // 2 seconds
+}
+
+// Update the cart badge number
+function updateCartBadge() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+
+    let badge = document.querySelector('.cart-badge');
+    const cartLink = document.querySelector('.cart-link');
+
+    if (!badge && cartLink) {
+        badge = document.createElement('span');
+        badge.className = 'cart-badge';
+        cartLink.appendChild(badge);
+    }
+
+    if (badge) {
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'flex' : 'none';
+    }
+}
+
+// Run on every page load
+document.addEventListener('DOMContentLoaded', updateCartBadge);

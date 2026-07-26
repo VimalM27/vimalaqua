@@ -767,7 +767,8 @@ function addToCart(name, price, image) {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert(name + " added to cart!");
+    showToast(name + " added to cart!");
+    updateCartBadge();
 }
 
 function closeImagePopup(){
