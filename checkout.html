@@ -1,207 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Vimal Farms</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/navbar.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment | Vimal Farms</title>
+<link rel="stylesheet" href="css/shop.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-<nav class="navbar">
-    <div class="mobile-menu-btn" onclick="openMenu()">
-    ☰
-</div>
-<div class="logo">
-    <a href="index.html" class="logo-link">
-        <img src="images/vimallogo.png?v=2" alt="Vimal Farms" class="navbar-logo">
-        <span class="logo-text">Farms</span>
-    </a>
-</div>
-<a href="login.html" class="mobile-login">
-    👤
-</a>
-    <div class="search-box">
-    <input
-        type="text"
-        id="searchInput"
-        placeholder="Search pets, foods, accessories...">
 
-    <button onclick="searchWebsite()">
-        🔍
-    </button>
-</div>
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+<div class="form-card">
+    <h2>💳 Complete Payment</h2>
+    <p class="subtitle" id="planInfo">Loading plan...</p>
 
-        <li class="dropdown">
-    <a href="#" onclick="toggleDropdown(event, this)">Pets ▼</a>
-    <div class="dropdown-content">
-        <a href="fish.html">🐟 Fish</a>
-        <a href="birds.html">🦜 Birds</a>
-        <a href="dogs.html">🐶 Dogs</a>
-        <a href="cats.html">🐱 Cats</a>
-        <a href="small-pets.html">🐹 Small Pets</a>
-    </div>
-</li>
-
-        <li><a href="foods.html">Pet Foods</a></li>
-        <li class="dropdown">
-    <a href="accessories.html" onclick="toggleDropdown(event, this)">Accessories ▼</a>
-    <div class="dropdown-content">
-        <a href="accessories.html">Accessories</a>
-        <a href="aquariums.html">Aquariums</a>
-    </div>
-</li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="cart.html" class="cart-link">🛒</a></li>
-    </ul>
-
-    <div class="user-actions">
-        <a href="login.html" class="login-link">👤 Login</a>
-    </div>
-</nav>
-    <div id="mobileMenu" class="mobile-menu">
-
-<span class="close-menu" onclick="closeMenu()">✕</span>
-
-<a href="index.html">🏠 Home</a>
-<a href="fish.html">🐟 Fish</a>
-<a href="birds.html">🦜 Birds</a>
-<a href="dogs.html">🐶 Dogs</a>
-<a href="cats.html">🐱 Cats</a>
-<a href="small-pets.html">🐹 Small Pets</a>
-<a href="foods.html">🍖 Pet Foods</a>
-<a href="accessories.html">🛍 Accessories</a>
-<a href="aquariums.html">🐠 Aquariums</a>
-<a href="about.html">ℹ About</a>
-<a href="contact.html">📞 Contact</a>
-<a href="cart.html">🛒 Cart</a>
-
-</div>
-<section class="checkout-page">
-
-    <div class="checkout-header">
-
-        <h1>🛒 Secure Checkout</h1>
-
-        <p>
-            Complete your purchase securely with Vimal Farms
-        </p>
-
+    <div class="warn-msg">
+        ⚠️ This is a demo checkout. Replace this with a real gateway
+        (Razorpay / Stripe) before going live. No real charge happens here.
     </div>
 
-    <div class="checkout-wrapper">
+    <div id="message"></div>
 
-        <!-- LEFT -->
-
-        <div class="checkout-form">
-
-    <h2>Customer Information</h2>
-
-    <input
-        type="text"
-        id="customerName"
-        placeholder="👤 Full Name"
-        required>
-
-    <input
-        type="tel"
-        id="customerPhone"
-        placeholder="📞 Mobile Number"
-        maxlength="10"
-        required>
-
-    <input
-        type="email"
-        id="customerEmail"
-        placeholder="✉ Email Address">
-
-    <textarea
-        id="customerAddress"
-        rows="5"
-        placeholder="🏠 Delivery Address"></textarea>
-
-</div>
-
-        <!-- RIGHT -->
-
-        <div class="order-summary">
-
-            <h2>Order Summary</h2>
-
-            <img src="images/payment-qr.png"
-            class="checkout-qr">
-
-            <div class="summary-row">
-                <span>Delivery</span>
-                <span>FREE</span>
-            </div>
-
-            <div class="summary-row">
-                <span>Payment</span>
-                <span>UPI</span>
-            </div>
-
-            <div class="summary-row total-row">
-
-                <span>Total</span>
-
-                <span id="checkout-total">₹0</span>
-
-            </div>
-
-            <p class="upi-id">
-
-                UPI ID :
-                <strong>vimalaqua@upi</strong>
-
-            </p>
-
-            <button
-class="checkout-btn"
-id="placeOrderBtn">
-
-✔ Place Order
-
-</button>
-
+    <form id="payForm">
+        <div class="form-group">
+            <label>Card Number</label>
+            <input type="text" placeholder="4242 4242 4242 4242" maxlength="19" required>
         </div>
+        <div class="form-group" style="display:flex; gap:12px;">
+            <div style="flex:1;">
+                <label>Expiry</label>
+                <input type="text" placeholder="MM/YY" required>
+            </div>
+            <div style="flex:1;">
+                <label>CVV</label>
+                <input type="text" placeholder="123" maxlength="3" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Cardholder Name</label>
+            <input type="text" placeholder="Name on card" required>
+        </div>
+        <button type="submit" class="btn-primary" id="payBtn">Pay Now</button>
+    </form>
 
+    <div class="switch-link">
+        <a href="subscription.html">← Choose a different plan</a>
     </div>
+</div>
 
-    <div class="trust-section">
-
-        <div>🔒 Secure Payment</div>
-
-        <div>🚚 Free Delivery</div>
-
-        <div>✔ Trusted Store</div>
-
-        <div>💬 24×7 Support</div>
-
-    </div>
-
-</section>
-
+<script src="js/supabaseClient.js"></script>
 <script>
+let currentUser = null;
+let selectedPlan = null;
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+async function init() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+        window.location.href = "login.html";
+        return;
+    }
+    currentUser = session.user;
 
-let total = 0;
+    const params = new URLSearchParams(window.location.search);
+    const planId = params.get("plan_id");
 
-cart.forEach(item=>{
-total += item.price * (item.qty || 1);
+    const { data: plan, error } = await supabase
+        .from("subscription_plans")
+        .select("*")
+        .eq("id", planId)
+        .single();
 
+    if (error || !plan) {
+        window.location.href = "subscription.html";
+        return;
+    }
+
+    selectedPlan = plan;
+    document.getElementById("planInfo").innerHTML =
+        `Plan: <strong style="color:#FFD700;">${plan.plan_name}</strong> &nbsp;|&nbsp; Amount: <strong style="color:#FFD700;">₹${Number(plan.price).toFixed(2)}</strong>`;
+    document.getElementById("payBtn").textContent = `Pay ₹${Number(plan.price).toFixed(0)}`;
+}
+
+document.getElementById("payForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const payBtn = document.getElementById("payBtn");
+    payBtn.disabled = true;
+    payBtn.textContent = "Processing...";
+
+    const transactionId = "TXN" + Math.random().toString(36).substring(2, 12).toUpperCase();
+
+    // 1. record the payment
+    const { error: payError } = await supabase.from("payments").insert([{
+        shop_owner_id: currentUser.id,
+        plan_id: selectedPlan.id,
+        amount: selectedPlan.price,
+        payment_status: "success",
+        transaction_id: transactionId
+    }]);
+
+    if (payError) {
+        document.getElementById("message").innerHTML = `<div class="error-msg">${payError.message}</div>`;
+        payBtn.disabled = false;
+        payBtn.textContent = "Pay Now";
+        return;
+    }
+
+    // 2. activate subscription on profile
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + selectedPlan.duration_days);
+    const expiryString = expiryDate.toISOString().split("T")[0];
+
+    const { error: profileError } = await supabase
+        .from("profiles")
+        .update({
+            subscription_status: "active",
+            plan_name: selectedPlan.plan_name,
+            plan_expiry: expiryString
+        })
+        .eq("id", currentUser.id);
+
+    if (profileError) {
+        document.getElementById("message").innerHTML = `<div class="error-msg">${profileError.message}</div>`;
+        payBtn.disabled = false;
+        payBtn.textContent = "Pay Now";
+        return;
+    }
+
+    window.location.href = "dashboard.html?payment=success";
 });
 
-document.getElementById("checkout-total").innerText="₹"+total;
-
+init();
 </script>
-<script src="js/script.js"></script>
-<script src="js/checkout.js"></script>
-<script src="js/navbar.js"></script>
-<script src="js/protect.js"></script>
+
 </body>
 </html>

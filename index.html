@@ -6,6 +6,7 @@
     <title>Vimal Farms</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/navbar-auth.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
@@ -49,7 +50,7 @@
         <span class="logo-text">Farms</span>
     </a>
 </div>
-<a href="login.html" class="mobile-login">
+<a href="login.html" class="mobile-login" id="mobileLoginLink">
     👤
 </a>
     <div class="search-box">
@@ -75,7 +76,8 @@
         <a href="small-pets.html">🐹 Small Pets</a>
     </div>
 </li>
-
+        <li><a href="marketplace.html">🛍️ Marketplace</a></li>
+<li><a href="seller-signup.html">Sell With Us</a></li>
         <li><a href="foods.html">Pet Foods</a></li>
         <li class="dropdown">
     <a href="accessories.html" onclick="toggleDropdown(event, this)">Accessories ▼</a>
@@ -89,7 +91,7 @@
         <li><a href="cart.html" class="cart-link">🛒</a></li>
     </ul>
 
-    <div class="user-actions">
+    <div class="user-actions" id="userActions">
         <a href="login.html" class="login-link">👤 Login</a>
     </div>
 </nav>
@@ -493,6 +495,13 @@ document.getElementById("searchInput").addEventListener("keypress", function(e){
 </script>
 <script src="js/navbar.js"></script>
 <script src="js/script.js"></script>
+
+<!-- Firebase SDKs (compat, no build tools needed) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
 
 <script src="js/protect.js"></script>
 </body>

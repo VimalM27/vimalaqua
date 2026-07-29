@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subscription Plans | Vimal Farms</title>
+<link rel="stylesheet" href="css/shop.css">
+<style>body { align-items: flex-start; }</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<div class="plans-wrap">
+    <div class="page-title">
+        <h1>🐾 Choose Your Seller Plan</h1>
+        <p>Subscribe to start posting products on Vimal Farms marketplace</p>
+    </div>
+
+    <div class="plans-grid" id="plansGrid">Loading plans...</div>
+
+    <div class="switch-link" style="margin-top:30px;">
+        <a href="dashboard.html">← Back to Dashboard</a>
+    </div>
+</div>
+
+<script src="js/supabaseClient.js"></script>
+<script>
+(async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const { data: plans, error } = await supabase
+        .from("subscription_plans")
+        .select("*")
+        .order("price", { ascending: true });
+
+    const grid = document.getElementById("plansGrid");
+
+    if (error || !plans) {
+        grid.innerHTML = `<p style="color:#ff9b9b;">Could not load plans.</p>`;
+        return;
+    }
+
+    grid.innerHTML = plans.map(plan => `
+        <div class="plan-card ${plan.plan_name === 'Premium' ? 'featured' : ''}">
+            <h3>${plan.plan_name}</h3>
+            <div class="plan-price">₹${Number(plan.price).toFixed(0)} <span>/ ${plan.duration_days} days</span></div>
+            <div class="plan-desc">${plan.description}</div>
+            <button class="btn-primary" onclick="goToCheckout(${plan.id})">Subscribe Now</button>
+        </div>
+    `).join("");
+})();
+
+function goToCheckout(planId) {
+    window.location.href = `checkout.html?plan_id=${planId}`;
+}
+</script>
+
+</body>
+</html>
