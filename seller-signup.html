@@ -90,10 +90,10 @@ form.addEventListener("submit", async (e) => {
     submitBtn.textContent = "Creating account...";
 
     // 1. Create the auth user
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: email,
-        password: password
-    });
+    const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+    email: email,
+    password: password
+});
 
     if (authError) {
         messageBox.innerHTML = `<div class="error-msg">${authError.message}</div>`;
@@ -104,7 +104,7 @@ form.addEventListener("submit", async (e) => {
 
     // 2. Create their shop profile row
     const userId = authData.user.id;
-    const { error: profileError } = await supabase.from("profiles").insert([{
+    const { error: profileError } = await supabaseClient.from("profiles").insert([{
         id: userId,
         shop_name: shop_name,
         owner_name: owner_name,
