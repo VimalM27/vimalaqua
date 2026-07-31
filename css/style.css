@@ -1379,6 +1379,18 @@ margin-bottom:15px;
 
     transition:.3s;
 }
+.cart-count {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: #ff4d4f;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 999px;
+    line-height: 1.4;
+}
 
 .product-card button:hover{
     background:#1d4ed8;
@@ -2755,15 +2767,11 @@ align-items:center;
 gap:25px;
 
 }
-
-.cart-link{
-
-font-size:24px;
-
-text-decoration:none;
-
-color:white;
-
+.cart-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    font-size: 20px;      /* make the 🛒 emoji bigger/clearer */
 }
 
 .cart-link:hover{
@@ -3787,9 +3795,6 @@ body {
 }
 
 /* Cart badge */
-.cart-link {
-    position: relative;
-}
 
 .cart-badge {
     position: absolute;

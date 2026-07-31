@@ -8,14 +8,41 @@ function closeMenu() {
     document.getElementById("mobileMenu").style.left = "-280px";
 }
 
+// ================= DROPDOWN =================
+
+function toggleDropdown(event, trigger) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const content = trigger.nextElementSibling;
+    const isOpen = content && content.classList.contains("show");
+
+    document.querySelectorAll(".dropdown-content.show").forEach(el => {
+        el.classList.remove("show");
+    });
+
+    if (!isOpen && content) {
+        content.classList.add("show");
+    }
+}
+
+document.addEventListener("click", function (event) {
+    if (!event.target.closest(".dropdown")) {
+        document.querySelectorAll(".dropdown-content.show").forEach(el => {
+            el.classList.remove("show");
+        });
+    }
+});
+
 // ================= SEARCH =================
 
 function searchWebsite() {
+    const input = document.getElementById("searchInput");
+    if (!input) {
+        return;
+    }
 
-    let search = document.getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
+    let search = input.value.toLowerCase().trim();
 
     if (search === "") {
         alert("Please enter something to search.");
@@ -55,5 +82,16 @@ function searchWebsite() {
     else {
         alert("No matching products found.");
     }
-
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) {
+        searchInput.addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                searchWebsite();
+            }
+        });
+    }
+});

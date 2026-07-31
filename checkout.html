@@ -5,21 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment | Vimal Farms</title>
 <link rel="stylesheet" href="css/shop.css">
+<link rel="stylesheet" href="css/navbar.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
+ 
 <div class="form-card">
     <h2>💳 Complete Payment</h2>
     <p class="subtitle" id="planInfo">Loading plan...</p>
-
+ 
     <div class="warn-msg">
         ⚠️ This is a demo checkout. Replace this with a real gateway
         (Razorpay / Stripe) before going live. No real charge happens here.
     </div>
-
+ 
     <div id="message"></div>
-
+ 
     <form id="payForm">
         <div class="form-group">
             <label>Card Number</label>
@@ -41,75 +42,75 @@
         </div>
         <button type="submit" class="btn-primary" id="payBtn">Pay Now</button>
     </form>
-
+ 
     <div class="switch-link">
         <a href="subscription.html">← Choose a different plan</a>
     </div>
 </div>
-
+ 
 <script src="js/supabaseClient.js"></script>
 <script>
 let currentUser = null;
 let selectedPlan = null;
-
+ 
 async function init() {
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await supabaseClient.auth.getSession();
     if (!session) {
         window.location.href = "login.html";
         return;
     }
     currentUser = session.user;
-
+ 
     const params = new URLSearchParams(window.location.search);
     const planId = params.get("plan_id");
-
-    const { data: plan, error } = await supabase
+ 
+    const { data: plan, error } = await supabaseClient
         .from("subscription_plans")
         .select("*")
         .eq("id", planId)
         .single();
-
+ 
     if (error || !plan) {
         window.location.href = "subscription.html";
         return;
     }
-
+ 
     selectedPlan = plan;
     document.getElementById("planInfo").innerHTML =
         `Plan: <strong style="color:#FFD700;">${plan.plan_name}</strong> &nbsp;|&nbsp; Amount: <strong style="color:#FFD700;">₹${Number(plan.price).toFixed(2)}</strong>`;
     document.getElementById("payBtn").textContent = `Pay ₹${Number(plan.price).toFixed(0)}`;
 }
-
+ 
 document.getElementById("payForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const payBtn = document.getElementById("payBtn");
     payBtn.disabled = true;
     payBtn.textContent = "Processing...";
-
+ 
     const transactionId = "TXN" + Math.random().toString(36).substring(2, 12).toUpperCase();
-
+ 
     // 1. record the payment
-    const { error: payError } = await supabase.from("payments").insert([{
+    const { error: payError } = await supabaseClient.from("payments").insert([{
         shop_owner_id: currentUser.id,
         plan_id: selectedPlan.id,
         amount: selectedPlan.price,
         payment_status: "success",
         transaction_id: transactionId
     }]);
-
+ 
     if (payError) {
         document.getElementById("message").innerHTML = `<div class="error-msg">${payError.message}</div>`;
         payBtn.disabled = false;
         payBtn.textContent = "Pay Now";
         return;
     }
-
+ 
     // 2. activate subscription on profile
     const expiryDate = new Date();
     expiryDate.setDate(expiryDate.getDate() + selectedPlan.duration_days);
     const expiryString = expiryDate.toISOString().split("T")[0];
-
-    const { error: profileError } = await supabase
+ 
+    const { error: profileError } = await supabaseClient
         .from("profiles")
         .update({
             subscription_status: "active",
@@ -117,19 +118,21 @@ document.getElementById("payForm").addEventListener("submit", async (e) => {
             plan_expiry: expiryString
         })
         .eq("id", currentUser.id);
-
+ 
     if (profileError) {
         document.getElementById("message").innerHTML = `<div class="error-msg">${profileError.message}</div>`;
         payBtn.disabled = false;
         payBtn.textContent = "Pay Now";
         return;
     }
-
-    window.location.href = "dashboard.html?payment=success";
+ 
+    window.location.href = "seller-dashboard.html?payment=success";
 });
-
+ 
 init();
 </script>
-
+<script src="js/navbar.js"></script>
+<script src="js/navbar-inject.js"></script>
+ 
 </body>
 </html>

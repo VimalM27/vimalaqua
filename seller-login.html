@@ -1,4 +1,6 @@
 
+Seller login · HTML
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop Owner Login | Vimal Farms</title>
 <link rel="stylesheet" href="css/shop.css">
+<link rel="stylesheet" href="css/navbar.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -44,7 +47,7 @@ const submitBtn = document.getElementById("submitBtn");
 // if already logged in, skip straight to dashboard
 (async () => {
     const { data: { session } } = await supabaseClient.auth.getSession();
-    if (session) window.location.href = "dashboard.html";
+    if (session) window.location.href = "seller-dashboard.html";
 })();
  
 form.addEventListener("submit", async (e) => {
@@ -63,11 +66,12 @@ form.addEventListener("submit", async (e) => {
         submitBtn.disabled = false;
         submitBtn.textContent = "Login";
     } else {
-        window.location.href = "dashboard.html";
+        window.location.href = "seller-dashboard.html";
     }
 });
 </script>
+<script src="js/navbar.js"></script>
+<script src="js/navbar-inject.js"></script>
  
 </body>
 </html>
- 

@@ -55,6 +55,7 @@
     align-items:center;
     justify-content:space-between;
     gap:20px;
+    flex-wrap: nowrap;
     z-index:9999;
     box-shadow:0 5px 20px rgba(0,0,0,.2);
 }
@@ -95,6 +96,7 @@
     gap:25px;
     list-style:none;
     flex-shrink:1;
+    min-width:0;        /* ADD THIS — allows real shrinking */
     white-space:nowrap;
 }
 .user-actions{
@@ -102,6 +104,7 @@
     align-items:center;
     gap:20px;
     flex-shrink:0;
+    margin-left: auto; 
 }
 .login-link{
     display:inline-flex;
@@ -257,5 +260,33 @@
 
     .hero-content p {
         font-size: 15px;
+    }
+}
+@media (max-width: 1150px) {
+    .nav-links{
+        gap: 14px;
+        font-size: 14px;
+    }
+    .search-box{
+        max-width: 260px;
+    }
+}
+@media (max-width: 1300px) {
+    .nav-links{
+        gap: 10px;
+        font-size: 13px;
+    }
+    .search-box{
+        max-width: 200px;
+        min-width: 120px;
+    }
+    .login-link{
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+}
+@media (max-width: 1300px) {
+    .navbar-logo-wrap{
+        width: 120px;
     }
 }
