@@ -1392,17 +1392,17 @@ margin-bottom:15px;
     line-height: 1.4;
 }
 .mega-menu{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    width:420px;
-    padding:20px;
-    background:#102347;
-    border-radius:10px;
-    grid-template-columns:1fr 1fr;
-    gap:30px;
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 420px;
+    background: #102347;
+    border-radius: 10px;
+    padding: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    z-index: 999;
 }
 
 .dropdown:hover .mega-menu{
