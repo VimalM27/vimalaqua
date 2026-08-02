@@ -4,11 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Subscription Plans | Vimal Farms</title>
-<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/navbar.css">
 <link rel="stylesheet" href="css/navbar-auth.css">
 <link rel="stylesheet" href="css/shop.css">
-<style>body { align-items: flex-start; }</style>
+    <link rel="stylesheet" href="css/style.css">
+<style>
+body { align-items: flex-start; }
+.trial-card {
+    border: 2px dashed #4ade80;
+}
+.trial-card h3 {
+    color: #4ade80;
+}
+.trial-badge {
+    display: inline-block;
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+.trial-card .btn-primary {
+    background: #4ade80;
+    color: #06281a;
+}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -133,12 +155,15 @@
  
 <script src="js/supabaseClient.js"></script>
 <script>
-(async () => {
+let currentUser = null;
+ 
+async function init() {
     const { data: { session } } = await supabaseClient.auth.getSession();
     if (!session) {
         window.location.href = "login.html";
         return;
     }
+    currentUser = session.user;
  
     const { data: plans, error } = await supabaseClient
         .from("subscription_plans")
@@ -152,7 +177,19 @@
         return;
     }
  
-    grid.innerHTML = plans.map(plan => `
+    // Free trial card is not stored in subscription_plans — it's a
+    // one-time, zero-cost activation handled entirely client-side.
+    const trialCardHtml = `
+        <div class="plan-card trial-card">
+            <span class="trial-badge">FREE TRIAL</span>
+            <h3>2-Day Trial</h3>
+            <div class="plan-price">₹0 <span>/ 2 days</span></div>
+            <div class="plan-desc">Try posting products and using your dashboard, no payment needed.</div>
+            <button class="btn-primary" id="trialBtn" onclick="startFreeTrial()">Start Free Trial</button>
+        </div>
+    `;
+ 
+    const paidPlansHtml = plans.map(plan => `
         <div class="plan-card ${plan.plan_name === 'Premium' ? 'featured' : ''}">
             <h3>${plan.plan_name}</h3>
             <div class="plan-price">₹${Number(plan.price).toFixed(0)} <span>/ ${plan.duration_days} days</span></div>
@@ -160,11 +197,45 @@
             <button class="btn-primary" onclick="goToCheckout(${plan.id})">Subscribe Now</button>
         </div>
     `).join("");
-})();
+ 
+    grid.innerHTML = trialCardHtml + paidPlansHtml;
+}
  
 function goToCheckout(planId) {
     window.location.href = `checkout.html?plan_id=${planId}`;
 }
+ 
+async function startFreeTrial() {
+    const trialBtn = document.getElementById("trialBtn");
+    trialBtn.disabled = true;
+    trialBtn.textContent = "Activating...";
+ 
+    const TRIAL_DAYS = 2; // change to 1 for a 1-day trial
+ 
+    const expiryDate = new Date();
+    expiryDate.setDate(expiryDate.getDate() + TRIAL_DAYS);
+    const expiryString = expiryDate.toISOString().split("T")[0];
+ 
+    const { error } = await supabaseClient
+        .from("profiles")
+        .update({
+            subscription_status: "active",
+            plan_name: "Free Trial",
+            plan_expiry: expiryString
+        })
+        .eq("id", currentUser.id);
+ 
+    if (error) {
+        alert("Could not start trial: " + error.message);
+        trialBtn.disabled = false;
+        trialBtn.textContent = "Start Free Trial";
+        return;
+    }
+ 
+    window.location.href = "seller-dashboard.html?trial=success";
+}
+ 
+init();
 </script>
  
 </body>
