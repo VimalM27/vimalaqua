@@ -3,12 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop Owner Login | Vimal Farms</title>
+<title>Payment | Vimal Farms</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/navbar.css">
 <link rel="stylesheet" href="css/navbar-auth.css">
 <link rel="stylesheet" href="css/shop.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+.pay-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.pay-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #9aa8b8;
+    padding: 10px 6px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.pay-tab.active {
+    color: #FFD700;
+    border-bottom-color: #FFD700;
+}
+.pay-panel {
+    display: none;
+}
+.pay-panel.active {
+    display: block;
+}
+.upi-qr-box {
+    text-align: center;
+    padding: 18px;
+    border: 1px dashed rgba(255,215,0,0.5);
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+.upi-qr-box img {
+    width: 180px;
+    height: 180px;
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px;
+}
+.upi-qr-box p {
+    color: #9aa8b8;
+    font-size: 13px;
+    margin-top: 10px;
+}
+.upi-id-display {
+    color: #FFD700;
+    font-weight: 600;
+    font-size: 14px;
+}
+select#netbankingBank {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #3a4a5c;
+    background: #1c2530;
+    color: #fff;
+    font-size: 14px;
+}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
@@ -17,89 +82,89 @@
     <div class="mobile-menu-btn" onclick="openMenu()">
         ☰
     </div>
-
+ 
     <div class="logo">
         <a href="index.html" class="logo-link">
             <img src="images/vimallogo.png?v=2" alt="Vimal Farms" class="navbar-logo">
             <span class="logo-text">Farms</span>
         </a>
     </div>
-
+ 
     <a href="login.html" class="mobile-login" id="mobileLoginLink">
         👤
     </a>
-
+ 
     <div class="search-box">
         <input
             type="text"
             id="searchInput"
             placeholder="Search pets, foods, accessories...">
-
+ 
         <button onclick="searchWebsite()">🔍</button>
     </div>
-
+ 
     <ul class="nav-links">
-
+ 
         <li><a href="index.html">Home</a></li>
-
+ 
         <!-- SHOP -->
         <li class="dropdown">
             <a href="#" onclick="toggleDropdown(event,this)">Shop ▼</a>
-
+ 
             <div class="mega-menu">
-
+ 
                 <div class="menu-column">
                     <h4>Pets</h4>
-
+ 
                     <a href="dogs.html">🐶 Dogs</a>
                     <a href="cats.html">🐱 Cats</a>
                     <a href="birds.html">🦜 Birds</a>
                     <a href="fish.html">🐟 Fish</a>
                     <a href="small-pets.html">🐹 Small Pets</a>
                 </div>
-
+ 
                 <div class="menu-column">
                     <h4>Products</h4>
-
+ 
                     <a href="marketplace.html">🛍 Marketplace</a>
                     <a href="foods.html">🍖 Pet Foods</a>
                     <a href="accessories.html">🎯 Accessories</a>
                     <a href="aquariums.html">🐠 Aquariums</a>
                 </div>
-
+ 
             </div>
         </li>
-
+ 
         <!-- SELLER -->
         <li class="dropdown">
             <a href="#" onclick="toggleDropdown(event,this)">Seller ▼</a>
-
+ 
             <div class="dropdown-content">
                 <a href="seller-signup.html">📝 Become a Seller</a>
                 <a href="seller-login.html">🔑 Seller Login</a>
                 <a href="seller-dashboard.html">📊 Seller Dashboard</a>
             </div>
         </li>
-
+ 
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
-
+ 
         <li>
             <a href="cart.html" class="cart-link">🛒</a>
         </li>
-
+ 
     </ul>
-
+ 
     <div class="user-actions" id="userActions">
         <a href="login.html" class="login-link">👤 Login</a>
     </div>
-
+ 
 </nav>
-
+ 
 <div id="mobileMenu" class="mobile-menu">
-
+ 
     <span class="close-menu" onclick="closeMenu()">✕</span>
-
+ 
     <a href="index.html">🏠 Home</a>
     <a href="fish.html">🐟 Fish</a>
     <a href="birds.html">🦜 Birds</a>
@@ -115,9 +180,9 @@
     <a href="about.html">ℹ About</a>
     <a href="contact.html">📞 Contact</a>
     <a href="cart.html">🛒 Cart</a>
-
+ 
 </div>
-
+ 
 <div class="form-card">
     <h2>💳 Complete Payment</h2>
     <p class="subtitle" id="planInfo">Loading plan...</p>
@@ -129,25 +194,65 @@
  
     <div id="message"></div>
  
+    <div class="pay-tabs">
+        <button type="button" class="pay-tab active" data-tab="card" onclick="switchPayTab('card')">💳 Card</button>
+        <button type="button" class="pay-tab" data-tab="upi" onclick="switchPayTab('upi')">📱 UPI / QR</button>
+        <button type="button" class="pay-tab" data-tab="netbanking" onclick="switchPayTab('netbanking')">🏦 Net Banking</button>
+    </div>
+ 
     <form id="payForm">
-        <div class="form-group">
-            <label>Card Number</label>
-            <input type="text" placeholder="4242 4242 4242 4242" maxlength="19" required>
-        </div>
-        <div class="form-group" style="display:flex; gap:12px;">
-            <div style="flex:1;">
-                <label>Expiry</label>
-                <input type="text" placeholder="MM/YY" required>
+ 
+        <!-- CARD PANEL -->
+        <div class="pay-panel active" id="panel-card">
+            <div class="form-group">
+                <label>Card Number</label>
+                <input type="text" id="cardNumber" placeholder="4242 4242 4242 4242" maxlength="19">
             </div>
-            <div style="flex:1;">
-                <label>CVV</label>
-                <input type="text" placeholder="123" maxlength="3" required>
+            <div class="form-group" style="display:flex; gap:12px;">
+                <div style="flex:1;">
+                    <label>Expiry</label>
+                    <input type="text" id="cardExpiry" placeholder="MM/YY">
+                </div>
+                <div style="flex:1;">
+                    <label>CVV</label>
+                    <input type="text" id="cardCvv" placeholder="123" maxlength="3">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Cardholder Name</label>
+                <input type="text" id="cardName" placeholder="Name on card">
             </div>
         </div>
-        <div class="form-group">
-            <label>Cardholder Name</label>
-            <input type="text" placeholder="Name on card" required>
+ 
+        <!-- UPI / QR PANEL -->
+        <div class="pay-panel" id="panel-upi">
+            <div class="upi-qr-box">
+                <img id="upiQrImage" src="" alt="UPI QR Code">
+                <p>Scan with any UPI app (GPay, PhonePe, Paytm) to pay <span class="upi-id-display" id="upiAmountLabel"></span></p>
+            </div>
+            <div class="form-group">
+                <label>Or enter your UPI ID</label>
+                <input type="text" id="upiId" placeholder="yourname@upi">
+            </div>
         </div>
+ 
+        <!-- NET BANKING PANEL -->
+        <div class="pay-panel" id="panel-netbanking">
+            <div class="form-group">
+                <label>Select Your Bank</label>
+                <select id="netbankingBank">
+                    <option value="">Choose bank</option>
+                    <option value="SBI">State Bank of India</option>
+                    <option value="HDFC">HDFC Bank</option>
+                    <option value="ICICI">ICICI Bank</option>
+                    <option value="Axis">Axis Bank</option>
+                    <option value="Kotak">Kotak Mahindra Bank</option>
+                    <option value="PNB">Punjab National Bank</option>
+                    <option value="Other">Other Bank</option>
+                </select>
+            </div>
+        </div>
+ 
         <button type="submit" class="btn-primary" id="payBtn">Pay Now</button>
     </form>
  
@@ -160,6 +265,7 @@
 <script>
 let currentUser = null;
 let selectedPlan = null;
+let activePayMethod = "card";
  
 async function init() {
     const { data: { session } } = await supabaseClient.auth.getSession();
@@ -187,10 +293,55 @@ async function init() {
     document.getElementById("planInfo").innerHTML =
         `Plan: <strong style="color:#FFD700;">${plan.plan_name}</strong> &nbsp;|&nbsp; Amount: <strong style="color:#FFD700;">₹${Number(plan.price).toFixed(2)}</strong>`;
     document.getElementById("payBtn").textContent = `Pay ₹${Number(plan.price).toFixed(0)}`;
+ 
+    // build the UPI QR code for this amount
+    const upiUrl = `upi://pay?pa=vimalfarms@upi&pn=VimalFarms&am=${Number(plan.price).toFixed(2)}&cu=INR`;
+    document.getElementById("upiQrImage").src =
+        `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiUrl)}`;
+    document.getElementById("upiAmountLabel").textContent = `₹${Number(plan.price).toFixed(0)}`;
+}
+ 
+function switchPayTab(tab) {
+    activePayMethod = tab;
+ 
+    document.querySelectorAll(".pay-tab").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tab === tab);
+    });
+    document.querySelectorAll(".pay-panel").forEach(panel => {
+        panel.classList.remove("active");
+    });
+    document.getElementById(`panel-${tab}`).classList.add("active");
+}
+ 
+function validateActivePayMethod() {
+    if (activePayMethod === "card") {
+        const num = document.getElementById("cardNumber").value.trim();
+        const exp = document.getElementById("cardExpiry").value.trim();
+        const cvv = document.getElementById("cardCvv").value.trim();
+        const name = document.getElementById("cardName").value.trim();
+        if (!num || !exp || !cvv || !name) {
+            return "Please fill in all card details.";
+        }
+    } else if (activePayMethod === "upi") {
+        // UPI ID is optional since the QR code itself is a valid payment path
+    } else if (activePayMethod === "netbanking") {
+        const bank = document.getElementById("netbankingBank").value;
+        if (!bank) {
+            return "Please select your bank.";
+        }
+    }
+    return null;
 }
  
 document.getElementById("payForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+ 
+    const validationError = validateActivePayMethod();
+    if (validationError) {
+        document.getElementById("message").innerHTML = `<div class="error-msg">${validationError}</div>`;
+        return;
+    }
+ 
     const payBtn = document.getElementById("payBtn");
     payBtn.disabled = true;
     payBtn.textContent = "Processing...";
@@ -203,6 +354,7 @@ document.getElementById("payForm").addEventListener("submit", async (e) => {
         plan_id: selectedPlan.id,
         amount: selectedPlan.price,
         payment_status: "success",
+        payment_method: activePayMethod,
         transaction_id: transactionId
     }]);
  
