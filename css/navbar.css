@@ -313,3 +313,9 @@
 .dropdown-content.show{
     display:block;
 }
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown {
+    position: relative;
+}

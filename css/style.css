@@ -1391,7 +1391,41 @@ margin-bottom:15px;
     border-radius: 999px;
     line-height: 1.4;
 }
+.mega-menu{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    width:420px;
+    padding:20px;
+    background:#102347;
+    border-radius:10px;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
 
+.dropdown:hover .mega-menu{
+    display:grid;
+}
+
+.menu-column h4{
+    color:#00c8ff;
+    margin-bottom:10px;
+    border-bottom:1px solid rgba(255,255,255,.2);
+    padding-bottom:8px;
+}
+
+.menu-column a{
+    display:block;
+    color:white;
+    padding:8px 0;
+    text-decoration:none;
+}
+
+.menu-column a:hover{
+    color:#00c8ff;
+}
 .product-card button:hover{
     background:#1d4ed8;
 }
