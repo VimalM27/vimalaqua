@@ -2538,7 +2538,84 @@ border-radius:20px;
     margin-bottom:30px;
 }
 /* Premium Dropdown */
+/* Vimal Farms - Wishlist & Delivery Checker styles */
 
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.wishlist-btn {
+    background: #f3f4f6;
+    border: none;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+    transition: transform 0.15s ease;
+}
+
+.wishlist-btn:hover {
+    transform: scale(1.12);
+}
+
+.wishlist-btn.active {
+    color: #e63950;
+    background: #fde8ea;
+}
+
+.delivery-check {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+.pincode-input {
+    flex: 1;
+    min-width: 100px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.check-delivery-btn {
+    padding: 6px 10px;
+    background: #2d7d46;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.check-delivery-btn:hover {
+    background: #24632f;
+}
+
+.delivery-result {
+    width: 100%;
+    font-size: 13px;
+    margin: 4px 0 0;
+}
+
+.delivery-result.success {
+    color: #2d7d46;
+}
+
+.delivery-result.error {
+    color: #c0392b;
+}
 .dropdown{
     position:relative;
     height:100%;

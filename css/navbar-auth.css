@@ -124,3 +124,122 @@
 .cart-link {
     margin-right: 20px !important;
 }
+
+ ================================================================ */
+ 
+.form-card {
+    max-width: 400px;
+    margin: 60px auto;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 36px 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+ 
+.form-card h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    color: #12263a;
+    text-align: center;
+}
+ 
+.form-card .subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+ 
+.form-group {
+    margin-bottom: 18px;
+}
+ 
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+}
+ 
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+ 
+.form-group input:focus {
+    outline: none;
+    border-color: #0e8ba8;
+    box-shadow: 0 0 0 3px rgba(14, 139, 168, 0.15);
+}
+ 
+.btn-primary {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(135deg, #0e8ba8, #0a5f7a);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+ 
+.btn-primary:hover {
+    opacity: 0.9;
+}
+ 
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+ 
+.switch-link {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 14px;
+    color: #6b7280;
+}
+ 
+.switch-link a {
+    color: #0e8ba8;
+    font-weight: 600;
+    text-decoration: none;
+}
+ 
+.switch-link a:hover {
+    text-decoration: underline;
+}
+ 
+#message .error-msg {
+    background: #fee2e2;
+    color: #b91c1c;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+ 
+#message .success-msg {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+ 
+@media (max-width: 480px) {
+    .form-card {
+        margin: 30px 16px;
+        padding: 28px 22px;
+    }
+}
