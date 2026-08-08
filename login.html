@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R5NVV7FZB6');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Vimal Farms</title>
@@ -41,6 +49,7 @@
         }
         .home-btn:hover { opacity: 0.9; }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -78,7 +87,13 @@ const form = document.getElementById("loginForm");
 const messageBox = document.getElementById("message");
 const submitBtn = document.getElementById("submitBtn");
 
-form.addEventListener("submit", function (e) {
+// if already logged in, skip straight to home
+(async () => {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (session) window.location.href = "index.html";
+})();
+
+form.addEventListener("submit", async function (e) {
     e.preventDefault();
     messageBox.innerHTML = "";
     submitBtn.disabled = true;
@@ -87,24 +102,19 @@ form.addEventListener("submit", function (e) {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    loginUser(email, password)
-        .then(function () {
-            window.location.href = "index.html";
-        })
-        .catch(function (error) {
-            messageBox.innerHTML = `<div class="error-msg">${error.message || error}</div>`;
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Login";
-        });
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+    if (error) {
+        messageBox.innerHTML = `<div class="error-msg">${error.message}</div>`;
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Login";
+    } else {
+        window.location.href = "index.html";
+    }
 });
 </script>
 
-<!-- Firebase SDKs and site auth helpers -->
-<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
-<script src="js/firebase-config.js"></script>
-<script src="js/auth.js"></script>
+<script src="js/supabaseClient.js"></script>
 
 </body>
 </html>
