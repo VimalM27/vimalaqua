@@ -5,117 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop Owner Login | Vimal Farms</title>
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/navbar.css">
 <link rel="stylesheet" href="css/navbar-auth.css">
 <link rel="stylesheet" href="css/shop.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+    body { align-items: flex-start; padding-top: 40px; flex-wrap: wrap; }
+    body > .home-btn-wrap,
+    body > .form-card {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+    .form-card {
+        max-width: 420px !important;
+        width: 90% !important;
+        margin: 20px auto 60px !important;
+        align-self: center !important;
+        position: relative !important;
+        top: 0 !important;
+    }
+    .home-btn-wrap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 4px;
+    }
+    .home-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #0c447c;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 18px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .home-btn:hover { opacity: 0.9; }
+</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
- 
-<nav class="navbar">
-    <div class="mobile-menu-btn" onclick="openMenu()">
-        ☰
-    </div>
 
-    <div class="logo">
-    <a href="index.html" class="logo-link">
-        <img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="navbar-logo">
-    </a>
+<div class="home-btn-wrap">
+    <a href="index.html" class="home-btn">🏠 Back to Home</a>
 </div>
 
-    <a href="login.html" class="mobile-login" id="mobileLoginLink">
-        👤
-    </a>
-
-    <div class="search-box">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search pets, foods, accessories...">
-
-        <button onclick="searchWebsite()">🔍</button>
-    </div>
-
-    <ul class="nav-links">
-
-        <li><a href="index.html">Home</a></li>
-
-        <!-- SHOP -->
-        <li class="dropdown">
-            <a href="#" onclick="toggleDropdown(event,this)">Shop ▼</a>
-
-            <div class="mega-menu">
-
-                <div class="menu-column">
-                    <h4>Pets</h4>
-
-                    <a href="dogs.html">🐶 Dogs</a>
-                    <a href="cats.html">🐱 Cats</a>
-                    <a href="birds.html">🦜 Birds</a>
-                    <a href="fish.html">🐟 Fish</a>
-                    <a href="small-pets.html">🐹 Small Pets</a>
-                </div>
-
-                <div class="menu-column">
-                    <h4>Products</h4>
-
-                    <a href="marketplace.html">🛍 Marketplace</a>
-                    <a href="foods.html">🍖 Pet Foods</a>
-                    <a href="accessories.html">🎯 Accessories</a>
-                    <a href="aquariums.html">🐠 Aquariums</a>
-                </div>
-
-            </div>
-        </li>
-
-        <!-- SELLER -->
-        <li class="dropdown">
-            <a href="#" onclick="toggleDropdown(event,this)">Seller ▼</a>
-
-            <div class="dropdown-content">
-                <a href="seller-signup.html">📝 Become a Seller</a>
-                <a href="seller-login.html">🔑 Seller Login</a>
-                <a href="seller-dashboard.html">📊 Seller Dashboard</a>
-            </div>
-        </li>
-
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-
-        <li>
-            <a href="cart.html" class="cart-link">🛒</a>
-        </li>
-
-    </ul>
-
-    <div class="user-actions" id="userActions">
-        <a href="login.html" class="login-link">👤 Login</a>
-    </div>
-
-</nav>
-
-<div id="mobileMenu" class="mobile-menu">
-
-    <span class="close-menu" onclick="closeMenu()">✕</span>
-
-    <a href="index.html">🏠 Home</a>
-    <a href="fish.html">🐟 Fish</a>
-    <a href="birds.html">🦜 Birds</a>
-    <a href="dogs.html">🐶 Dogs</a>
-    <a href="cats.html">🐱 Cats</a>
-    <a href="small-pets.html">🐹 Small Pets</a>
-    <a href="marketplace.html">🛍️ Marketplace</a>
-    <a href="foods.html">🍖 Pet Foods</a>
-    <a href="accessories.html">🛍 Accessories</a>
-    <a href="aquariums.html">🐠 Aquariums</a>
-    <a href="seller-signup.html">📝 Become a Seller</a>
-    <a href="seller-login.html">🔑 Seller Login</a>
-    <a href="about.html">ℹ About</a>
-    <a href="contact.html">📞 Contact</a>
-    <a href="cart.html">🛒 Cart</a>
-
-</div>
 <div class="form-card">
     <h2>🐾 Seller Login</h2>
     <p class="subtitle">Access your Vimal Farms seller dashboard</p>

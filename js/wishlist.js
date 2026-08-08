@@ -6,7 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const WISHLIST_KEY = 'vimalWishlist';
 
   function getWishlist() {
-    return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
+    let list = JSON.parse(localStorage.getItem(WISHLIST_KEY)) || [];
+    // Migrate old format (array of plain name strings) to new object format
+    list = list.map(item =>
+      typeof item === 'string' ? { name: item, price: null, image: '' } : item
+    );
+    return list;
   }
 
   function saveWishlist(list) {
@@ -22,17 +27,17 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function isWishlisted(name) {
-    return getWishlist().includes(name);
+    return getWishlist().some(item => item.name === name);
   }
 
-  function toggleWishlist(name, btn) {
+  function toggleWishlist(product, btn) {
     let list = getWishlist();
-    if (list.includes(name)) {
-      list = list.filter(item => item !== name);
+    if (list.some(item => item.name === product.name)) {
+      list = list.filter(item => item.name !== product.name);
       btn.classList.remove('active');
       btn.textContent = '♡';
     } else {
-      list.push(name);
+      list.push(product);
       btn.classList.add('active');
       btn.textContent = '❤️';
     }
@@ -42,8 +47,14 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('.product-card').forEach(card => {
     const titleEl = card.querySelector('h2');
     const priceEl = card.querySelector('.price');
+    const imgEl = card.querySelector('img');
     if (!titleEl || !priceEl) return;
+
     const name = titleEl.textContent.trim();
+    const priceNum = parseFloat((priceEl.textContent || '').replace(/[^\d.]/g, '')) || 0;
+    const image = imgEl ? imgEl.getAttribute('src') : '';
+
+    const product = { name, price: priceNum, image };
 
     const btn = document.createElement('button');
     btn.className = 'wishlist-btn';
@@ -54,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btn.addEventListener('click', function (e) {
       e.preventDefault();
-      toggleWishlist(name, btn);
+      toggleWishlist(product, btn);
     });
 
     // Wrap the price and heart button together so the heart sits

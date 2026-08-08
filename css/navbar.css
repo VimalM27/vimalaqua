@@ -32,9 +32,35 @@
     text-decoration: none;
     line-height: 1;
 }
+.wishlist-link {
+    position: relative;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
 
+.wishlist-link:hover {
+    color: #f5c451; /* gold accent, matches your logo */
+}
+
+.wishlist-link #wishlistCount {
+    font-size: 12px;
+    font-weight: bold;
+    background: #d94b4b;
+    color: #fff;
+    border-radius: 50%;
+    min-width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1px;
+}
 .navbar-logo{
-    height: 50px;   /* Adjust if needed */
+    height: 60px;   /* Adjust if needed */
     width: auto;
 }
 .logo-text{
