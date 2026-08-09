@@ -1,4 +1,4 @@
-// Vimal Farms - Delivery Date Estimator (rule-based, no courier API yet)
+// Vimal Pets World - Delivery Date Estimator (rule-based, no courier API yet)
 // This gives customers a rough estimate. When you connect a courier/tracking
 // app (Shipway, Track123, etc.) later, replace estimateDeliveryDays() with
 // a real API call to get accurate zone-based transit times.

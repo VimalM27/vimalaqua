@@ -1,4 +1,4 @@
-// Vimal Farms - Wishlist (client-side, saved per browser/device)
+// Vimal Pets World - Wishlist (client-side, saved per browser/device)
 // Note: This does NOT sync across devices or accounts. Once you add real
 // user login (backend), this should be upgraded to save wishlist per account.
 

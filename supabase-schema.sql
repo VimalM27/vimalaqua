@@ -1,9 +1,4 @@
--- ===================================================
--- Vimal Farms Marketplace - Supabase Schema
--- Run this in: Supabase Dashboard > SQL Editor > New Query > Run
--- ===================================================
-
--- 0. Required extension for gen_random_uuid()
+-- Vimal Pets World Marketplace - Supabase Schema
 create extension if not exists pgcrypto;
 
 -- 1. Shop owner profiles (linked to Supabase Auth users)

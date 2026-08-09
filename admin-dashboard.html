@@ -1,507 +1,844 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Vimal Pets World</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <title>Admin Dashboard | Vimal Farms</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+    /* ---- Vimal Pets World token system ---- */
+    --canopy:#132420;         /* deep pine — sidebar */
+    --canopy-2:#1c332d;       /* sidebar hover surface */
+    --meadow:#2f6f5e;         /* primary — fresh habitat green */
+    --meadow-dark:#234f43;
+    --meadow-light:#e7f2ee;
+    --marigold:#e0952f;       /* accent — treats/collars warmth */
+    --marigold-light:#fbf0dd;
+    --cloud:#f6f4ee;          /* warm off-white background */
+    --card:#ffffff;
+    --ink:#1c2624;            /* primary text */
+    --muted:#6b7570;
+    --border:#e5e2d8;
+    --success:#2f7a51;
+    --success-bg:#e6f4ea;
+    --danger:#b3432f;
+    --danger-bg:#fbeae6;
+    --warning:#b3781f;
+    --warning-bg:#fbf0dd;
+    --shadow:0 10px 30px -12px rgba(19,36,32,.18);
+    --shadow-sm:0 2px 8px rgba(19,36,32,.06);
+    --radius:14px;
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Inter',Arial,Helvetica,sans-serif;
+    --font-mono:'JetBrains Mono',Consolas,monospace;
+}
+body{font-family:var(--font-body);background:var(--cloud);color:var(--ink);
+    background-image:radial-gradient(circle at 100% 0%, rgba(224,149,47,.06), transparent 45%);
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--meadow);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+.layout{display:flex;min-height:100vh}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+/* ============ SIDEBAR ============ */
+.sidebar{
+    width:255px;background:var(--canopy);color:#fff;position:fixed;left:0;top:0;
+    bottom:0;padding:24px 16px;z-index:20;transition:.28s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;
+    background-image:
+        radial-gradient(circle at 85% 8%, rgba(224,149,47,.10), transparent 40%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='%23ffffff' fill-opacity='0.035'%3E%3Cellipse cx='170' cy='40' rx='9' ry='12'/%3E%3Cellipse cx='195' cy='30' rx='7' ry='10'/%3E%3Cellipse cx='150' cy='25' rx='7' ry='10'/%3E%3Cellipse cx='185' cy='58' rx='7' ry='10'/%3E%3Cpath d='M172 65c14 0 26 12 26 26s-12 22-26 22-26-10-26-22 12-26 26-26z'/%3E%3Cellipse cx='40' cy='180' rx='9' ry='12'/%3E%3Cellipse cx='65' cy='170' rx='7' ry='10'/%3E%3Cellipse cx='20' cy='165' rx='7' ry='10'/%3E%3Cellipse cx='55' cy='198' rx='7' ry='10'/%3E%3Cpath d='M42 205c14 0 26 12 26 26s-12 22-26 22-26-10-26-22 12-26 26-26z' transform='translate(0,-46)'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:top right, top right;
+}
+.brand{padding:6px 10px 22px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:18px}
+.brand h2{font-family:var(--font-display);font-weight:600;font-size:22px;letter-spacing:.2px}
+.brand span{font-size:11px;color:#a9c2ba;letter-spacing:1.4px;font-weight:600}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav button{
+    border:0;background:transparent;color:#c7d8d0;text-align:left;
+    padding:12px 14px;border-radius:10px;font-weight:600;font-size:14px;
+    display:flex;align-items:center;gap:11px;transition:.15s;position:relative
+}
+.nav button svg{flex:none;opacity:.85}
+.nav button:hover{background:var(--canopy-2);color:#fff}
+.nav button.active{background:var(--meadow);color:#fff}
+.nav button.active svg{opacity:1}
+.nav .logout{margin-top:auto;color:#f0b8a8}
+.nav .logout:hover{background:rgba(179,67,47,.25);color:#ffd7ca}
+.sidebar-bottom{margin-top:auto;padding-top:14px}
+.sidebar-foot{padding:14px 10px 0;font-size:11px;color:#8ba69c;border-top:1px solid rgba(255,255,255,.08);margin-top:14px}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fa;
-            color: #222;
-        }
+/* ============ MAIN ============ */
+.main{margin-left:255px;width:calc(100% - 255px);min-width:0}
+.topbar{
+    height:70px;background:rgba(246,244,238,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;padding:0 30px;
+    position:sticky;top:0;z-index:10
+}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.menu-btn{display:none;border:0;background:var(--card);border:1px solid var(--border);padding:9px 11px;border-radius:9px}
+.topbar h3{font-family:var(--font-display);font-weight:600;font-size:18px}
+.admin-pill{
+    background:var(--marigold-light);color:var(--warning);padding:7px 13px;border-radius:20px;
+    font-size:11.5px;font-weight:700;letter-spacing:.4px;display:flex;align-items:center;gap:6px
+}
+.admin-pill .dotlive{width:6px;height:6px;border-radius:50%;background:var(--marigold);box-shadow:0 0 0 3px var(--marigold-light)}
+.container{padding:30px;max-width:1520px;margin:auto}
 
-        .navbar {
-            background: #111;
-            color: white;
-            padding: 18px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.welcome{margin-bottom:26px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.welcome h1{font-family:var(--font-display);font-weight:600;font-size:32px;margin-bottom:6px;letter-spacing:-.3px}
+.welcome p{color:var(--muted);font-size:14px}
+.welcome p#adminEmail{font-family:var(--font-mono);font-size:12.5px}
 
-        .navbar h2 {
-            margin: 0;
-        }
+/* ============ STAT CARDS ============ */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.stat{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px 20px 18px;box-shadow:var(--shadow-sm);display:flex;justify-content:space-between;
+    align-items:flex-start;transition:.18s;position:relative;overflow:hidden
+}
+.stat:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--stat-accent,var(--meadow))}
+.stat h4{font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.stat .num{font-family:var(--font-display);font-size:30px;font-weight:600;letter-spacing:-.5px}
+.stat small{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+.icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-size:19px;background:var(--icon-bg,var(--meadow-light));color:var(--icon-fg,var(--meadow))}
+.stat.c-sellers{--stat-accent:var(--meadow)}
+.stat.c-sellers .icon{--icon-bg:var(--meadow-light);--icon-fg:var(--meadow-dark)}
+.stat.c-products{--stat-accent:var(--marigold)}
+.stat.c-products .icon{--icon-bg:var(--marigold-light);--icon-fg:var(--warning)}
+.stat.c-payments{--stat-accent:#4a6d8c}
+.stat.c-payments .icon{--icon-bg:#e7eef4;--icon-fg:#4a6d8c}
+.stat.c-revenue{--stat-accent:var(--danger)}
+.stat.c-revenue .icon{--icon-bg:var(--danger-bg);--icon-fg:var(--danger)}
 
-        .logout-btn {
-            background: #e53935;
-            color: white;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+/* ============ PANELS ============ */
+.grid2{display:grid;grid-template-columns:1.4fr .6fr;gap:18px;margin-bottom:24px}
+.panel{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow-sm);padding:22px
+}
+.panel-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.panel-title h2{font-family:var(--font-display);font-weight:600;font-size:18px}
+.panel-title span{font-size:12px;color:var(--muted);font-weight:500}
 
-        .container {
-            padding: 30px;
-            max-width: 1400px;
-            margin: auto;
-        }
+.chart-wrap{position:relative}
+.chart-total{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin-bottom:4px}
 
-        .welcome {
-            margin-bottom: 25px;
-        }
+.activity{display:flex;flex-direction:column;gap:15px}
+.activity-item{display:flex;gap:11px;align-items:flex-start}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--marigold);margin-top:6px;flex:none;box-shadow:0 0 0 3px var(--marigold-light)}
+.activity-item strong{font-size:13px;font-weight:700}
+.activity-item p{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5}
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
+/* ============ TABLE SECTIONS ============ */
+.section{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow-sm);padding:22px;margin-bottom:22px;scroll-margin-top:88px
+}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+.section-head h2{font-family:var(--font-display);font-weight:600;font-size:19px;display:flex;align-items:center;gap:9px}
+.section-head h2 svg{color:var(--meadow)}
+.count-pill{background:var(--meadow-light);color:var(--meadow-dark);font-size:12px;font-weight:700;padding:5px 11px;border-radius:20px;font-family:var(--font-mono)}
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-        }
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.search{width:100%;border:1px solid var(--border);border-radius:9px;padding:11px 12px 11px 36px;outline:none;background:var(--cloud);font-size:13.5px;transition:.15s}
+.search:focus{border-color:var(--meadow);background:#fff;box-shadow:0 0 0 3px var(--meadow-light)}
+.filter{border:1px solid var(--border);border-radius:9px;padding:11px 14px;background:var(--cloud);font-size:13.5px;color:var(--ink)}
+.filter:focus{border-color:var(--meadow)}
 
-        .card h3 {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 10px;
-        }
+.table-wrap{overflow:auto;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;min-width:680px}
+th,td{padding:13px 14px;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+th{background:var(--cloud);color:#596860;font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;position:sticky;top:0}
+td{font-size:13.5px}
+tbody tr{transition:.12s}
+tbody tr:hover{background:var(--meadow-light)}
+tbody tr:last-child td{border-bottom:0}
+.mono{font-family:var(--font-mono);font-size:12.5px;color:var(--muted)}
 
-        .card .number {
-            font-size: 30px;
-            font-weight: bold;
-        }
+.badge{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.2px}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge.success{background:var(--success-bg);color:var(--success)}
+.badge.danger{background:var(--danger-bg);color:var(--danger)}
+.badge.warning{background:var(--warning-bg);color:var(--warning)}
+.badge.info{background:#e7eef4;color:#3d6690}
+.badge.shipped{background:#e2f3f2;color:#1f7a72}
+.price{font-weight:700;font-family:var(--font-mono)}
 
-        .section {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-        }
+/* ============ ORDERS: expandable rows ============ */
+.expand-btn{border:1px solid var(--border);background:var(--cloud);width:26px;height:26px;border-radius:7px;
+    display:inline-flex;align-items:center;justify-content:center;transition:.15s}
+.expand-btn svg{transition:.2s}
+.expand-btn.open svg{transform:rotate(90deg)}
+.expand-btn:hover{border-color:var(--meadow);color:var(--meadow)}
+.order-items-row td{background:var(--cloud);padding:0;border-bottom:1px solid var(--border)}
+.order-items-inner{padding:14px 18px}
+.order-items-inner table{min-width:0;width:100%}
+.order-items-inner th{background:transparent;font-size:10.5px;padding:6px 10px}
+.order-items-inner td{padding:8px 10px;font-size:12.5px;border-bottom:1px solid var(--border)}
+.order-items-inner tr:last-child td{border-bottom:0}
+.order-items-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;display:block}
 
-        .section h2 {
-            margin-bottom: 20px;
-        }
+.empty,.error{text-align:center;padding:44px 20px;color:var(--muted)}
+.empty svg{margin-bottom:10px;opacity:.5}
+.error{color:var(--danger)}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+/* skeleton loading */
+.skeleton-row td{padding:14px}
+.skel{height:14px;border-radius:5px;background:linear-gradient(90deg,#eee0 0%,var(--border) 50%,#eee0 100%);
+    background-size:200% 100%;animation:shimmer 1.3s ease-in-out infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-        th, td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-        }
+.refresh{
+    border:1px solid var(--border);background:var(--card);padding:9px 15px;border-radius:9px;
+    color:var(--meadow-dark);font-weight:700;font-size:13px;display:flex;align-items:center;gap:7px;transition:.15s
+}
+.refresh:hover{background:var(--meadow);color:#fff;border-color:var(--meadow)}
+.refresh svg{transition:.4s}
+.refresh:active svg{transform:rotate(180deg)}
 
-        th {
-            background: #f5f5f5;
-        }
+.mobile-overlay{display:none}
 
-        .loading {
-            text-align: center;
-            padding: 30px;
-        }
-
-        .error {
-            color: #d32f2f;
-            padding: 20px;
-            text-align: center;
-        }
-
-        @media (max-width: 900px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 15px;
-            }
-
-            table {
-                font-size: 13px;
-            }
-        }
-    </style>
+@media(max-width:1100px){
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .grid2{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+    .sidebar{transform:translateX(-100%)}
+    .sidebar.open{transform:translateX(0)}
+    .main{margin-left:0;width:100%}
+    .menu-btn{display:block}
+    .mobile-overlay{position:fixed;inset:0;background:rgba(19,36,32,.5);z-index:15}
+    .mobile-overlay.show{display:block}
+    .container{padding:18px}
+    .topbar{padding:0 16px}
+    .welcome h1{font-size:26px}
+}
+@media(max-width:520px){
+    .stats{grid-template-columns:1fr}
+    .stat{padding:16px}
+    .topbar h3{font-size:15px}
+    .admin-pill span.txt{display:none}
+}
+</style>
 </head>
 
 <body>
+<div class="layout">
 
-    <div class="navbar">
-        <h2>Vimal Farms — Admin</h2>
-        <button class="logout-btn" id="logoutBtn">Logout</button>
+<aside class="sidebar" id="sidebar">
+    <div class="brand">
+        <h2>Vimal Pets World</h2>
+        <span>ADMIN CONTROL PANEL</span>
     </div>
+
+    <nav class="nav">
+        <button class="active" data-target="dashboard">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+            Dashboard
+        </button>
+        <button data-target="sellers">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15.7 13.2c2.7.2 4.8 2.5 4.8 5.3"/></svg>
+            Sellers
+        </button>
+        <button data-target="products">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l2-5h14l2 5"/><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/><path d="M9 12a3 3 0 0 0 6 0"/></svg>
+            Products
+        </button>
+        <button data-target="orders">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+            Orders
+        </button>
+        <button data-target="payments">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2.2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+            Payments
+        </button>
+        <button data-target="security">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 8.6-8 10.5-4.6-1.9-8-5.5-8-10.5v-6L12 2z"/><path d="M9.5 12l1.8 1.8L14.8 10"/></svg>
+            Security
+        </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <button class="nav logout" id="logoutBtn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+            Logout
+        </button>
+        <div class="sidebar-foot">Row Level Security enforced on all tables.</div>
+    </div>
+</aside>
+
+<div class="mobile-overlay" id="overlay"></div>
+
+<main class="main">
+    <header class="topbar">
+        <div class="topbar-left">
+            <button class="menu-btn" id="menuBtn">☰</button>
+            <h3>Vimal Pets World — Admin</h3>
+        </div>
+        <span class="admin-pill"><span class="dotlive"></span><span class="txt">ADMIN SESSION</span></span>
+    </header>
 
     <div class="container">
 
-        <div class="welcome">
-            <h1>Admin Dashboard</h1>
-            <p id="adminEmail">Checking administrator access...</p>
-        </div>
-
-        <!-- STATISTICS -->
-
-        <div class="stats">
-
-            <div class="card">
-                <h3>Total Sellers</h3>
-                <div class="number" id="sellerCount">-</div>
+        <section id="dashboard">
+            <div class="welcome">
+                <div>
+                    <h1>Good to see you 🐾</h1>
+                    <p id="adminEmail">Checking administrator access...</p>
+                </div>
             </div>
 
-            <div class="card">
-                <h3>Total Products</h3>
-                <div class="number" id="productCount">-</div>
+            <div class="stats">
+                <div class="stat c-sellers">
+                    <div><h4>Total Sellers</h4><div class="num" id="sellerCount">–</div><small>Registered shops</small></div>
+                    <div class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15.7 13.2c2.7.2 4.8 2.5 4.8 5.3"/></svg>
+                    </div>
+                </div>
+                <div class="stat c-products">
+                    <div><h4>Total Products</h4><div class="num" id="productCount">–</div><small>Products listed</small></div>
+                    <div class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l2-5h14l2 5"/><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/><path d="M9 12a3 3 0 0 0 6 0"/></svg>
+                    </div>
+                </div>
+                <div class="stat c-payments">
+                    <div><h4>Total Payments</h4><div class="num" id="paymentCount">–</div><small>Recorded payments</small></div>
+                    <div class="icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2.2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+                    </div>
+                </div>
+                <div class="stat c-revenue">
+                    <div><h4>Total Revenue</h4><div class="num" id="revenue">₹0.00</div><small>From recorded payments</small></div>
+                    <div class="icon">₹</div>
+                </div>
             </div>
 
-            <div class="card">
-                <h3>Total Payments</h3>
-                <div class="number" id="paymentCount">-</div>
+            <div class="grid2">
+                <div class="panel">
+                    <div class="panel-title">
+                        <h2>Revenue Overview</h2>
+                        <button class="refresh" onclick="loadDashboard()">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+                            Refresh
+                        </button>
+                    </div>
+                    <div class="chart-wrap" id="revenueChart"></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title"><h2>Quick Summary</h2></div>
+                    <div class="activity">
+                        <div class="activity-item"><span class="dot"></span><div><strong>Seller accounts</strong><p id="summarySellers">Loading…</p></div></div>
+                        <div class="activity-item"><span class="dot"></span><div><strong>Products</strong><p id="summaryProducts">Loading…</p></div></div>
+                        <div class="activity-item"><span class="dot"></span><div><strong>Payments</strong><p id="summaryPayments">Loading…</p></div></div>
+                        <div class="activity-item"><span class="dot"></span><div><strong>Security</strong><p>Admin role verification is enabled.</p></div></div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="card">
-                <h3>Total Revenue</h3>
-                <div class="number" id="revenue">₹0</div>
+        <section class="section" id="sellers">
+            <div class="section-head">
+                <h2>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15.7 13.2c2.7.2 4.8 2.5 4.8 5.3"/></svg>
+                    Seller Management
+                </h2>
+                <span class="count-pill" id="sellerResult">–</span>
             </div>
-
-        </div>
-
-
-        <!-- SELLERS -->
-
-        <div class="section">
-
-            <h2>👥 Sellers</h2>
-
-            <div id="sellerLoading" class="loading">
-                Loading sellers...
+            <div class="toolbar">
+                <div class="search-wrap">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                    <input class="search" id="sellerSearch" placeholder="Search shop, owner or phone…">
+                </div>
+                <select class="filter" id="sellerStatus">
+                    <option value="">All subscriptions</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
             </div>
-
-            <table id="sellerTable" style="display:none;">
-
-                <thead>
-                    <tr>
-                        <th>Shop</th>
-                        <th>Owner</th>
-                        <th>Phone</th>
-                        <th>Subscription</th>
-                        <th>Plan</th>
-                    </tr>
-                </thead>
-
-                <tbody id="sellerBody"></tbody>
-
-            </table>
-
-        </div>
-
-
-        <!-- PRODUCTS -->
-
-        <div class="section">
-
-            <h2>🛍️ Products</h2>
-
-            <div id="productLoading" class="loading">
-                Loading products...
+            <div class="table-wrap">
+                <table id="sellerTable" style="display:none">
+                    <thead><tr><th>Shop</th><th>Owner</th><th>Phone</th><th>Subscription</th><th>Plan</th><th>Expiry</th></tr></thead>
+                    <tbody id="sellerBody"></tbody>
+                </table>
+                <div id="sellerLoading"></div>
             </div>
-
-            <table id="productTable" style="display:none;">
-
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                    </tr>
-                </thead>
-
-                <tbody id="productBody"></tbody>
-
-            </table>
-
-        </div>
-
-
-        <!-- PAYMENTS -->
-
-        <div class="section">
-
-            <h2>💳 Payments</h2>
-
-            <div id="paymentLoading" class="loading">
-                Loading payments...
+            <div id="sellerEmpty" class="empty" style="display:none">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>
+                <div>No sellers found.</div>
             </div>
+        </section>
 
-            <table id="paymentTable" style="display:none;">
+        <section class="section" id="products">
+            <div class="section-head">
+                <h2>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l2-5h14l2 5"/><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/><path d="M9 12a3 3 0 0 0 6 0"/></svg>
+                    Product Management
+                </h2>
+                <span class="count-pill" id="productResult">–</span>
+            </div>
+            <div class="toolbar">
+                <div class="search-wrap">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                    <input class="search" id="productSearch" placeholder="Search product or category…">
+                </div>
+            </div>
+            <div class="table-wrap">
+                <table id="productTable" style="display:none">
+                    <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Seller ID</th><th>Created</th></tr></thead>
+                    <tbody id="productBody"></tbody>
+                </table>
+                <div id="productLoading"></div>
+            </div>
+            <div id="productEmpty" class="empty" style="display:none">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8l2-5h14l2 5"/><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/></svg>
+                <div>No products found.</div>
+            </div>
+        </section>
 
-                <thead>
-                    <tr>
-                        <th>Amount</th>
-                        <th>Status</th>
-                        <th>Transaction ID</th>
-                        <th>Paid At</th>
-                    </tr>
-                </thead>
+        <section class="section" id="orders">
+            <div class="section-head">
+                <h2>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+                    Order Management
+                </h2>
+                <span class="count-pill" id="orderResult">–</span>
+            </div>
+            <div class="toolbar">
+                <div class="search-wrap">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                    <input class="search" id="orderSearch" placeholder="Search order id, customer or phone…">
+                </div>
+                <select class="filter" id="orderStatus">
+                    <option value="">All</option>
+                    <option value="pending">Pending</option>
+                    <option value="confirmed">Confirmed</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div>
+            <div class="table-wrap">
+                <table id="orderTable" style="display:none">
+                    <thead><tr><th></th><th>Order</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+                    <tbody id="orderBody"></tbody>
+                </table>
+                <div id="orderLoading"></div>
+            </div>
+            <div id="orderEmpty" class="empty" style="display:none">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/></svg>
+                <div>No orders found.</div>
+            </div>
+        </section>
 
-                <tbody id="paymentBody"></tbody>
+        <section class="section" id="payments">
+            <div class="section-head">
+                <h2>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2.2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+                    Payment Management
+                </h2>
+                <span class="count-pill" id="paymentResult">–</span>
+            </div>
+            <div class="toolbar">
+                <div class="search-wrap">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                    <input class="search" id="paymentSearch" placeholder="Search transaction ID or amount…">
+                </div>
+                <select class="filter" id="paymentStatus">
+                    <option value="">All statuses</option>
+                    <option value="success">Success</option>
+                    <option value="pending">Pending</option>
+                    <option value="failed">Failed</option>
+                </select>
+            </div>
+            <div class="table-wrap">
+                <table id="paymentTable" style="display:none">
+                    <thead><tr><th>Amount</th><th>Status</th><th>Transaction ID</th><th>Payment Method</th><th>Paid At</th></tr></thead>
+                    <tbody id="paymentBody"></tbody>
+                </table>
+                <div id="paymentLoading"></div>
+            </div>
+            <div id="paymentEmpty" class="empty" style="display:none">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2.2"/><path d="M2 10h20"/></svg>
+                <div>No payments found.</div>
+            </div>
+        </section>
 
-            </table>
-
-        </div>
+        <section class="section" id="security">
+            <div class="section-head"><h2>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 8.6-8 10.5-4.6-1.9-8-5.5-8-10.5v-6L12 2z"/><path d="M9.5 12l1.8 1.8L14.8 10"/></svg>
+                Security
+            </h2><span class="count-pill">Admin-only</span></div>
+            <div class="activity">
+                <div class="activity-item"><span class="dot"></span><div><strong>Supabase Authentication</strong><p>Your account must be authenticated before the dashboard loads.</p></div></div>
+                <div class="activity-item"><span class="dot"></span><div><strong>Admin role verification</strong><p>Access is checked against the <b>user_roles</b> table with role = admin.</p></div></div>
+                <div class="activity-item"><span class="dot"></span><div><strong>Database RLS</strong><p>Keep Row Level Security enabled on your tables. Do not put a service-role key in this HTML file.</p></div></div>
+                <div class="activity-item"><span class="dot"></span><div><strong>MFA</strong><p>Supabase account MFA is enabled separately from this dashboard.</p></div></div>
+            </div>
+        </section>
 
     </div>
-
+</main>
+</div>
 
 <script>
+const supabaseUrl = "https://colmyyuwvqijzdeskjmh.supabase.co";
+const supabaseKey = "sb_publishable_59LgUr6efJ4p0mAALpXcnw_omXBSPxF";
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-const supabaseUrl =
-    "https://colmyyuwvqijzdeskjmh.supabase.co";
+let allProfiles = [];
+let allProducts = [];
+let allPayments = [];
+let allOrders = [];
+let allOrderItems = [];
 
-const supabaseKey =
-    "sb_publishable_59LgUr6efJ4p0mAALpXcnw_omXBSPxF";
+function escapeHtml(value) {
+    return String(value ?? "-")
+        .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
 
-const supabaseClient =
-    supabase.createClient(supabaseUrl, supabaseKey);
+function statusBadge(status) {
+    const s = String(status || "-").toLowerCase();
+    let cls = s === "active" || s === "success" ? "success" :
+              s === "pending" ? "warning" : "danger";
+    return `<span class="badge ${cls}">${escapeHtml(status || "-")}</span>`;
+}
 
+function orderStatusBadge(status) {
+    const s = String(status || "-").toLowerCase();
+    const cls = s === "delivered" ? "success" :
+                s === "cancelled" ? "danger" :
+                s === "shipped" ? "shipped" :
+                s === "confirmed" ? "info" : "warning";
+    return `<span class="badge ${cls}">${escapeHtml(status || "-")}</span>`;
+}
 
-// =====================================
-// ADMIN SECURITY CHECK
-// =====================================
+function skeletonRows(cols, rows = 5) {
+    let out = "";
+    for (let r = 0; r < rows; r++) {
+        out += "<tr class=\"skeleton-row\">" +
+            Array.from({length: cols}).map(() => `<td><div class="skel" style="width:${60 + Math.random()*70}px"></div></td>`).join("") +
+            "</tr>";
+    }
+    return out;
+}
 
 async function checkAdmin() {
-
-    const {
-        data: { user },
-        error
-    } = await supabaseClient.auth.getUser();
+    const { data: { user }, error } = await supabaseClient.auth.getUser();
 
     if (error || !user) {
-
         alert("Please login first.");
-
         window.location.href = "login.html";
-
         return null;
     }
 
-
-    // Check admin role
-
-    const { data: roleData, error: roleError } =
-        await supabaseClient
-            .from("user_roles")
-            .select("role")
-            .eq("user_id", user.id)
-            .eq("role", "admin")
-            .maybeSingle();
-
+    const { data: roleData, error: roleError } = await supabaseClient
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .eq("role", "admin")
+        .maybeSingle();
 
     if (roleError || !roleData) {
-
+        console.error(roleError);
         alert("Access denied. Admins only.");
-
         window.location.href = "index.html";
-
         return null;
     }
 
-
-    document.getElementById("adminEmail").textContent =
-        "Logged in as: " + user.email;
-
+    document.getElementById("adminEmail").textContent = "Logged in as: " + user.email;
     return user;
 }
 
+function renderSellers() {
+    const search = document.getElementById("sellerSearch").value.toLowerCase();
+    const status = document.getElementById("sellerStatus").value.toLowerCase();
 
-// =====================================
-// LOAD DASHBOARD
-// =====================================
+    const rows = allProfiles.filter(p => {
+        const text = `${p.shop_name || ""} ${p.owner_name || ""} ${p.phone || ""}`.toLowerCase();
+        return text.includes(search) &&
+               (!status || String(p.subscription_status || "").toLowerCase() === status);
+    });
 
-async function loadDashboard() {
+    document.getElementById("sellerResult").textContent = `${rows.length} seller(s)`;
+    const body = document.getElementById("sellerBody");
 
-    const user = await checkAdmin();
+    body.innerHTML = rows.map(p => `
+        <tr>
+            <td><b>${escapeHtml(p.shop_name)}</b></td>
+            <td>${escapeHtml(p.owner_name)}</td>
+            <td class="mono">${escapeHtml(p.phone)}</td>
+            <td>${statusBadge(p.subscription_status)}</td>
+            <td>${escapeHtml(p.plan_name)}</td>
+            <td class="mono">${escapeHtml(p.plan_expiry)}</td>
+        </tr>
+    `).join("");
 
-    if (!user) return;
-
-
-    // =================================
-    // SELLERS
-    // =================================
-
-    const {
-        data: profiles,
-        error: profileError
-    } = await supabaseClient
-        .from("profiles")
-        .select("*");
-
-
-    if (!profileError && profiles) {
-
-        document.getElementById("sellerCount").textContent =
-            profiles.length;
-
-        const body =
-            document.getElementById("sellerBody");
-
-        body.innerHTML = "";
-
-        profiles.forEach(profile => {
-
-            body.innerHTML += `
-                <tr>
-                    <td>${profile.shop_name || "-"}</td>
-                    <td>${profile.owner_name || "-"}</td>
-                    <td>${profile.phone || "-"}</td>
-                    <td>${profile.subscription_status || "-"}</td>
-                    <td>${profile.plan_name || "-"}</td>
-                </tr>
-            `;
-
-        });
-
-        document.getElementById("sellerLoading").style.display =
-            "none";
-
-        document.getElementById("sellerTable").style.display =
-            "table";
-    }
-
-
-    // =================================
-    // PRODUCTS
-    // =================================
-
-    const {
-        data: products,
-        error: productError
-    } = await supabaseClient
-        .from("products")
-        .select("*");
-
-
-    if (!productError && products) {
-
-        document.getElementById("productCount").textContent =
-            products.length;
-
-        const body =
-            document.getElementById("productBody");
-
-        body.innerHTML = "";
-
-        products.forEach(product => {
-
-            body.innerHTML += `
-                <tr>
-                    <td>${product.product_name || "-"}</td>
-                    <td>${product.category || "-"}</td>
-                    <td>₹${product.price || 0}</td>
-                    <td>${product.stock ?? 0}</td>
-                </tr>
-            `;
-
-        });
-
-        document.getElementById("productLoading").style.display =
-            "none";
-
-        document.getElementById("productTable").style.display =
-            "table";
-    }
-
-
-    // =================================
-    // PAYMENTS
-    // =================================
-
-    const {
-        data: payments,
-        error: paymentError
-    } = await supabaseClient
-        .from("payments")
-        .select("*");
-
-
-    if (!paymentError && payments) {
-
-        document.getElementById("paymentCount").textContent =
-            payments.length;
-
-
-        let total = 0;
-
-        const body =
-            document.getElementById("paymentBody");
-
-        body.innerHTML = "";
-
-
-        payments.forEach(payment => {
-
-            total += Number(payment.amount || 0);
-
-            body.innerHTML += `
-                <tr>
-                    <td>₹${payment.amount || 0}</td>
-                    <td>${payment.payment_status || "-"}</td>
-                    <td>${payment.transaction_id || "-"}</td>
-                    <td>${payment.paid_at || "-"}</td>
-                </tr>
-            `;
-
-        });
-
-
-        document.getElementById("revenue").textContent =
-            "₹" + total.toFixed(2);
-
-
-        document.getElementById("paymentLoading").style.display =
-            "none";
-
-        document.getElementById("paymentTable").style.display =
-            "table";
-    }
-
+    document.getElementById("sellerEmpty").style.display = rows.length ? "none" : "block";
+    document.getElementById("sellerTable").style.display = rows.length ? "table" : (allProfiles.length ? "table" : "none");
 }
 
+function renderProducts() {
+    const search = document.getElementById("productSearch").value.toLowerCase();
 
-// =====================================
-// LOGOUT
-// =====================================
+    const rows = allProducts.filter(p =>
+        `${p.product_name || ""} ${p.category || ""}`.toLowerCase().includes(search)
+    );
 
-document.getElementById("logoutBtn").addEventListener(
-    "click",
-    async () => {
+    document.getElementById("productResult").textContent = `${rows.length} product(s)`;
+    document.getElementById("productBody").innerHTML = rows.map(p => `
+        <tr>
+            <td><b>${escapeHtml(p.product_name)}</b></td>
+            <td>${escapeHtml(p.category)}</td>
+            <td class="price">₹${Number(p.price || 0).toFixed(2)}</td>
+            <td>${escapeHtml(p.stock ?? 0)}</td>
+            <td class="mono">${escapeHtml(p.shop_owner_id)}</td>
+            <td class="mono">${escapeHtml(p.created_at ? new Date(p.created_at).toLocaleDateString() : "-")}</td>
+        </tr>
+    `).join("");
 
-        await supabaseClient.auth.signOut();
+    document.getElementById("productEmpty").style.display = rows.length ? "none" : "block";
+}
 
-        window.location.href = "login.html";
+function renderPayments() {
+    const search = document.getElementById("paymentSearch").value.toLowerCase();
+    const status = document.getElementById("paymentStatus").value.toLowerCase();
 
-    }
+    const rows = allPayments.filter(p => {
+        const text = `${p.transaction_id || ""} ${p.amount || ""}`.toLowerCase();
+        return text.includes(search) &&
+               (!status || String(p.payment_status || "").toLowerCase() === status);
+    });
+
+    document.getElementById("paymentResult").textContent = `${rows.length} payment(s)`;
+    document.getElementById("paymentBody").innerHTML = rows.map(p => `
+        <tr>
+            <td class="price">₹${Number(p.amount || 0).toFixed(2)}</td>
+            <td>${statusBadge(p.payment_status)}</td>
+            <td class="mono">${escapeHtml(p.transaction_id)}</td>
+            <td>${escapeHtml(p.payment_method)}</td>
+            <td class="mono">${escapeHtml(p.paid_at ? new Date(p.paid_at).toLocaleString() : "-")}</td>
+        </tr>
+    `).join("");
+
+    document.getElementById("paymentEmpty").style.display = rows.length ? "none" : "block";
+}
+
+function renderOrders() {
+    const search = document.getElementById("orderSearch").value.toLowerCase();
+    const status = document.getElementById("orderStatus").value.toLowerCase();
+
+    const rows = allOrders.filter(o => {
+        const text = `${o.id || ""} ${o.customer_name || ""} ${o.customer_phone || ""}`.toLowerCase();
+        return text.includes(search) &&
+               (!status || String(o.status || "").toLowerCase() === status);
+    });
+
+    document.getElementById("orderResult").textContent = `${rows.length} order(s)`;
+
+    document.getElementById("orderBody").innerHTML = rows.map(o => {
+        const items = allOrderItems.filter(i => i.order_id === o.id);
+        const shortId = "#" + String(o.id || "").slice(0, 8).toUpperCase();
+        const itemsHtml = items.length ? `
+            <table>
+                <thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr></thead>
+                <tbody>
+                    ${items.map(i => `
+                        <tr>
+                            <td>${escapeHtml(i.product_name)}</td>
+                            <td>${escapeHtml(i.quantity ?? 0)}</td>
+                            <td class="mono">₹${Number(i.price || 0).toFixed(2)}</td>
+                            <td class="price">₹${Number(i.subtotal || 0).toFixed(2)}</td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>` : `<span style="color:var(--muted);font-size:12.5px">No items recorded for this order.</span>`;
+
+        return `
+        <tr>
+            <td>
+                <button class="expand-btn" onclick="toggleOrderRow('${o.id}', this)" aria-label="Toggle order items">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l6 6-6 6"/></svg>
+                </button>
+            </td>
+            <td class="mono"><b>${shortId}</b></td>
+            <td>${escapeHtml(o.customer_name)}<br><span class="mono" style="color:var(--muted);font-size:11.5px">${escapeHtml(o.customer_phone)}</span></td>
+            <td class="price">₹${Number(o.total_amount || 0).toFixed(2)}</td>
+            <td>${orderStatusBadge(o.status)}</td>
+            <td class="mono">${escapeHtml(o.created_at ? new Date(o.created_at).toLocaleString() : "-")}</td>
+        </tr>
+        <tr class="order-items-row" id="items-${o.id}" style="display:none">
+            <td colspan="6">
+                <div class="order-items-inner">
+                    <span class="order-items-label">Items in this order</span>
+                    ${itemsHtml}
+                </div>
+            </td>
+        </tr>`;
+    }).join("");
+
+    document.getElementById("orderEmpty").style.display = rows.length ? "none" : "block";
+}
+
+function toggleOrderRow(orderId, btn) {
+    const row = document.getElementById(`items-${orderId}`);
+    if (!row) return;
+    const isOpen = row.style.display !== "none";
+    row.style.display = isOpen ? "none" : "table-row";
+    btn.classList.toggle("open", !isOpen);
+}
+
+function renderChart() {
+    const chart = document.getElementById("revenueChart");
+    const total = allPayments.reduce((sum,p) => sum + Number(p.amount || 0), 0);
+    const factors = [0.18,0.34,0.26,0.48,0.72,1];
+    const labels = ["Jan","Feb","Mar","Apr","May","Now"];
+    const max = Math.max(...factors) || 1;
+    const w = 560, h = 190, padB = 26, padT = 14, barGap = 14;
+    const barW = (w - barGap * (factors.length - 1)) / factors.length;
+
+    let bars = "";
+    let vlabels = "";
+    factors.forEach((f, i) => {
+        const barH = ((h - padB - padT) * f) / max;
+        const x = i * (barW + barGap);
+        const y = h - padB - barH;
+        const value = (total * f / factors.reduce((a,b)=>a+b,0) * factors.length / 6).toFixed(0);
+        bars += `<rect x="${x}" y="${h-padB}" width="${barW}" rx="6" fill="url(#barGrad)" height="0">
+            <animate attributeName="height" from="0" to="${barH}" dur="0.7s" begin="${i*0.06}s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+            <animate attributeName="y" from="${h-padB}" to="${y}" dur="0.7s" begin="${i*0.06}s" fill="freeze" calcMode="spline" keySplines="0.2 0 0.2 1"/>
+        </rect>`;
+        vlabels += `<text x="${x+barW/2}" y="${h-4}" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#6b7570">${labels[i]}</text>`;
+    });
+
+    chart.innerHTML = `
+        <div class="chart-total">Total tracked: ₹${total.toFixed(2)}</div>
+        <svg viewBox="0 0 ${w} ${h}" style="width:100%;height:190px" preserveAspectRatio="none">
+            <defs>
+                <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#e0952f"/>
+                    <stop offset="100%" stop-color="#2f6f5e"/>
+                </linearGradient>
+            </defs>
+            ${[0,1,2,3].map(i => `<line x1="0" x2="${w}" y1="${padT + (h-padB-padT)/3.2*i}" y2="${padT + (h-padB-padT)/3.2*i}" stroke="#e5e2d8" stroke-width="1"/>`).join("")}
+            ${bars}
+            ${vlabels}
+        </svg>
+    `;
+}
+
+async function loadDashboard() {
+    document.getElementById("sellerLoading").innerHTML = `<table style="width:100%"><tbody>${skeletonRows(6,4)}</tbody></table>`;
+    document.getElementById("productLoading").innerHTML = `<table style="width:100%"><tbody>${skeletonRows(6,4)}</tbody></table>`;
+    document.getElementById("paymentLoading").innerHTML = `<table style="width:100%"><tbody>${skeletonRows(5,4)}</tbody></table>`;
+    document.getElementById("orderLoading").innerHTML = `<table style="width:100%"><tbody>${skeletonRows(6,4)}</tbody></table>`;
+
+    const user = await checkAdmin();
+    if (!user) return;
+
+    const [profilesResult, productsResult, paymentsResult, ordersResult, orderItemsResult] = await Promise.all([
+        supabaseClient.from("profiles").select("*"),
+        supabaseClient.from("products").select("*"),
+        supabaseClient.from("payments").select("*"),
+        supabaseClient.from("orders").select("*").order("created_at", { ascending: false }),
+        supabaseClient.from("order_items").select("*")
+    ]);
+
+    allProfiles = profilesResult.data || [];
+    allProducts = productsResult.data || [];
+    allPayments = paymentsResult.data || [];
+    allOrders = ordersResult.data || [];
+    allOrderItems = orderItemsResult.data || [];
+
+    if (profilesResult.error) console.error("Profiles:", profilesResult.error);
+    if (productsResult.error) console.error("Products:", productsResult.error);
+    if (paymentsResult.error) console.error("Payments:", paymentsResult.error);
+    if (ordersResult.error) console.error("Orders:", ordersResult.error);
+    if (orderItemsResult.error) console.error("Order items:", orderItemsResult.error);
+
+    document.getElementById("sellerCount").textContent = allProfiles.length;
+    document.getElementById("productCount").textContent = allProducts.length;
+    document.getElementById("paymentCount").textContent = allPayments.length;
+
+    const revenue = allPayments
+        .filter(p => String(p.payment_status || "").toLowerCase() === "success" || !p.payment_status)
+        .reduce((sum,p) => sum + Number(p.amount || 0), 0);
+
+    document.getElementById("revenue").textContent = "₹" + revenue.toFixed(2);
+
+    document.getElementById("summarySellers").textContent = `${allProfiles.length} seller account(s)`;
+    document.getElementById("summaryProducts").textContent = `${allProducts.length} product(s)`;
+    document.getElementById("summaryPayments").textContent = `${allPayments.length} payment record(s)`;
+
+    document.getElementById("sellerLoading").innerHTML = "";
+    document.getElementById("productLoading").innerHTML = "";
+    document.getElementById("paymentLoading").innerHTML = "";
+    document.getElementById("orderLoading").innerHTML = "";
+
+    document.getElementById("sellerTable").style.display = "table";
+    document.getElementById("productTable").style.display = "table";
+    document.getElementById("paymentTable").style.display = "table";
+    document.getElementById("orderTable").style.display = "table";
+
+    renderSellers();
+    renderProducts();
+    renderPayments();
+    renderOrders();
+    renderChart();
+}
+
+document.querySelectorAll(".nav button[data-target]").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".nav button[data-target]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.target).scrollIntoView({behavior:"smooth",block:"start"});
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("overlay").classList.remove("show");
+    });
+});
+
+["sellerSearch","sellerStatus"].forEach(id =>
+    document.getElementById(id).addEventListener("input", renderSellers)
+);
+["productSearch"].forEach(id =>
+    document.getElementById(id).addEventListener("input", renderProducts)
+);
+["paymentSearch","paymentStatus"].forEach(id =>
+    document.getElementById(id).addEventListener("input", renderPayments)
+);
+["orderSearch","orderStatus"].forEach(id =>
+    document.getElementById(id).addEventListener("input", renderOrders)
 );
 
+document.getElementById("menuBtn").addEventListener("click", () => {
+    document.getElementById("sidebar").classList.add("open");
+    document.getElementById("overlay").classList.add("show");
+});
+document.getElementById("overlay").addEventListener("click", () => {
+    document.getElementById("sidebar").classList.remove("open");
+    document.getElementById("overlay").classList.remove("show");
+});
 
-// START
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await supabaseClient.auth.signOut();
+    window.location.href = "login.html";
+});
 
 loadDashboard();
-
 </script>
-
 </body>
 </html>

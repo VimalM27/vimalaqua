@@ -2,7 +2,7 @@
 // FIREBASE CONFIG
 // ============================================================
 // 1. Go to https://console.firebase.google.com
-// 2. Create a project (free) called "Vimal Farms" (or anything)
+// 2. Create a project (free) called "Vimal Pets World" (or anything)
 // 3. Click the "</>" web icon to register a web app
 // 4. Copy the config object it gives you and paste the values below
 // 5. In the Firebase Console:
