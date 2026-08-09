@@ -95,6 +95,7 @@ const submitBtn = document.getElementById("submitBtn");
 
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
+
     messageBox.innerHTML = "";
     submitBtn.disabled = true;
     submitBtn.textContent = "Logging in...";
@@ -102,17 +103,69 @@ form.addEventListener("submit", async function (e) {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
-    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    const { error } =
+        await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+        });
 
     if (error) {
-        messageBox.innerHTML = `<div class="error-msg">${error.message}</div>`;
+
+        messageBox.innerHTML =
+            `<div class="error-msg">${error.message}</div>`;
+
         submitBtn.disabled = false;
         submitBtn.textContent = "Login";
+
     } else {
-        window.location.href = "index.html";
+
+        // Check admin role
+        const {
+            data: { user }
+        } = await supabaseClient.auth.getUser();
+
+        if (!user) {
+            messageBox.innerHTML =
+                `<div class="error-msg">Unable to verify account.</div>`;
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Login";
+            return;
+        }
+
+        const { data: roleData, error: roleError } =
+            await supabaseClient
+                .from("user_roles")
+                .select("role")
+                .eq("user_id", user.id)
+                .eq("role", "admin")
+                .maybeSingle();
+
+        if (roleError) {
+
+            console.error("Admin role check failed:", roleError);
+
+            messageBox.innerHTML =
+                `<div class="error-msg">Unable to verify account permissions.</div>`;
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Login";
+
+            return;
+        }
+
+        if (roleData?.role === "admin") {
+
+            // 👑 Admin
+            window.location.href = "admin-dashboard.html";
+
+        } else {
+
+            // 👤 Normal customer
+            window.location.href = "index.html";
+        }
     }
-});
-</script>
+});</script>
 
 <script src="js/supabaseClient.js"></script>
 
