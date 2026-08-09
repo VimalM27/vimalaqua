@@ -177,9 +177,15 @@ async function init() {
         .single();
  
     if (error || !profile) {
-        document.getElementById("topMessage").innerHTML = `<div class="error-msg">Could not load your shop profile.</div>`;
-        return;
-    }
+    document.getElementById("shopNameHeading").textContent = "🏪 Profile not found";
+    document.getElementById("statusBadge").className = "status-badge status-inactive";
+    document.getElementById("statusBadge").textContent = "Error";
+    document.getElementById("productFormArea").innerHTML = "";
+    document.getElementById("productList").innerHTML = "";
+    document.getElementById("topMessage").innerHTML = `<div class="error-msg">Could not load your shop profile. If you just signed up, please contact support — your seller profile wasn't created correctly.</div>`;
+    console.error("Profile fetch error:", error);
+    return;
+}
  
     document.getElementById("shopNameHeading").textContent = "🏪 " + profile.shop_name;
  
