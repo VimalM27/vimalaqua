@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="css/shop.css">
 <style>
 body { align-items: flex-start; }
- 
+
 /* Scoped fix: ensures marketplace cards flow into a wrapping grid
    instead of collapsing to one card with empty space around it,
    regardless of whatever .market-grid already does in shop.css */
@@ -31,78 +31,143 @@ body { align-items: flex-start; }
 #marketGrid .market-card {
     width: 100%;
 }
+
+/* Seller filter bar */
+#sellerFilterWrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px 0 20px;
+}
+#sellerFilterWrap label {
+    color: #9aa8b8;
+    font-size: 14px;
+}
+#sellerFilterWrap select {
+    background: #12233b;
+    color: #fff;
+    border: 1px solid #24405f;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+/* Seller info panel */
+#sellerInfo {
+    display: none;
+    margin-bottom: 24px;
+}
+.seller-card {
+    background: #12233b;
+    border: 1px solid #24405f;
+    border-radius: 12px;
+    padding: 18px 22px;
+}
+.seller-card h3 {
+    margin: 0 0 6px;
+    color: #FFD700;
+}
+.seller-card p {
+    margin: 4px 0;
+    color: #cdd8e6;
+    font-size: 14px;
+}
+.clear-filter-btn {
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid #ff9b9b;
+    color: #ff9b9b;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+}
+.clear-filter-btn:hover {
+    background: rgba(255,155,155,0.1);
+}
+
+/* Clickable "Sold by" tag */
+.shop-tag {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+.shop-tag:hover {
+    color: #FFD700;
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
- 
+
 <nav class="navbar">
     <div class="mobile-menu-btn" onclick="openMenu()">
         ☰
     </div>
- 
+
     <div class="logo">
     <a href="index.html" class="logo-link">
         <img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="navbar-logo">
     </a>
 </div>
- 
+
     <a href="login.html" class="mobile-login" id="mobileLoginLink">
         👤
     </a>
- 
+
     <div class="search-box">
         <input
             type="text"
             id="searchInput"
             placeholder="Search pets, foods, accessories...">
- 
+
         <button onclick="searchWebsite()">🔍</button>
     </div>
- 
+
     <ul class="nav-links">
- 
+
         <li><a href="index.html">Home</a></li>
- 
+
         <!-- SHOP -->
         <li class="dropdown">
             <a href="#" onclick="toggleDropdown(event,this)">Shop ▼</a>
- 
+
             <div class="mega-menu">
- 
+
                 <div class="menu-column">
                     <h4>Pets</h4>
- 
+
                     <a href="dogs.html">🐶 Dogs</a>
                     <a href="cats.html">🐱 Cats</a>
                     <a href="birds.html">🦜 Birds</a>
                     <a href="fish.html">🐟 Fish</a>
                     <a href="small-pets.html">🐹 Small Pets</a>
                 </div>
- 
+
                 <div class="menu-column">
                     <h4>Products</h4>
- 
+
                     <a href="marketplace.html">🛍 Marketplace</a>
                     <a href="foods.html">🍖 Pet Foods</a>
                     <a href="accessories.html">🎯 Accessories</a>
                     <a href="aquariums.html">🐠 Aquariums</a>
                 </div>
- 
+
             </div>
         </li>
- 
+
         <!-- SELLER -->
         <li class="dropdown">
             <a href="#" onclick="toggleDropdown(event,this)">Seller ▼</a>
- 
+
             <div class="dropdown-content">
                 <a href="seller-signup.html">📝 Become a Seller</a>
                 <a href="seller-login.html">🔑 Seller Login</a>
                 <a href="seller-dashboard.html">📊 Seller Dashboard</a>
             </div>
         </li>
- 
+
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li>
@@ -113,19 +178,19 @@ body { align-items: flex-start; }
         <li>
             <a href="cart.html" class="cart-link">🛒</a>
         </li>
- 
+
     </ul>
- 
+
     <div class="user-actions" id="userActions">
         <a href="login.html" class="login-link">👤 Login</a>
     </div>
- 
+
 </nav>
- 
+
 <div id="mobileMenu" class="mobile-menu">
- 
+
     <span class="close-menu" onclick="closeMenu()">✕</span>
- 
+
     <a href="index.html">🏠 Home</a>
     <a href="fish.html">🐟 Fish</a>
     <a href="birds.html">🦜 Birds</a>
@@ -141,64 +206,152 @@ body { align-items: flex-start; }
     <a href="about.html">ℹ About</a>
     <a href="contact.html">📞 Contact</a>
     <a href="cart.html">🛒 Cart</a>
- 
+
 </div>
- 
+
 <div class="plans-wrap">
     <div class="page-title">
         <h1>🛍️ Marketplace</h1>
         <p>Browse products from all Vimal Pets World partner pet shops</p>
     </div>
- 
+
+    <div id="sellerFilterWrap"></div>
+
+    <div id="sellerInfo"></div>
+
     <div class="market-grid" id="marketGrid">Loading products...</div>
 </div>
- 
+
 <script src="js/supabaseClient.js"></script>
 <script>
+let allActiveProducts = [];
+let sellersMap = {};
+
 (async () => {
     const grid = document.getElementById("marketGrid");
- 
+
     // fetch products joined with the shop profile, only from active shops
     const { data: products, error } = await supabaseClient
         .from("products")
-        .select("*, profiles(shop_name, subscription_status, plan_expiry)")
+        .select("*, profiles(shop_name, owner_name, phone, shop_address, subscription_status, plan_expiry)")
         .order("created_at", { ascending: false });
- 
+
     if (error) {
         grid.innerHTML = `<p style="color:#ff9b9b;">Could not load products: ${error.message}</p>`;
         return;
     }
- 
+
     const today = new Date().toISOString().split("T")[0];
-    const activeProducts = (products || []).filter(p =>
+    allActiveProducts = (products || []).filter(p =>
         p.profiles &&
         p.profiles.subscription_status === "active" &&
         p.profiles.plan_expiry >= today
     );
- 
-    if (activeProducts.length === 0) {
+
+    // Build a lookup of sellers from the products we just loaded
+    allActiveProducts.forEach(p => {
+        const sid = p.shop_owner_id;
+        if (!sellersMap[sid]) {
+            sellersMap[sid] = { ...p.profiles, id: sid, count: 0 };
+        }
+        sellersMap[sid].count++;
+    });
+
+    buildSellerFilter();
+
+    // Support direct links like marketplace.html?seller=<id>
+    const params = new URLSearchParams(window.location.search);
+    const initialSeller = params.get("seller") || "";
+    renderProducts(initialSeller);
+
+    const sel = document.getElementById("sellerFilter");
+    if (sel && initialSeller) sel.value = initialSeller;
+})();
+
+function buildSellerFilter() {
+    const wrap = document.getElementById("sellerFilterWrap");
+    const sellers = Object.values(sellersMap).sort((a, b) =>
+        a.shop_name.localeCompare(b.shop_name)
+    );
+
+    if (sellers.length === 0) {
+        wrap.innerHTML = "";
+        return;
+    }
+
+    wrap.innerHTML = `
+        <label for="sellerFilter">Filter by Seller:</label>
+        <select id="sellerFilter" onchange="onSellerChange(this.value)">
+            <option value="">All Sellers (${allActiveProducts.length})</option>
+            ${sellers.map(s => `<option value="${s.id}">${escapeHtml(s.shop_name)} (${s.count})</option>`).join("")}
+        </select>
+    `;
+}
+
+function onSellerChange(sellerId) {
+    const url = new URL(window.location);
+    if (sellerId) {
+        url.searchParams.set("seller", sellerId);
+    } else {
+        url.searchParams.delete("seller");
+    }
+    window.history.pushState({}, "", url);
+
+    const sel = document.getElementById("sellerFilter");
+    if (sel) sel.value = sellerId;
+
+    renderProducts(sellerId);
+}
+
+function renderProducts(sellerId) {
+    const grid = document.getElementById("marketGrid");
+    const infoBox = document.getElementById("sellerInfo");
+
+    const filtered = sellerId
+        ? allActiveProducts.filter(p => p.shop_owner_id === sellerId)
+        : allActiveProducts;
+
+    if (sellerId && sellersMap[sellerId]) {
+        const s = sellersMap[sellerId];
+        infoBox.style.display = "block";
+        infoBox.innerHTML = `
+            <div class="seller-card">
+                <h3>🏪 ${escapeHtml(s.shop_name)}</h3>
+                ${s.owner_name ? `<p>👤 ${escapeHtml(s.owner_name)}</p>` : ""}
+                ${s.shop_address ? `<p>📍 ${escapeHtml(s.shop_address)}</p>` : ""}
+                ${s.phone ? `<p>📞 ${escapeHtml(s.phone)}</p>` : ""}
+                <p>${s.count} product${s.count === 1 ? "" : "s"} listed</p>
+                <button class="clear-filter-btn" onclick="onSellerChange('')">✕ Clear filter</button>
+            </div>
+        `;
+    } else {
+        infoBox.style.display = "none";
+        infoBox.innerHTML = "";
+    }
+
+    if (filtered.length === 0) {
         grid.innerHTML = `<p style="color:#9aa8b8; grid-column:1/-1; text-align:center;">No products available yet. Check back soon!</p>`;
         return;
     }
- 
-    grid.innerHTML = activeProducts.map(p => `
+
+    grid.innerHTML = filtered.map(p => `
         <div class="market-card">
             <img src="${p.image_url || 'images/placeholder.png'}" alt="${escapeHtml(p.product_name)}">
             <div class="info">
                 <h4>${escapeHtml(p.product_name)}</h4>
-                <div class="shop-tag">Sold by: ${escapeHtml(p.profiles.shop_name)}</div>
+                <div class="shop-tag" onclick="onSellerChange('${p.shop_owner_id}')">Sold by: ${escapeHtml(p.profiles.shop_name)}</div>
                 <div class="price">₹${Number(p.price).toFixed(2)}</div>
             </div>
         </div>
     `).join("");
-})();
- 
+}
+
 function escapeHtml(str) {
     const div = document.createElement("div");
     div.textContent = str || "";
     return div.innerHTML;
 }
 </script>
- 
+
 </body>
 </html>

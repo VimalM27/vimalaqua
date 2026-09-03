@@ -33,6 +33,7 @@ content="Vimal Pets World, pet shop, buy pets online, dogs, cats, birds, fish, a
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/navbar-auth.css">
+    <link rel="stylesheet" href="css/extra-sections.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
@@ -252,6 +253,230 @@ content="Vimal Pets World, pet shop, buy pets online, dogs, cats, birds, fish, a
     </div>
 
 </section>
+
+<!-- ================= SHOP BY CATEGORY ================= -->
+<section class="xsec xsec-b">
+    <div class="xsec-head">
+        <h2>Shop By Category</h2>
+        <p>More ways to browse, beyond just the animal.</p>
+    </div>
+    <div class="category-grid">
+        <a href="pets.html" class="category-card"><span class="cat-icon">🐕</span><span class="cat-label">Pets</span></a>
+        <a href="foods.html" class="category-card"><span class="cat-icon">🍖</span><span class="cat-label">Pet Food</span></a>
+        <a href="toys.html" class="category-card"><span class="cat-icon">🧸</span><span class="cat-label">Toys</span></a>
+        <a href="accessories.html" class="category-card"><span class="cat-icon">🦴</span><span class="cat-label">Accessories</span></a>
+        <a href="#pet-care" class="category-card"><span class="cat-icon">🧴</span><span class="cat-label">Grooming</span></a>
+        <a href="#pet-care" class="category-card"><span class="cat-icon">🩺</span><span class="cat-label">Pet Healthcare</span></a>
+        <a href="#pet-care" class="category-card"><span class="cat-icon">🏠</span><span class="cat-label">Beds & Living</span></a>
+        <a href="aquariums.html" class="category-card"><span class="cat-icon">🐠</span><span class="cat-label">Aquariums</span></a>
+        <a href="small-pets.html" class="category-card"><span class="cat-icon">🐍</span><span class="cat-label">Reptiles</span></a>
+        <a href="plants.html" class="category-card"><span class="cat-icon">🌱</span><span class="cat-label">Plants</span></a>
+    </div>
+</section>
+
+<!-- ================= BEST SELLERS ================= -->
+<section class="xsec xsec-a home-shop">
+    <div class="xsec-head">
+        <h2>🔥 Best Sellers</h2>
+        <p>Customer favourites across pets, aquariums and accessories.</p>
+    </div>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <a href="fish.html"><img src="images/koi.jpg" alt="Koi Fish"></a>
+            <h2>Koi Fish</h2>
+            <p class="description">Premium Japanese ornamental koi.</p>
+            <p class="price">₹500</p>
+            <button onclick="addToCart('Koi Fish',500,'images/koi.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="cats.html"><img src="images/Persian%20cat.jpg" alt="Persian Cat"></a>
+            <h2>Persian Cat</h2>
+            <p class="description">Gentle, fluffy and affectionate companion.</p>
+            <p class="price">₹30,000</p>
+            <button onclick="addToCart('Persian Cat',30000,'images/Persian%20cat.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="dogs.html"><img src="images/Golden%20retriever.jpg" alt="Golden Retriever"></a>
+            <h2>Golden Retriever</h2>
+            <p class="description">Friendly, intelligent and family-friendly breed.</p>
+            <p class="price">₹25,000</p>
+            <button onclick="addToCart('Golden Retriever',25000,'images/Golden%20retriever.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="birds.html"><img src="images/Amazon%20parrot.jpg" alt="Amazon Parrot"></a>
+            <h2>Amazon Parrot</h2>
+            <p class="description">Vibrant, social and highly intelligent parrot.</p>
+            <p class="price">₹8,500</p>
+            <button onclick="addToCart('Amazon Parrot',8500,'images/Amazon%20parrot.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="small-pets.html"><img src="images/Guinea%20pig.jpg" alt="Guinea Pig"></a>
+            <h2>Guinea Pig</h2>
+            <p class="description">Gentle, social and easy to care for.</p>
+            <p class="price">₹2,500</p>
+            <button onclick="addToCart('Guinea Pig',2500,'images/Guinea%20pig.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="aquariums.html"><img src="images/2feet_tank.jpg" alt="2 Feet Aquarium Tank"></a>
+            <h2>2 Feet Aquarium Tank</h2>
+            <p class="description">Compact starter tank, great for beginners.</p>
+            <p class="price">₹1,200</p>
+            <button onclick="addToCart('2 Feet Aquarium Tank',1200,'images/2feet_tank.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="accessories.html"><img src="images/airpump.jpg" alt="Air Pump"></a>
+            <h2>Air Pump</h2>
+            <p class="description">Reliable oxygenation for any aquarium.</p>
+            <p class="price">₹750</p>
+            <button onclick="addToCart('Air Pump',750,'images/airpump.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <a href="fish.html"><img src="images/discus.jpg" alt="Discus Fish"></a>
+            <h2>Discus Fish</h2>
+            <p class="description">Striking colours, a centrepiece for any tank.</p>
+            <p class="price">₹800</p>
+            <button onclick="addToCart('Discus Fish',800,'images/discus.jpg')">Add to Cart</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= NEW ARRIVALS ================= -->
+<section class="xsec xsec-b home-shop">
+    <div class="xsec-head">
+        <h2>🆕 New Arrivals</h2>
+        <p>Just landed at Vimal Pets World.</p>
+    </div>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <span class="new-badge">NEW</span>
+            <a href="fish.html"><img src="images/arowana.jpg" alt="Silver Arowana"></a>
+            <h2>Silver Arowana</h2>
+            <p class="description">A striking, prized centrepiece fish.</p>
+            <p class="price">₹3,000</p>
+            <button onclick="addToCart('Silver Arowana',3000,'images/arowana.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <span class="new-badge">NEW</span>
+            <a href="fish.html"><img src="images/flowerhorn.jpg" alt="Flowerhorn"></a>
+            <h2>Flowerhorn</h2>
+            <p class="description">Bold colours and a distinctive head shape.</p>
+            <p class="price">₹1,500</p>
+            <button onclick="addToCart('Flowerhorn',1500,'images/flowerhorn.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <span class="new-badge">NEW</span>
+            <a href="dogs.html"><img src="images/German%20shepherd.jpg" alt="German Shepherd"></a>
+            <h2>German Shepherd</h2>
+            <p class="description">Strong, intelligent and protective breed.</p>
+            <p class="price">₹30,000</p>
+            <button onclick="addToCart('German Shepherd',30000,'images/German%20shepherd.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <span class="new-badge">NEW</span>
+            <a href="fish.html"><img src="images/corydoras.jpg" alt="Corydoras Catfish"></a>
+            <h2>Corydoras Catfish</h2>
+            <p class="description">Peaceful bottom-cleaner for community tanks.</p>
+            <p class="price">₹90</p>
+            <button onclick="addToCart('Corydoras Catfish',90,'images/corydoras.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <span class="new-badge">NEW</span>
+            <a href="small-pets.html"><img src="images/Chinchilas.jpg" alt="Chinchilla"></a>
+            <h2>Chinchilla</h2>
+            <p class="description">Soft-coated, curious and playful small pet.</p>
+            <p class="price">₹18,000</p>
+            <button onclick="addToCart('Chinchilla',18000,'images/Chinchilas.jpg')">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <span class="new-badge">NEW</span>
+            <a href="dogs.html"><img src="images/Rajapalayam%20dog.jpg" alt="Rajapalayam"></a>
+            <h2>Rajapalayam</h2>
+            <p class="description">Indian royal breed — loyal and brave.</p>
+            <p class="price">₹28,000</p>
+            <button onclick="addToCart('Rajapalayam',28000,'images/Rajapalayam%20dog.jpg')">Add to Cart</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= PET HEALTHCARE, GROOMING & LIVING ================= -->
+<section class="xsec xsec-a" id="pet-care">
+    <div class="xsec-head">
+        <h2>🩺 Pet Healthcare & Grooming</h2>
+        <p>Everything to keep your pet healthy, clean and comfortable.</p>
+    </div>
+    <div class="service-grid">
+        <div class="service-card">
+            <h3>Pet Healthcare</h3>
+            <p>Supplements • Dental Care • Skin & Coat</p>
+        </div>
+        <div class="service-card">
+            <h3>Grooming</h3>
+            <p>Shampoo • Brushes • Grooming Kits</p>
+        </div>
+        <div class="service-card">
+            <h3>Beds & Living</h3>
+            <p>Beds • Cages • Mats • Bowls</p>
+        </div>
+        <div class="service-card">
+            <h3>Pet Essentials</h3>
+            <p>Daily-use products for every pet</p>
+        </div>
+    </div>
+    <a href="accessories.html" class="xsec-cta">Explore Pet Care →</a>
+</section>
+
+<!-- ================= AQUARIUM SERVICES ================= -->
+<section class="xsec xsec-b">
+    <div class="xsec-head">
+        <h2>🐠 Aquarium Services</h2>
+        <p>From your first tank to full maintenance — we've got it covered.</p>
+    </div>
+    <div class="service-grid">
+        <div class="service-card">
+            <h3>Aquarium Setup</h3>
+            <p>Complete setup for new tanks, tailored to your space.</p>
+        </div>
+        <div class="service-card">
+            <h3>Custom Aquariums</h3>
+            <p>Built-to-order tanks in the size and style you want.</p>
+        </div>
+        <div class="service-card">
+            <h3>Maintenance</h3>
+            <p>Regular upkeep to keep water and fish healthy.</p>
+        </div>
+        <div class="service-card">
+            <h3>Cleaning</h3>
+            <p>Deep cleaning for tanks, filters and decor.</p>
+        </div>
+    </div>
+    <a href="aquariums.html" class="xsec-cta">Explore Aquarium Services →</a>
+</section>
+
+<!-- ================= FIND YOUR PERFECT PET ================= -->
+<section class="xsec xsec-a">
+    <div class="pet-finder">
+        <h2>🐾 Find Your Perfect Pet</h2>
+        <p>Not sure which pet is right for you? Tell us a little about your lifestyle and we'll help you find a suitable companion.</p>
+        <button class="pet-finder-btn" onclick="vfToggleChat()">Find My Perfect Pet</button>
+    </div>
+</section>
+
 <section class="youtube-section">
 
     <h2>Watch Our Latest Videos</h2>
@@ -294,6 +519,27 @@ content="Vimal Pets World, pet shop, buy pets online, dogs, cats, birds, fish, a
     </a>
 
 </section>
+
+<!-- ================= PET CARE GUIDE ================= -->
+<section class="xsec xsec-a">
+    <div class="xsec-head">
+        <h2>📚 Pet Care Guide</h2>
+        <p>Tips and know-how for keeping every kind of pet happy and healthy.</p>
+    </div>
+    <div class="guide-grid">
+        <a href="dogs.html" class="guide-card"><span class="g-icon">🐶</span><span class="g-label">Puppy Care</span></a>
+        <a href="cats.html" class="guide-card"><span class="g-icon">🐱</span><span class="g-label">Kitten Care</span></a>
+        <a href="aquariums.html" class="guide-card"><span class="g-icon">🐠</span><span class="g-label">Fish Tank Maintenance</span></a>
+        <a href="birds.html" class="guide-card"><span class="g-icon">🐦</span><span class="g-label">Bird Care</span></a>
+        <a href="small-pets.html" class="guide-card"><span class="g-icon">🐹</span><span class="g-label">Hamster Care</span></a>
+        <a href="small-pets.html" class="guide-card"><span class="g-icon">🐰</span><span class="g-label">Rabbit Care</span></a>
+        <a href="small-pets.html" class="guide-card"><span class="g-icon">🐍</span><span class="g-label">Reptile Care</span></a>
+        <a href="aquariums.html" class="guide-card"><span class="g-icon">💧</span><span class="g-label">Aquarium Cycling</span></a>
+        <a href="foods.html" class="guide-card"><span class="g-icon">🍖</span><span class="g-label">Pet Feeding Guide</span></a>
+    </div>
+    <a href="care-guide.html" class="xsec-cta">View All Pet Care Guides →</a>
+</section>
+
 <section class="why-us">
 
     <h2>Why Choose Vimal Pets World?</h2>
@@ -374,6 +620,16 @@ content="Vimal Pets World, pet shop, buy pets online, dogs, cats, birds, fish, a
 
     </div>
 
+</section>
+
+<!-- ================= NEWSLETTER ================= -->
+<section class="newsletter">
+    <h2>Get the latest from Vimal Pets World 🐾</h2>
+    <p>New arrivals, pet-care tips and special offers delivered to you.</p>
+    <form class="newsletter-form" onsubmit="return subscribeNewsletter(event)">
+        <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+    </form>
 </section>
 
 <div id="vf-chat-bubble" onclick="vfToggleChat()">
@@ -638,6 +894,16 @@ content="Vimal Pets World, pet shop, buy pets online, dogs, cats, birds, fish, a
     </a>
 </div>
 
+        <div class="footer-legal">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-conditions.html">Terms & Conditions</a>
+            <a href="shipping-policy.html">Shipping Policy</a>
+            <a href="cancellation-policy.html">Cancellation Policy</a>
+            <a href="return-refund-policy.html">Return & Refund Policy</a>
+            <a href="pet-purchase-policy.html">Pet Purchase Policy</a>
+            <a href="seller-terms.html">Seller Terms</a>
+        </div>
+
         <hr>
 
         <p class="copyright">
@@ -689,6 +955,28 @@ function subscribeUser(){
     .catch(function(error){
         console.log(error);
     });
+}
+</script>
+<script>
+function subscribeNewsletter(e){
+    e.preventDefault();
+    const email = document.getElementById("newsletterEmail").value.trim();
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!pattern.test(email)){
+        alert("Please enter a valid email address.");
+        return false;
+    }
+
+    let subscribers = JSON.parse(localStorage.getItem("newsletterSubscribers")) || [];
+    if(!subscribers.includes(email)){
+        subscribers.push(email);
+        localStorage.setItem("newsletterSubscribers", JSON.stringify(subscribers));
+    }
+
+    alert("You're subscribed! Thanks for joining Vimal Pets World.");
+    document.getElementById("newsletterEmail").value = "";
+    return false;
 }
 </script>
 <script>

@@ -138,11 +138,23 @@ form.addEventListener("submit", async (e) => {
     submitBtn.disabled = true;
     submitBtn.textContent = "Creating account...";
 
-    // 1. Create the auth user
+    // Create the auth user AND pass shop details as user metadata.
+    // A database trigger (on_auth_user_created) reads this metadata and
+    // creates the matching row in `profiles` automatically — server-side,
+    // so it works even before the user confirms their email and has no
+    // active session yet (which is why the old client-side insert failed).
     const { data: authData, error: authError } = await supabaseClient.auth.signUp({
-    email: email,
-    password: password
-});
+        email: email,
+        password: password,
+        options: {
+            data: {
+                shop_name: shop_name,
+                owner_name: owner_name,
+                phone: phone,
+                shop_address: shop_address
+            }
+        }
+    });
 
     if (authError) {
         messageBox.innerHTML = `<div class="error-msg">${authError.message}</div>`;
@@ -151,22 +163,9 @@ form.addEventListener("submit", async (e) => {
         return;
     }
 
-    // 2. Create their shop profile row
-    const userId = authData.user.id;
-    const { error: profileError } = await supabaseClient.from("profiles").insert([{
-        id: userId,
-        shop_name: shop_name,
-        owner_name: owner_name,
-        phone: phone,
-        shop_address: shop_address
-    }]);
-
-    if (profileError) {
-        messageBox.innerHTML = `<div class="error-msg">Account created, but profile setup failed: ${profileError.message}</div>`;
-    } else {
-        messageBox.innerHTML = `<div class="success-msg">✅ Account created! Check your email to confirm (if required), then <a href="login.html" style="color:#FFD700;">login here</a>.</div>`;
-        form.reset();
-    }
+    // No client-side insert into `profiles` anymore — the trigger handles it.
+    messageBox.innerHTML = `<div class="success-msg">✅ Account created! Check your email to confirm (if required), then <a href="login.html" style="color:#FFD700;">login here</a>.</div>`;
+    form.reset();
 
     submitBtn.disabled = false;
     submitBtn.textContent = "Create Seller Account";

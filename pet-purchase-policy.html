@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Purchase Policy | Vimal Pets World</title>
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/navbar-auth.css">
+    <link rel="stylesheet" href="css/extra-sections.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="mobile-menu-btn" onclick="openMenu()">☰</div>
+    <div class="logo">
+        <a href="index.html" class="logo-link">
+            <img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="navbar-logo">
+        </a>
+    </div>
+    <a href="login.html" class="mobile-login" id="mobileLoginLink">👤</a>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search pets, foods, accessories...">
+        <button onclick="searchWebsite()">🔍</button>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Shop ▼</a>
+            <div class="mega-menu">
+                <div class="menu-column">
+                    <h4>Pets</h4>
+                    <a href="dogs.html">🐶 Dogs</a>
+                    <a href="cats.html">🐱 Cats</a>
+                    <a href="birds.html">🦜 Birds</a>
+                    <a href="fish.html">🐟 Fish</a>
+                    <a href="small-pets.html">🐹 Small Pets</a>
+                </div>
+                <div class="menu-column">
+                    <h4>Products</h4>
+                    <a href="marketplace.html">🛍 Marketplace</a>
+                    <a href="foods.html">🍖 Pet Foods</a>
+                    <a href="accessories.html">🎯 Accessories</a>
+                    <a href="aquariums.html">🐠 Aquariums</a>
+                </div>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Seller ▼</a>
+            <div class="dropdown-content">
+                <a href="seller-signup.html">📝 Become a Seller</a>
+                <a href="seller-login.html">🔑 Seller Login</a>
+                <a href="seller-dashboard.html">📊 Seller Dashboard</a>
+            </div>
+        </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="wishlist.html" class="wishlist-link">♡ <span id="wishlistCount">0</span></a></li>
+        <li><a href="cart.html" class="cart-link">🛒</a></li>
+    </ul>
+    <div class="user-actions" id="userActions">
+        <a href="login.html" class="login-link">👤 Login</a>
+    </div>
+</nav>
+<div id="mobileMenu" class="mobile-menu">
+    <span class="close-menu" onclick="closeMenu()">✕</span>
+    <a href="index.html">🏠 Home</a>
+    <a href="fish.html">🐟 Fish</a>
+    <a href="birds.html">🦜 Birds</a>
+    <a href="dogs.html">🐶 Dogs</a>
+    <a href="cats.html">🐱 Cats</a>
+    <a href="small-pets.html">🐹 Small Pets</a>
+    <a href="marketplace.html">🛍️ Marketplace</a>
+    <a href="foods.html">🍖 Pet Foods</a>
+    <a href="accessories.html">🛍 Accessories</a>
+    <a href="aquariums.html">🐠 Aquariums</a>
+    <a href="seller-signup.html">📝 Become a Seller</a>
+    <a href="seller-login.html">🔑 Seller Login</a>
+    <a href="about.html">ℹ About</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+</div>
+<div class="legal-page">
+<h1>Pet Purchase Policy</h1>
+<p class="legal-updated">Last updated: September 2026</p>
+<div class="legal-note">This is placeholder policy text so the link works end-to-end. Replace it with Vimal Pets World's actual policy before this page goes live.</div>
+<h2>Health Guarantee</h2>
+<p>All pets are checked for general health and condition before dispatch.</p>
+<h2>Responsible Ownership</h2>
+<p>We ask buyers to confirm they can provide appropriate care, housing and time for the pet they're purchasing.</p>
+<h2>Age & Local Regulation</h2>
+<p>Some pets may be subject to local or national regulations. It's the buyer's responsibility to ensure they can legally keep the species purchased.</p>
+<h2>Post-Purchase Support</h2>
+<p>Our team is available for care guidance after your pet comes home — reach out anytime.</p>
+</div>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-brand">
+            <img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="footer-brand-img">
+        </div>
+        <p>Your Trusted Pet Store & Aquarium Destination</p>
+        <div class="footer-contact">
+            <p>📞 +91 78 4545 2727</p>
+            <p>📧 vimal@vimal27.in</p>
+            <p>📍 Coimbatore, Tamil Nadu, India</p>
+        </div>
+        <div class="social-contact">
+            <a href="https://wa.me/917845452727" target="_blank" class="contact-link whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://t.me/yourtelegramusername" target="_blank" class="contact-link telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://www.instagram.com/vimalm27_official/" target="_blank" class="contact-link instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@VimalM27" target="_blank" class="contact-link youtube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <div class="footer-legal">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-conditions.html">Terms & Conditions</a>
+            <a href="shipping-policy.html">Shipping Policy</a>
+            <a href="cancellation-policy.html">Cancellation Policy</a>
+            <a href="return-refund-policy.html">Return & Refund Policy</a>
+            <a href="pet-purchase-policy.html">Pet Purchase Policy</a>
+            <a href="seller-terms.html">Seller Terms</a>
+        </div>
+        <hr>
+        <p class="copyright">© 2026 Vimal Pets World. All Rights Reserved.</p>
+    </div>
+</footer>
+<script src="js/navbar.js"></script>
+<script src="js/script.js"></script>
+<script src="js/protect.js"></script>
+</body>
+</html>
