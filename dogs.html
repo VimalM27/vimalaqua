@@ -130,6 +130,42 @@
         <p>Find your perfect companion from our healthy and well-cared breeds.</p>
     </div>
 </section>
+<!-- ===== PRODUCT FILTERS ===== -->
+
+<section class="filter-section">
+
+    <div class="filter-box">
+
+        <label>💰 Price:</label>
+
+        <div class="price-filter">
+            <input type="number" id="minPrice" placeholder="Min ₹">
+            <span>—</span>
+            <input type="number" id="maxPrice" placeholder="Max ₹">
+        </div>
+
+        <label>Sort:</label>
+
+        <select id="sortFilter">
+            <option value="default">Default</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+            <option value="name">Name: A to Z</option>
+        </select>
+
+        <button class="clear-filter" onclick="clearFilters()">
+            Clear Filters
+        </button>
+
+    </div>
+
+    <div class="filter-count" id="filterCount"></div>
+
+</section>
+
+<div class="no-products" id="noProducts">
+    🔍 No products found
+</div>
 <section class="products">
 
     <div class="product-card">

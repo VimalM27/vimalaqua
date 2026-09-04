@@ -546,5 +546,124 @@ function updateCartBadge() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const productsContainer = document.querySelector(".products");
+    const products = Array.from(
+        productsContainer.querySelectorAll(".product-card")
+    );
+
+    const minPrice = document.getElementById("minPrice");
+    const maxPrice = document.getElementById("maxPrice");
+    const sortFilter = document.getElementById("sortFilter");
+    const filterCount = document.getElementById("filterCount");
+    const noProducts = document.getElementById("noProducts");
+
+    function getPrice(card) {
+
+        const priceElement = card.querySelector(".price");
+
+        if (!priceElement) return 0;
+
+        return parseFloat(
+            priceElement.textContent
+                .replace(/[₹,]/g, "")
+                .trim()
+        ) || 0;
+    }
+
+    function getName(card) {
+
+        const nameElement = card.querySelector("h2, h3, h4");
+
+        return nameElement
+            ? nameElement.textContent.trim().toLowerCase()
+            : "";
+    }
+
+    function applyFilters() {
+
+        let min = parseFloat(minPrice.value);
+        let max = parseFloat(maxPrice.value);
+
+        if (isNaN(min)) min = 0;
+        if (isNaN(max)) max = Infinity;
+
+        let visibleProducts = products.filter(card => {
+
+            const price = getPrice(card);
+
+            return price >= min && price <= max;
+        });
+
+        /* Sorting */
+
+        const sortValue = sortFilter.value;
+
+        if (sortValue === "low") {
+
+            visibleProducts.sort(
+                (a, b) => getPrice(a) - getPrice(b)
+            );
+
+        } else if (sortValue === "high") {
+
+            visibleProducts.sort(
+                (a, b) => getPrice(b) - getPrice(a)
+            );
+
+        } else if (sortValue === "name") {
+
+            visibleProducts.sort(
+                (a, b) => getName(a).localeCompare(getName(b))
+            );
+        }
+
+        /* Hide all products first */
+
+        products.forEach(card => {
+            card.style.display = "none";
+        });
+
+        /* Show filtered products */
+
+        visibleProducts.forEach(card => {
+            card.style.display = "";
+            productsContainer.appendChild(card);
+        });
+
+        /* Count */
+
+        filterCount.textContent =
+            visibleProducts.length +
+            " product" +
+            (visibleProducts.length !== 1 ? "s" : "") +
+            " found";
+
+        /* No products */
+
+        if (visibleProducts.length === 0) {
+            noProducts.style.display = "block";
+        } else {
+            noProducts.style.display = "none";
+        }
+    }
+
+    window.clearFilters = function () {
+
+        minPrice.value = "";
+        maxPrice.value = "";
+        sortFilter.value = "default";
+
+        applyFilters();
+    };
+
+    minPrice.addEventListener("input", applyFilters);
+    maxPrice.addEventListener("input", applyFilters);
+    sortFilter.addEventListener("change", applyFilters);
+
+    applyFilters();
+});
+
 // Run on every page load
 document.addEventListener('DOMContentLoaded', updateCartBadge);

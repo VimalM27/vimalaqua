@@ -3710,6 +3710,128 @@ body {
     padding: 40px 30px 30px !important;
     text-align: center !important;
 }
+<style>
+/* ===== PRODUCT FILTER ===== */
+
+.filter-section {
+    width: 92%;
+    max-width: 1400px;
+    margin: 30px auto 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-box label {
+    color: #fff;
+    font-weight: 600;
+}
+
+.filter-box select {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: #123a5c;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.filter-box select option {
+    background: #123a5c;
+    color: #fff;
+}
+
+.price-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price-filter input {
+    width: 110px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    outline: none;
+}
+
+.price-filter input::placeholder {
+    color: #bfc9d4;
+}
+
+.clear-filter {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #22c1c3;
+    color: #06232f;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.clear-filter:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.filter-count {
+    color: #cfd8e3;
+    font-size: 14px;
+}
+
+/* No products message */
+
+.no-products {
+    display: none;
+    width: 100%;
+    text-align: center;
+    padding: 50px 20px;
+    color: #cfd8e3;
+    font-size: 18px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .filter-section {
+        width: 94%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-box {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-box select,
+    .price-filter input {
+        width: 100%;
+    }
+
+    .price-filter {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .clear-filter {
+        width: 100%;
+    }
+}
 
 .popup-logo-wrap {
     display: flex !important;
