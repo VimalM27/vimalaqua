@@ -6,11 +6,22 @@
    Primary button: #0f3d91 (matches .product-card button)
    ========================================================= */
 
+/* ---------- Page sheet ----------
+   Your site's body background is a dark navy gradient (see style.css).
+   Everything below sits on a white "sheet", the same way .product-card
+   is a white card floating on that dark background elsewhere on the site. */
+.pd-page{
+    max-width:1400px;
+    margin:20px auto 60px;
+    background:#fff;
+    border-radius:24px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    padding-bottom:30px;
+}
+
 /* ---------- Breadcrumb ---------- */
 .breadcrumb-bar{
-    max-width:1400px;
-    margin:110px auto 0;
-    padding:0 30px;
+    padding:24px 30px 0;
     font-size:14px;
     color:#64748b;
 }
@@ -25,17 +36,16 @@
 /* ---------- Not found ---------- */
 .pd-not-found{
     max-width:600px;
-    margin:160px auto;
+    margin:0 auto;
     text-align:center;
-    padding:0 20px;
+    padding:80px 20px;
 }
 .pd-not-found h1{ font-size:32px; color:#0f172a; margin-bottom:12px; }
 .pd-not-found p{ color:#64748b; margin-bottom:24px; }
 
 /* ---------- Layout ---------- */
 .pd-wrap{
-    max-width:1400px;
-    margin:30px auto 0;
+    margin:20px 0 0;
     padding:0 30px;
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -327,8 +337,7 @@
 
 /* ---------- Tabs / details ---------- */
 .pd-details{
-    max-width:1400px;
-    margin:60px auto 0;
+    margin:50px 0 0;
     padding:0 30px;
 }
 .pd-tabs{
@@ -374,8 +383,7 @@
 
 /* ---------- Reviews ---------- */
 .pd-reviews{
-    max-width:1400px;
-    margin:60px auto 0;
+    margin:50px 0 0;
     padding:0 30px;
 }
 .pd-section-title{
@@ -447,15 +455,17 @@
 }
 
 @media (max-width: 900px){
-    .breadcrumb-bar{ margin-top:90px; }
+    .pd-page{ margin:10px 10px 40px; border-radius:16px; }
     .pd-wrap{
         grid-template-columns:1fr;
         gap:24px;
         padding:0 18px;
     }
+    .breadcrumb-bar{ padding:18px 18px 0; }
     .pd-title{ font-size:26px; }
     .pd-price{ font-size:26px; }
-    .pd-details, .pd-reviews, .pd-related{ padding:0 18px; }
+    .pd-details, .pd-reviews{ padding:0 18px; }
+    .pd-related .pd-section-title, .pd-related .products{ padding:0 18px; }
     .pd-actions{ position:sticky; bottom:0; background:#fff; padding:12px 0 6px; margin-bottom:6px; z-index:50; }
     .pd-btn{ flex:1 1 45%; padding:14px 12px; font-size:14.5px; }
 }

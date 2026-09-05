@@ -219,7 +219,7 @@
 
         html += '<div class="pd-actions">';
         if (product.priceOnRequest) {
-            html += '<a class="pd-btn pd-btn-cart" href="contact.html">📞 Contact for Price</a>';
+            html += '<a class="pd-btn pd-btn-cart" href="/contact.html">📞 Contact for Price</a>';
         } else if (product.availability !== "Available") {
             html += '<button class="pd-btn pd-btn-cart" disabled>Currently Unavailable</button>';
         } else {
@@ -266,7 +266,7 @@
         if (buyBtn) {
             buyBtn.addEventListener("click", function () {
                 addProductToCart(product, qty);
-                window.location.href = "checkout.html";
+                window.location.href = "/checkout.html";
             });
         }
     }
@@ -364,10 +364,10 @@
 
         html += '<div class="pd-tab-panel" data-panel="conditions"><div class="pd-desc-block"><ul>' + conditionsHtml + "</ul>" +
             '<p style="margin-top:14px;font-size:13.5px;color:#94a3b8;">Full policies: ' +
-            '<a href="shipping-policy.html" style="color:#0f3d91;">Shipping</a> · ' +
-            '<a href="cancellation-policy.html" style="color:#0f3d91;">Cancellation</a> · ' +
-            '<a href="return-refund-policy.html" style="color:#0f3d91;">Returns &amp; Refunds</a>' +
-            (isPet ? ' · <a href="pet-purchase-policy.html" style="color:#0f3d91;">Pet Purchase Policy</a>' : "") +
+            '<a href="/shipping-policy.html" style="color:#0f3d91;">Shipping</a> · ' +
+            '<a href="/cancellation-policy.html" style="color:#0f3d91;">Cancellation</a> · ' +
+            '<a href="/return-refund-policy.html" style="color:#0f3d91;">Returns &amp; Refunds</a>' +
+            (isPet ? ' · <a href="/pet-purchase-policy.html" style="color:#0f3d91;">Pet Purchase Policy</a>' : "") +
             "</p></div></div>";
 
         el.innerHTML = html;
@@ -442,7 +442,7 @@
                 '<p class="description">' + escapeHtml(p.description) + "</p>" +
                 '<p class="price">' + priceLabel + "</p>" +
                 (p.priceOnRequest
-                    ? '<a href="contact.html" onclick="event.stopPropagation()"><button type="button">Contact for Price</button></a>'
+                    ? '<a href="/contact.html" onclick="event.stopPropagation()"><button type="button">Contact for Price</button></a>'
                     : '<button type="button" onclick="event.stopPropagation(); if(typeof addToCart===\'function\'){addToCart(\'' + p.name.replace(/'/g, "\\'") + "', " + p.price + ", '" + img + "');}\">Add to Cart</button>") +
                 "</div>";
         });
@@ -452,7 +452,7 @@
         el.querySelectorAll(".product-card").forEach(function (card) {
             card.addEventListener("click", function (e) {
                 if (e.target.closest("button, a")) return;
-                window.location.href = "/product/" + card.getAttribute("data-related-slug");
+                window.location.href = "/product.html?id=" + encodeURIComponent(card.getAttribute("data-related-slug"));
             });
         });
     }

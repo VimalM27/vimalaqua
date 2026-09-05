@@ -25,7 +25,7 @@
             var slug = slugify(name);
             if (!slug) return;
 
-            var url = "/product/" + slug;
+            var url = "product.html?id=" + encodeURIComponent(slug);
 
             card.style.cursor = "pointer";
             card.setAttribute("data-product-link", url);
