@@ -227,7 +227,7 @@
     text-align: center;
 }
  
-#message .success-msg {
+.success-msg {
     background: #dcfce7;
     color: #15803d;
     padding: 10px 14px;
