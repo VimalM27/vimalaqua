@@ -549,6 +549,11 @@ function updateCartBadge() {
 document.addEventListener("DOMContentLoaded", function () {
 
     const productsContainer = document.querySelector(".products");
+
+    // Pages without a product-filter grid (e.g. the product detail page)
+    // simply don't need this block — skip instead of throwing.
+    if (!productsContainer) return;
+
     const products = Array.from(
         productsContainer.querySelectorAll(".product-card")
     );
@@ -558,6 +563,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const sortFilter = document.getElementById("sortFilter");
     const filterCount = document.getElementById("filterCount");
     const noProducts = document.getElementById("noProducts");
+
+    // Some pages have the .products grid without the price-filter controls.
+    if (!minPrice || !maxPrice || !sortFilter || !filterCount || !noProducts) return;
 
     function getPrice(card) {
 
