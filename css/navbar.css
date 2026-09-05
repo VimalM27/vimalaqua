@@ -355,114 +355,7 @@
 .dropdown {
     position: relative;
 }
-/* ================= TOYS MEGA MENU ================= */
-
-.mega-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(950px, 92vw);
-    background: #081b3c;
-    padding: 20px;
-    border-radius: 0 0 14px 14px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.35);
-    z-index: 10000;
-
-    grid-template-columns: 1fr 1fr 2fr;
-    gap: 22px;
-
-    max-height: 75vh;
-    overflow-y: auto;
-}
-
-.dropdown:hover .mega-menu {
-    display: grid;
-}
-
-.mega-menu .menu-column {
-    min-width: 0;
-}
-
-.mega-menu h4 {
-    color: #f5c451;
-    font-size: 17px;
-    margin-bottom: 10px;
-    padding-bottom: 7px;
-    border-bottom: 1px solid rgba(255,255,255,.15);
-}
-
-.mega-menu a {
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    padding: 6px 7px;
-    font-size: 13px;
-    border-radius: 5px;
-    transition: .2s ease;
-}
-
-.mega-menu a:hover {
-    background: rgba(0,180,216,.18);
-    color: #00d9ff;
-    padding-left: 11px;
-}
-
-/* Toys column */
-.toys-menu {
-    columns: 2;
-    column-gap: 15px;
-}
-
-.toys-menu h4 {
-    column-span: all;
-}
-
-.toys-menu a {
-    break-inside: avoid;
-}
-
-/* ================= REDUCE LOGO / SEARCH GAP ================= */
-
-.navbar {
-    gap: 8px;
-}
-
-.navbar .logo {
-    margin-right: -8px;
-}
-
-.search-box {
-    margin-left: 0;
-}
-
-/* ================= NAVBAR RESPONSIVE ================= */
-
-@media (max-width: 1150px) {
-    .mega-menu {
-        width: 90vw;
-    }
-
-    .toys-menu {
-        columns: 2;
-    }
-}
-
-@media (max-width: 768px) {
-
-    .mega-menu {
-        display: none !important;
-    }
-
-    .navbar {
-        gap: 5px;
-    }
-
-    .navbar .logo {
-        margin-right: 0;
-    }
-}/* ================= TOY CATEGORY SECTION ================= */
+/* ================= TOY CATEGORY SECTION (homepage) ================= */
 
 .toy-categories {
     max-width: 1200px;
@@ -508,195 +401,59 @@
     color: #666;
 }
 
-/* Tablet */
 @media (max-width: 900px) {
     .toy-categories {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-/* Mobile */
 @media (max-width: 600px) {
     .toy-categories {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
         padding: 0 10px;
     }
-
     .toy-category {
         padding: 14px 9px;
     }
 }
-/* =========================================
-   VIMAL - TOYS MEGA MENU FIX
-   ========================================= */
 
-/* Main Shop mega menu */
+/* ================= SHOP MEGA MENU ================= */
+
 .mega-menu {
-    width: 950px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 980px;
     max-width: 92vw;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 2fr;
-    gap: 22px;
-
-    padding: 20px;
-
-    max-height: 75vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-/* Pets and Products columns */
-.mega-menu > .menu-column {
-    min-width: 0;
-}
-
-/* ================= TOYS COLUMN ================= */
-
-.mega-menu > .toys-menu {
-    width: auto;
-    max-width: none;
-    min-width: 0;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    gap: 14px 20px;
-
-    padding: 0;
-    margin: 0;
-
-    overflow: visible;
-}
-
-/* Toys heading */
-.mega-menu > .toys-menu > h4 {
-    grid-column: 1 / -1;
-
-    margin: 0 0 4px 0;
-    padding: 0 0 8px 0;
-
-    color: #f5c451;
-    font-size: 18px;
-
-    border-bottom: 1px solid rgba(255,255,255,.18);
-}
-
-/* Individual toy category */
-.toy-group {
-    min-width: 0;
-}
-
-/* Category title */
-.toy-group h5 {
-    color: #00d9ff;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    margin: 0 0 5px 0;
-    padding: 0;
-}
-
-/* Toy links */
-.toy-group a {
-    display: block;
-
-    color: #fff;
-    text-decoration: none;
-
-    font-size: 12px;
-    line-height: 1.3;
-
-    padding: 3px 5px;
-
-    border-radius: 4px;
-
-    transition: all .2s ease;
-}
-
-/* Hover */
-.toy-group a:hover {
-    color: #00d9ff;
-    background: rgba(0,217,255,.10);
-    padding-left: 9px;
-}
-
-/* Scrollbar */
-.mega-menu::-webkit-scrollbar {
-    width: 5px;
-}
-
-.mega-menu::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,.3);
-    border-radius: 10px;
-}
-
-/* ================= TABLET ================= */
-
-@media (max-width: 1100px) {
-
-    .mega-menu {
-        width: 90vw;
-        grid-template-columns: 1fr 1fr 1.8fr;
-    }
-
-    .mega-menu > .toys-menu {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-/* ================= MOBILE ================= */
-
-@media (max-width: 700px) {
-
-    .mega-menu {
-        width: 94vw;
-        grid-template-columns: 1fr;
-        max-height: 70vh;
-    }
-
-    .mega-menu > .toys-menu {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-/* =====================================================
-   VIMAL SHOP MENU — CONSISTENT DESIGN
-   ===================================================== */
-
-/* Main dropdown */
-.mega-menu {
-    width: 950px;
-    max-width: 92vw;
-
-    display: grid;
-    grid-template-columns: 180px 190px 1fr;
-
-    gap: 25px;
-
-    padding: 20px 22px;
 
     background: #081b3c;
+    padding: 20px 22px;
+    border-radius: 0 0 14px 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.35);
+    z-index: 10000;
+
+    grid-template-columns: 170px 180px 190px 1fr;
+    gap: 24px;
 
     max-height: 75vh;
     overflow-y: auto;
     overflow-x: hidden;
-
     box-sizing: border-box;
 }
 
-/* =====================================================
-   ALL MAIN COLUMNS — SAME STYLE
-   ===================================================== */
+.dropdown:hover .mega-menu {
+    display: grid;
+}
 
 .mega-menu > .menu-column {
     min-width: 0;
 }
 
-/* Pets / Products / Toys title */
-.mega-menu > .menu-column > h4,
-.mega-menu > .toys-menu > h4 {
+.mega-menu > .menu-column > h4 {
     color: #f5c451;
     font-size: 16px;
     font-weight: 700;
@@ -705,17 +462,11 @@
     padding: 0 0 10px;
 
     border-bottom: 1px solid rgba(255,255,255,.18);
-
     line-height: 1.2;
 }
 
-/* =====================================================
-   PETS + PRODUCTS LINKS
-   ===================================================== */
-
 .mega-menu > .menu-column > a {
     display: block;
-
     color: #ffffff;
     text-decoration: none;
 
@@ -723,7 +474,6 @@
     line-height: 1.4;
 
     padding: 6px 7px;
-
     border-radius: 5px;
 
     transition: .2s ease;
@@ -732,142 +482,41 @@
 .mega-menu > .menu-column > a:hover {
     color: #00d9ff;
     background: rgba(0,217,255,.10);
+    padding-left: 11px;
 }
-
-/* =====================================================
-   TOYS AREA
-   ===================================================== */
-
-.mega-menu > .toys-menu {
-    width: auto;
-    min-width: 0;
-
-    display: grid;
-
-    grid-template-columns: repeat(2, minmax(150px, 1fr));
-
-    column-gap: 30px;
-    row-gap: 18px;
-
-    padding: 0;
-    margin: 0;
-
-    overflow: visible;
-}
-
-/* Toys heading spans entire Toys area */
-.mega-menu > .toys-menu > h4 {
-    grid-column: 1 / -1;
-}
-
-/* =====================================================
-   TOY CATEGORY HEADINGS
-   ===================================================== */
-
-.toy-group {
-    min-width: 0;
-}
-
-.toy-group h5 {
-    color: #00d9ff;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    margin: 0 0 6px;
-    padding: 0;
-
-    line-height: 1.3;
-}
-
-/* =====================================================
-   TOY LINKS — SAME AS PETS / PRODUCTS
-   ===================================================== */
-
-.toy-group a {
-    display: block;
-
-    color: #ffffff;
-    text-decoration: none;
-
-    font-size: 13px;
-    line-height: 1.35;
-
-    padding: 4px 7px;
-
-    margin: 0;
-
-    border-radius: 5px;
-
-    transition: .2s ease;
-}
-
-.toy-group a:hover {
-    color: #00d9ff;
-    background: rgba(0,217,255,.10);
-}
-
-/* =====================================================
-   REMOVE OLD COLUMNS / FLOATING STYLES
-   ===================================================== */
-
-.toys-menu,
-.toys-menu * {
-    box-sizing: border-box;
-}
-
-/* =====================================================
-   SCROLLBAR
-   ===================================================== */
 
 .mega-menu::-webkit-scrollbar {
     width: 5px;
 }
-
 .mega-menu::-webkit-scrollbar-track {
     background: transparent;
 }
-
 .mega-menu::-webkit-scrollbar-thumb {
     background: rgba(255,255,255,.25);
     border-radius: 10px;
 }
 
-/* =====================================================
-   TABLET
-   ===================================================== */
+/* ================= NAVBAR SPACING FIX ================= */
 
-@media (max-width: 1000px) {
+.navbar {
+    justify-content: flex-start;
+    gap: 22px;
+}
 
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
     .mega-menu {
-        width: 92vw;
-
-        grid-template-columns: 150px 160px 1fr;
-
+        grid-template-columns: 150px 160px 170px 1fr;
         gap: 18px;
-    }
-
-    .mega-menu > .toys-menu {
-        grid-template-columns: 1fr 1fr;
-        column-gap: 18px;
     }
 }
 
-/* =====================================================
-   MOBILE
-   ===================================================== */
-
-@media (max-width: 700px) {
-
+@media (max-width: 768px) {
     .mega-menu {
-        width: 94vw;
-
-        grid-template-columns: 1fr;
-
-        max-height: 70vh;
+        display: none !important;
     }
-
-    .mega-menu > .toys-menu {
-        grid-template-columns: 1fr 1fr;
+    .navbar {
+        gap: 10px;
     }
 }
