@@ -1,0 +1,14 @@
+<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Push &amp; Pull Toys">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="55%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0077b6"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="250" fill="url(#g)"/>
+  <circle cx="200" cy="95" r="52" fill="#ffffff" fill-opacity="0.07"/>
+  <text x="200" y="112" font-size="58" text-anchor="middle" dominant-baseline="middle">👶</text>
+  <text x="200" y="190" font-size="20" font-weight="700" fill="#f4e5a1" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">Push &amp; Pull Toys</text>
+  <text x="200" y="215" font-size="12" fill="#cfd8e3" text-anchor="middle" font-family="Arial, Helvetica, sans-serif">Sample listing &#8226; Vimal Pets World</text>
+</svg>
