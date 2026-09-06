@@ -1281,6 +1281,16 @@ margin-bottom:15px;
     background:#081b3a;
     text-align:center;
 }
+/* Tighten the gap between the "Find Your Perfect Pet" box and the
+   pet-category circles directly below it on the homepage only —
+   scoped to this adjacency so pets.html (which also uses
+   .pet-categories) is unaffected. */
+#pet-finder{
+    padding-bottom:20px;
+}
+#pet-finder + .pet-categories{
+    padding-top:20px;
+}
 .pet-categories h2{
     color:#ffffff !important;
     font-size:42px;
@@ -1327,8 +1337,14 @@ margin-bottom:15px;
 }
 .pet-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    grid-template-columns:repeat(5,1fr);
     gap:30px;
+}
+@media(max-width:900px){
+    .pet-grid{ grid-template-columns:repeat(3,1fr); }
+}
+@media(max-width:480px){
+    .pet-grid{ grid-template-columns:repeat(2,1fr); }
 }
 .pet-item{
     display:flex;
