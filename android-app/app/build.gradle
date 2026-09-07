@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'com.vimal27.petsworld'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.vimal27.petsworld"
+        minSdkVersion 21
+        targetSdkVersion 34
+        // Bump versionCode on every release you want to push to Play Store.
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    // Google's official Trusted Web Activity support library.
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+}
