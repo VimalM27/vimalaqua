@@ -8,7 +8,6 @@ android {
         applicationId "com.vimal27.petsworld"
         minSdkVersion 21
         targetSdkVersion 34
-        // Bump versionCode on every release you want to push to Play Store.
         versionCode 1
         versionName "1.0.0"
     }
@@ -27,8 +26,6 @@ android {
 }
 
 dependencies {
-    // Google's official Trusted Web Activity support library.
-    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.6.0'
-    implementation 'androidx.browser:browser:1.8.0'
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.5.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
 }
