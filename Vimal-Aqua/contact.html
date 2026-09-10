@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R5NVV7FZB6');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | Vimal Pets World</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/navbar.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="css/responsive-fix.css">
+</head>
+
+<body>
+<nav class="navbar">
+    <div class="mobile-menu-btn" onclick="openMenu()">
+        ☰
+    </div>
+
+    <div class="logo">
+    <a href="index.html" class="logo-link">
+        <img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="navbar-logo">
+    </a>
+</div>
+
+    <a href="login.html" class="mobile-login" id="mobileLoginLink">
+        👤
+    </a>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search pets, foods, accessories...">
+
+        <button onclick="searchWebsite()">🔍</button>
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="index.html">Home</a></li>
+
+        <!-- SHOP -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Shop ▼</a>
+
+            <div class="mega-menu">
+
+                <div class="menu-column">
+                    <h4>Pets</h4>
+
+                    <a href="dogs.html">🐶 Dogs</a>
+                    <a href="cats.html">🐱 Cats</a>
+                    <a href="birds.html">🦜 Birds</a>
+                    <a href="fish.html">🐟 Fish</a>
+                    <a href="small-pets.html">🐹 Small Pets</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Products</h4>
+
+                    <a href="marketplace.html">🛍 Marketplace</a>
+                    <a href="foods.html">🍖 Pet Foods</a>
+                    <a href="accessories.html">🎯 Accessories</a>
+                    <a href="aquariums.html">🐠 Aquariums</a>
+                </div>
+
+            </div>
+        </li>
+
+        <!-- SELLER -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Seller ▼</a>
+
+            <div class="dropdown-content">
+                <a href="seller-signup.html">📝 Become a Seller</a>
+                <a href="seller-login.html">🔑 Seller Login</a>
+                <a href="seller-dashboard.html">📊 Seller Dashboard</a>
+            </div>
+        </li>
+
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+
+        <li>
+            <a href="cart.html" class="cart-link">🛒</a>
+        </li>
+
+    </ul>
+
+    <div class="user-actions" id="userActions">
+        <a href="login.html" class="login-link">👤 Login</a>
+    </div>
+
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+
+    <span class="close-menu" onclick="closeMenu()">✕</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="fish.html">🐟 Fish</a>
+    <a href="birds.html">🦜 Birds</a>
+    <a href="dogs.html">🐶 Dogs</a>
+    <a href="cats.html">🐱 Cats</a>
+    <a href="small-pets.html">🐹 Small Pets</a>
+    <a href="marketplace.html">🛍️ Marketplace</a>
+    <a href="foods.html">🍖 Pet Foods</a>
+    <a href="accessories.html">🛍 Accessories</a>
+    <a href="aquariums.html">🐠 Aquariums</a>
+    <a href="seller-signup.html">📝 Become a Seller</a>
+    <a href="seller-login.html">🔑 Seller Login</a>
+    <a href="about.html">ℹ About</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+
+</div>
+<section class="contact-page">
+
+<div class="contact-hero">
+
+<div class="hero-text contact-text">
+
+<h1>Let's Connect</h1>
+
+<p>
+
+Need help choosing the perfect pet?
+
+Our experts are here to help you with healthy pets,
+
+premium pet foods, aquariums and accessories.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="contact-main">
+
+<div class="contact-left">
+
+    <h2>Get in Touch</h2>
+
+    <div class="contact-grid">
+
+        <div class="contact-box">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+                <h3>Call Us</h3>
+                <p>+91 78 4545 2727</p>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+                <h3>Email</h3>
+                <p>vimal@vimal27.in</p>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+                <h3>Address</h3>
+                <p>Coimbatore, Tamil Nadu</p>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+                <h3>Business Hours</h3>
+                <p>Open 24/7</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="social-contact">
+    <a href="https://wa.me/917845452727" target="_blank" class="contact-link whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <a href="https://t.me/yourtelegramusername" target="_blank" class="contact-link telegram">
+        <i class="fa-brands fa-telegram"></i>
+    </a>
+    <a href="https://www.instagram.com/vimalm27_official/" target="_blank" class="contact-link instagram">
+        <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://www.youtube.com/@VimalM27" target="_blank" class="contact-link youtube">
+        <i class="fa-brands fa-youtube"></i>
+    </a>
+</div>
+
+</div>
+
+
+<div class="contact-right">
+
+<h2>Send a Message</h2>
+
+<form>
+<input type="text" id="name" placeholder="Full Name" required>
+
+<input type="email" id="email" placeholder="Email Address" required>
+
+<input type="tel"
+       id="phone"
+       placeholder="Mobile Number"
+       maxlength="10"
+       required>
+
+<input type="text" id="subject" placeholder="Subject" required>
+
+<textarea id="message"
+placeholder="Your Message"
+required></textarea>
+
+<button type="button" onclick="sendMail()">
+    Send Message
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<div class="map-box">
+
+<iframe
+
+src="https://www.google.com/maps?q=Coimbatore&output=embed"
+
+loading="lazy">
+
+</iframe>
+
+</div>
+
+</section>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("_bKOBVl00wVYTb-9k");
+
+function sendMail(){
+
+    const params = {
+        from_name: document.getElementById("name").value,
+        from_email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        subject: document.getElementById("subject").value,
+        message: document.getElementById("message").value,
+        time: new Date().toLocaleString()
+    };
+
+    emailjs.send(
+        "service_etdxaxq",
+        "template_ts6zubd",
+        params
+    )
+    .then(function(response){
+        alert("Email Sent Successfully!");
+        console.log(response);
+    })
+    .catch(function(error){
+        alert("Email Failed");
+        console.log(error);
+    });
+
+}
+</script>
+<script src="js/navbar.js"></script>
+<script src="js/protect.js"></script>
+<script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R5NVV7FZB6');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vimal Pets World - Small Pets Collection</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/wishlist-delivery.css">
+    <link rel="stylesheet" href="css/responsive-fix.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="mobile-menu-btn" onclick="openMenu()">
+        ☰
+    </div>
+    <div class="logo">
+    <a href="index.html" class="logo-link">
+        <img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="navbar-logo">
+    </a>
+</div>
+    <a href="login.html" class="mobile-login" id="mobileLoginLink">
+        👤
+    </a>
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search pets, foods, accessories...">
+
+        <button onclick="searchWebsite()">
+            🔍
+        </button>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event, this)">Pets ▼</a>
+            <div class="dropdown-content">
+                <a href="fish.html">🐟 Fish</a>
+                <a href="birds.html">🦜 Birds</a>
+                <a href="dogs.html">🐶 Dogs</a>
+                <a href="cats.html">🐱 Cats</a>
+                <a href="small-pets.html">🐹 Small Pets</a>
+            </div>
+        </li>
+
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event, this)">Shop ▼</a>
+            <div class="dropdown-content">
+                <a href="marketplace.html">🛍️ Marketplace</a>
+                <a href="foods.html">🍖 Pet Foods</a>
+                <a href="accessories.html">🎯 Accessories</a>
+                <a href="aquariums.html">🐠 Aquariums</a>
+            </div>
+        </li>
+
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event, this)">Seller ▼</a>
+            <div class="dropdown-content">
+                <a href="seller-signup.html">📝 Become a Seller</a>
+                <a href="seller-login.html">🔑 Seller Login</a>
+                <a href="seller-dashboard.html">📊 Seller Dashboard</a>
+            </div>
+        </li>
+
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html" class="cart-link">🛒</a></li>
+    </ul>
+
+    <div class="user-actions" id="userActions">
+        <a href="login.html" class="login-link">👤 Login</a>
+    </div>
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+
+    <span class="close-menu" onclick="closeMenu()">✕</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="fish.html">🐟 Fish</a>
+    <a href="birds.html">🦜 Birds</a>
+    <a href="dogs.html">🐶 Dogs</a>
+    <a href="cats.html">🐱 Cats</a>
+    <a href="small-pets.html">🐹 Small Pets</a>
+    <a href="marketplace.html">🛍️ Marketplace</a>
+    <a href="foods.html">🍖 Pet Foods</a>
+    <a href="accessories.html">🛍 Accessories</a>
+    <a href="aquariums.html">🐠 Aquariums</a>
+    <a href="seller-signup.html">📝 Become a Seller</a>
+    <a href="seller-login.html">🔑 Seller Login</a>
+    <a href="about.html">ℹ About</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+
+</div>
+<section class="page-hero">
+    <video autoplay muted loop playsinline class="fish-video">
+        <source src="videos/smallpets.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-content">
+        <h1>Premium Small Pets</h1>
+        <p>Healthy, friendly and adorable small companions for your home.</p>
+    </div>
+</section>
+
+<script src="js/script.js"></script>
+<script src="js/product-link.js"></script>
+
+<section class="products">
+
+<div class="product-card">
+<img src="images/Guinea%20pig.jpg" alt="Guinea Pig">
+<h2>Guinea Pig</h2>
+<p class="description">Friendly and gentle small pet.</p>
+<p class="price">₹2,500</p>
+<button onclick="addToCart('Guinea Pig',2500,'images/Guinea%20pig.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/hamster.jpg" alt="Hamster">
+<h2>Hamster</h2>
+<p class="description">Cute and playful pocket pet.</p>
+<p class="price">₹900</p>
+<button onclick="addToCart('Hamster',900,'images/hamster.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Rabbit.jpg" alt="Rabbit">
+<h2>Rabbit</h2>
+<p class="description">Soft and affectionate companion.</p>
+<p class="price">₹3,500</p>
+<button onclick="addToCart('Rabbit',3500,'images/Rabbit.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Hedgehog.jpg" alt="Hedgehog">
+<h2>Hedgehog</h2>
+<p class="description">Unique and adorable exotic pet.</p>
+<p class="price">₹8,000</p>
+<button onclick="addToCart('Hedgehog',8000,'images/Hedgehog.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Ferrets.jpg" alt="Ferret">
+<h2>Ferret</h2>
+<p class="description">Energetic and intelligent pet.</p>
+<p class="price">₹15,000</p>
+<button onclick="addToCart('Ferret',15000,'images/Ferrets.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Chinchilas.jpg" alt="Chinchilla">
+<h2>Chinchilla</h2>
+<p class="description">Fluffy pet with incredibly soft fur.</p>
+<p class="price">₹18,000</p>
+<button onclick="addToCart('Chinchilla',18000,'images/Chinchilas.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Gerbils%20and%20mice.jpg" alt="Fancy Mouse">
+<h2>Fancy Mouse</h2>
+<p class="description">Tiny, social and easy to care for.</p>
+<p class="price">₹350</p>
+<button onclick="addToCart('Fancy Mouse',350,'images/Gerbils%20and%20mice.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Gerbils%20and%20mice.jpg" alt="Gerbil">
+<h2>Gerbil</h2>
+<p class="description">Active and curious little pet.</p>
+<p class="price">₹600</p>
+<button onclick="addToCart('Gerbil',600,'images/Gerbils%20and%20mice.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Ball%20python.jpg" alt="Ball Python">
+<h2>Ball Python</h2>
+<p class="description">Gentle and easy-going pet snake.</p>
+<p class="price">₹12,000</p>
+<button onclick="addToCart('Ball Python',12000,'images/Ball%20python.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Corn%20snake.jpg" alt="Corn Snake">
+<h2>Corn Snake</h2>
+<p class="description">Colorful and calm pet snake.</p>
+<p class="price">₹7,500</p>
+<button onclick="addToCart('Corn Snake',7500,'images/Corn%20snake.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Garter%20snake.jpg" alt="Garter Snake">
+<h2>Garter Snake</h2>
+<p class="description">Active and beginner-friendly snake.</p>
+<p class="price">₹6,000</p>
+<button onclick="addToCart('Garter Snake',6000,'images/Garter%20snake.jpg')">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="images/Mexican%20king%20snake.jpg" alt="Mexican King Snake">
+<h2>Mexican King Snake</h2>
+<p class="description">Beautiful pattern and hardy temperament.</p>
+<p class="price">₹9,500</p>
+<button onclick="addToCart('Mexican King Snake',9500,'images/Mexican%20king%20snake.jpg')">Add to Cart</button>
+</div>
+
+</section>
+<script src="js/navbar.js"></script>
+<script src="js/script.js"></script>
+<script src="js/protect.js"></script>
+<script src="js/wishlist.js"></script>
+</body>
+</html>

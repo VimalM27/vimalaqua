@@ -1,0 +1,206 @@
+/* ============================================================
+   RESPONSIVE-FIX.CSS
+   Site-wide mobile/tablet safety net.
+   Loaded AFTER all other stylesheets on every page so these
+   rules can safely override fixed-width / desktop-only styles
+   without touching the original CSS files.
+   Covers: phones, tablets, and Chrome/desktop browser resizing.
+   ============================================================ */
+
+/* 1. Universal box model so padding/border never blow out widths */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 2. Media never overflows its container */
+img, video, iframe, svg, embed, object {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 3. Tables become horizontally scrollable instead of breaking layout */
+table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 4. Prevent iOS Safari auto-zoom on form focus (must be >=16px) */
+input, select, textarea, button {
+  font-size: 16px;
+}
+
+/* 5. Comfortable tap targets on touch devices */
+a, button, .btn, input[type="submit"], input[type="button"] {
+  min-height: 44px;
+}
+
+/* 6. Common grid/list/card classes across the site auto-fit instead
+      of relying on a fixed column count that breaks on narrow screens */
+.product-grid,
+.category-grid,
+.guide-grid,
+.service-grid,
+.dash-grid,
+.market-grid,
+.plans-grid,
+.about-grid,
+.contact-grid,
+.pet-grid,
+.why-grid,
+.youtube-grid,
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+/* 7. Fluid typography so headings don't overflow small screens */
+h1 { font-size: clamp(1.6rem, 5vw, 2.6rem); }
+h2 { font-size: clamp(1.3rem, 4vw, 2rem); }
+h3 { font-size: clamp(1.1rem, 3.5vw, 1.5rem); }
+
+/* ============================================================
+   TABLET (<=1024px) — laptops in split view, iPads landscape
+   ============================================================ */
+@media (max-width: 1024px) {
+  .product-grid,
+  .category-grid,
+  .guide-grid,
+  .service-grid,
+  .dash-grid,
+  .market-grid,
+  .plans-grid,
+  .about-grid,
+  .contact-grid,
+  .pet-grid,
+  .why-grid,
+  .youtube-grid,
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .container,
+  .cart-container,
+  .contact-container,
+  .login-container,
+  .search-container,
+  .checkout-wrapper,
+  .contact-wrapper {
+    max-width: 100% !important;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ============================================================
+   TABLET / LARGE PHONE (<=768px) — iPads portrait, phablets
+   ============================================================ */
+@media (max-width: 768px) {
+  /* Any element hard-coded wider than the viewport shrinks to fit */
+  [style*="width:450px"],
+  [style*="width: 450px"],
+  [style*="width:420px"],
+  [style*="width: 420px"],
+  [style*="width:350px"],
+  [style*="width: 350px"],
+  [style*="width:300px"],
+  [style*="width: 300px"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .product-grid,
+  .category-grid,
+  .guide-grid,
+  .service-grid,
+  .dash-grid,
+  .market-grid,
+  .plans-grid,
+  .about-grid,
+  .contact-grid,
+  .pet-grid,
+  .why-grid,
+  .youtube-grid,
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+  }
+
+  /* Stack anything meant to sit side-by-side as flex on desktop */
+  .checkout-wrapper,
+  .contact-wrapper,
+  .cart-section,
+  .about-section {
+    flex-direction: column;
+  }
+}
+
+/* ============================================================
+   PHONE (<=480px) — most phones in portrait
+   ============================================================ */
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+  }
+
+  .product-grid,
+  .category-grid,
+  .guide-grid,
+  .service-grid,
+  .dash-grid,
+  .market-grid,
+  .plans-grid,
+  .about-grid,
+  .contact-grid,
+  .pet-grid,
+  .why-grid,
+  .youtube-grid,
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+    gap: 10px;
+  }
+
+  .container,
+  .cart-container,
+  .contact-container,
+  .login-container,
+  .search-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Nav logo / icons that were sized for desktop */
+  .navbar img, .navbar .logo {
+    max-width: 120px;
+  }
+}
+
+/* ============================================================
+   VERY SMALL PHONES (<=360px) — older/small Android devices
+   ============================================================ */
+@media (max-width: 360px) {
+  .product-grid,
+  .category-grid,
+  .guide-grid,
+  .service-grid,
+  .dash-grid,
+  .market-grid,
+  .plans-grid,
+  .about-grid,
+  .contact-grid,
+  .pet-grid,
+  .why-grid,
+  .youtube-grid,
+  .product-list {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  h1 { font-size: 1.4rem; }
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R5NVV7FZB6');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquariums - Vimal Pets World</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/responsive-fix.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="mobile-menu-btn" onclick="openMenu()">
+        ☰
+    </div>
+
+    <div class="logo">
+    <a href="index.html" class="logo-link">
+        <img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="navbar-logo">
+    </a>
+</div>
+
+    <a href="login.html" class="mobile-login" id="mobileLoginLink">
+        👤
+    </a>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search pets, foods, accessories...">
+
+        <button onclick="searchWebsite()">🔍</button>
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="index.html">Home</a></li>
+
+        <!-- SHOP -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Shop ▼</a>
+
+            <div class="mega-menu">
+
+                <div class="menu-column">
+                    <h4>Pets</h4>
+
+                    <a href="dogs.html">🐶 Dogs</a>
+                    <a href="cats.html">🐱 Cats</a>
+                    <a href="birds.html">🦜 Birds</a>
+                    <a href="fish.html">🐟 Fish</a>
+                    <a href="small-pets.html">🐹 Small Pets</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Products</h4>
+
+                    <a href="marketplace.html">🛍 Marketplace</a>
+                    <a href="foods.html">🍖 Pet Foods</a>
+                    <a href="accessories.html">🎯 Accessories</a>
+                    <a href="aquariums.html">🐠 Aquariums</a>
+                </div>
+
+            </div>
+        </li>
+
+        <!-- SELLER -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Seller ▼</a>
+
+            <div class="dropdown-content">
+                <a href="seller-signup.html">📝 Become a Seller</a>
+                <a href="seller-login.html">🔑 Seller Login</a>
+                <a href="seller-dashboard.html">📊 Seller Dashboard</a>
+            </div>
+        </li>
+
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+
+        <li>
+            <a href="cart.html" class="cart-link">🛒</a>
+        </li>
+
+    </ul>
+
+    <div class="user-actions" id="userActions">
+        <a href="login.html" class="login-link">👤 Login</a>
+    </div>
+
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+
+    <span class="close-menu" onclick="closeMenu()">✕</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="fish.html">🐟 Fish</a>
+    <a href="birds.html">🦜 Birds</a>
+    <a href="dogs.html">🐶 Dogs</a>
+    <a href="cats.html">🐱 Cats</a>
+    <a href="small-pets.html">🐹 Small Pets</a>
+    <a href="marketplace.html">🛍️ Marketplace</a>
+    <a href="foods.html">🍖 Pet Foods</a>
+    <a href="accessories.html">🛍 Accessories</a>
+    <a href="aquariums.html">🐠 Aquariums</a>
+    <a href="seller-signup.html">📝 Become a Seller</a>
+    <a href="seller-login.html">🔑 Seller Login</a>
+    <a href="about.html">ℹ About</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+
+</div>
+<section class="cart-section">
+
+<h1>🛒 Shopping Cart</h1>
+
+<div class="cart-layout">
+
+    <div id="cart-items"></div>
+
+    <div class="order-summary">
+
+        <h2>Order Summary</h2>
+
+        <h3 id="total">Total: ₹0</h3>
+
+        <a href="checkout.html" class="checkout-btn">
+            Proceed to Checkout
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+<script src="js/script.js"></script>
+<script src="js/navbar.js"></script>
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function renderCart() {
+
+    let total = 0;
+    let html = "";
+
+    cart.forEach((item, index) => {
+        const price = parsePrice(item.price);
+        total += price * item.qty;
+
+        html += `
+        <div class="cart-card">
+
+            <img src="${item.image || 'images/fish-icon.jpg'}"
+                 class="cart-image"
+                 alt="${item.name}">
+
+            <div class="cart-details">
+
+                <h3>${item.name}</h3>
+                <p class="cart-price">₹${price}</p>
+
+                <div class="qty-box">
+
+                    <button onclick="decreaseQty(${index})">-</button>
+
+                    <span>${item.qty}</span>
+
+                    <button onclick="increaseQty(${index})">+</button>
+
+                </div>
+
+                <button class="remove-btn" onclick="removeItem(${index})">
+                    Remove
+                </button>
+
+            </div>
+
+        </div>
+        `;
+    });
+
+    if (cart.length === 0) {
+    html = `
+    <div class="cart-empty">
+        <h3>Your cart is empty 🛒</h3>
+        <p>Explore our pets,food,toys,aquariums and accessories.</p>
+        <a href="pets.html" class="shop-btn">Shop Now</a>
+    </div>
+    `;
+}
+
+    document.getElementById("cart-items").innerHTML = html;
+    document.getElementById("total").innerText = "Total: ₹" + total;
+}
+
+function increaseQty(index) {
+    cart[index].qty += 1;
+    saveCart();
+    renderCart();
+}
+
+function decreaseQty(index) {
+    if (cart[index].qty > 1) {
+        cart[index].qty -= 1;
+    } else {
+        cart.splice(index, 1);
+    }
+    saveCart();
+    renderCart();
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    saveCart();
+    renderCart();
+}
+cart = cart.map(item => ({
+    ...item,
+    qty: item.qty || 1
+}));
+
+renderCart();
+</script>
+<script src="js/protect.js"></script>
+</body>
+</html>
