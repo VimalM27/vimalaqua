@@ -4070,7 +4070,7 @@ body {
 .hero{
     position:relative;
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:flex-end;
     text-align:left;
     background:#000;
@@ -4098,10 +4098,12 @@ body {
 }
 
 .hero-content{
-    position:relative;
+    position:absolute;
+    top:24%;
+    right:6%;
     z-index:2;
-    max-width:520px;
-    margin:0 6% 0 auto;
+    max-width:440px;
+    margin:0;
     padding:0;
     text-align:left;
     color:#0b1f3a;
@@ -4111,11 +4113,11 @@ body {
 }
 
 .hero-content h1{
-    font-size:2.5rem;
+    font-size:1.9rem;
     font-weight:800;
     line-height:1.25;
     color:#0b1f3a;
-    margin-bottom:16px;
+    margin-bottom:10px;
     text-shadow:
         0 0 12px rgba(255,255,255,.85),
         0 0 24px rgba(255,255,255,.65),
@@ -4126,15 +4128,15 @@ body {
     display:block;
     color:#0096c7;
     font-weight:700;
-    font-size:1.9rem;
-    margin-bottom:4px;
+    font-size:1.4rem;
+    margin-bottom:2px;
 }
 
 .hero-content p{
-    font-size:1.05rem;
+    font-size:0.9rem;
     font-weight:600;
     color:#1e293b;
-    margin-bottom:26px;
+    margin-bottom:18px;
     text-shadow:
         0 0 10px rgba(255,255,255,.85),
         0 0 20px rgba(255,255,255,.6);
@@ -4142,7 +4144,9 @@ body {
 
 .hero-content .shop-btn{
     margin-top:0;
-    margin-bottom:26px;
+    margin-bottom:18px;
+    padding:12px 30px;
+    font-size:15px;
     background:#071A3D;
     box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
@@ -4153,14 +4157,14 @@ body {
 
 .hero .social-contact{
     justify-content:flex-start;
-    gap:14px;
+    gap:12px;
     margin-top:0;
 }
 
 .hero .social-contact a{
-    width:52px;
-    height:52px;
-    font-size:20px;
+    width:44px;
+    height:44px;
+    font-size:17px;
     box-shadow:0 8px 18px rgba(0,0,0,.2);
 }
 
