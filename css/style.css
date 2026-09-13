@@ -1778,6 +1778,7 @@ color:#d6e6ff;
 display:grid;
 grid-template-columns:380px 1fr;
 gap:45px;
+align-items:start;
 }
 
 .contact-left{
