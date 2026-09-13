@@ -1725,6 +1725,7 @@ color:white;
 .contact-hero .hero-text{
     max-width:700px;
     margin:auto;
+    text-align:center;
 }
 
 .contact-text h1{
@@ -1803,13 +1804,13 @@ margin-top:25px;
     width:100%;
     background:rgba(255,255,255,0.08);
     border:1px solid rgba(255,255,255,0.16);
-    border-radius:18px;
-    padding:24px;
+    border-radius:14px;
+    padding:14px 16px;
     display:flex;
     align-items:center;
-    gap:18px;
-    min-height:130px;
-    margin-bottom:30px;
+    gap:14px;
+    min-height:auto;
+    margin-bottom:14px;
 }
 
 .contact-box div{
@@ -1830,9 +1831,9 @@ margin-top:25px;
 }
 
 .contact-box i{
-    font-size:26px;
-    width:60px;
-    height:60px;
+    font-size:18px;
+    width:42px;
+    height:42px;
     background:#00c8ff;
     color:#fff;
     border-radius:50%;
@@ -1840,7 +1841,6 @@ margin-top:25px;
     justify-content:center;
     align-items:center;
 }
-
 /* Consolidated .social-contact (was defined 3x at different sizes) */
 .social-contact{
     display:flex;
