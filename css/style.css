@@ -4098,8 +4098,8 @@ body {
 }
 .hero-content{
     position:absolute;
-    top:20%;
-    right:6%;
+    top:15%;
+    right:3%;
     z-index:2;
     max-width:640px;
     margin:0;
