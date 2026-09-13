@@ -3739,18 +3739,16 @@ img {
 }
 
 .hero-content h1 {
-    font-weight: 800;
-    color: #0b1f3a;
-    margin: 0 0 8px;
+    font-size: 32px !important;
     line-height: 1.1;
+    margin: 0 0 8px;
+    white-space: normal;
 }
 
 .hero-content h1 .accent {
+    font-size: 18px;
     display: block;
-    color: #0096c7;
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
 }
 
 .hero-content p {
@@ -4344,4 +4342,31 @@ img {
         object-fit: cover !important;
         object-position: center center !important;
     }
+}
+/* DESKTOP HERO TEXT - RIGHT SIDE */
+.hero {
+    position: relative;
+}
+
+.hero-content {
+    position: absolute !important;
+
+    top: 30px !important;
+    left: 47.5% !important;
+    right: auto !important;
+
+    width: 490px !important;
+    height: 260px !important;
+
+    transform: none !important;
+
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    text-align: center;
+    box-sizing: border-box;
 }
