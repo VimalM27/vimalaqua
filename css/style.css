@@ -4188,7 +4188,10 @@ body {
         pointer-events:none;
     }
     .hero-content{
-        margin:0;
+        left:0;             /* NEW — anchor full width */
+        right:0;            /* NEW */
+        width:100%;         /* NEW */
+        margin:0 auto;
         max-width:100%;
         padding:0 24px 40px;
         text-align:center;
@@ -4205,5 +4208,8 @@ body {
     }
     .hero .social-contact{
         justify-content:center;
+    }
+    .hero-content .shop-btn{
+        display:inline-block;   /* NEW — so text-align:center actually centers it */
     }
 }
