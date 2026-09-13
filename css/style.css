@@ -3723,8 +3723,8 @@ img {
 
 .hero-content{
     position:absolute;
-    top:5%;
-    right:1%;
+    top:8%;
+    right:15%;
     z-index:2;
     max-width:640px;
     margin:0;
