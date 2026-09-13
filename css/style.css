@@ -3872,3 +3872,135 @@ img {
         margin-top: 12px !important;
     }
 }
+/* =========================================================
+   FINAL MOBILE HERO FIX
+   ========================================================= */
+
+@media screen and (max-width: 768px) {
+
+    /* HERO CONTAINER */
+    .hero {
+        position: relative !important;
+
+        width: 100% !important;
+
+        height: auto !important;
+        min-height: 0 !important;
+
+        margin-top: 105px !important;
+        margin-bottom: 0 !important;
+
+        padding: 0 !important;
+
+        overflow: hidden !important;
+
+        display: block !important;
+    }
+
+
+    /* SHOW THE COMPLETE IMAGE */
+    .hero .bg-image {
+        position: relative !important;
+
+        top: auto !important;
+        left: auto !important;
+
+        display: block !important;
+
+        width: 100% !important;
+        height: auto !important;
+
+        min-height: 0 !important;
+        max-height: none !important;
+
+        object-fit: contain !important;
+        object-position: center center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+
+    /* CENTER THE TEXT ON THE IMAGE */
+    .hero-content {
+        position: absolute !important;
+
+        top: 50% !important;
+        left: 50% !important;
+
+        right: auto !important;
+        bottom: auto !important;
+
+        transform: translate(-50%, -50%) !important;
+
+        width: 92% !important;
+        max-width: 600px !important;
+
+        margin: 0 !important;
+        padding: 0 10px !important;
+
+        text-align: center !important;
+
+        z-index: 10 !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* FIRST LINE */
+    .hero-content h1 {
+        margin: 0 0 8px 0 !important;
+
+        font-size: 25px !important;
+        line-height: 1.2 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* MAIN TITLE */
+    .hero-content h1 .accent {
+        display: block !important;
+
+        font-size: 19px !important;
+        line-height: 1.2 !important;
+
+        margin-bottom: 5px !important;
+    }
+
+
+    /* DESCRIPTION */
+    .hero-content p {
+        margin: 0 0 16px 0 !important;
+
+        font-size: 14px !important;
+        line-height: 1.5 !important;
+
+        text-align: center !important;
+    }
+
+
+    /* VIEW COLLECTION */
+    .hero-content .shop-btn {
+        display: inline-block !important;
+
+        padding: 12px 28px !important;
+
+        font-size: 14px !important;
+
+        margin: 0 auto !important;
+    }
+
+
+    /* SOCIAL ICONS */
+    .hero .social-contact {
+        display: flex !important;
+
+        justify-content: center !important;
+        align-items: center !important;
+
+        gap: 10px !important;
+
+        margin-top: 12px !important;
+    }
+}
