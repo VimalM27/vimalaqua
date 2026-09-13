@@ -3584,3 +3584,291 @@ img {
         object-position: center top !important;
     }
 }
+/* =========================================================
+   FINAL MOBILE FIX — VIMAL PETS WORLD
+   Put this at the VERY END of style.css
+   ========================================================= */
+
+@media screen and (max-width: 768px) {
+
+    /* ---------- PAGE ---------- */
+
+    html {
+        width: 100%;
+        overflow-x: hidden !important;
+    }
+
+    body {
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
+    }
+
+
+    /* ---------- NAVBAR ---------- */
+
+    .navbar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+
+        width: 100% !important;
+        height: 105px !important;
+
+        display: grid !important;
+
+        grid-template-columns: 55px 1fr 55px !important;
+        grid-template-rows: 55px 45px !important;
+
+        align-items: center !important;
+
+        padding: 5px 12px !important;
+        margin: 0 !important;
+
+        gap: 0 !important;
+
+        background: #081b3c !important;
+
+        z-index: 99999 !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* ---------- HAMBURGER ---------- */
+
+    .navbar .mobile-menu-btn {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: flex-start !important;
+
+        width: 55px !important;
+        height: 55px !important;
+
+        font-size: 30px !important;
+        color: white !important;
+    }
+
+
+    /* ---------- LOGO ---------- */
+
+    .navbar .logo {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        width: 100% !important;
+        height: 55px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .navbar .logo-link {
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        width: auto !important;
+        height: 55px !important;
+    }
+
+    .navbar .logo img,
+    .navbar .logo img.navbar-logo {
+        display: block !important;
+
+        width: auto !important;
+        height: 52px !important;
+
+        max-width: 100% !important;
+        max-height: 52px !important;
+
+        object-fit: contain !important;
+    }
+
+
+    /* ---------- LOGIN ICON ---------- */
+
+    .navbar .mobile-login {
+        grid-column: 3 !important;
+        grid-row: 1 !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+        justify-content: flex-end !important;
+
+        width: 55px !important;
+        height: 55px !important;
+
+        font-size: 25px !important;
+        color: white !important;
+    }
+
+
+    /* ---------- SEARCH ---------- */
+
+    .navbar .search-box {
+        grid-column: 1 / 4 !important;
+        grid-row: 2 !important;
+
+        display: flex !important;
+
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+
+        height: 40px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        box-sizing: border-box !important;
+    }
+
+    .navbar .search-box input {
+        flex: 1 1 auto !important;
+
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
+
+        height: 40px !important;
+
+        padding: 0 14px !important;
+
+        font-size: 14px !important;
+
+        border-radius: 22px 0 0 22px !important;
+    }
+
+    .navbar .search-box button {
+        flex: 0 0 52px !important;
+
+        width: 52px !important;
+        height: 40px !important;
+
+        margin: 0 !important;
+
+        border-radius: 0 22px 22px 0 !important;
+    }
+
+
+    /* ---------- HIDE DESKTOP NAVIGATION ---------- */
+
+    .navbar .nav-links {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .navbar .user-actions {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+        position: relative !important;
+
+        width: 100% !important;
+
+        height: calc(100vh - 105px) !important;
+        min-height: 600px !important;
+
+        margin: 105px 0 0 0 !important;
+        padding: 0 !important;
+
+        overflow: hidden !important;
+    }
+
+    .hero .bg-image {
+        position: absolute !important;
+
+        top: 0 !important;
+        left: 0 !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        object-fit: cover !important;
+        object-position: center top !important;
+
+        display: block !important;
+    }
+
+
+    /* ---------- HERO TEXT ---------- */
+
+    .hero-content {
+        position: absolute !important;
+
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 25px !important;
+        top: auto !important;
+
+        width: 100% !important;
+        max-width: none !important;
+
+        margin: 0 !important;
+
+        padding: 0 18px 15px !important;
+
+        box-sizing: border-box !important;
+
+        text-align: center !important;
+
+        z-index: 5 !important;
+    }
+
+    .hero-content h1 {
+        font-size: 27px !important;
+        line-height: 1.15 !important;
+
+        margin-bottom: 8px !important;
+    }
+
+    .hero-content h1 .accent {
+        display: block !important;
+
+        font-size: 19px !important;
+
+        margin-bottom: 3px !important;
+    }
+
+    .hero-content p {
+        font-size: 14px !important;
+
+        margin-bottom: 15px !important;
+    }
+
+    .hero-content .shop-btn {
+        display: inline-block !important;
+
+        padding: 13px 30px !important;
+
+        font-size: 15px !important;
+    }
+
+    .hero .social-contact {
+        display: flex !important;
+
+        justify-content: center !important;
+
+        gap: 12px !important;
+
+        margin-top: 12px !important;
+    }
+}
