@@ -3879,23 +3879,7 @@ img {
 @media screen and (max-width: 768px) {
 
     /* HERO CONTAINER */
-    .hero {
-        position: relative !important;
 
-        width: 100% !important;
-
-        height: auto !important;
-        min-height: 0 !important;
-
-        margin-top: 105px !important;
-        margin-bottom: 0 !important;
-
-        padding: 0 !important;
-
-        overflow: hidden !important;
-
-        display: block !important;
-    }
 
 
     /* SHOW THE COMPLETE IMAGE */
@@ -4002,5 +3986,104 @@ img {
         gap: 10px !important;
 
         margin-top: 12px !important;
+    }
+}
+/* =========================================
+   HERO IMAGE - DESKTOP + MOBILE
+   ========================================= */
+
+.hero {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+/* Picture fills the complete hero */
+.hero-picture {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    z-index: 0 !important;
+}
+
+/* Background image */
+.hero-picture .hero-background {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
+}
+
+/* Overlay */
+.hero .overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+}
+
+/* Text/buttons */
+.hero .hero-content {
+    position: relative !important;
+    z-index: 2 !important;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+
+    .hero {
+        height: 700px !important;
+        min-height: 700px !important;
+        width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .hero-picture {
+        height: 700px !important;
+    }
+
+    .hero-picture .hero-background {
+        width: 100% !important;
+        height: 700px !important;
+        object-fit: cover !important;
+        object-position: center center !important;
+    }
+
+    .hero .overlay {
+        z-index: 1 !important;
+    }
+
+    .hero .hero-content {
+        z-index: 2 !important;
+    }
+}
+
+
+/* =========================================
+   SMALL PHONES
+   ========================================= */
+
+@media screen and (max-width: 480px) {
+
+    .hero {
+        height: 650px !important;
+        min-height: 650px !important;
+    }
+
+    .hero-picture {
+        height: 650px !important;
+    }
+
+    .hero-picture .hero-background {
+        height: 650px !important;
+        object-fit: cover !important;
+        object-position: center center !important;
     }
 }

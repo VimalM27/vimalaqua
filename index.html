@@ -261,13 +261,21 @@
 </div>
     <section class="hero">
 
-    <!-- Desktop hero image: kept exactly as existing -->
-    <img src="images/homes.png" alt="Background" class="bg-image hero-desktop-image">
+    <picture class="hero-picture">
+        <!-- Mobile image -->
+        <source
+            media="(max-width: 768px)"
+            srcset="images/home-mobile.png?v=20">
 
-    <!-- Mobile-only hero image -->
-    <img src="images/home-mobile.png?v=10" alt="Vimal Pets World mobile hero" class="hero-mobile-image">
+        <!-- Desktop image -->
+        <img
+            src="images/homes.png?v=20"
+            alt="Vimal Pets World"
+            class="hero-background">
+    </picture>
 
     <div class="overlay"></div>
+
     <div class="hero-content">
         <h1><span class="accent">Your Trusted place for</span>Pets, Accessories & Toys</h1>
         <p id="heroTagline">Made for Happy Pets, Chosen with Love by You🐾❤️</p>
