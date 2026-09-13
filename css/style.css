@@ -3529,12 +3529,6 @@ img {
 /* Tablet / mobile — photo still full width, text centered
    near the bottom over a soft white gradient for legibility */
 @media (max-width:900px){
-    .hero{
-        justify-content:center;
-        align-items:flex-end;
-        height:100vh;
-        min-height:600px;
-    }
     .hero::after{
         content:"";
         position:absolute;
@@ -3545,17 +3539,6 @@ img {
         background:linear-gradient(to top, rgba(255,255,255,.92) 10%, rgba(255,255,255,0) 100%);
         z-index:1;
         pointer-events:none;
-    }
-    .hero-content{
-        top:auto;
-        bottom:30px;
-        left:0;
-        right:0;
-        width:100%;
-        margin:0 auto;
-        max-width:100%;
-        padding:0 24px 20px;
-        text-align:center;
     }
     .hero-content h1{
         font-size:1.8rem;
@@ -3574,8 +3557,30 @@ img {
         display:inline-block;
     }
 }
-@media (max-width:900px){
-    .bg-image{
-        object-position: top center;
+@media (max-width: 900px) {
+
+    .hero {
+        height: calc(100vh - 100px) !important;
+        min-height: 600px;
+        margin-top: 100px !important;
+
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .hero-content {
+        bottom: 25px !important;
+        top: auto !important;
+        left: 0 !important;
+        right: 0 !important;
+
+        width: 100% !important;
+        padding: 0 18px 15px !important;
+
+        text-align: center !important;
+    }
+
+    .bg-image {
+        object-position: center top !important;
     }
 }
