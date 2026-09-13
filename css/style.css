@@ -4377,22 +4377,40 @@ img {
    ========================================================= */
 
 /* Desktop: keep the hero clean and centered */
+/* =========================================
+   DESKTOP HERO TEXT - BESIDE BOY'S HEAD
+   ========================================= */
+
 @media screen and (min-width: 769px) {
+
     .hero {
-        margin-top: 0 !important;
-        height: 100vh !important;
-        min-height: 650px !important;
+        position: relative !important;
     }
 
-    .hero-content {
-        top: 30px !important;
-        left: 47.5% !important;
+    .hero .hero-content {
+        position: absolute !important;
+
+        /* MOVE TEXT TO THE RIGHT OF BOY */
+        left: 55% !important;
         right: auto !important;
-        bottom: auto !important;
-        width: 490px !important;
+
+        /* MOVE UP/DOWN */
+        top: 8% !important;
+
+        width: 430px !important;
         height: auto !important;
+
         transform: none !important;
+
         z-index: 10 !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+
+        text-align: center !important;
+        box-sizing: border-box !important;
     }
 }
 
