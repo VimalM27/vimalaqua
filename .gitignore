@@ -1,0 +1,10 @@
+android-app/build/
+android-app/.gradle/
+android-app/local.properties
+*.apk
+*.aab
+node_modules/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
