@@ -60,7 +60,33 @@
         -webkit-mask-image:none !important;
         mask-image:none !important;
     }
-    </style>
+    
+
+    /* Mobile hero image: desktop remains unchanged */
+    .hero-mobile-image {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        .hero-desktop-image {
+            display: none !important;
+        }
+
+        .hero-mobile-image {
+            display: block;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            z-index: 0;
+        }
+
+        .hero .overlay { z-index: 1; }
+        .hero .hero-content { position: relative; z-index: 2; }
+    }
+</style>
 </head>
 <body>
 <div id="offerPopup" class="popup-overlay">
@@ -216,7 +242,11 @@
 </div>
     <section class="hero">
 
-    <img src="images/homes.png" alt="Background" class="bg-image">
+    <!-- Desktop hero image: kept exactly as existing -->
+    <img src="images/homes.png" alt="Background" class="bg-image hero-desktop-image">
+
+    <!-- Mobile-only hero image -->
+    <img src="images/home-mobile.png" alt="Vimal Pets World mobile hero" class="hero-mobile-image">
 
     <div class="overlay"></div>
     <div class="hero-content">
