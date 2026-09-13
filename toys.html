@@ -11,10 +11,40 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Toys | Vimal Pets World</title>
+    <title>Toys | Vimal Pets World</title>
+    <meta name="description" content="Shop toys by category: Kids Toys, Baby & Toddler, Art & Creativity, Educational & STEM, Outdoor & Sports, Teens, Adults & Hobbies, Seniors, Family Games, Unique & Trending, and Pet Toys.">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* ---- Toys taxonomy page (scoped additions; does not touch shared style.css) ---- */
+        .toys-search-bar{max-width:640px;margin:0 auto 1.5rem;padding:0 1rem;}
+        .toys-search-bar input{width:100%;padding:.85rem 1.1rem;font-size:1rem;border:1px solid #ddd;
+            border-radius:999px;box-sizing:border-box;}
+        .age-jump{max-width:1100px;margin:0 auto 2rem;padding:0 1rem;text-align:center;}
+        .age-jump-label{display:block;font-weight:600;margin-bottom:.6rem;color:#555;}
+        .age-jump-chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;}
+        .age-chip{display:inline-block;padding:.4rem .9rem;border:1px solid #ddd;border-radius:999px;
+            text-decoration:none;color:#333;font-size:.9rem;transition:background .15s,border-color .15s;}
+        .age-chip:hover{background:#f2f2f2;border-color:#bbb;}
+        .toy-category .age-badge,.toy-group-head .age-badge{display:inline-block;margin-top:.4rem;
+            padding:.2rem .7rem;font-size:.78rem;font-weight:600;border-radius:999px;
+            background:#eef6ff;color:#2563eb;}
+        a.toy-category{text-decoration:none;color:inherit;display:block;cursor:pointer;}
+        .toys-note{max-width:900px;margin:0 auto 2.5rem;padding:.9rem 1.2rem;text-align:center;
+            font-size:.92rem;color:#555;background:#fafafa;border-radius:10px;}
+        .toy-group{max-width:1200px;margin:0 auto 2.6rem;padding:0 1rem;}
+        .toy-group-head{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+        .toy-group-head h2{margin:0;font-size:1.4rem;}
+        .toy-group-desc{margin:.3rem 0 1rem;color:#666;}
+        .subcat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.7rem;}
+        .subcat-chip{display:flex;align-items:center;gap:.5rem;padding:.7rem .9rem;border:1px solid #e4e4e4;
+            border-radius:10px;text-decoration:none;color:#222;background:#fff;font-size:.92rem;
+            transition:transform .12s,box-shadow .12s,border-color .12s;}
+        .subcat-chip:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08);border-color:#ccc;}
+        .subcat-icon{font-size:1.2rem;}
+        .subcat-chip.is-hidden,.toy-category.is-hidden,.toy-group.is-hidden{display:none !important;}
+    </style>
 </head>
 
 <body>
@@ -143,239 +173,316 @@
 </div>
 <section class="page-hero">
     <div class="hero-content">
-        <h1>Pet Toys</h1>
-        <p>Fun, safe, and durable toys for every kind of pet</p>
+        <h1>Toys</h1>
+        <p>Pet toys, kids' toys, games & hobbies — organised by category, not by guesswork.</p>
     </div>
 </section>
-<!-- ================= TOY CATEGORIES ================= -->
 
-<section class="toy-categories">
+<!-- ================= TOYS SEARCH / QUICK FILTER ================= -->
+<section class="toys-search-bar">
+    <input type="text" id="toysQuickSearch" placeholder="Search toy categories (e.g. chess, drones, dolls, cricket)...">
+</section>
 
-    <div class="toy-category" id="dog-toys">
-        <span>🐶</span>
-        <h3>Dog Toys</h3>
-        <p>Chew, fetch, tug, squeaky, training and interactive toys.</p>
+<!-- ================= SHOP BY AGE (quick jump, not a separate catalog branch) ================= -->
+<section class="age-jump">
+    <span class="age-jump-label">Shop by age &amp; group:</span>
+    <div class="age-jump-chips">
+            <a href="#kids-toys" class="age-chip">🧒 Kids Toys</a>
+            <a href="#baby-toddler" class="age-chip">👶 Baby & Toddler</a>
+            <a href="#art-creativity" class="age-chip">🎨 Art & Creativity</a>
+            <a href="#educational-stem" class="age-chip">🧠 Educational & STEM</a>
+            <a href="#outdoor-sports" class="age-chip">⚽ Outdoor & Sports</a>
+            <a href="#teens" class="age-chip">🎮 Teens</a>
+            <a href="#adults-hobbies" class="age-chip">🧑 Adults & Hobbies</a>
+            <a href="#seniors" class="age-chip">👵 Seniors</a>
+            <a href="#family-group" class="age-chip">👨‍👩‍👧‍👦 Family & Group Games</a>
+            <a href="#unique-trending" class="age-chip">✨ Unique & Trending</a>
+            <a href="#pet-toys" class="age-chip">🐾 Pet Toys</a>
     </div>
+</section>
 
-    <div class="toy-category" id="cat-toys">
-        <span>🐱</span>
-        <h3>Cat Toys</h3>
-        <p>Teasers, wands, balls, catnip toys, scratchers and tunnels.</p>
-    </div>
+<!-- ================= TOP-LEVEL TOY CATEGORIES ================= -->
+<section class="toy-categories" id="toyCategoryOverview">
 
-    <div class="toy-category" id="bird-toys">
-        <span>🦜</span>
-        <h3>Bird Toys</h3>
-        <p>Swings, bells, ropes, ladders, chew and foraging toys.</p>
-    </div>
+    <a href="#kids-toys" class="toy-category" data-search="kids toys everyday favourites for imaginative, hands-on play.">
+        <span>🧒</span>
+        <h3>Kids Toys</h3>
+        <p>Everyday favourites for imaginative, hands-on play.</p>
+        <span class="age-badge">Ages 3–8</span>
+    </a>
 
-    <div class="toy-category" id="small-pet-toys">
-        <span>🐹</span>
-        <h3>Small Pet Toys</h3>
-        <p>Tunnels, wheels, chew toys and enrichment toys.</p>
-    </div>
+    <a href="#baby-toddler" class="toy-category" data-search="baby & toddler safe, soft essentials for little hands and early development.">
+        <span>👶</span>
+        <h3>Baby & Toddler</h3>
+        <p>Safe, soft essentials for little hands and early development.</p>
+        <span class="age-badge">Ages 0–3</span>
+    </a>
 
-    <div class="toy-category" id="interactive-toys">
-        <span>🤖</span>
-        <h3>Interactive Toys</h3>
-        <p>Smart, motion-based and interactive toys that keep pets busy.</p>
-    </div>
+    <a href="#art-creativity" class="toy-category" data-search="art & creativity colourful supplies for creative self-expression.">
+        <span>🎨</span>
+        <h3>Art & Creativity</h3>
+        <p>Colourful supplies for creative self-expression.</p>
+        <span class="age-badge">Ages 3–12</span>
+    </a>
 
-    <div class="toy-category" id="educational-toys">
+    <a href="#educational-stem" class="toy-category" data-search="educational & stem hands-on learning that makes curiosity fun.">
         <span>🧠</span>
-        <h3>Educational & Puzzle Toys</h3>
-        <p>Puzzle feeders, brain games and problem-solving toys.</p>
-    </div>
+        <h3>Educational & STEM</h3>
+        <p>Hands-on learning that makes curiosity fun.</p>
+        <span class="age-badge">Ages 5–14</span>
+    </a>
 
-    <div class="toy-category" id="chew-toys">
-        <span>🦴</span>
-        <h3>Chew Toys</h3>
-        <p>Durable toys designed for chewing and teething.</p>
-    </div>
+    <a href="#outdoor-sports" class="toy-category" data-search="outdoor & sports active, energetic fun for the great outdoors.">
+        <span>⚽</span>
+        <h3>Outdoor & Sports</h3>
+        <p>Active, energetic fun for the great outdoors.</p>
+        <span class="age-badge">Ages 5+</span>
+    </a>
 
-    <div class="toy-category" id="fetch-toys">
-        <span>🎾</span>
-        <h3>Fetch & Ball Toys</h3>
-        <p>Balls, frisbees, launchers and outdoor play toys.</p>
-    </div>
+    <a href="#teens" class="toy-category" data-search="teens cool gear and games built for teens who love a challenge.">
+        <span>🎮</span>
+        <h3>Teens</h3>
+        <p>Cool gear and games built for teens who love a challenge.</p>
+        <span class="age-badge">Ages 9–15</span>
+    </a>
 
-    <div class="toy-category" id="tug-toys">
-        <span>🪢</span>
-        <h3>Tug Toys</h3>
-        <p>Rope toys, tug rings and interactive pulling toys.</p>
-    </div>
+    <a href="#adults-hobbies" class="toy-category" data-search="adults & hobbies premium picks for hobbyists, collectors and unwinding.">
+        <span>🧑</span>
+        <h3>Adults & Hobbies</h3>
+        <p>Premium picks for hobbyists, collectors and unwinding.</p>
+        <span class="age-badge">Ages 15+</span>
+    </a>
 
-    <div class="toy-category" id="squeaky-toys">
-        <span>🔊</span>
-        <h3>Squeaky Toys</h3>
-        <p>Fun squeaky toys in different shapes and sizes.</p>
-    </div>
+    <a href="#seniors" class="toy-category" data-search="seniors relaxed, sociable fun that keeps the mind sharp.">
+        <span>👵</span>
+        <h3>Seniors</h3>
+        <p>Relaxed, sociable fun that keeps the mind sharp.</p>
+        <span class="age-badge">Adult</span>
+    </a>
 
-    <div class="toy-category" id="plush-toys">
-        <span>🧸</span>
-        <h3>Plush Toys</h3>
-        <p>Soft, cuddly and character-shaped toys.</p>
-    </div>
+    <a href="#family-group" class="toy-category" data-search="family & group games perfect for family game night and get-togethers.">
+        <span>👨‍👩‍👧‍👦</span>
+        <h3>Family & Group Games</h3>
+        <p>Perfect for family game night and get-togethers.</p>
+        <span class="age-badge">All ages</span>
+    </a>
 
-    <div class="toy-category" id="treat-toys">
-        <span>🍖</span>
-        <h3>Treat-Dispensing Toys</h3>
-        <p>Toys that reward pets while keeping them mentally active.</p>
-    </div>
-
-    <div class="toy-category" id="training-toys">
-        <span>🎓</span>
-        <h3>Training & Reward Toys</h3>
-        <p>Training aids and reward-based toys for better learning.</p>
-    </div>
-
-    <div class="toy-category" id="dental-toys">
-        <span>🦷</span>
-        <h3>Dental Toys</h3>
-        <p>Chew toys designed to support dental cleaning.</p>
-    </div>
-
-    <div class="toy-category" id="agility-toys">
-        <span>🏃</span>
-        <h3>Agility Toys</h3>
-        <p>Hurdles, rings, tunnels and activity equipment.</p>
-    </div>
-
-    <div class="toy-category" id="scratchers">
-        <span>🐾</span>
-        <h3>Scratchers</h3>
-        <p>Scratch pads, boards and scratching posts for cats.</p>
-    </div>
-
-    <div class="toy-category" id="cat-trees">
-        <span>🌳</span>
-        <h3>Cat Trees & Towers</h3>
-        <p>Climbing towers, activity centres and cat furniture.</p>
-    </div>
-
-    <div class="toy-category" id="teasers">
-        <span>🪶</span>
-        <h3>Teasers & Wands</h3>
-        <p>Feather wands, fishing toys and chase toys.</p>
-    </div>
-
-    <div class="toy-category" id="tunnels">
-        <span>🌀</span>
-        <h3>Tunnels</h3>
-        <p>Play tunnels for cats, rabbits, hamsters and other pets.</p>
-    </div>
-
-    <div class="toy-category" id="catnip">
-        <span>🌿</span>
-        <h3>Catnip Toys</h3>
-        <p>Catnip-filled toys for play and stimulation.</p>
-    </div>
-
-    <div class="toy-category" id="outdoor-toys">
-        <span>🌳</span>
-        <h3>Outdoor Toys</h3>
-        <p>Outdoor play toys for active pets.</p>
-    </div>
-
-    <div class="toy-category" id="enrichment">
+    <a href="#unique-trending" class="toy-category" data-search="unique & trending something new, novel and a little bit different.">
         <span>✨</span>
-        <h3>DIY & Enrichment Toys</h3>
-        <p>Creative toys that encourage natural behaviours and exploration.</p>
-    </div>
+        <h3>Unique & Trending</h3>
+        <p>Something new, novel and a little bit different.</p>
+        <span class="age-badge">All ages</span>
+    </a>
 
-    <div class="toy-category" id="unique-toys">
-        <span>⭐</span>
-        <h3>New & Unique Toys</h3>
-        <p>Innovative and unusual toys for pets who love something different.</p>
-    </div>
-
+    <a href="#pet-toys" class="toy-category" data-search="pet toys playtime favourites for happy, healthy pets.">
+        <span>🐾</span>
+        <h3>Pet Toys</h3>
+        <p>Playtime favourites for happy, healthy pets.</p>
+        <span class="age-badge">For your pets</span>
+    </a>
 </section>
 
-<!-- ================= TOY CATEGORY FILTER BAR ================= -->
-<!-- Reuses the site's existing .filter-section / .filter-count / .clear-filter
-     / .no-products classes (already defined in css/style.css and used on
-     pages like dogs.html) so no new CSS or layout changes are introduced. -->
-<section class="filter-section">
+<p class="toys-note">
+    ✅ Age range shown per category is a guide, not a restriction — exact age &amp; safety
+    info is listed on every product. Looking for a specific character or theme?
+    Use the search box above — Shop by Character/Theme collections are cross-category, not separate menus.
+</p>
 
-    <div class="filter-box">
-        <label id="toysCategoryLabel">🧸 Showing: All Toys</label>
+<!-- ================= CATEGORY DETAIL SECTIONS ================= -->
+<div id="toyGroups">
 
-        <button class="clear-filter" id="showAllToysBtn" onclick="showAllToys()">
-            Show All Toys
-        </button>
+<section class="toy-group" id="kids-toys">
+    <div class="toy-group-head">
+        <h2>🧒 Kids Toys</h2>
+        <span class="age-badge">Ages 3–8</span>
     </div>
-
-    <div class="filter-count" id="toysFilterCount"></div>
-
+    <p class="toy-group-desc">Everyday favourites for imaginative, hands-on play.</p>
+    <div class="subcat-grid">
+            <a href="action-figures.html" class="subcat-chip" data-search="action figures kids toys"><span class="subcat-icon">🧒</span>Action Figures</a>
+            <a href="board-games.html" class="subcat-chip" data-search="board games kids toys"><span class="subcat-icon">🧒</span>Board Games</a>
+            <a href="building.html" class="subcat-chip" data-search="building blocks kids toys"><span class="subcat-icon">🧒</span>Building Blocks</a>
+            <a href="cars.html" class="subcat-chip" data-search="cars & vehicles kids toys"><span class="subcat-icon">🧒</span>Cars & Vehicles</a>
+            <a href="construction.html" class="subcat-chip" data-search="construction toys kids toys"><span class="subcat-icon">🧒</span>Construction Toys</a>
+            <a href="doctor-sets.html" class="subcat-chip" data-search="doctor sets kids toys"><span class="subcat-icon">🧒</span>Doctor Sets</a>
+            <a href="dolls.html" class="subcat-chip" data-search="dolls & dollhouses kids toys"><span class="subcat-icon">🧒</span>Dolls & Dollhouses</a>
+            <a href="playsets.html" class="subcat-chip" data-search="playsets kids toys"><span class="subcat-icon">🧒</span>Playsets</a>
+            <a href="pretend-play.html" class="subcat-chip" data-search="pretend play kids toys"><span class="subcat-icon">🧒</span>Pretend Play</a>
+            <a href="puzzles.html" class="subcat-chip" data-search="puzzles kids toys"><span class="subcat-icon">🧒</span>Puzzles</a>
+    </div>
 </section>
 
-<div class="no-products" id="noToysFound">
-    😕 No products found in this category yet. <a href="toys.html">View All Toys</a>
+<section class="toy-group" id="baby-toddler">
+    <div class="toy-group-head">
+        <h2>👶 Baby & Toddler</h2>
+        <span class="age-badge">Ages 0–3</span>
+    </div>
+    <p class="toy-group-desc">Safe, soft essentials for little hands and early development.</p>
+    <div class="subcat-grid">
+            <a href="bath-toys.html" class="subcat-chip" data-search="bath toys baby & toddler"><span class="subcat-icon">👶</span>Bath Toys</a>
+            <a href="musical-baby.html" class="subcat-chip" data-search="musical toys baby & toddler"><span class="subcat-icon">👶</span>Musical Toys</a>
+            <a href="push-pull.html" class="subcat-chip" data-search="push & pull toys baby & toddler"><span class="subcat-icon">👶</span>Push & Pull Toys</a>
+            <a href="rattles.html" class="subcat-chip" data-search="rattles baby & toddler"><span class="subcat-icon">👶</span>Rattles</a>
+            <a href="shape-sorters.html" class="subcat-chip" data-search="shape sorters baby & toddler"><span class="subcat-icon">👶</span>Shape Sorters</a>
+            <a href="soft-toys.html" class="subcat-chip" data-search="soft toys baby & toddler"><span class="subcat-icon">👶</span>Soft Toys</a>
+            <a href="stacking.html" class="subcat-chip" data-search="stacking toys baby & toddler"><span class="subcat-icon">👶</span>Stacking Toys</a>
+            <a href="teethers.html" class="subcat-chip" data-search="teethers baby & toddler"><span class="subcat-icon">👶</span>Teethers</a>
+    </div>
+</section>
+
+<section class="toy-group" id="art-creativity">
+    <div class="toy-group-head">
+        <h2>🎨 Art & Creativity</h2>
+        <span class="age-badge">Ages 3–12</span>
+    </div>
+    <p class="toy-group-desc">Colourful supplies for creative self-expression.</p>
+    <div class="subcat-grid">
+            <a href="art-sets.html" class="subcat-chip" data-search="art sets art & creativity"><span class="subcat-icon">🎨</span>Art Sets</a>
+            <a href="clay.html" class="subcat-chip" data-search="clay & modelling art & creativity"><span class="subcat-icon">🎨</span>Clay & Modelling</a>
+            <a href="craft.html" class="subcat-chip" data-search="craft kits art & creativity"><span class="subcat-icon">🎨</span>Craft Kits</a>
+            <a href="drawing.html" class="subcat-chip" data-search="drawing kits art & creativity"><span class="subcat-icon">🎨</span>Drawing Kits</a>
+            <a href="musical.html" class="subcat-chip" data-search="musical instruments art & creativity"><span class="subcat-icon">🎨</span>Musical Instruments</a>
+            <a href="sewing.html" class="subcat-chip" data-search="sewing & diy kits art & creativity"><span class="subcat-icon">🎨</span>Sewing & DIY Kits</a>
+    </div>
+</section>
+
+<section class="toy-group" id="educational-stem">
+    <div class="toy-group-head">
+        <h2>🧠 Educational & STEM</h2>
+        <span class="age-badge">Ages 5–14</span>
+    </div>
+    <p class="toy-group-desc">Hands-on learning that makes curiosity fun.</p>
+    <div class="subcat-grid">
+            <a href="coding.html" class="subcat-chip" data-search="coding toys educational & stem"><span class="subcat-icon">🧠</span>Coding Toys</a>
+            <a href="educational.html" class="subcat-chip" data-search="educational toys educational & stem"><span class="subcat-icon">🧠</span>Educational Toys</a>
+            <a href="experiments.html" class="subcat-chip" data-search="experiment kits educational & stem"><span class="subcat-icon">🧠</span>Experiment Kits</a>
+            <a href="learning.html" class="subcat-chip" data-search="learning toys educational & stem"><span class="subcat-icon">🧠</span>Learning Toys</a>
+            <a href="montessori.html" class="subcat-chip" data-search="montessori toys educational & stem"><span class="subcat-icon">🧠</span>Montessori Toys</a>
+            <a href="robotics.html" class="subcat-chip" data-search="robotics kits educational & stem"><span class="subcat-icon">🧠</span>Robotics Kits</a>
+            <a href="science.html" class="subcat-chip" data-search="science kits educational & stem"><span class="subcat-icon">🧠</span>Science Kits</a>
+            <a href="stem.html" class="subcat-chip" data-search="stem toys educational & stem"><span class="subcat-icon">🧠</span>STEM Toys</a>
+    </div>
+</section>
+
+<section class="toy-group" id="outdoor-sports">
+    <div class="toy-group-head">
+        <h2>⚽ Outdoor & Sports</h2>
+        <span class="age-badge">Ages 5+</span>
+    </div>
+    <p class="toy-group-desc">Active, energetic fun for the great outdoors.</p>
+    <div class="subcat-grid">
+            <a href="badminton.html" class="subcat-chip" data-search="badminton outdoor & sports"><span class="subcat-icon">⚽</span>Badminton</a>
+            <a href="balls.html" class="subcat-chip" data-search="balls outdoor & sports"><span class="subcat-icon">⚽</span>Balls</a>
+            <a href="basketball.html" class="subcat-chip" data-search="basketball outdoor & sports"><span class="subcat-icon">⚽</span>Basketball</a>
+            <a href="cricket.html" class="subcat-chip" data-search="cricket outdoor & sports"><span class="subcat-icon">⚽</span>Cricket</a>
+            <a href="football.html" class="subcat-chip" data-search="football outdoor & sports"><span class="subcat-icon">⚽</span>Football</a>
+            <a href="frisbee.html" class="subcat-chip" data-search="frisbee outdoor & sports"><span class="subcat-icon">⚽</span>Frisbee</a>
+            <a href="scooters.html" class="subcat-chip" data-search="scooters outdoor & sports"><span class="subcat-icon">⚽</span>Scooters</a>
+            <a href="water-toys.html" class="subcat-chip" data-search="water toys outdoor & sports"><span class="subcat-icon">⚽</span>Water Toys</a>
+    </div>
+</section>
+
+<section class="toy-group" id="teens">
+    <div class="toy-group-head">
+        <h2>🎮 Teens</h2>
+        <span class="age-badge">Ages 9–15</span>
+    </div>
+    <p class="toy-group-desc">Cool gear and games built for teens who love a challenge.</p>
+    <div class="subcat-grid">
+            <a href="3d-puzzles.html" class="subcat-chip" data-search="3d puzzles teens"><span class="subcat-icon">🎮</span>3D Puzzles</a>
+            <a href="card-games.html" class="subcat-chip" data-search="card games teens"><span class="subcat-icon">🎮</span>Card Games</a>
+            <a href="collectibles.html" class="subcat-chip" data-search="collectibles teens"><span class="subcat-icon">🎮</span>Collectibles</a>
+            <a href="drones.html" class="subcat-chip" data-search="drones teens"><span class="subcat-icon">🎮</span>Drones</a>
+            <a href="gaming.html" class="subcat-chip" data-search="gaming accessories teens"><span class="subcat-icon">🎮</span>Gaming Accessories</a>
+            <a href="model-kits.html" class="subcat-chip" data-search="model kits teens"><span class="subcat-icon">🎮</span>Model Kits</a>
+            <a href="rc.html" class="subcat-chip" data-search="rc cars & vehicles teens"><span class="subcat-icon">🎮</span>RC Cars & Vehicles</a>
+            <a href="strategy.html" class="subcat-chip" data-search="strategy games teens"><span class="subcat-icon">🎮</span>Strategy Games</a>
+    </div>
+</section>
+
+<section class="toy-group" id="adults-hobbies">
+    <div class="toy-group-head">
+        <h2>🧑 Adults & Hobbies</h2>
+        <span class="age-badge">Ages 15+</span>
+    </div>
+    <p class="toy-group-desc">Premium picks for hobbyists, collectors and unwinding.</p>
+    <div class="subcat-grid">
+            <a href="adult-board-games.html" class="subcat-chip" data-search="premium board games adults & hobbies"><span class="subcat-icon">🧑</span>Premium Board Games</a>
+            <a href="brain-teasers.html" class="subcat-chip" data-search="brain teasers adults & hobbies"><span class="subcat-icon">🧑</span>Brain Teasers</a>
+            <a href="diecast.html" class="subcat-chip" data-search="die-cast models adults & hobbies"><span class="subcat-icon">🧑</span>Die-cast Models</a>
+            <a href="diy.html" class="subcat-chip" data-search="diy kits adults & hobbies"><span class="subcat-icon">🧑</span>DIY Kits</a>
+            <a href="mechanical-puzzles.html" class="subcat-chip" data-search="mechanical puzzles adults & hobbies"><span class="subcat-icon">🧑</span>Mechanical Puzzles</a>
+            <a href="miniatures.html" class="subcat-chip" data-search="miniatures adults & hobbies"><span class="subcat-icon">🧑</span>Miniatures</a>
+            <a href="model-building.html" class="subcat-chip" data-search="model building adults & hobbies"><span class="subcat-icon">🧑</span>Model Building</a>
+            <a href="painting.html" class="subcat-chip" data-search="painting kits adults & hobbies"><span class="subcat-icon">🧑</span>Painting Kits</a>
+    </div>
+</section>
+
+<section class="toy-group" id="seniors">
+    <div class="toy-group-head">
+        <h2>👵 Seniors</h2>
+        <span class="age-badge">Adult</span>
+    </div>
+    <p class="toy-group-desc">Relaxed, sociable fun that keeps the mind sharp.</p>
+    <div class="subcat-grid">
+            <a href="carrom.html" class="subcat-chip" data-search="carrom seniors"><span class="subcat-icon">👵</span>Carrom</a>
+            <a href="checkers.html" class="subcat-chip" data-search="checkers seniors"><span class="subcat-icon">👵</span>Checkers</a>
+            <a href="chess.html" class="subcat-chip" data-search="chess seniors"><span class="subcat-icon">👵</span>Chess</a>
+            <a href="creative-hobbies.html" class="subcat-chip" data-search="creative hobby kits seniors"><span class="subcat-icon">👵</span>Creative Hobby Kits</a>
+            <a href="indoor-games.html" class="subcat-chip" data-search="indoor games seniors"><span class="subcat-icon">👵</span>Indoor Games</a>
+            <a href="large-puzzles.html" class="subcat-chip" data-search="large-piece puzzles seniors"><span class="subcat-icon">👵</span>Large-Piece Puzzles</a>
+            <a href="memory-games.html" class="subcat-chip" data-search="memory games seniors"><span class="subcat-icon">👵</span>Memory Games</a>
+    </div>
+</section>
+
+<section class="toy-group" id="family-group">
+    <div class="toy-group-head">
+        <h2>👨‍👩‍👧‍👦 Family & Group Games</h2>
+        <span class="age-badge">All ages</span>
+    </div>
+    <p class="toy-group-desc">Perfect for family game night and get-togethers.</p>
+    <div class="subcat-grid">
+            <a href="classic-games.html" class="subcat-chip" data-search="classic games family & group games"><span class="subcat-icon">👨‍👩‍👧‍👦</span>Classic Games</a>
+            <a href="family-games.html" class="subcat-chip" data-search="family games family & group games"><span class="subcat-icon">👨‍👩‍👧‍👦</span>Family Games</a>
+            <a href="group-games.html" class="subcat-chip" data-search="group games family & group games"><span class="subcat-icon">👨‍👩‍👧‍👦</span>Group Games</a>
+            <a href="party-games.html" class="subcat-chip" data-search="party games family & group games"><span class="subcat-icon">👨‍👩‍👧‍👦</span>Party Games</a>
+            <a href="trivia.html" class="subcat-chip" data-search="trivia games family & group games"><span class="subcat-icon">👨‍👩‍👧‍👦</span>Trivia Games</a>
+    </div>
+</section>
+
+<section class="toy-group" id="unique-trending">
+    <div class="toy-group-head">
+        <h2>✨ Unique & Trending</h2>
+        <span class="age-badge">All ages</span>
+    </div>
+    <p class="toy-group-desc">Something new, novel and a little bit different.</p>
+    <div class="subcat-grid">
+            <a href="fidget.html" class="subcat-chip" data-search="fidget toys unique & trending"><span class="subcat-icon">✨</span>Fidget Toys</a>
+            <a href="interactive.html" class="subcat-chip" data-search="interactive toys unique & trending"><span class="subcat-icon">✨</span>Interactive Toys</a>
+            <a href="mystery.html" class="subcat-chip" data-search="mystery toys unique & trending"><span class="subcat-icon">✨</span>Mystery Toys</a>
+            <a href="novelty.html" class="subcat-chip" data-search="novelty toys unique & trending"><span class="subcat-icon">✨</span>Novelty Toys</a>
+            <a href="sensory.html" class="subcat-chip" data-search="sensory toys unique & trending"><span class="subcat-icon">✨</span>Sensory Toys</a>
+            <a href="smart-toys.html" class="subcat-chip" data-search="smart toys unique & trending"><span class="subcat-icon">✨</span>Smart Toys</a>
+    </div>
+</section>
+
+<section class="toy-group" id="pet-toys">
+    <div class="toy-group-head">
+        <h2>🐾 Pet Toys</h2>
+        <span class="age-badge">For your pets</span>
+    </div>
+    <p class="toy-group-desc">Playtime favourites for happy, healthy pets.</p>
+    <div class="subcat-grid">
+            <a href="bird-toys.html" class="subcat-chip" data-search="bird toys pet toys"><span class="subcat-icon">🐾</span>Bird Toys</a>
+            <a href="cat-toys.html" class="subcat-chip" data-search="cat toys pet toys"><span class="subcat-icon">🐾</span>Cat Toys</a>
+            <a href="chew-toys.html" class="subcat-chip" data-search="chew toys pet toys"><span class="subcat-icon">🐾</span>Chew Toys</a>
+            <a href="dog-toys.html" class="subcat-chip" data-search="dog toys pet toys"><span class="subcat-icon">🐾</span>Dog Toys</a>
+            <a href="interactive-pet.html" class="subcat-chip" data-search="interactive pet toys pet toys"><span class="subcat-icon">🐾</span>Interactive Pet Toys</a>
+            <a href="pet-plush.html" class="subcat-chip" data-search="pet plush toys pet toys"><span class="subcat-icon">🐾</span>Pet Plush Toys</a>
+            <a href="scratchers.html" class="subcat-chip" data-search="scratchers pet toys"><span class="subcat-icon">🐾</span>Scratchers</a>
+            <a href="small-pet-toys.html" class="subcat-chip" data-search="small pet toys pet toys"><span class="subcat-icon">🐾</span>Small Pet Toys</a>
+    </div>
+</section>
 </div>
-
-<section class="products">
-
-    <div class="product-card" data-category="dog-toys chew-toys">
-        <a href="#">
-            <img src="images/toy-chew-bone.svg" alt="Chew Bone">
-            <h2>Chew Bone Toy</h2>
-            <p class="description">Durable rubber chew toy, gentle on gums, great for teething pups.</p>
-            <p class="price">₹199</p>
-        </a>
-        <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card" data-category="cat-toys interactive-pet">
-        <a href="#">
-            <img src="images/toy-feather-wand.svg" alt="Feather Wand">
-            <h2>Feather Wand</h2>
-            <p class="description">Interactive teaser wand to keep your cat active and engaged.</p>
-            <p class="price">₹149</p>
-        </a>
-        <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card" data-category="bird-toys">
-        <a href="#">
-            <img src="images/toy-parrot-swing.svg" alt="Bird Swing">
-            <h2>Bird Swing Toy</h2>
-            <p class="description">Colorful wooden swing perch for birds, easy to attach to any cage.</p>
-            <p class="price">₹249</p>
-        </a>
-        <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card" data-category="dog-toys balls">
-        <a href="#">
-            <img src="images/toy-squeaky-ball.svg" alt="Squeaky Ball">
-            <h2>Squeaky Ball</h2>
-            <p class="description">Bouncy, squeaky rubber ball built for hours of fetch.</p>
-            <p class="price">₹99</p>
-        </a>
-        <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card" data-category="small-pet-toys">
-        <a href="#">
-            <img src="images/toy-tunnel.svg" alt="Small Pet Tunnel">
-            <h2>Small Pet Tunnel</h2>
-            <p class="description">Collapsible tunnel for rabbits, hamsters and guinea pigs to explore.</p>
-            <p class="price">₹299</p>
-        </a>
-        <button>Add to Cart</button>
-    </div>
-
-    <div class="product-card" data-category="cat-toys scratchers">
-        <a href="#">
-            <img src="images/toy-cat-tree.svg" alt="Cat Scratch Post">
-            <h2>Cat Scratch Post</h2>
-            <p class="description">Sisal-wrapped scratch post to protect your furniture and keep claws healthy.</p>
-            <p class="price">₹599</p>
-        </a>
-        <button>Add to Cart</button>
-    </div>
-
-</section>
 
 <footer class="footer">
     <div class="footer-content">
@@ -402,8 +509,44 @@
 
 <script src="js/navbar.js"></script>
 <script src="js/script.js"></script>
-<script src="js/toys-filter.js"></script>
 <script src="js/product-link.js"></script>
 <script src="js/protect.js"></script>
+<script>
+// Live quick-search across the toy taxonomy: filters both the top-level
+// category cards and the subcategory chips inside each group by name.
+// A group with zero matching chips (and no matching header) hides itself.
+(function () {
+    var input = document.getElementById("toysQuickSearch");
+    if (!input) return;
+
+    var topCards = Array.prototype.slice.call(document.querySelectorAll("#toyCategoryOverview .toy-category"));
+    var groups = Array.prototype.slice.call(document.querySelectorAll("#toyGroups .toy-group"));
+
+    input.addEventListener("input", function () {
+        var q = input.value.trim().toLowerCase();
+
+        topCards.forEach(function (card) {
+            var text = card.getAttribute("data-search") || "";
+            card.classList.toggle("is-hidden", q.length > 0 && text.indexOf(q) === -1);
+        });
+
+        groups.forEach(function (group) {
+            var chips = group.querySelectorAll(".subcat-chip");
+            var groupTitle = (group.querySelector("h2") ? group.querySelector("h2").textContent : "").toLowerCase();
+            var anyVisible = false;
+
+            chips.forEach(function (chip) {
+                var text = chip.getAttribute("data-search") || "";
+                var hide = q.length > 0 && text.indexOf(q) === -1;
+                chip.classList.toggle("is-hidden", hide);
+                if (!hide) anyVisible = true;
+            });
+
+            var groupMatches = q.length === 0 || anyVisible || groupTitle.indexOf(q) !== -1;
+            group.classList.toggle("is-hidden", !groupMatches);
+        });
+    });
+})();
+</script>
 </body>
 </html>
