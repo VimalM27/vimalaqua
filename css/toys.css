@@ -1231,3 +1231,365 @@ body.toys-page .subcat-chip:hover {
         grid-template-columns: 1fr;
     }
 }
+/* ================================================================
+   ✨ TOYS PAGE — ATTRACTIVE PREMIUM FINISH
+   Add at the VERY BOTTOM of toys.css
+   ================================================================ */
+
+body.toys-page {
+    background:
+        radial-gradient(circle at 5% 30%, rgba(0,180,216,0.05), transparent 25%),
+        radial-gradient(circle at 95% 65%, rgba(212,175,55,0.06), transparent 25%),
+        #f8f8f5;
+}
+
+
+/* ================================================================
+   HERO — MAKE IT BIGGER & MORE PREMIUM
+   ================================================================ */
+
+body.toys-page .page-hero {
+    min-height: 410px !important;
+    height: 410px !important;
+}
+
+/* Stronger cinematic overlay */
+
+body.toys-page .page-hero::before {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(4,20,45,0.45) 0%,
+            rgba(4,20,45,0.30) 45%,
+            rgba(4,20,45,0.72) 100%
+        ) !important;
+}
+
+/* Hero text */
+
+body.toys-page .page-hero .hero-content {
+    padding: 30px !important;
+}
+
+body.toys-page .page-hero h1 {
+    font-size: clamp(44px, 6vw, 72px) !important;
+    letter-spacing: -1.5px !important;
+    margin-bottom: 16px !important;
+}
+
+
+/* ================================================================
+   SEARCH — FLOATING PREMIUM LOOK
+   ================================================================ */
+
+body.toys-page .toys-search-bar {
+    max-width: 680px !important;
+    margin: -30px auto 50px !important;
+}
+
+body.toys-page .toys-search-bar input {
+    height: 62px !important;
+
+    border: 2px solid rgba(255,255,255,0.9) !important;
+    border-radius: 18px !important;
+
+    box-shadow:
+        0 18px 45px rgba(7,26,61,0.18),
+        0 2px 5px rgba(7,26,61,0.05) !important;
+
+    font-size: 15px !important;
+}
+
+body.toys-page .toys-search-bar input:focus {
+    border-color: #00b4d8 !important;
+
+    box-shadow:
+        0 18px 45px rgba(0,180,216,0.20) !important;
+}
+
+
+/* ================================================================
+   AGE SECTION
+   ================================================================ */
+
+body.toys-page .age-jump {
+    margin-bottom: 46px !important;
+}
+
+body.toys-page .age-jump-label {
+    font-size: 14px !important;
+    color: #102c50 !important;
+    margin-bottom: 15px !important;
+}
+
+/* Chips */
+
+body.toys-page .age-chip {
+    background: #ffffff !important;
+
+    border: 1px solid #dfe5e8 !important;
+
+    box-shadow:
+        0 3px 10px rgba(7,26,61,0.04) !important;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        color .2s ease,
+        box-shadow .2s ease !important;
+}
+
+body.toys-page .age-chip:hover {
+    background: #00a9c7 !important;
+
+    color: #ffffff !important;
+
+    border-color: #00a9c7 !important;
+
+    transform: translateY(-3px) !important;
+
+    box-shadow:
+        0 9px 20px rgba(0,169,199,0.22) !important;
+}
+
+
+/* ================================================================
+   CATEGORY GRID
+   ================================================================ */
+
+body.toys-page .toy-categories {
+    gap: 20px !important;
+    margin-bottom: 35px !important;
+}
+
+
+/* Cards */
+
+body.toys-page a.toy-category {
+    min-height: 215px;
+
+    padding: 24px 20px 21px !important;
+
+    border-radius: 20px !important;
+
+    border: 1px solid #e7ebed !important;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #fcfdfd 100%
+        ) !important;
+
+    box-shadow:
+        0 6px 20px rgba(7,26,61,0.055) !important;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Small decorative glow inside cards */
+
+body.toys-page a.toy-category::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -45px;
+    bottom: -45px;
+
+    border-radius: 50%;
+
+    background: rgba(0,180,216,0.07);
+
+    pointer-events: none;
+}
+
+
+/* Card hover */
+
+body.toys-page a.toy-category:hover {
+    transform: translateY(-7px) !important;
+
+    border-color: #b8e7ef !important;
+
+    box-shadow:
+        0 20px 40px rgba(7,26,61,0.13) !important;
+}
+
+
+/* ================================================================
+   CATEGORY ICONS
+   ================================================================ */
+
+body.toys-page .toy-category > span:first-child {
+    width: 56px !important;
+    height: 56px !important;
+
+    border-radius: 17px !important;
+
+    font-size: 27px !important;
+
+    margin-bottom: 9px !important;
+
+    box-shadow:
+        0 4px 10px rgba(7,26,61,0.05);
+}
+
+
+/* ================================================================
+   CATEGORY TITLES
+   ================================================================ */
+
+body.toys-page .toy-category h3 {
+    font-size: 17px !important;
+
+    color: #102c50 !important;
+
+    margin-top: 3px !important;
+}
+
+body.toys-page .toy-category p {
+    color: #687582 !important;
+
+    line-height: 1.55 !important;
+}
+
+
+/* ================================================================
+   AGE BADGES
+   ================================================================ */
+
+body.toys-page .toy-category .age-badge {
+    background: #fff5d9 !important;
+
+    color: #886716 !important;
+
+    border: 1px solid #f0dfaa;
+
+    box-shadow:
+        0 2px 6px rgba(212,175,55,0.08);
+}
+
+
+/* ================================================================
+   INFO NOTE
+   ================================================================ */
+
+body.toys-page .toys-note {
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf7,
+            #ffffff
+        ) !important;
+
+    border: 1px solid #eee2bd !important;
+
+    box-shadow:
+        0 7px 20px rgba(7,26,61,0.04) !important;
+}
+
+
+/* ================================================================
+   CATEGORY GROUPS
+   ================================================================ */
+
+body.toys-page .toy-group {
+    padding: 34px 0 !important;
+
+    border-top: 1px solid #e4e8ea !important;
+}
+
+body.toys-page .toy-group-head h2 {
+    font-size: 1.4rem !important;
+
+    color: #102c50 !important;
+}
+
+
+/* ================================================================
+   SUBCATEGORY CHIPS
+   ================================================================ */
+
+body.toys-page .subcat-chip {
+    min-height: 46px;
+
+    background: #ffffff !important;
+
+    border: 1px solid #e5e9eb !important;
+
+    border-radius: 13px !important;
+
+    box-shadow:
+        0 3px 9px rgba(7,26,61,0.035);
+
+    transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease,
+        box-shadow .18s ease !important;
+}
+
+body.toys-page .subcat-chip:hover {
+    background: #eefafd !important;
+
+    border-color: #00b4d8 !important;
+
+    color: #086a84 !important;
+
+    transform: translateY(-3px) !important;
+
+    box-shadow:
+        0 10px 22px rgba(0,180,216,0.10) !important;
+}
+
+
+/* ================================================================
+   MOBILE
+   ================================================================ */
+
+@media (max-width: 640px) {
+
+    body.toys-page .page-hero {
+        min-height: 320px !important;
+        height: 320px !important;
+    }
+
+    body.toys-page .page-hero h1 {
+        font-size: 40px !important;
+    }
+
+    body.toys-page .page-hero p {
+        font-size: 15px !important;
+    }
+
+    body.toys-page .toys-search-bar {
+        margin: -25px auto 38px !important;
+    }
+
+    body.toys-page .toys-search-bar input {
+        height: 56px !important;
+    }
+
+    body.toys-page .toy-categories {
+        gap: 13px !important;
+    }
+
+    body.toys-page a.toy-category {
+        min-height: 205px;
+        padding: 18px 15px !important;
+        border-radius: 17px !important;
+    }
+
+    body.toys-page .toy-category > span:first-child {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 23px !important;
+    }
+}
