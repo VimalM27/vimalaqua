@@ -16,38 +16,10 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <style>
-        /* ---- Toys taxonomy page (scoped additions; does not touch shared style.css) ---- */
-        .toys-search-bar{max-width:640px;margin:0 auto 1.5rem;padding:0 1rem;}
-        .toys-search-bar input{width:100%;padding:.85rem 1.1rem;font-size:1rem;border:1px solid #ddd;
-            border-radius:999px;box-sizing:border-box;}
-        .age-jump{max-width:1100px;margin:0 auto 2rem;padding:0 1rem;text-align:center;}
-        .age-jump-label{display:block;font-weight:600;margin-bottom:.6rem;color:#555;}
-        .age-jump-chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;}
-        .age-chip{display:inline-block;padding:.4rem .9rem;border:1px solid #ddd;border-radius:999px;
-            text-decoration:none;color:#333;font-size:.9rem;transition:background .15s,border-color .15s;}
-        .age-chip:hover{background:#f2f2f2;border-color:#bbb;}
-        .toy-category .age-badge,.toy-group-head .age-badge{display:inline-block;margin-top:.4rem;
-            padding:.2rem .7rem;font-size:.78rem;font-weight:600;border-radius:999px;
-            background:#eef6ff;color:#2563eb;}
-        a.toy-category{text-decoration:none;color:inherit;display:block;cursor:pointer;}
-        .toys-note{max-width:900px;margin:0 auto 2.5rem;padding:.9rem 1.2rem;text-align:center;
-            font-size:.92rem;color:#555;background:#fafafa;border-radius:10px;}
-        .toy-group{max-width:1200px;margin:0 auto 2.6rem;padding:0 1rem;}
-        .toy-group-head{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
-        .toy-group-head h2{margin:0;font-size:1.4rem;}
-        .toy-group-desc{margin:.3rem 0 1rem;color:#666;}
-        .subcat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.7rem;}
-        .subcat-chip{display:flex;align-items:center;gap:.5rem;padding:.7rem .9rem;border:1px solid #e4e4e4;
-            border-radius:10px;text-decoration:none;color:#222;background:#fff;font-size:.92rem;
-            transition:transform .12s,box-shadow .12s,border-color .12s;}
-        .subcat-chip:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08);border-color:#ccc;}
-        .subcat-icon{font-size:1.2rem;}
-        .subcat-chip.is-hidden,.toy-category.is-hidden,.toy-group.is-hidden{display:none !important;}
-    </style>
+    <link rel="stylesheet" href="css/toys.css">
 </head>
 
-<body>
+<body class="toys-page">
 <nav class="navbar">
     <div class="mobile-menu-btn" onclick="openMenu()">
         ☰

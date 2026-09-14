@@ -1,0 +1,401 @@
+/* =====================================================================
+   TOYS PAGE — scoped styles
+   Everything in this file is scoped under body.toys-page so it can never
+   leak onto or be affected by any other page. Uses the site's existing
+   brand tokens (navy / gold / blue) from style.css :root.
+   ===================================================================== */
+
+body.toys-page{
+    background:#f7f7f5;
+}
+
+/* ---------------------------------------------------------------------
+   Hero — overrides the shared .page-hero (which is also used, with a
+   conflicting background image, on other pages) with a toy-page-specific
+   treatment. Scoped to body.toys-page so nothing else is touched.
+   --------------------------------------------------------------------- */
+body.toys-page .page-hero{
+    height:auto;
+    min-height:260px;
+    padding:64px 20px 56px;
+    background:
+        radial-gradient(circle at 12% 22%, rgba(0,180,216,0.22), transparent 40%),
+        radial-gradient(circle at 88% 78%, rgba(212,175,55,0.18), transparent 45%),
+        linear-gradient(135deg, #071A3D, #10294f 55%, #0d3b63);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+}
+
+body.toys-page .page-hero::before{
+    content:"🧸 🎲 🪁 🧩 🚀 🎨";
+    position:absolute;
+    inset:auto auto -18px -10px;
+    font-size:64px;
+    letter-spacing:28px;
+    opacity:0.08;
+    white-space:nowrap;
+    pointer-events:none;
+}
+
+body.toys-page .page-hero .hero-content{
+    max-width:640px;
+}
+
+body.toys-page .page-hero h1{
+    font-size:clamp(34px, 5vw, 52px);
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin-bottom:12px;
+}
+
+body.toys-page .page-hero p{
+    font-size:clamp(15px, 2vw, 18px);
+    color:#cfe3f2;
+    line-height:1.55;
+    max-width:520px;
+    margin:0 auto;
+}
+
+/* ---------------------------------------------------------------------
+   Quick search
+   --------------------------------------------------------------------- */
+body.toys-page .toys-search-bar{
+    max-width:600px;
+    margin:-26px auto 34px;
+    padding:0 20px;
+    position:relative;
+    z-index:3;
+}
+
+body.toys-page .toys-search-bar input{
+    width:100%;
+    padding:16px 22px;
+    font-size:15px;
+    font-family:'Poppins',sans-serif;
+    border:1px solid #e6e6e2;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(7,26,61,0.14);
+    outline:none;
+    transition:box-shadow .15s ease, border-color .15s ease;
+}
+
+body.toys-page .toys-search-bar input::placeholder{
+    color:#9aa3ad;
+}
+
+body.toys-page .toys-search-bar input:focus{
+    border-color:#00B4D8;
+    box-shadow:0 10px 30px rgba(0,180,216,0.22);
+}
+
+/* ---------------------------------------------------------------------
+   Shop by age — horizontally scrollable chip row on small screens
+   --------------------------------------------------------------------- */
+body.toys-page .age-jump{
+    max-width:1180px;
+    margin:0 auto 40px;
+    padding:0 20px;
+}
+
+body.toys-page .age-jump-label{
+    display:block;
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:.02em;
+    color:#5b6472;
+    margin-bottom:12px;
+}
+
+body.toys-page .age-jump-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+body.toys-page .age-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:9px 16px;
+    border:1px solid #dfe3e8;
+    border-radius:999px;
+    background:#fff;
+    text-decoration:none;
+    color:#0f2a4a;
+    font-size:13.5px;
+    font-weight:500;
+    transition:transform .12s ease, border-color .12s ease, background .12s ease;
+    white-space:nowrap;
+}
+
+body.toys-page .age-chip:hover{
+    border-color:#00B4D8;
+    background:#eef9fc;
+    transform:translateY(-1px);
+}
+
+/* ---------------------------------------------------------------------
+   Top-level category grid — this is the section that was previously
+   completely unstyled (raw text links).
+   --------------------------------------------------------------------- */
+body.toys-page .toy-categories{
+    max-width:1180px;
+    margin:0 auto 18px;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+    gap:18px;
+}
+
+body.toys-page a.toy-category{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+    text-decoration:none;
+    color:inherit;
+    background:#fff;
+    border:1px solid #ececea;
+    border-radius:16px;
+    padding:22px 20px 20px;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+body.toys-page a.toy-category:hover,
+body.toys-page a.toy-category:focus-visible{
+    transform:translateY(-3px);
+    box-shadow:0 16px 30px rgba(7,26,61,0.10);
+    border-color:#d7e9f0;
+    outline:none;
+}
+
+body.toys-page .toy-category > span:first-child{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:48px;
+    border-radius:13px;
+    font-size:24px;
+    margin-bottom:6px;
+    background:#eef6fb;
+}
+
+/* Cycle three brand-tone icon backgrounds across the grid for variety
+   without turning every card into a different color (keeps it calm). */
+body.toys-page .toy-category:nth-child(3n+1) > span:first-child{ background:#eef6fb; }
+body.toys-page .toy-category:nth-child(3n+2) > span:first-child{ background:#fbf3de; }
+body.toys-page .toy-category:nth-child(3n+3) > span:first-child{ background:#eef0fb; }
+
+body.toys-page .toy-category h3{
+    font-size:16.5px;
+    font-weight:600;
+    color:#0f2a4a;
+    margin:2px 0 0;
+}
+
+body.toys-page .toy-category p{
+    font-size:13.5px;
+    line-height:1.45;
+    color:#6b7280;
+    margin:0;
+}
+
+body.toys-page .toy-category .age-badge{
+    margin-top:8px;
+    padding:4px 11px;
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:.01em;
+    border-radius:999px;
+    background:#f3ede0;
+    color:#8a6d1f;
+}
+
+/* ---------------------------------------------------------------------
+   Info note
+   --------------------------------------------------------------------- */
+body.toys-page .toys-note{
+    max-width:900px;
+    margin:0 auto 44px;
+    padding:14px 20px;
+    text-align:center;
+    font-size:13.5px;
+    line-height:1.55;
+    color:#5b6472;
+    background:#fff;
+    border:1px dashed #dfe3e8;
+    border-radius:12px;
+}
+
+/* ---------------------------------------------------------------------
+   Category detail sections (the long list of groups + subcategory chips)
+   --------------------------------------------------------------------- */
+body.toys-page #toyGroups{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 20px 20px;
+}
+
+body.toys-page .toy-group{
+    margin:0 0 8px;
+    padding:26px 0;
+    border-top:1px solid #ececea;
+}
+
+body.toys-page .toy-group:first-child{
+    border-top:none;
+}
+
+body.toys-page .toy-group-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+body.toys-page .toy-group-head h2{
+    margin:0;
+    font-size:1.28rem;
+    font-weight:600;
+    color:#0f2a4a;
+}
+
+body.toys-page .toy-group-head .age-badge{
+    padding:4px 11px;
+    font-size:11.5px;
+    font-weight:600;
+    border-radius:999px;
+    background:#eef6fb;
+    color:#0b6e8c;
+}
+
+body.toys-page .toy-group-desc{
+    margin:6px 0 16px;
+    color:#6b7280;
+    font-size:14px;
+}
+
+body.toys-page .subcat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+    gap:10px;
+}
+
+body.toys-page .subcat-chip{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:11px 14px;
+    border:1px solid #ececea;
+    border-radius:11px;
+    text-decoration:none;
+    color:#1f2a37;
+    background:#fafafa;
+    font-size:13.5px;
+    font-weight:500;
+    transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+}
+
+body.toys-page .subcat-chip:hover,
+body.toys-page .subcat-chip:focus-visible{
+    background:#fff;
+    border-color:#00B4D8;
+    box-shadow:0 8px 18px rgba(7,26,61,0.08);
+    transform:translateY(-2px);
+    outline:none;
+}
+
+body.toys-page .subcat-icon{
+    font-size:16px;
+    flex-shrink:0;
+}
+
+body.toys-page .subcat-chip.is-hidden,
+body.toys-page .toy-category.is-hidden,
+body.toys-page .toy-group.is-hidden{
+    display:none !important;
+}
+
+/* ---------------------------------------------------------------------
+   Responsive breakpoints
+   --------------------------------------------------------------------- */
+@media (max-width: 900px){
+    body.toys-page .toy-categories{
+        grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+        gap:14px;
+    }
+    body.toys-page .subcat-grid{
+        grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 640px){
+    body.toys-page .page-hero{
+        padding:48px 18px 42px;
+        min-height:0;
+    }
+
+    body.toys-page .toys-search-bar{
+        margin-top:-20px;
+    }
+
+    /* Age chips scroll horizontally instead of wrapping into a wall of
+       pills on narrow screens — keeps the page feeling app-like. */
+    body.toys-page .age-jump-chips{
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        padding-bottom:6px;
+        scroll-snap-type:x proximity;
+        -webkit-overflow-scrolling:touch;
+    }
+    body.toys-page .age-jump-chips::-webkit-scrollbar{ height:0; }
+    body.toys-page .age-chip{ scroll-snap-align:start; }
+
+    body.toys-page .toy-categories{
+        grid-template-columns:repeat(2, 1fr);
+        gap:12px;
+    }
+
+    body.toys-page a.toy-category{
+        padding:16px 14px 15px;
+    }
+
+    body.toys-page .toy-category h3{
+        font-size:15px;
+    }
+
+    body.toys-page .toy-category p{
+        font-size:12.5px;
+    }
+
+    body.toys-page .subcat-grid{
+        grid-template-columns:repeat(2, 1fr);
+        gap:9px;
+    }
+
+    body.toys-page .toy-group-head h2{
+        font-size:1.1rem;
+    }
+}
+
+@media (max-width: 380px){
+    body.toys-page .toy-categories{
+        grid-template-columns:1fr 1fr;
+    }
+    body.toys-page .subcat-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce){
+    body.toys-page a.toy-category,
+    body.toys-page .subcat-chip,
+    body.toys-page .age-chip{
+        transition:none;
+    }
+}
