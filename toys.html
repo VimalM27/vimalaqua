@@ -47,7 +47,15 @@
     <ul class="nav-links">
 
         <li><a href="index.html">Home</a></li>
-        <li><a href="toys.html">Toys</a></li>
+        <li class="nav-item toys-nav">
+    <button type="button" id="toysMenuBtn">
+        Toys
+    </button>
+
+    <div class="toys-dropdown" id="toysDropdown">
+        <!-- your dropdown content here -->
+    </div>
+</li>
         <!-- SHOP -->
         <li class="dropdown">
             <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
@@ -520,6 +528,30 @@
         });
     });
 })();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const toysBtn = document.getElementById("toysMenuBtn");
+    const toysDropdown = document.getElementById("toysDropdown");
+
+    if (!toysBtn || !toysDropdown) return;
+
+    toysBtn.addEventListener("click", function (event) {
+        event.stopPropagation();
+
+        toysDropdown.classList.toggle("show");
+    });
+
+    toysDropdown.addEventListener("click", function (event) {
+        event.stopPropagation();
+    });
+
+    document.addEventListener("click", function () {
+        toysDropdown.classList.remove("show");
+    });
+
+});
 </script>
 </body>
 </html>

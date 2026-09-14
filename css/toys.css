@@ -1,600 +1,43 @@
-/* =====================================================================
-   TOYS PAGE — scoped styles
-   Everything in this file is scoped under body.toys-page so it can never
-   leak onto or be affected by any other page. Uses the site's existing
-   brand tokens (navy / gold / blue) from style.css :root.
-   ===================================================================== */
-
-body.toys-page{
-    background:#f7f7f5;
-}
-
-/* ---------------------------------------------------------------------
-   Hero — centered content
-   --------------------------------------------------------------------- */
-
-body.toys-page .page-hero {
-    height: auto;
-    min-height: 260px;
-    padding: 64px 20px 56px;
-
-    background:
-        radial-gradient(circle at 12% 22%, rgba(0,180,216,0.22), transparent 40%),
-        radial-gradient(circle at 88% 78%, rgba(212,175,55,0.18), transparent 45%),
-        linear-gradient(135deg, #071A3D, #10294f 55%, #0d3b63);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: relative;
-    overflow: hidden;
-}
-
-body.toys-page .page-hero .hero-content {
-    width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-body.toys-page .page-hero h1 {
-    font-size: clamp(34px, 5vw, 52px);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    margin: 0 0 12px;
-}
-
-body.toys-page .page-hero p {
-    font-size: clamp(15px, 2vw, 18px);
-    color: #cfe3f2;
-    line-height: 1.55;
-    max-width: 520px;
-    margin: 0 auto;
-}
-
-/* ---------------------------------------------------------------------
-   Quick search
-   --------------------------------------------------------------------- */
-body.toys-page .toys-search-bar{
-    max-width:600px;
-    margin:-26px auto 34px;
-    padding:0 20px;
-    position:relative;
-    z-index:3;
-}
-
-body.toys-page .toys-search-bar input{
-    width:100%;
-    padding:16px 22px;
-    font-size:15px;
-    font-family:'Poppins',sans-serif;
-    border:1px solid #e6e6e2;
-    border-radius:14px;
-    box-shadow:0 10px 30px rgba(7,26,61,0.14);
-    outline:none;
-    transition:box-shadow .15s ease, border-color .15s ease;
-}
-
-body.toys-page .toys-search-bar input::placeholder{
-    color:#9aa3ad;
-}
-
-body.toys-page .toys-search-bar input:focus{
-    border-color:#00B4D8;
-    box-shadow:0 10px 30px rgba(0,180,216,0.22);
-}
-
-/* ---------------------------------------------------------------------
-   Shop by age — horizontally scrollable chip row on small screens
-   --------------------------------------------------------------------- */
-body.toys-page .age-jump{
-    max-width:1180px;
-    margin:0 auto 40px;
-    padding:0 20px;
-}
-
-body.toys-page .age-jump-label{
-    display:block;
-    font-weight:600;
-    font-size:13px;
-    letter-spacing:.02em;
-    color:#5b6472;
-    margin-bottom:12px;
-}
-
-body.toys-page .age-jump-chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-body.toys-page .age-chip{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    padding:9px 16px;
-    border:1px solid #dfe3e8;
-    border-radius:999px;
-    background:#fff;
-    text-decoration:none;
-    color:#0f2a4a;
-    font-size:13.5px;
-    font-weight:500;
-    transition:transform .12s ease, border-color .12s ease, background .12s ease;
-    white-space:nowrap;
-}
-
-body.toys-page .age-chip:hover{
-    border-color:#00B4D8;
-    background:#eef9fc;
-    transform:translateY(-1px);
-}
-
-/* ---------------------------------------------------------------------
-   Top-level category grid — this is the section that was previously
-   completely unstyled (raw text links).
-   --------------------------------------------------------------------- */
-body.toys-page .toy-categories{
-    max-width:1180px;
-    margin:0 auto 18px;
-    padding:0 20px;
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
-    gap:18px;
-}
-
-body.toys-page a.toy-category{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    gap:6px;
-    text-decoration:none;
-    color:inherit;
-    background:#fff;
-    border:1px solid #ececea;
-    border-radius:16px;
-    padding:22px 20px 20px;
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-}
-
-body.toys-page a.toy-category:hover,
-body.toys-page a.toy-category:focus-visible{
-    transform:translateY(-3px);
-    box-shadow:0 16px 30px rgba(7,26,61,0.10);
-    border-color:#d7e9f0;
-    outline:none;
-}
-
-body.toys-page .toy-category > span:first-child{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    width:48px;
-    height:48px;
-    border-radius:13px;
-    font-size:24px;
-    margin-bottom:6px;
-    background:#eef6fb;
-}
-
-/* Cycle three brand-tone icon backgrounds across the grid for variety
-   without turning every card into a different color (keeps it calm). */
-body.toys-page .toy-category:nth-child(3n+1) > span:first-child{ background:#eef6fb; }
-body.toys-page .toy-category:nth-child(3n+2) > span:first-child{ background:#fbf3de; }
-body.toys-page .toy-category:nth-child(3n+3) > span:first-child{ background:#eef0fb; }
-
-body.toys-page .toy-category h3{
-    font-size:16.5px;
-    font-weight:600;
-    color:#0f2a4a;
-    margin:2px 0 0;
-}
-
-body.toys-page .toy-category p{
-    font-size:13.5px;
-    line-height:1.45;
-    color:#6b7280;
-    margin:0;
-}
-
-body.toys-page .toy-category .age-badge{
-    margin-top:8px;
-    padding:4px 11px;
-    font-size:11.5px;
-    font-weight:600;
-    letter-spacing:.01em;
-    border-radius:999px;
-    background:#f3ede0;
-    color:#8a6d1f;
-}
-
-/* ---------------------------------------------------------------------
-   Info note
-   --------------------------------------------------------------------- */
-body.toys-page .toys-note{
-    max-width:900px;
-    margin:0 auto 44px;
-    padding:14px 20px;
-    text-align:center;
-    font-size:13.5px;
-    line-height:1.55;
-    color:#5b6472;
-    background:#fff;
-    border:1px dashed #dfe3e8;
-    border-radius:12px;
-}
-
-/* ---------------------------------------------------------------------
-   Category detail sections (the long list of groups + subcategory chips)
-   --------------------------------------------------------------------- */
-body.toys-page #toyGroups{
-    max-width:1180px;
-    margin:0 auto;
-    padding:0 20px 20px;
-}
-
-body.toys-page .toy-group{
-    margin:0 0 8px;
-    padding:26px 0;
-    border-top:1px solid #ececea;
-}
-
-body.toys-page .toy-group:first-child{
-    border-top:none;
-}
-
-body.toys-page .toy-group-head{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-body.toys-page .toy-group-head h2{
-    margin:0;
-    font-size:1.28rem;
-    font-weight:600;
-    color:#0f2a4a;
-}
-
-body.toys-page .toy-group-head .age-badge{
-    padding:4px 11px;
-    font-size:11.5px;
-    font-weight:600;
-    border-radius:999px;
-    background:#eef6fb;
-    color:#0b6e8c;
-}
-
-body.toys-page .toy-group-desc{
-    margin:6px 0 16px;
-    color:#6b7280;
-    font-size:14px;
-}
-
-body.toys-page .subcat-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
-    gap:10px;
-}
-
-body.toys-page .subcat-chip{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:11px 14px;
-    border:1px solid #ececea;
-    border-radius:11px;
-    text-decoration:none;
-    color:#1f2a37;
-    background:#fafafa;
-    font-size:13.5px;
-    font-weight:500;
-    transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
-}
-
-body.toys-page .subcat-chip:hover,
-body.toys-page .subcat-chip:focus-visible{
-    background:#fff;
-    border-color:#00B4D8;
-    box-shadow:0 8px 18px rgba(7,26,61,0.08);
-    transform:translateY(-2px);
-    outline:none;
-}
-
-body.toys-page .subcat-icon{
-    font-size:16px;
-    flex-shrink:0;
-}
-
-body.toys-page .subcat-chip.is-hidden,
-body.toys-page .toy-category.is-hidden,
-body.toys-page .toy-group.is-hidden{
-    display:none !important;
-}
-
-/* ---------------------------------------------------------------------
-   Responsive breakpoints
-   --------------------------------------------------------------------- */
-@media (max-width: 900px){
-    body.toys-page .toy-categories{
-        grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
-        gap:14px;
-    }
-    body.toys-page .subcat-grid{
-        grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
-    }
-}
-
-@media (max-width: 640px){
-    body.toys-page .page-hero{
-        padding:48px 18px 42px;
-        min-height:0;
-    }
-
-    body.toys-page .toys-search-bar{
-        margin-top:-20px;
-    }
-
-    /* Age chips scroll horizontally instead of wrapping into a wall of
-       pills on narrow screens — keeps the page feeling app-like. */
-    body.toys-page .age-jump-chips{
-        flex-wrap:nowrap;
-        overflow-x:auto;
-        padding-bottom:6px;
-        scroll-snap-type:x proximity;
-        -webkit-overflow-scrolling:touch;
-    }
-    body.toys-page .age-jump-chips::-webkit-scrollbar{ height:0; }
-    body.toys-page .age-chip{ scroll-snap-align:start; }
-
-    body.toys-page .toy-categories{
-        grid-template-columns:repeat(2, 1fr);
-        gap:12px;
-    }
-
-    body.toys-page a.toy-category{
-        padding:16px 14px 15px;
-    }
-
-    body.toys-page .toy-category h3{
-        font-size:15px;
-    }
-
-    body.toys-page .toy-category p{
-        font-size:12.5px;
-    }
-
-    body.toys-page .subcat-grid{
-        grid-template-columns:repeat(2, 1fr);
-        gap:9px;
-    }
-
-    body.toys-page .toy-group-head h2{
-        font-size:1.1rem;
-    }
-}
-
-@media (max-width: 380px){
-    body.toys-page .toy-categories{
-        grid-template-columns:1fr 1fr;
-    }
-    body.toys-page .subcat-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-/* Respect reduced-motion preference */
-@media (prefers-reduced-motion: reduce){
-    body.toys-page a.toy-category,
-    body.toys-page .subcat-chip,
-    body.toys-page .age-chip{
-        transition:none;
-    }
-}
-@media (max-width: 640px) {
-    body.toys-page .page-hero {
-        min-height: 240px;
-        padding: 40px 18px;
-    }
-
-    body.toys-page .page-hero .hero-content {
-        width: 100%;
-        text-align: center;
-    }
-}
-/* =========================================================
-   TOYS HERO — FORCE TEXT EXACTLY CENTER
-   ========================================================= */
-
-body.toys-page .page-hero {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
-}
-
-body.toys-page .page-hero .hero-content {
-    position: static !important;
-
-    width: 100% !important;
-    max-width: 640px !important;
-
-    margin: 0 auto !important;
-    padding: 0 !important;
-
-    text-align: center !important;
-
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-
-    transform: none !important;
-}
-
-body.toys-page .page-hero h1 {
-    width: 100% !important;
-    margin: 0 0 12px !important;
-    text-align: center !important;
-}
-
-body.toys-page .page-hero p {
-    width: 100% !important;
-    max-width: 520px !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-}
-@media (max-width: 640px) {
-
-    body.toys-page .page-hero {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-    }
-
-    body.toys-page .page-hero .hero-content {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 auto !important;
-        padding: 0 10px !important;
-        text-align: center !important;
-    }
-
-    body.toys-page .page-hero h1,
-    body.toys-page .page-hero p {
-        text-align: center !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-}
-/* =========================================================
-   TOYS HERO VIDEO
-   ========================================================= */
-
-body.toys-page .page-hero {
-    position: relative;
-    overflow: hidden;
-
-    min-height: 360px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-}
-
-/* Background video */
-body.toys-page .page-hero .toys-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-
-    z-index: 0;
-}
-
-/* Dark overlay for readable text */
-body.toys-page .page-hero::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background: rgba(7, 26, 61, 0.42);
-
-    z-index: 1;
-}
-
-/* Text above video */
-body.toys-page .page-hero .hero-content {
-    position: relative !important;
-
-    z-index: 2;
-
-    width: 100% !important;
-    max-width: 640px !important;
-
-    margin: 0 auto !important;
-    padding: 0 !important;
-
-    text-align: center !important;
-
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-
-    transform: none !important;
-}
-
-body.toys-page .page-hero h1 {
-    margin: 0 0 12px !important;
-    text-align: center !important;
-}
-
-body.toys-page .page-hero p {
-    max-width: 520px;
-    margin: 0 auto !important;
-    text-align: center !important;
-}
- @media (max-width: 640px) {
-
-    body.toys-page .page-hero {
-        min-height: 280px;
-    }
-
-    body.toys-page .page-hero .hero-content {
-        width: 90% !important;
-        max-width: 600px !important;
-    }
-
-    body.toys-page .page-hero h1 {
-        font-size: 34px !important;
-    }
-
-    body.toys-page .page-hero p {
-        font-size: 15px !important;
-    }
-}
 /* ================================================================
-   VIMAL TOYS — PREMIUM PLAYFUL DESIGN
+   VIMAL TOYS PAGE
+   PREMIUM RESPONSIVE DESIGN
+   All Toys page styles are scoped under body.toys-page
    ================================================================ */
 
-/* ---------- Overall Toys Page ---------- */
+
+/* ================================================================
+   PAGE BACKGROUND
+   ================================================================ */
 
 body.toys-page {
-    background: #f8f7f3;
-    color: #172b4d;
+    background: #071a3d !important;
+    color: #ffffff !important;
 }
 
 
 /* ================================================================
-   HERO VIDEO
+   HERO
    ================================================================ */
 
 body.toys-page .page-hero {
     position: relative;
-    min-height: 390px;
+    min-height: 410px;
+    height: 410px;
     padding: 0 20px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    text-align: center;
     overflow: hidden;
     isolation: isolate;
 
     background: #071a3d;
 }
 
-/* Video */
+
+/* ---------- Hero Video ---------- */
 
 body.toys-page .page-hero .toys-video {
     position: absolute;
@@ -604,32 +47,38 @@ body.toys-page .page-hero .toys-video {
     height: 100%;
 
     object-fit: cover;
+    object-position: center;
 
     z-index: -2;
 }
 
-/* Beautiful dark-blue overlay */
+
+/* ---------- Hero Overlay ---------- */
 
 body.toys-page .page-hero::before {
     content: "";
+
     position: absolute;
     inset: 0;
 
     background:
         linear-gradient(
             135deg,
-            rgba(7, 26, 61, 0.82),
-            rgba(8, 55, 82, 0.62),
-            rgba(0, 180, 216, 0.25)
+            rgba(5, 25, 60, 0.88) 0%,
+            rgba(8, 65, 92, 0.70) 45%,
+            rgba(0, 180, 216, 0.42) 75%,
+            rgba(212, 175, 55, 0.25) 100%
         );
 
     z-index: -1;
 }
 
-/* Soft glow */
+
+/* ---------- Gold Glow ---------- */
 
 body.toys-page .page-hero::after {
     content: "";
+
     position: absolute;
 
     width: 420px;
@@ -640,7 +89,7 @@ body.toys-page .page-hero::after {
 
     border-radius: 50%;
 
-    background: rgba(212, 175, 55, 0.18);
+    background: rgba(255, 193, 7, 0.20);
 
     filter: blur(10px);
 
@@ -649,59 +98,68 @@ body.toys-page .page-hero::after {
 
 
 /* ================================================================
-   HERO TEXT
+   HERO CONTENT
    ================================================================ */
 
 body.toys-page .page-hero .hero-content {
-    position: relative !important;
-
-    width: 100% !important;
-    max-width: 720px !important;
-
-    margin: 0 auto !important;
-    padding: 20px !important;
-
-    text-align: center !important;
-
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-
-    transform: none !important;
+    position: relative;
 
     z-index: 2;
+
+    width: 100%;
+    max-width: 720px;
+
+    margin: 0 auto;
+    padding: 30px;
+
+    text-align: center;
+
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+
+    transform: none;
 }
+
+
+/* ---------- Hero Heading ---------- */
 
 body.toys-page .page-hero h1 {
-    margin: 0 0 16px !important;
+    width: 100%;
 
-    font-size: clamp(42px, 6vw, 68px);
+    margin: 0 0 16px;
 
+    font-size: clamp(44px, 6vw, 72px);
     font-weight: 700;
 
-    letter-spacing: -1px;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
 
-    color: #ffffff;
+    color: #ffffff !important;
 
-    text-align: center !important;
+    text-align: center;
 
     text-shadow:
-        0 3px 20px rgba(0, 0, 0, 0.35);
+        0 3px 25px rgba(0, 0, 0, 0.45),
+        0 0 25px rgba(0, 180, 216, 0.20);
 }
 
+
+/* ---------- Hero Paragraph ---------- */
+
 body.toys-page .page-hero p {
+    width: 100%;
     max-width: 620px;
 
-    margin: 0 auto !important;
+    margin: 0 auto;
 
     font-size: clamp(15px, 2vw, 19px);
-
     line-height: 1.65;
 
-    color: #eef8fc;
+    color: #e7f9ff !important;
 
-    text-align: center !important;
+    text-align: center;
 
     text-shadow:
         0 2px 10px rgba(0, 0, 0, 0.35);
@@ -713,94 +171,100 @@ body.toys-page .page-hero p {
    ================================================================ */
 
 body.toys-page .toys-search-bar {
-    max-width: 620px;
-
-    margin: -30px auto 42px;
-
-    padding: 0 20px;
-
     position: relative;
 
     z-index: 5;
+
+    width: 100%;
+    max-width: 680px;
+
+    margin: -30px auto 50px;
+    padding: 0 20px;
 }
 
-body.toys-page .toys-search-bar input {
-    width: 100%;
 
-    height: 58px;
+body.toys-page .toys-search-bar input {
+    box-sizing: border-box;
+
+    display: block;
+
+    width: 100%;
+    height: 62px;
 
     padding: 0 22px;
 
-    border: 1px solid #e1e5e8;
-
-    border-radius: 16px;
-
-    background: rgba(255,255,255,0.98);
-
-    color: #172b4d;
-
-    font-size: 15px;
-
-    font-family: 'Poppins', sans-serif;
-
-    box-shadow:
-        0 14px 35px rgba(7, 26, 61, 0.16);
+    border: 2px solid #e6edf2;
+    border-radius: 18px;
 
     outline: none;
 
+    background: #ffffff !important;
+    color: #172b4d !important;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+
+    box-shadow:
+        0 15px 40px rgba(7, 26, 61, 0.14),
+        0 0 0 4px rgba(0, 180, 216, 0.04);
+
     transition:
-        border-color .2s ease,
-        box-shadow .2s ease,
-        transform .2s ease;
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
+
+
+body.toys-page .toys-search-bar input::placeholder {
+    color: #6b7280;
+}
+
 
 body.toys-page .toys-search-bar input:focus {
     border-color: #00b4d8;
 
     box-shadow:
-        0 16px 38px rgba(0, 180, 216, 0.22);
+        0 15px 40px rgba(0, 180, 216, 0.20),
+        0 0 0 4px rgba(0, 180, 216, 0.08);
 
     transform: translateY(-1px);
 }
 
-body.toys-page .toys-search-bar input::placeholder {
-    color: #9aa6b2;
-}
-
 
 /* ================================================================
-   AGE SECTION
+   SHOP BY AGE
    ================================================================ */
 
 body.toys-page .age-jump {
+    width: 100%;
     max-width: 1180px;
 
-    margin: 0 auto 42px;
-
+    margin: 0 auto 46px;
     padding: 0 20px;
 }
+
 
 body.toys-page .age-jump-label {
     display: block;
 
-    margin-bottom: 14px;
+    margin: 0 0 15px;
+
+    color: #ffffff !important;
 
     font-size: 14px;
-
     font-weight: 700;
 
-    color: #17345c;
-
-    letter-spacing: .02em;
+    letter-spacing: 0.02em;
 }
+
 
 body.toys-page .age-jump-chips {
     display: flex;
-
     flex-wrap: wrap;
 
     gap: 10px;
 }
+
 
 body.toys-page .age-chip {
     display: inline-flex;
@@ -812,51 +276,60 @@ body.toys-page .age-chip {
 
     padding: 10px 17px;
 
-    border: 1px solid #e0e5e8;
-
+    border: 1px solid #d9e2ec;
     border-radius: 999px;
 
-    background: #ffffff;
-
-    color: #17345c;
+    background: #ffffff !important;
+    color: #071a3d !important;
 
     font-size: 13.5px;
-
     font-weight: 600;
 
     text-decoration: none;
-
     white-space: nowrap;
 
-    box-shadow: 0 3px 10px rgba(7,26,61,0.04);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12);
 
     transition:
-        .18s ease;
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-body.toys-page .age-chip:hover {
-    color: #ffffff;
 
-    background: #00a6c7;
+body.toys-page .age-chip:hover,
+body.toys-page .age-chip:focus-visible {
+    background: linear-gradient(
+        135deg,
+        #00b4d8,
+        #0077b6
+    ) !important;
 
-    border-color: #00a6c7;
+    color: #ffffff !important;
 
-    transform: translateY(-2px);
+    border-color: #00b4d8;
+
+    transform: translateY(-3px);
 
     box-shadow:
-        0 8px 18px rgba(0,166,199,0.22);
+        0 10px 22px rgba(0, 180, 216, 0.25);
+
+    outline: none;
 }
 
 
 /* ================================================================
-   CATEGORY CARDS
+   MAIN CATEGORY GRID
    ================================================================ */
 
 body.toys-page .toy-categories {
+    width: 100%;
     max-width: 1180px;
 
-    margin: 0 auto 24px;
-
+    margin: 0 auto 35px;
     padding: 0 20px;
 
     display: grid;
@@ -864,533 +337,73 @@ body.toys-page .toy-categories {
     grid-template-columns:
         repeat(auto-fill, minmax(200px, 1fr));
 
-    gap: 18px;
+    gap: 20px;
+
+    background: transparent;
 }
+
+
+/* ================================================================
+   CATEGORY CARDS
+   ================================================================ */
 
 body.toys-page a.toy-category {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 7px;
-
-    padding: 22px 20px 20px;
-
-    background: #ffffff;
-
-    border: 1px solid #e9ecef;
-
-    border-radius: 18px;
-
-    color: inherit;
-
-    text-decoration: none;
-
-    box-shadow:
-        0 5px 18px rgba(7,26,61,0.045);
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
-}
-
-body.toys-page a.toy-category:hover {
-    transform: translateY(-5px);
-
-    border-color: #b9e7ef;
-
-    box-shadow:
-        0 18px 35px rgba(7,26,61,0.11);
-}
-
-
-/* Category icons */
-
-body.toys-page .toy-category > span:first-child {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 52px;
-    height: 52px;
-
-    margin-bottom: 7px;
-
-    border-radius: 15px;
-
-    font-size: 25px;
-
-    background: #e9f8fb;
-}
-
-
-/* Beautiful icon variations */
-
-body.toys-page
-.toy-category:nth-child(3n+1)
-> span:first-child {
-    background: #e7f7fb;
-}
-
-body.toys-page
-.toy-category:nth-child(3n+2)
-> span:first-child {
-    background: #fff5dc;
-}
-
-body.toys-page
-.toy-category:nth-child(3n+3)
-> span:first-child {
-    background: #f0ecfb;
-}
-
-
-/* Category title */
-
-body.toys-page .toy-category h3 {
-    margin: 3px 0 0;
-
-    color: #102c50;
-
-    font-size: 16.5px;
-
-    font-weight: 700;
-}
-
-
-/* Category description */
-
-body.toys-page .toy-category p {
-    margin: 0;
-
-    color: #707b87;
-
-    font-size: 13.5px;
-
-    line-height: 1.5;
-}
-
-
-/* Age badge */
-
-body.toys-page .toy-category .age-badge {
-    margin-top: 9px;
-
-    padding: 5px 11px;
-
-    border-radius: 999px;
-
-    background: #fff4d8;
-
-    color: #8a6815;
-
-    font-size: 11.5px;
-
-    font-weight: 700;
-}
-
-
-/* ================================================================
-   INFO NOTE
-   ================================================================ */
-
-body.toys-page .toys-note {
-    max-width: 900px;
-
-    margin: 10px auto 45px;
-
-    padding: 16px 22px;
-
-    background: #fffdf6;
-
-    border: 1px solid #f0e3b9;
-
-    border-radius: 14px;
-
-    color: #68717c;
-
-    text-align: center;
-
-    font-size: 13.5px;
-
-    line-height: 1.6;
-
-    box-shadow:
-        0 5px 15px rgba(7,26,61,0.03);
-}
-
-
-/* ================================================================
-   CATEGORY DETAIL SECTIONS
-   ================================================================ */
-
-body.toys-page #toyGroups {
-    max-width: 1180px;
-
-    margin: 0 auto;
-
-    padding: 0 20px 30px;
-}
-
-body.toys-page .toy-group {
-    margin: 0 0 8px;
-
-    padding: 30px 0;
-
-    border-top: 1px solid #e7e9ea;
-}
-
-body.toys-page .toy-group:first-child {
-    border-top: none;
-}
-
-body.toys-page .toy-group-head {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    flex-wrap: wrap;
-}
-
-body.toys-page .toy-group-head h2 {
-    margin: 0;
-
-    color: #102c50;
-
-    font-size: 1.35rem;
-
-    font-weight: 700;
-}
-
-body.toys-page .toy-group-head .age-badge {
-    padding: 5px 11px;
-
-    border-radius: 999px;
-
-    background: #e7f7fb;
-
-    color: #08728f;
-
-    font-size: 11.5px;
-
-    font-weight: 700;
-}
-
-body.toys-page .toy-group-desc {
-    margin: 7px 0 17px;
-
-    color: #737d87;
-
-    font-size: 14px;
-}
-
-
-/* ================================================================
-   SUBCATEGORY CHIPS
-   ================================================================ */
-
-body.toys-page .subcat-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fill, minmax(180px, 1fr));
-
-    gap: 11px;
-}
-
-body.toys-page .subcat-chip {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 12px 14px;
-
-    border: 1px solid #e5e8ea;
-
-    border-radius: 12px;
-
-    background: #ffffff;
-
-    color: #24364d;
-
-    font-size: 13.5px;
-
-    font-weight: 600;
-
-    text-decoration: none;
-
-    transition:
-        .18s ease;
-}
-
-body.toys-page .subcat-chip:hover {
-    background: #effafd;
-
-    border-color: #00b4d8;
-
-    color: #086a84;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 8px 18px rgba(0,180,216,0.10);
-}
-
-
-/* ================================================================
-   MOBILE
-   ================================================================ */
-
-@media (max-width: 640px) {
-
-    body.toys-page .page-hero {
-        min-height: 300px;
-
-        padding: 0 18px;
-    }
-
-    body.toys-page .page-hero h1 {
-        font-size: 38px !important;
-
-        margin-bottom: 12px !important;
-    }
-
-    body.toys-page .page-hero p {
-        font-size: 15px;
-
-        line-height: 1.55;
-    }
-
-    body.toys-page .toys-search-bar {
-        margin-top: -22px;
-    }
-
-    body.toys-page .age-jump-chips {
-        flex-wrap: nowrap;
-
-        overflow-x: auto;
-
-        padding-bottom: 7px;
-
-        -webkit-overflow-scrolling: touch;
-    }
-
-    body.toys-page .age-jump-chips::-webkit-scrollbar {
-        display: none;
-    }
-
-    body.toys-page .toy-categories {
-        grid-template-columns: repeat(2, 1fr);
-
-        gap: 12px;
-    }
-
-    body.toys-page a.toy-category {
-        padding: 17px 14px;
-    }
-
-    body.toys-page .toy-category h3 {
-        font-size: 15px;
-    }
-
-    body.toys-page .toy-category p {
-        font-size: 12.5px;
-    }
-
-    body.toys-page .subcat-grid {
-        grid-template-columns: repeat(2, 1fr);
-
-        gap: 9px;
-    }
-}
-
-
-/* ================================================================
-   VERY SMALL PHONES
-   ================================================================ */
-
-@media (max-width: 380px) {
-
-    body.toys-page .page-hero {
-        min-height: 280px;
-    }
-
-    body.toys-page .toy-categories {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    body.toys-page .subcat-grid {
-        grid-template-columns: 1fr;
-    }
-}
-/* ================================================================
-   ✨ TOYS PAGE — ATTRACTIVE PREMIUM FINISH
-   Add at the VERY BOTTOM of toys.css
-   ================================================================ */
-
-body.toys-page {
-    background:
-        radial-gradient(circle at 5% 30%, rgba(0,180,216,0.05), transparent 25%),
-        radial-gradient(circle at 95% 65%, rgba(212,175,55,0.06), transparent 25%),
-        #f8f8f5;
-}
-
-
-/* ================================================================
-   HERO — MAKE IT BIGGER & MORE PREMIUM
-   ================================================================ */
-
-body.toys-page .page-hero {
-    min-height: 410px !important;
-    height: 410px !important;
-}
-
-/* Stronger cinematic overlay */
-
-body.toys-page .page-hero::before {
-    background:
-        linear-gradient(
-            180deg,
-            rgba(4,20,45,0.45) 0%,
-            rgba(4,20,45,0.30) 45%,
-            rgba(4,20,45,0.72) 100%
-        ) !important;
-}
-
-/* Hero text */
-
-body.toys-page .page-hero .hero-content {
-    padding: 30px !important;
-}
-
-body.toys-page .page-hero h1 {
-    font-size: clamp(44px, 6vw, 72px) !important;
-    letter-spacing: -1.5px !important;
-    margin-bottom: 16px !important;
-}
-
-
-/* ================================================================
-   SEARCH — FLOATING PREMIUM LOOK
-   ================================================================ */
-
-body.toys-page .toys-search-bar {
-    max-width: 680px !important;
-    margin: -30px auto 50px !important;
-}
-
-body.toys-page .toys-search-bar input {
-    height: 62px !important;
-
-    border: 2px solid rgba(255,255,255,0.9) !important;
-    border-radius: 18px !important;
-
-    box-shadow:
-        0 18px 45px rgba(7,26,61,0.18),
-        0 2px 5px rgba(7,26,61,0.05) !important;
-
-    font-size: 15px !important;
-}
-
-body.toys-page .toys-search-bar input:focus {
-    border-color: #00b4d8 !important;
-
-    box-shadow:
-        0 18px 45px rgba(0,180,216,0.20) !important;
-}
-
-
-/* ================================================================
-   AGE SECTION
-   ================================================================ */
-
-body.toys-page .age-jump {
-    margin-bottom: 46px !important;
-}
-
-body.toys-page .age-jump-label {
-    font-size: 14px !important;
-    color: #102c50 !important;
-    margin-bottom: 15px !important;
-}
-
-/* Chips */
-
-body.toys-page .age-chip {
-    background: #ffffff !important;
-
-    border: 1px solid #dfe5e8 !important;
-
-    box-shadow:
-        0 3px 10px rgba(7,26,61,0.04) !important;
-
-    transition:
-        transform .2s ease,
-        background .2s ease,
-        color .2s ease,
-        box-shadow .2s ease !important;
-}
-
-body.toys-page .age-chip:hover {
-    background: #00a9c7 !important;
-
-    color: #ffffff !important;
-
-    border-color: #00a9c7 !important;
-
-    transform: translateY(-3px) !important;
-
-    box-shadow:
-        0 9px 20px rgba(0,169,199,0.22) !important;
-}
-
-
-/* ================================================================
-   CATEGORY GRID
-   ================================================================ */
-
-body.toys-page .toy-categories {
-    gap: 20px !important;
-    margin-bottom: 35px !important;
-}
-
-
-/* Cards */
-
-body.toys-page a.toy-category {
-    min-height: 215px;
-
-    padding: 24px 20px 21px !important;
-
-    border-radius: 20px !important;
-
-    border: 1px solid #e7ebed !important;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff 0%,
-            #fcfdfd 100%
-        ) !important;
-
-    box-shadow:
-        0 6px 20px rgba(7,26,61,0.055) !important;
-
     position: relative;
 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-height: 215px;
+
+    padding: 24px 20px 21px;
+
     overflow: hidden;
+
+    background: #ffffff !important;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 20px;
+
+    color: #102c50 !important;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
 }
 
 
-/* Small decorative glow inside cards */
+/* ---------- Colourful Top Border ---------- */
+
+body.toys-page a.toy-category::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 4px;
+
+    background: linear-gradient(
+        90deg,
+        #00b4d8,
+        #48cae4,
+        #ffd166
+    );
+
+    opacity: 0.9;
+}
+
+
+/* ---------- Decorative Card Glow ---------- */
 
 body.toys-page a.toy-category::after {
     content: "";
@@ -1405,21 +418,24 @@ body.toys-page a.toy-category::after {
 
     border-radius: 50%;
 
-    background: rgba(0,180,216,0.07);
+    background: rgba(0, 180, 216, 0.07);
 
     pointer-events: none;
 }
 
 
-/* Card hover */
+/* ---------- Card Hover ---------- */
 
-body.toys-page a.toy-category:hover {
-    transform: translateY(-7px) !important;
+body.toys-page a.toy-category:hover,
+body.toys-page a.toy-category:focus-visible {
+    transform: translateY(-7px);
 
-    border-color: #b8e7ef !important;
+    border-color: #00b4d8;
 
     box-shadow:
-        0 20px 40px rgba(7,26,61,0.13) !important;
+        0 20px 40px rgba(0, 0, 0, 0.28);
+
+    outline: none;
 }
 
 
@@ -1428,88 +444,266 @@ body.toys-page a.toy-category:hover {
    ================================================================ */
 
 body.toys-page .toy-category > span:first-child {
-    width: 56px !important;
-    height: 56px !important;
+    position: relative;
+    z-index: 1;
 
-    border-radius: 17px !important;
+    display: flex;
 
-    font-size: 27px !important;
+    align-items: center;
+    justify-content: center;
 
-    margin-bottom: 9px !important;
+    width: 56px;
+    height: 56px;
+
+    margin-bottom: 9px;
+
+    border-radius: 17px;
+
+    font-size: 27px;
 
     box-shadow:
-        0 4px 10px rgba(7,26,61,0.05);
+        0 4px 10px rgba(7, 26, 61, 0.05);
+}
+
+
+/* ---------- Icon Colour Rotation ---------- */
+
+body.toys-page
+.toy-category:nth-child(3n + 1)
+> span:first-child {
+    background: linear-gradient(
+        135deg,
+        #e0f7ff,
+        #c8f1fa
+    );
+}
+
+
+body.toys-page
+.toy-category:nth-child(3n + 2)
+> span:first-child {
+    background: linear-gradient(
+        135deg,
+        #fff4d6,
+        #ffe7a8
+    );
+}
+
+
+body.toys-page
+.toy-category:nth-child(3n + 3)
+> span:first-child {
+    background: linear-gradient(
+        135deg,
+        #f0e9ff,
+        #e3d5ff
+    );
+}
+
+
+body.toys-page
+.toy-category:nth-child(4n)
+> span:first-child {
+    background: linear-gradient(
+        135deg,
+        #e0f8ee,
+        #c9f2df
+    );
 }
 
 
 /* ================================================================
-   CATEGORY TITLES
+   CATEGORY TEXT
    ================================================================ */
 
 body.toys-page .toy-category h3 {
-    font-size: 17px !important;
+    position: relative;
+    z-index: 1;
 
-    color: #102c50 !important;
+    margin: 3px 0 0;
 
-    margin-top: 3px !important;
+    color: #071a3d !important;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    line-height: 1.35;
 }
 
-body.toys-page .toy-category p {
-    color: #687582 !important;
 
-    line-height: 1.55 !important;
+body.toys-page .toy-category p {
+    position: relative;
+    z-index: 1;
+
+    margin: 0;
+
+    color: #364152 !important;
+
+    font-size: 13.5px;
+    font-weight: 500;
+
+    line-height: 1.55;
 }
 
 
 /* ================================================================
-   AGE BADGES
+   CATEGORY AGE BADGE
    ================================================================ */
 
 body.toys-page .toy-category .age-badge {
-    background: #fff5d9 !important;
+    position: relative;
+    z-index: 1;
 
-    color: #886716 !important;
+    margin-top: 9px;
 
-    border: 1px solid #f0dfaa;
+    padding: 5px 11px;
 
-    box-shadow:
-        0 2px 6px rgba(212,175,55,0.08);
+    border: 1px solid #f1d98a;
+    border-radius: 999px;
+
+    background: linear-gradient(
+        135deg,
+        #fff5d6,
+        #ffe9a8
+    ) !important;
+
+    color: #6b4f00 !important;
+
+    font-size: 11.5px;
+    font-weight: 700;
 }
 
 
 /* ================================================================
-   INFO NOTE
+   INFORMATION NOTE
    ================================================================ */
 
 body.toys-page .toys-note {
-    background:
-        linear-gradient(
-            135deg,
-            #fffdf7,
-            #ffffff
-        ) !important;
+    width: calc(100% - 40px);
+    max-width: 900px;
 
-    border: 1px solid #eee2bd !important;
+    box-sizing: border-box;
+
+    margin: 10px auto 45px;
+    padding: 16px 22px;
+
+    background: #ffffff !important;
+
+    border: 1px solid #dfe5ea;
+
+    border-radius: 14px;
+
+    color: #364152 !important;
+
+    text-align: center;
+
+    font-size: 13.5px;
+    line-height: 1.6;
 
     box-shadow:
-        0 7px 20px rgba(7,26,61,0.04) !important;
+        0 10px 25px rgba(0, 0, 0, 0.16);
 }
 
 
 /* ================================================================
-   CATEGORY GROUPS
+   CATEGORY DETAIL GROUPS
    ================================================================ */
 
-body.toys-page .toy-group {
-    padding: 34px 0 !important;
+body.toys-page #toyGroups {
+    width: 100%;
+    max-width: 1180px;
 
-    border-top: 1px solid #e4e8ea !important;
+    margin: 0 auto;
+
+    padding: 0 20px 30px;
 }
 
-body.toys-page .toy-group-head h2 {
-    font-size: 1.4rem !important;
 
-    color: #102c50 !important;
+body.toys-page .toy-group {
+    margin: 0 0 8px;
+
+    padding: 34px 0;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+body.toys-page .toy-group:first-child {
+    border-top: none;
+}
+
+
+/* ================================================================
+   GROUP HEADER
+   ================================================================ */
+
+body.toys-page .toy-group-head {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+
+body.toys-page .toy-group-head h2 {
+    margin: 0;
+
+    color: #ffffff !important;
+
+    font-size: 1.4rem;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+
+/* ---------- Group Age Badge ---------- */
+
+body.toys-page .toy-group-head .age-badge {
+    padding: 5px 11px;
+
+    border: 1px solid #b9eaf3;
+    border-radius: 999px;
+
+    background: #e7f7fb !important;
+
+    color: #08728f !important;
+
+    font-size: 11.5px;
+    font-weight: 700;
+}
+
+
+/* ---------- Group Description ---------- */
+
+body.toys-page .toy-group-desc {
+    margin: 7px 0 17px;
+
+    color: #e5edf5 !important;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+}
+
+
+/* ================================================================
+   SUBCATEGORY GRID
+   ================================================================ */
+
+body.toys-page .subcat-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(180px, 1fr));
+
+    gap: 11px;
+
+    background: transparent;
 }
 
 
@@ -1518,896 +712,174 @@ body.toys-page .toy-group-head h2 {
    ================================================================ */
 
 body.toys-page .subcat-chip {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
     min-height: 46px;
+
+    box-sizing: border-box;
+
+    padding: 12px 14px;
 
     background: #ffffff !important;
 
-    border: 1px solid #e5e9eb !important;
+    border: 1px solid #dfe5ea;
+    border-radius: 13px;
 
-    border-radius: 13px !important;
+    color: #1f2937 !important;
+
+    font-size: 13.5px;
+    font-weight: 600;
+
+    text-decoration: none;
 
     box-shadow:
-        0 3px 9px rgba(7,26,61,0.035);
+        0 5px 15px rgba(0, 0, 0, 0.12);
 
     transition:
-        transform .18s ease,
-        border-color .18s ease,
-        background .18s ease,
-        box-shadow .18s ease !important;
+        transform 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        box-shadow 0.18s ease;
 }
 
-body.toys-page .subcat-chip:hover {
+
+body.toys-page .subcat-chip:hover,
+body.toys-page .subcat-chip:focus-visible {
     background: #eefafd !important;
 
-    border-color: #00b4d8 !important;
+    border-color: #00b4d8;
 
     color: #086a84 !important;
 
-    transform: translateY(-3px) !important;
+    transform: translateY(-3px);
 
     box-shadow:
-        0 10px 22px rgba(0,180,216,0.10) !important;
+        0 10px 22px rgba(0, 180, 216, 0.28);
+
+    outline: none;
 }
 
 
-/* ================================================================
-   MOBILE
-   ================================================================ */
-
-@media (max-width: 640px) {
-
-    body.toys-page .page-hero {
-        min-height: 320px !important;
-        height: 320px !important;
-    }
-
-    body.toys-page .page-hero h1 {
-        font-size: 40px !important;
-    }
-
-    body.toys-page .page-hero p {
-        font-size: 15px !important;
-    }
-
-    body.toys-page .toys-search-bar {
-        margin: -25px auto 38px !important;
-    }
-
-    body.toys-page .toys-search-bar input {
-        height: 56px !important;
-    }
-
-    body.toys-page .toy-categories {
-        gap: 13px !important;
-    }
-
-    body.toys-page a.toy-category {
-        min-height: 205px;
-        padding: 18px 15px !important;
-        border-radius: 17px !important;
-    }
-
-    body.toys-page .toy-category > span:first-child {
-        width: 48px !important;
-        height: 48px !important;
-        font-size: 23px !important;
-    }
-}
-/* ================================================================
-   🎨 VIMAL TOYS — NEW PREMIUM COLOUR COMBINATION
-   APPEND ONLY — DO NOT DELETE ANYTHING ABOVE
-   ================================================================ */
-
-/* ---------- Main page background ---------- */
-
-body.toys-page {
-    background:
-        radial-gradient(circle at 8% 18%, rgba(0, 180, 216, 0.07), transparent 25%),
-        radial-gradient(circle at 92% 45%, rgba(255, 183, 77, 0.08), transparent 25%),
-        radial-gradient(circle at 15% 85%, rgba(155, 89, 182, 0.06), transparent 25%),
-        #f8fafc !important;
-    color: #172b4d !important;
-}
-
-
-/* ================================================================
-   🌈 HERO COLOUR
-   ================================================================ */
-
-body.toys-page .page-hero::before {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(5, 25, 60, 0.88) 0%,
-            rgba(8, 65, 92, 0.70) 45%,
-            rgba(0, 180, 216, 0.42) 75%,
-            rgba(212, 175, 55, 0.25) 100%
-        ) !important;
-}
-
-
-/* Gold glow on hero */
-
-body.toys-page .page-hero::after {
-    background: rgba(255, 193, 7, 0.20) !important;
-}
-
-
-/* Hero heading */
-
-body.toys-page .page-hero h1 {
-    color: #ffffff !important;
-    text-shadow:
-        0 3px 25px rgba(0,0,0,0.45),
-        0 0 25px rgba(0,180,216,0.20);
-}
-
-
-/* Hero paragraph */
-
-body.toys-page .page-hero p {
-    color: #e7f9ff !important;
-}
-
-
-/* ================================================================
-   🔎 SEARCH BAR
-   ================================================================ */
-
-body.toys-page .toys-search-bar input {
-    background: #ffffff !important;
-    border: 2px solid #e6edf2 !important;
-    color: #102c50 !important;
-    box-shadow:
-        0 15px 40px rgba(7,26,61,0.14),
-        0 0 0 4px rgba(0,180,216,0.04) !important;
-}
-
-body.toys-page .toys-search-bar input:focus {
-    border-color: #00b4d8 !important;
-    box-shadow:
-        0 15px 40px rgba(0,180,216,0.20),
-        0 0 0 4px rgba(0,180,216,0.08) !important;
-}
-
-
-/* ================================================================
-   🏷️ AGE CHIPS
-   ================================================================ */
-
-body.toys-page .age-chip {
-    background: #ffffff !important;
-    color: #17345c !important;
-    border: 1px solid #dbe5ec !important;
-    box-shadow: 0 4px 12px rgba(7,26,61,0.05) !important;
-}
-
-body.toys-page .age-chip:hover {
-    background: linear-gradient(135deg, #00b4d8, #0077b6) !important;
-    color: #ffffff !important;
-    border-color: #00b4d8 !important;
-    box-shadow: 0 10px 22px rgba(0,180,216,0.25) !important;
-}
-
-
-/* ================================================================
-   🧸 CATEGORY CARDS
-   ================================================================ */
-
-body.toys-page a.toy-category {
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff 0%,
-            #fbfdff 70%,
-            #f4fbfd 100%
-        ) !important;
-
-    border: 1px solid #e2eaf0 !important;
-
-    box-shadow:
-        0 8px 24px rgba(7,26,61,0.06) !important;
-}
-
-
-/* Colourful top border */
-
-body.toys-page a.toy-category::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(
-        90deg,
-        #00b4d8,
-        #48cae4,
-        #ffd166
-    );
-    opacity: 0.9;
-}
-
-
-/* Hover */
-
-body.toys-page a.toy-category:hover {
-    border-color: #9bddea !important;
-    box-shadow:
-        0 20px 42px rgba(7,26,61,0.13) !important;
-}
-
-
-/* ================================================================
-   🌈 COLOURFUL CATEGORY ICONS
-   ================================================================ */
-
-/* Kids */
-
-body.toys-page
-.toy-category:nth-child(3n+1)
-> span:first-child {
-    background: linear-gradient(135deg, #e0f7ff, #c8f1fa) !important;
-    color: #0077b6;
-}
-
-
-/* Baby */
-
-body.toys-page
-.toy-category:nth-child(3n+2)
-> span:first-child {
-    background: linear-gradient(135deg, #fff4d6, #ffe7a8) !important;
-}
-
-
-/* Third category */
-
-body.toys-page
-.toy-category:nth-child(3n+3)
-> span:first-child {
-    background: linear-gradient(135deg, #f0e9ff, #e3d5ff) !important;
-}
-
-
-/* Additional colour variation */
-
-body.toys-page
-.toy-category:nth-child(4n)
-> span:first-child {
-    background: linear-gradient(135deg, #e0f8ee, #c9f2df) !important;
-}
-
-
-/* ================================================================
-   ✨ CATEGORY TITLES
-   ================================================================ */
-
-body.toys-page .toy-category h3 {
-    color: #0b3157 !important;
-}
-
-
-/* Description */
-
-body.toys-page .toy-category p {
-    color: #667788 !important;
-}
-
-
-/* ================================================================
-   🟡 AGE BADGES
-   ================================================================ */
-
-body.toys-page .toy-category .age-badge {
-    background: linear-gradient(
-        135deg,
-        #fff5d6,
-        #ffe9a8
-    ) !important;
-
-    color: #765600 !important;
-
-    border: 1px solid #f1d98a !important;
-}
-
-
-/* ================================================================
-   💡 INFO NOTE
-   ================================================================ */
-
-body.toys-page .toys-note {
-    background:
-        linear-gradient(
-            135deg,
-            #fffdf5,
-            #ffffff
-        ) !important;
-
-    border: 1px solid #f0dfaa !important;
-
-    color: #596878 !important;
-
-    box-shadow:
-        0 8px 24px rgba(7,26,61,0.05) !important;
-}
-
-
-/* ================================================================
-   🎯 CATEGORY GROUP HEADINGS
-   ================================================================ */
-
-body.toys-page .toy-group {
-    border-top: 1px solid #e2e9ee !important;
-}
-
-body.toys-page .toy-group-head h2 {
-    color: #0b3157 !important;
-}
-
-
-/* Group age badge */
-
-body.toys-page .toy-group-head .age-badge {
-    background: #e1f7fc !important;
-    color: #06738f !important;
-    border: 1px solid #b9eaf3 !important;
-}
-
-
-/* ================================================================
-   🧩 SUBCATEGORY CHIPS
-   ================================================================ */
-
-body.toys-page .subcat-chip {
-    background: #ffffff !important;
-    color: #263b52 !important;
-    border: 1px solid #e1e8ed !important;
-
-    box-shadow:
-        0 4px 12px rgba(7,26,61,0.035) !important;
-}
-
-body.toys-page .subcat-chip:hover {
-    background:
-        linear-gradient(
-            135deg,
-            #effbfe,
-            #e3f8fc
-        ) !important;
-
-    border-color: #00b4d8 !important;
-
-    color: #006b85 !important;
-
-    box-shadow:
-        0 10px 24px rgba(0,180,216,0.14) !important;
-}
-
-
-/* ================================================================
-   🌟 SUBCATEGORY ICONS
-   ================================================================ */
+/* ---------- Subcategory Icon ---------- */
 
 body.toys-page .subcat-icon {
+    flex-shrink: 0;
+
+    font-size: 16px;
+
     filter: saturate(1.15);
 }
 
 
 /* ================================================================
-   📱 MOBILE — KEEP COLOURS CLEAN
+   HIDDEN SEARCH RESULTS
    ================================================================ */
 
-@media (max-width: 640px) {
-
-    body.toys-page a.toy-category {
-        box-shadow:
-            0 6px 18px rgba(7,26,61,0.06) !important;
-    }
-
-    body.toys-page .age-chip {
-        box-shadow:
-            0 3px 10px rgba(7,26,61,0.05) !important;
-    }
-
-    body.toys-page .subcat-chip {
-        box-shadow:
-            0 3px 9px rgba(7,26,61,0.04) !important;
-    }
-}
-/* ================================================================
-   💙 VIMAL TOYS — NAVY BLUE PAGE BACKGROUND
-   Keep cards WHITE
-   ================================================================ */
-
-/* ---------- ENTIRE TOYS PAGE ---------- */
-body.toys-page {
-    background: #071A3D !important;
-    color: #ffffff;
-}
-
-
-/* ---------- AGE SECTION ---------- */
-body.toys-page .age-jump {
-    background: transparent !important;
-}
-
-body.toys-page .age-jump-label {
-    color: #ffffff !important;
-}
-
-
-/* ---------- AGE CHIPS ---------- */
-body.toys-page .age-chip {
-    background: #ffffff !important;
-    color: #071A3D !important;
-    border: 1px solid #d9e2ec !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important;
-}
-
-body.toys-page .age-chip:hover {
-    background: #00B4D8 !important;
-    color: #ffffff !important;
-    border-color: #00B4D8 !important;
+body.toys-page .subcat-chip.is-hidden,
+body.toys-page .toy-category.is-hidden,
+body.toys-page .toy-group.is-hidden {
+    display: none !important;
 }
 
 
 /* ================================================================
-   🤍 WHITE CATEGORY CARDS
+   TOYS NAVBAR MEGA MENU
    ================================================================ */
 
-body.toys-page .toy-categories {
-    background: transparent !important;
+body.toys-page nav.navbar .dropdown {
+    position: relative !important;
 }
 
-body.toys-page a.toy-category {
-    background: #ffffff !important;
-    color: #071A3D !important;
-
-    border: 1px solid rgba(255,255,255,0.35) !important;
-
-    box-shadow:
-        0 10px 28px rgba(0,0,0,0.20) !important;
+/* Toys dropdown - hidden by default */
+.toys-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    z-index: 9999;
 }
 
-body.toys-page a.toy-category:hover {
-    transform: translateY(-7px) !important;
-
-    box-shadow:
-        0 20px 40px rgba(0,0,0,0.28) !important;
-
-    border-color: #00B4D8 !important;
-}
-
-
-/* ---------- CATEGORY TEXT ---------- */
-
-body.toys-page .toy-category h3 {
-    color: #071A3D !important;
-}
-
-body.toys-page .toy-category p {
-    color: #5d6b7a !important;
-}
-
-
-/* ---------- CATEGORY ICONS ---------- */
-
-body.toys-page .toy-category:nth-child(3n+1)
-> span:first-child {
-    background: #e6f8fc !important;
-}
-
-body.toys-page .toy-category:nth-child(3n+2)
-> span:first-child {
-    background: #fff3d4 !important;
-}
-
-body.toys-page .toy-category:nth-child(3n+3)
-> span:first-child {
-    background: #eeeafd !important;
-}
-
-
-/* ---------- AGE BADGES ---------- */
-
-body.toys-page .toy-category .age-badge {
-    background: #fff3d4 !important;
-    color: #806116 !important;
-    border: none !important;
-}
-
-
-/* ================================================================
-   📝 INFORMATION NOTE
-   ================================================================ */
-
-body.toys-page .toys-note {
-    background: #ffffff !important;
-    color: #536273 !important;
-
-    border: none !important;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,0.16) !important;
-}
-
-
-/* ================================================================
-   🔵 CATEGORY GROUP AREA
-   ================================================================ */
-
-body.toys-page #toyGroups {
-    background: transparent !important;
-}
-
-body.toys-page .toy-group {
-    border-top: 1px solid rgba(255,255,255,0.16) !important;
-}
-
-body.toys-page .toy-group-head h2 {
-    color: #ffffff !important;
-}
-
-body.toys-page .toy-group-desc {
-    color: #d4e1ec !important;
-}
-
-
-/* ---------- GROUP AGE BADGE ---------- */
-
-body.toys-page .toy-group-head .age-badge {
-    background: #dff7fc !important;
-    color: #056b83 !important;
-}
-
-
-/* ================================================================
-   🤍 WHITE SUBCATEGORY BOXES
-   ================================================================ */
-
-body.toys-page .subcat-grid {
-    background: transparent !important;
-}
-
-body.toys-page .subcat-chip {
-    background: #ffffff !important;
-    color: #17345c !important;
-
-    border: 1px solid #e4e9ee !important;
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,0.12) !important;
-}
-
-body.toys-page .subcat-chip:hover {
-    background: #00B4D8 !important;
-    color: #ffffff !important;
-    border-color: #00B4D8 !important;
-
-    transform: translateY(-3px) !important;
-
-    box-shadow:
-        0 10px 22px rgba(0,180,216,0.28) !important;
-}
-
-
-/* ================================================================
-   🔎 SEARCH BAR
-   ================================================================ */
-
-body.toys-page .toys-search-bar input {
-    background: #ffffff !important;
-    color: #071A3D !important;
-}
-
-
-/* ================================================================
-   📱 MOBILE
-   ================================================================ */
-
-@media (max-width: 640px) {
-
-    body.toys-page {
-        background: #071A3D !important;
-    }
-
-    body.toys-page .age-jump-label {
-        color: #ffffff !important;
-    }
-
-    body.toys-page .toy-group {
-        border-top-color: rgba(255,255,255,0.15) !important;
-    }
-}
-/* ================================================================
-   🖤 TOYS CARD TEXT — DARK & EASY TO READ
-   ================================================================ */
-
-/* Product/category description text */
-body.toys-page .toy-category p {
-    color: #364152 !important;
-    font-weight: 500 !important;
-}
-
-/* Category titles */
-body.toys-page .toy-category h3 {
-    color: #071A3D !important;
-    font-weight: 700 !important;
-}
-
-/* Age badge text */
-body.toys-page .toy-category .age-badge {
-    color: #6b4f00 !important;
-    font-weight: 700 !important;
-}
-
-/* Information/note text inside white box */
-body.toys-page .toys-note {
-    color: #364152 !important;
-}
-
-/* Subcategory description/text */
-body.toys-page .toy-group-desc {
-    color: #d9e4ee !important;
-}
-
-/* Subcategory white buttons */
-body.toys-page .subcat-chip {
-    color: #1f2937 !important;
-    font-weight: 600 !important;
-}
-
-/* Make any normal text inside white toy cards readable */
-body.toys-page .toy-category span,
-body.toys-page .toy-category div {
-    color: #364152;
-}
-/* =========================================================
-   🧸 TOYS NAVBAR MEGA MENU
-   ========================================================= */
-
-nav.navbar .dropdown .mega-menu {
-    min-width: 650px;
-}
-
-nav.navbar .dropdown .mega-menu .menu-column {
-    min-width: 180px;
-}
-
-nav.navbar .dropdown .mega-menu h4 {
-    color: #071A3D;
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-nav.navbar .dropdown .mega-menu a {
+/* Show ONLY after clicking */
+.toys-dropdown.show {
     display: block;
-    color: #24364d;
-    text-decoration: none;
-    padding: 7px 0;
-    font-size: 13.5px;
-    transition: all .18s ease;
 }
-
-nav.navbar .dropdown .mega-menu a:hover {
-    color: #00A9C7;
-    transform: translateX(3px);
-}
-
-nav.navbar .dropdown .mega-menu .view-all-toys {
-    margin-top: 12px;
-    padding: 9px 12px;
-    border-radius: 8px;
-    background: #071A3D;
-    color: #ffffff !important;
-    text-align: center;
-}
-
-nav.navbar .dropdown .mega-menu .view-all-toys:hover {
-    background: #00A9C7;
-    transform: none;
-}
-/* =========================================================
-   TOYS PAGE — NAVY BACKGROUND + WHITE PRODUCT/CATEGORY BOXES
-   ADD THIS AT THE VERY BOTTOM OF toys.css
-   ========================================================= */
-
-/* ---------- Main Toys background ---------- */
-
-body.toys-page {
-    background: #071a3d !important;
-    color: #ffffff !important;
-}
-
-/* ---------- Category/detail section text ---------- */
-
-body.toys-page .age-jump-label {
-    color: #ffffff !important;
-}
-
-body.toys-page .toy-group-head h2 {
-    color: #ffffff !important;
-}
-
-body.toys-page .toy-group-desc {
-    color: #e5edf5 !important;
-}
-
-/* ---------- Age/category pills ---------- */
-
-body.toys-page .age-chip {
-    background: #ffffff !important;
-    color: #102c50 !important;
-    border: 1px solid #dce5ed !important;
-}
-
-body.toys-page .age-chip:hover {
-    background: #00b4d8 !important;
-    color: #ffffff !important;
-}
-
-/* ---------- Main category cards ---------- */
-
-body.toys-page a.toy-category {
-    background: #ffffff !important;
-    color: #102c50 !important;
-}
-
-/* Category titles */
-body.toys-page .toy-category h3 {
-    color: #102c50 !important;
-}
-
-/* Category descriptions — DARK enough to read */
-body.toys-page .toy-category p {
-    color: #4b5563 !important;
-}
-
-/* Age badge */
-body.toys-page .toy-category .age-badge {
-    background: #fff3d1 !important;
-    color: #795b12 !important;
-}
-
-/* ---------- Subcategory boxes ---------- */
-
-body.toys-page .subcat-chip {
-    background: #ffffff !important;
-    color: #172b4d !important;
-    border: 1px solid #dfe5ea !important;
-}
-
-body.toys-page .subcat-chip:hover {
-    background: #eefafd !important;
-    color: #086a84 !important;
-    border-color: #00b4d8 !important;
-}
-
-/* ---------- Section divider ---------- */
-
-body.toys-page .toy-group {
-    border-top: 1px solid rgba(255,255,255,0.18) !important;
-}
-
-/* ---------- Group age badge ---------- */
-
-body.toys-page .toy-group-head .age-badge {
-    background: #e7f7fb !important;
-    color: #08728f !important;
-}
-
-/* ---------- Information note ---------- */
-
-body.toys-page .toys-note {
-    background: #ffffff !important;
-    color: #4b5563 !important;
-    border: 1px solid #dfe5ea !important;
-}
-
-/* =========================================================
-   TOYS NAVBAR DROPDOWN
-   Make dropdown readable on navy
-   ========================================================= */
-
-body.toys-page .mega-menu {
-    background: #071a3d !important;
-}
-
-body.toys-page .mega-menu h4 {
-    color: #ffffff !important;
-}
-
-body.toys-page .mega-menu a {
-    color: #eaf2f8 !important;
-}
-
-body.toys-page .mega-menu a:hover {
-    color: #00b4d8 !important;
-}
-
-/* View All Toys */
-body.toys-page .mega-menu a:hover {
-    background: rgba(255,255,255,0.06) !important;
-}
-
-/* =========================================================
-   SEARCH BAR
-   ========================================================= */
-
-body.toys-page .toys-search-bar input {
-    background: #ffffff !important;
-    color: #172b4d !important;
-}
-
-body.toys-page .toys-search-bar input::placeholder {
-    color: #6b7280 !important;
-}
-/* =========================================================
-   VIMAL TOYS — NAVBAR MEGA MENU
-   EXACT DARK NAVY STYLE
-   ========================================================= */
-
-/* Main dropdown box */
-nav.navbar .dropdown .mega-menu {
+body.toys-page nav.navbar .dropdown .mega-menu {
     position: absolute !important;
 
     top: 100% !important;
     left: 50% !important;
+
     transform: translateX(-50%) !important;
 
     width: 600px !important;
     min-width: 600px !important;
     max-width: 600px !important;
 
+    box-sizing: border-box;
+
+    display: grid !important;
+
+    grid-template-columns:
+        1fr 1.15fr 1fr;
+
+    column-gap: 24px;
+
     padding: 18px 20px 20px !important;
 
     background: #12294f !important;
 
     border: none !important;
+
     border-radius: 0 0 10px 10px !important;
 
     box-shadow:
-        0 12px 28px rgba(0, 0, 0, 0.28) !important;
+        0 12px 28px rgba(0, 0, 0, 0.28);
 
     z-index: 9999 !important;
 }
 
 
-/* ---------------------------------------------------------
-   3 COLUMN LAYOUT
-   --------------------------------------------------------- */
+/* ================================================================
+   MEGA MENU COLUMNS
+   ================================================================ */
 
-nav.navbar .dropdown .mega-menu {
-    display: grid !important;
-    grid-template-columns: 1fr 1.15fr 1fr !important;
-
-    column-gap: 24px !important;
-}
-
-
-/* Each column */
-nav.navbar .dropdown .mega-menu .menu-column {
+body.toys-page nav.navbar
+.dropdown
+.mega-menu
+.menu-column {
     min-width: 0 !important;
+
     padding: 0 !important;
 }
 
 
-/* Vertical separator between columns */
-nav.navbar .dropdown .mega-menu .menu-column:not(:last-child) {
-    border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
+body.toys-page nav.navbar
+.dropdown
+.mega-menu
+.menu-column:not(:last-child) {
     padding-right: 22px !important;
+
+    border-right:
+        1px solid rgba(255, 255, 255, 0.16) !important;
 }
 
 
-/* ---------------------------------------------------------
-   GOLD COLUMN HEADINGS
-   --------------------------------------------------------- */
+/* ================================================================
+   MEGA MENU HEADINGS
+   ================================================================ */
 
-nav.navbar .dropdown .mega-menu h4 {
+body.toys-page nav.navbar
+.dropdown
+.mega-menu
+h4 {
     margin: 0 0 10px !important;
-
     padding-bottom: 10px !important;
 
     color: #ffd166 !important;
@@ -2415,67 +887,82 @@ nav.navbar .dropdown .mega-menu h4 {
     font-size: 15px !important;
     font-weight: 700 !important;
 
-    line-height: 1.2 !important;
+    line-height: 1.2;
 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-bottom:
+        1px solid rgba(255, 255, 255, 0.16);
 }
 
 
-/* ---------------------------------------------------------
-   MENU LINKS
-   --------------------------------------------------------- */
+/* ================================================================
+   MEGA MENU LINKS
+   ================================================================ */
 
-nav.navbar .dropdown .mega-menu a {
+body.toys-page nav.navbar
+.dropdown
+.mega-menu
+a {
     display: block !important;
 
-    padding: 7px 0 !important;
-
     margin: 0 !important;
-
-    color: #f4f7fb !important;
+    padding: 7px 0 !important;
 
     background: transparent !important;
 
-    text-decoration: none !important;
+    color: #f4f7fb !important;
 
     font-size: 13.5px !important;
     font-weight: 500 !important;
 
-    line-height: 1.35 !important;
+    line-height: 1.35;
 
-    white-space: nowrap !important;
+    text-decoration: none !important;
+
+    white-space: nowrap;
 
     transition:
         color 0.18s ease,
-        transform 0.18s ease !important;
+        transform 0.18s ease;
 }
 
 
-/* Link hover */
-nav.navbar .dropdown .mega-menu a:hover {
-    color: #ffd166 !important;
-
+body.toys-page nav.navbar
+.dropdown
+.mega-menu
+a:hover {
     background: transparent !important;
 
-    transform: translateX(3px) !important;
+    color: #ffd166 !important;
+
+    transform: translateX(3px);
 }
 
 
-/* ---------------------------------------------------------
-   EMOJIS / ICONS
-   --------------------------------------------------------- */
+/* ================================================================
+   MEGA MENU ICONS
+   ================================================================ */
 
-nav.navbar .dropdown .mega-menu a span,
-nav.navbar .dropdown .mega-menu .menu-icon {
+body.toys-page nav.navbar
+.dropdown
+.mega-menu
+a span,
+
+body.toys-page nav.navbar
+.dropdown
+.mega-menu
+.menu-icon {
     margin-right: 6px;
 }
 
 
-/* ---------------------------------------------------------
+/* ================================================================
    VIEW ALL TOYS
-   --------------------------------------------------------- */
+   ================================================================ */
 
-nav.navbar .dropdown .mega-menu .view-all-toys {
+body.toys-page nav.navbar
+.dropdown
+.mega-menu
+.view-all-toys {
     display: block !important;
 
     margin-top: 8px !important;
@@ -2493,72 +980,343 @@ nav.navbar .dropdown .mega-menu .view-all-toys {
 }
 
 
-/* View all hover */
-nav.navbar .dropdown .mega-menu .view-all-toys:hover {
+body.toys-page nav.navbar
+.dropdown
+.mega-menu
+.view-all-toys:hover {
     background: transparent !important;
 
     color: #ffd166 !important;
 
-    transform: translateX(3px) !important;
+    transform: translateX(3px);
 }
 
 
-/* ---------------------------------------------------------
-   MAKE DROPDOWN SIT BELOW NAVBAR
-   --------------------------------------------------------- */
-
-nav.navbar .dropdown {
-    position: relative !important;
-}
-
-
-/* ---------------------------------------------------------
-   MOBILE
-   --------------------------------------------------------- */
+/* ================================================================
+   MOBILE — TABLET
+   ================================================================ */
 
 @media (max-width: 900px) {
 
-    nav.navbar .dropdown .mega-menu {
+    /* ---------- Category Grid ---------- */
+
+    body.toys-page .toy-categories {
+        grid-template-columns:
+            repeat(auto-fill, minmax(160px, 1fr));
+
+        gap: 14px;
+    }
+
+
+    /* ---------- Subcategory Grid ---------- */
+
+    body.toys-page .subcat-grid {
+        grid-template-columns:
+            repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+
+    /* ---------- Mega Menu ---------- */
+
+    body.toys-page nav.navbar
+    .dropdown
+    .mega-menu {
         width: 92vw !important;
         min-width: 0 !important;
         max-width: 92vw !important;
 
-        grid-template-columns: 1fr 1fr !important;
+        grid-template-columns: 1fr 1fr;
 
-        column-gap: 18px !important;
-        row-gap: 18px !important;
+        column-gap: 18px;
+        row-gap: 18px;
     }
 
-    nav.navbar .dropdown .mega-menu .menu-column {
+
+    body.toys-page nav.navbar
+    .dropdown
+    .mega-menu
+    .menu-column {
         border-right: none !important;
+
         padding-right: 0 !important;
     }
 }
 
 
-@media (max-width: 600px) {
+/* ================================================================
+   MOBILE — PHONES
+   ================================================================ */
 
-    nav.navbar .dropdown .mega-menu {
+@media (max-width: 640px) {
+
+    /* ---------- Hero ---------- */
+
+    body.toys-page .page-hero {
+        min-height: 320px;
+        height: 320px;
+
+        padding: 0 18px;
+    }
+
+
+    body.toys-page .page-hero .hero-content {
+        width: 100%;
+        max-width: 100%;
+
+        padding: 0 10px;
+    }
+
+
+    body.toys-page .page-hero h1 {
+        font-size: 40px !important;
+
+        margin-bottom: 12px !important;
+    }
+
+
+    body.toys-page .page-hero p {
+        font-size: 15px;
+
+        line-height: 1.55;
+    }
+
+
+    /* ---------- Search ---------- */
+
+    body.toys-page .toys-search-bar {
+        margin: -25px auto 38px;
+
+        padding: 0 18px;
+    }
+
+
+    body.toys-page .toys-search-bar input {
+        height: 56px;
+
+        padding: 0 18px;
+
+        border-radius: 16px;
+    }
+
+
+    /* ---------- Age Chips ---------- */
+
+    body.toys-page .age-jump {
+        margin-bottom: 38px;
+
+        padding: 0 18px;
+    }
+
+
+    body.toys-page .age-jump-chips {
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        padding-bottom: 7px;
+
+        -webkit-overflow-scrolling: touch;
+
+        scrollbar-width: none;
+    }
+
+
+    body.toys-page .age-jump-chips::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    body.toys-page .age-chip {
+        flex-shrink: 0;
+    }
+
+
+    /* ---------- Category Cards ---------- */
+
+    body.toys-page .toy-categories {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 13px;
+
+        padding: 0 18px;
+    }
+
+
+    body.toys-page a.toy-category {
+        min-height: 205px;
+
+        padding: 18px 15px;
+
+        border-radius: 17px;
+    }
+
+
+    body.toys-page .toy-category > span:first-child {
+        width: 48px;
+        height: 48px;
+
+        font-size: 23px;
+
+        border-radius: 14px;
+    }
+
+
+    body.toys-page .toy-category h3 {
+        font-size: 15px;
+    }
+
+
+    body.toys-page .toy-category p {
+        font-size: 12.5px;
+    }
+
+
+    /* ---------- Information Note ---------- */
+
+    body.toys-page .toys-note {
+        width: calc(100% - 36px);
+
+        padding: 14px 16px;
+
+        font-size: 12.5px;
+    }
+
+
+    /* ---------- Detail Groups ---------- */
+
+    body.toys-page #toyGroups {
+        padding: 0 18px 25px;
+    }
+
+
+    body.toys-page .toy-group {
+        padding: 28px 0;
+    }
+
+
+    body.toys-page .toy-group-head h2 {
+        font-size: 1.1rem;
+    }
+
+
+    body.toys-page .toy-group-desc {
+        font-size: 13px;
+    }
+
+
+    /* ---------- Subcategory Grid ---------- */
+
+    body.toys-page .subcat-grid {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 9px;
+    }
+
+
+    body.toys-page .subcat-chip {
+        min-height: 44px;
+
+        padding: 10px 11px;
+
+        font-size: 12.5px;
+    }
+
+
+    /* ---------- Mega Menu ---------- */
+
+    body.toys-page nav.navbar
+    .dropdown
+    .mega-menu {
         width: calc(100vw - 20px) !important;
         max-width: calc(100vw - 20px) !important;
 
-        grid-template-columns: 1fr !important;
+        grid-template-columns: 1fr;
 
-        max-height: 70vh !important;
-        overflow-y: auto !important;
+        max-height: 70vh;
+
+        overflow-y: auto;
 
         padding: 16px !important;
+
+        border-radius: 0 0 10px 10px !important;
     }
 
-    nav.navbar .dropdown .mega-menu .menu-column {
+
+    body.toys-page nav.navbar
+    .dropdown
+    .mega-menu
+    .menu-column {
         border-right: none !important;
     }
 
-    nav.navbar .dropdown .mega-menu h4 {
+
+    body.toys-page nav.navbar
+    .dropdown
+    .mega-menu
+    h4 {
         font-size: 14px !important;
     }
 
-    nav.navbar .dropdown .mega-menu a {
+
+    body.toys-page nav.navbar
+    .dropdown
+    .mega-menu
+    a {
         font-size: 13px !important;
+    }
+}
+
+
+/* ================================================================
+   VERY SMALL PHONES
+   ================================================================ */
+
+@media (max-width: 380px) {
+
+    body.toys-page .page-hero {
+        min-height: 280px;
+        height: 280px;
+    }
+
+
+    body.toys-page .page-hero h1 {
+        font-size: 34px !important;
+    }
+
+
+    body.toys-page .toy-categories {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 10px;
+
+        padding: 0 14px;
+    }
+
+
+    body.toys-page a.toy-category {
+        min-height: 195px;
+
+        padding: 16px 12px;
+    }
+
+
+    body.toys-page .subcat-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ================================================================
+   ACCESSIBILITY — REDUCED MOTION
+   ================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    body.toys-page a.toy-category,
+    body.toys-page .subcat-chip,
+    body.toys-page .age-chip,
+    body.toys-page .toys-search-bar input,
+    body.toys-page nav.navbar .dropdown .mega-menu a {
+        transition: none !important;
     }
 }
