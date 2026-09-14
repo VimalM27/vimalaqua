@@ -404,3 +404,68 @@ body.toys-page .toy-group.is-hidden{
         text-align: center;
     }
 }
+/* =========================================================
+   TOYS HERO — FORCE TEXT EXACTLY CENTER
+   ========================================================= */
+
+body.toys-page .page-hero {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+body.toys-page .page-hero .hero-content {
+    position: static !important;
+
+    width: 100% !important;
+    max-width: 640px !important;
+
+    margin: 0 auto !important;
+    padding: 0 !important;
+
+    text-align: center !important;
+
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+
+    transform: none !important;
+}
+
+body.toys-page .page-hero h1 {
+    width: 100% !important;
+    margin: 0 0 12px !important;
+    text-align: center !important;
+}
+
+body.toys-page .page-hero p {
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+}
+@media (max-width: 640px) {
+
+    body.toys-page .page-hero {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    body.toys-page .page-hero .hero-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 10px !important;
+        text-align: center !important;
+    }
+
+    body.toys-page .page-hero h1,
+    body.toys-page .page-hero p {
+        text-align: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
