@@ -2344,3 +2344,221 @@ body.toys-page .toys-search-bar input {
 body.toys-page .toys-search-bar input::placeholder {
     color: #6b7280 !important;
 }
+/* =========================================================
+   VIMAL TOYS — NAVBAR MEGA MENU
+   EXACT DARK NAVY STYLE
+   ========================================================= */
+
+/* Main dropdown box */
+nav.navbar .dropdown .mega-menu {
+    position: absolute !important;
+
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+
+    width: 600px !important;
+    min-width: 600px !important;
+    max-width: 600px !important;
+
+    padding: 18px 20px 20px !important;
+
+    background: #12294f !important;
+
+    border: none !important;
+    border-radius: 0 0 10px 10px !important;
+
+    box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.28) !important;
+
+    z-index: 9999 !important;
+}
+
+
+/* ---------------------------------------------------------
+   3 COLUMN LAYOUT
+   --------------------------------------------------------- */
+
+nav.navbar .dropdown .mega-menu {
+    display: grid !important;
+    grid-template-columns: 1fr 1.15fr 1fr !important;
+
+    column-gap: 24px !important;
+}
+
+
+/* Each column */
+nav.navbar .dropdown .mega-menu .menu-column {
+    min-width: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* Vertical separator between columns */
+nav.navbar .dropdown .mega-menu .menu-column:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
+    padding-right: 22px !important;
+}
+
+
+/* ---------------------------------------------------------
+   GOLD COLUMN HEADINGS
+   --------------------------------------------------------- */
+
+nav.navbar .dropdown .mega-menu h4 {
+    margin: 0 0 10px !important;
+
+    padding-bottom: 10px !important;
+
+    color: #ffd166 !important;
+
+    font-size: 15px !important;
+    font-weight: 700 !important;
+
+    line-height: 1.2 !important;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+
+/* ---------------------------------------------------------
+   MENU LINKS
+   --------------------------------------------------------- */
+
+nav.navbar .dropdown .mega-menu a {
+    display: block !important;
+
+    padding: 7px 0 !important;
+
+    margin: 0 !important;
+
+    color: #f4f7fb !important;
+
+    background: transparent !important;
+
+    text-decoration: none !important;
+
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+
+    line-height: 1.35 !important;
+
+    white-space: nowrap !important;
+
+    transition:
+        color 0.18s ease,
+        transform 0.18s ease !important;
+}
+
+
+/* Link hover */
+nav.navbar .dropdown .mega-menu a:hover {
+    color: #ffd166 !important;
+
+    background: transparent !important;
+
+    transform: translateX(3px) !important;
+}
+
+
+/* ---------------------------------------------------------
+   EMOJIS / ICONS
+   --------------------------------------------------------- */
+
+nav.navbar .dropdown .mega-menu a span,
+nav.navbar .dropdown .mega-menu .menu-icon {
+    margin-right: 6px;
+}
+
+
+/* ---------------------------------------------------------
+   VIEW ALL TOYS
+   --------------------------------------------------------- */
+
+nav.navbar .dropdown .mega-menu .view-all-toys {
+    display: block !important;
+
+    margin-top: 8px !important;
+    padding: 7px 0 !important;
+
+    background: transparent !important;
+
+    color: #ffffff !important;
+
+    border-radius: 0 !important;
+
+    text-align: left !important;
+
+    font-weight: 600 !important;
+}
+
+
+/* View all hover */
+nav.navbar .dropdown .mega-menu .view-all-toys:hover {
+    background: transparent !important;
+
+    color: #ffd166 !important;
+
+    transform: translateX(3px) !important;
+}
+
+
+/* ---------------------------------------------------------
+   MAKE DROPDOWN SIT BELOW NAVBAR
+   --------------------------------------------------------- */
+
+nav.navbar .dropdown {
+    position: relative !important;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    nav.navbar .dropdown .mega-menu {
+        width: 92vw !important;
+        min-width: 0 !important;
+        max-width: 92vw !important;
+
+        grid-template-columns: 1fr 1fr !important;
+
+        column-gap: 18px !important;
+        row-gap: 18px !important;
+    }
+
+    nav.navbar .dropdown .mega-menu .menu-column {
+        border-right: none !important;
+        padding-right: 0 !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    nav.navbar .dropdown .mega-menu {
+        width: calc(100vw - 20px) !important;
+        max-width: calc(100vw - 20px) !important;
+
+        grid-template-columns: 1fr !important;
+
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+
+        padding: 16px !important;
+    }
+
+    nav.navbar .dropdown .mega-menu .menu-column {
+        border-right: none !important;
+    }
+
+    nav.navbar .dropdown .mega-menu h4 {
+        font-size: 14px !important;
+    }
+
+    nav.navbar .dropdown .mega-menu a {
+        font-size: 13px !important;
+    }
+}
