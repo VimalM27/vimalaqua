@@ -145,7 +145,6 @@ function applyUnifiedNavbar() {
     `;
 }
 
-alert("NEW NAVBAR JS IS RUNNING");
 applyUnifiedNavbar();
 
 // ================= SEARCH =================
