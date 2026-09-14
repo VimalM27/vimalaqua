@@ -1915,3 +1915,208 @@ body.toys-page .subcat-icon {
             0 3px 9px rgba(7,26,61,0.04) !important;
     }
 }
+/* ================================================================
+   💙 VIMAL TOYS — NAVY BLUE PAGE BACKGROUND
+   Keep cards WHITE
+   ================================================================ */
+
+/* ---------- ENTIRE TOYS PAGE ---------- */
+body.toys-page {
+    background: #071A3D !important;
+    color: #ffffff;
+}
+
+
+/* ---------- AGE SECTION ---------- */
+body.toys-page .age-jump {
+    background: transparent !important;
+}
+
+body.toys-page .age-jump-label {
+    color: #ffffff !important;
+}
+
+
+/* ---------- AGE CHIPS ---------- */
+body.toys-page .age-chip {
+    background: #ffffff !important;
+    color: #071A3D !important;
+    border: 1px solid #d9e2ec !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12) !important;
+}
+
+body.toys-page .age-chip:hover {
+    background: #00B4D8 !important;
+    color: #ffffff !important;
+    border-color: #00B4D8 !important;
+}
+
+
+/* ================================================================
+   🤍 WHITE CATEGORY CARDS
+   ================================================================ */
+
+body.toys-page .toy-categories {
+    background: transparent !important;
+}
+
+body.toys-page a.toy-category {
+    background: #ffffff !important;
+    color: #071A3D !important;
+
+    border: 1px solid rgba(255,255,255,0.35) !important;
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,0.20) !important;
+}
+
+body.toys-page a.toy-category:hover {
+    transform: translateY(-7px) !important;
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.28) !important;
+
+    border-color: #00B4D8 !important;
+}
+
+
+/* ---------- CATEGORY TEXT ---------- */
+
+body.toys-page .toy-category h3 {
+    color: #071A3D !important;
+}
+
+body.toys-page .toy-category p {
+    color: #5d6b7a !important;
+}
+
+
+/* ---------- CATEGORY ICONS ---------- */
+
+body.toys-page .toy-category:nth-child(3n+1)
+> span:first-child {
+    background: #e6f8fc !important;
+}
+
+body.toys-page .toy-category:nth-child(3n+2)
+> span:first-child {
+    background: #fff3d4 !important;
+}
+
+body.toys-page .toy-category:nth-child(3n+3)
+> span:first-child {
+    background: #eeeafd !important;
+}
+
+
+/* ---------- AGE BADGES ---------- */
+
+body.toys-page .toy-category .age-badge {
+    background: #fff3d4 !important;
+    color: #806116 !important;
+    border: none !important;
+}
+
+
+/* ================================================================
+   📝 INFORMATION NOTE
+   ================================================================ */
+
+body.toys-page .toys-note {
+    background: #ffffff !important;
+    color: #536273 !important;
+
+    border: none !important;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.16) !important;
+}
+
+
+/* ================================================================
+   🔵 CATEGORY GROUP AREA
+   ================================================================ */
+
+body.toys-page #toyGroups {
+    background: transparent !important;
+}
+
+body.toys-page .toy-group {
+    border-top: 1px solid rgba(255,255,255,0.16) !important;
+}
+
+body.toys-page .toy-group-head h2 {
+    color: #ffffff !important;
+}
+
+body.toys-page .toy-group-desc {
+    color: #d4e1ec !important;
+}
+
+
+/* ---------- GROUP AGE BADGE ---------- */
+
+body.toys-page .toy-group-head .age-badge {
+    background: #dff7fc !important;
+    color: #056b83 !important;
+}
+
+
+/* ================================================================
+   🤍 WHITE SUBCATEGORY BOXES
+   ================================================================ */
+
+body.toys-page .subcat-grid {
+    background: transparent !important;
+}
+
+body.toys-page .subcat-chip {
+    background: #ffffff !important;
+    color: #17345c !important;
+
+    border: 1px solid #e4e9ee !important;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.12) !important;
+}
+
+body.toys-page .subcat-chip:hover {
+    background: #00B4D8 !important;
+    color: #ffffff !important;
+    border-color: #00B4D8 !important;
+
+    transform: translateY(-3px) !important;
+
+    box-shadow:
+        0 10px 22px rgba(0,180,216,0.28) !important;
+}
+
+
+/* ================================================================
+   🔎 SEARCH BAR
+   ================================================================ */
+
+body.toys-page .toys-search-bar input {
+    background: #ffffff !important;
+    color: #071A3D !important;
+}
+
+
+/* ================================================================
+   📱 MOBILE
+   ================================================================ */
+
+@media (max-width: 640px) {
+
+    body.toys-page {
+        background: #071A3D !important;
+    }
+
+    body.toys-page .age-jump-label {
+        color: #ffffff !important;
+    }
+
+    body.toys-page .toy-group {
+        border-top-color: rgba(255,255,255,0.15) !important;
+    }
+}
