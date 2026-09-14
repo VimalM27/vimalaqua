@@ -469,3 +469,97 @@ body.toys-page .page-hero p {
         margin-right: auto !important;
     }
 }
+/* =========================================================
+   TOYS HERO VIDEO
+   ========================================================= */
+
+body.toys-page .page-hero {
+    position: relative;
+    overflow: hidden;
+
+    min-height: 360px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+/* Background video */
+body.toys-page .page-hero .toys-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 0;
+}
+
+/* Dark overlay for readable text */
+body.toys-page .page-hero::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(7, 26, 61, 0.42);
+
+    z-index: 1;
+}
+
+/* Text above video */
+body.toys-page .page-hero .hero-content {
+    position: relative !important;
+
+    z-index: 2;
+
+    width: 100% !important;
+    max-width: 640px !important;
+
+    margin: 0 auto !important;
+    padding: 0 !important;
+
+    text-align: center !important;
+
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+
+    transform: none !important;
+}
+
+body.toys-page .page-hero h1 {
+    margin: 0 0 12px !important;
+    text-align: center !important;
+}
+
+body.toys-page .page-hero p {
+    max-width: 520px;
+    margin: 0 auto !important;
+    text-align: center !important;
+}
+ @media (max-width: 640px) {
+
+    body.toys-page .page-hero {
+        min-height: 280px;
+    }
+
+    body.toys-page .page-hero .hero-content {
+        width: 90% !important;
+        max-width: 600px !important;
+    }
+
+    body.toys-page .page-hero h1 {
+        font-size: 34px !important;
+    }
+
+    body.toys-page .page-hero p {
+        font-size: 15px !important;
+    }
+}
