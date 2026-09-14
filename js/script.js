@@ -675,3 +675,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Run on every page load
 document.addEventListener('DOMContentLoaded', updateCartBadge);
+// ================= SCREENSHOT / COPY PROTECTION =================
+
+// Disable right-click
+document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+});
+
+// Disable common screenshot / developer shortcuts
+document.addEventListener("keydown", function (e) {
+
+    // Print Screen
+    if (e.key === "PrintScreen") {
+        navigator.clipboard.writeText("");
+        alert("Screenshots are disabled on this website.");
+    }
+
+    // Windows Snipping Tool shortcut
+    if (e.key === "PrintScreen" ||
+        (e.shiftKey && e.key === "S") ||
+        (e.ctrlKey && e.shiftKey && e.key === "S")) {
+        e.preventDefault();
+    }
+
+    // Ctrl + U
+    if (e.ctrlKey && e.key.toLowerCase() === "u") {
+        e.preventDefault();
+    }
+
+    // Ctrl + S
+    if (e.ctrlKey && e.key.toLowerCase() === "s") {
+        e.preventDefault();
+    }
+});

@@ -4694,3 +4694,24 @@ img {
 .hero .hero-content h3 {
     color: #c58b2a !important;
 }
+/* ================= COPY PROTECTION ================= */
+
+/* Prevent text selection */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+/* Allow typing inside inputs */
+input,
+textarea {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+/* Prevent dragging images */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+}
