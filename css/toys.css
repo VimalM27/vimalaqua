@@ -10,53 +10,47 @@ body.toys-page{
 }
 
 /* ---------------------------------------------------------------------
-   Hero — overrides the shared .page-hero (which is also used, with a
-   conflicting background image, on other pages) with a toy-page-specific
-   treatment. Scoped to body.toys-page so nothing else is touched.
+   Hero — centered content
    --------------------------------------------------------------------- */
-body.toys-page .page-hero{
-    height:auto;
-    min-height:260px;
-    padding:64px 20px 56px;
+
+body.toys-page .page-hero {
+    height: auto;
+    min-height: 260px;
+    padding: 64px 20px 56px;
+
     background:
         radial-gradient(circle at 12% 22%, rgba(0,180,216,0.22), transparent 40%),
         radial-gradient(circle at 88% 78%, rgba(212,175,55,0.18), transparent 45%),
         linear-gradient(135deg, #071A3D, #10294f 55%, #0d3b63);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    overflow:hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
 }
 
-body.toys-page .page-hero::before{
-    content:"🧸 🎲 🪁 🧩 🚀 🎨";
-    position:absolute;
-    inset:auto auto -18px -10px;
-    font-size:64px;
-    letter-spacing:28px;
-    opacity:0.08;
-    white-space:nowrap;
-    pointer-events:none;
+body.toys-page .page-hero .hero-content {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
 }
 
-body.toys-page .page-hero .hero-content{
-    max-width:640px;
+body.toys-page .page-hero h1 {
+    font-size: clamp(34px, 5vw, 52px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 12px;
 }
 
-body.toys-page .page-hero h1{
-    font-size:clamp(34px, 5vw, 52px);
-    font-weight:700;
-    letter-spacing:-0.01em;
-    margin-bottom:12px;
-}
-
-body.toys-page .page-hero p{
-    font-size:clamp(15px, 2vw, 18px);
-    color:#cfe3f2;
-    line-height:1.55;
-    max-width:520px;
-    margin:0 auto;
+body.toys-page .page-hero p {
+    font-size: clamp(15px, 2vw, 18px);
+    color: #cfe3f2;
+    line-height: 1.55;
+    max-width: 520px;
+    margin: 0 auto;
 }
 
 /* ---------------------------------------------------------------------
@@ -397,5 +391,16 @@ body.toys-page .toy-group.is-hidden{
     body.toys-page .subcat-chip,
     body.toys-page .age-chip{
         transition:none;
+    }
+}
+@media (max-width: 640px) {
+    body.toys-page .page-hero {
+        min-height: 240px;
+        padding: 40px 18px;
+    }
+
+    body.toys-page .page-hero .hero-content {
+        width: 100%;
+        text-align: center;
     }
 }
