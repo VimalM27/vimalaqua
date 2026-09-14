@@ -2209,3 +2209,138 @@ nav.navbar .dropdown .mega-menu .view-all-toys:hover {
     background: #00A9C7;
     transform: none;
 }
+/* =========================================================
+   TOYS PAGE — NAVY BACKGROUND + WHITE PRODUCT/CATEGORY BOXES
+   ADD THIS AT THE VERY BOTTOM OF toys.css
+   ========================================================= */
+
+/* ---------- Main Toys background ---------- */
+
+body.toys-page {
+    background: #071a3d !important;
+    color: #ffffff !important;
+}
+
+/* ---------- Category/detail section text ---------- */
+
+body.toys-page .age-jump-label {
+    color: #ffffff !important;
+}
+
+body.toys-page .toy-group-head h2 {
+    color: #ffffff !important;
+}
+
+body.toys-page .toy-group-desc {
+    color: #e5edf5 !important;
+}
+
+/* ---------- Age/category pills ---------- */
+
+body.toys-page .age-chip {
+    background: #ffffff !important;
+    color: #102c50 !important;
+    border: 1px solid #dce5ed !important;
+}
+
+body.toys-page .age-chip:hover {
+    background: #00b4d8 !important;
+    color: #ffffff !important;
+}
+
+/* ---------- Main category cards ---------- */
+
+body.toys-page a.toy-category {
+    background: #ffffff !important;
+    color: #102c50 !important;
+}
+
+/* Category titles */
+body.toys-page .toy-category h3 {
+    color: #102c50 !important;
+}
+
+/* Category descriptions — DARK enough to read */
+body.toys-page .toy-category p {
+    color: #4b5563 !important;
+}
+
+/* Age badge */
+body.toys-page .toy-category .age-badge {
+    background: #fff3d1 !important;
+    color: #795b12 !important;
+}
+
+/* ---------- Subcategory boxes ---------- */
+
+body.toys-page .subcat-chip {
+    background: #ffffff !important;
+    color: #172b4d !important;
+    border: 1px solid #dfe5ea !important;
+}
+
+body.toys-page .subcat-chip:hover {
+    background: #eefafd !important;
+    color: #086a84 !important;
+    border-color: #00b4d8 !important;
+}
+
+/* ---------- Section divider ---------- */
+
+body.toys-page .toy-group {
+    border-top: 1px solid rgba(255,255,255,0.18) !important;
+}
+
+/* ---------- Group age badge ---------- */
+
+body.toys-page .toy-group-head .age-badge {
+    background: #e7f7fb !important;
+    color: #08728f !important;
+}
+
+/* ---------- Information note ---------- */
+
+body.toys-page .toys-note {
+    background: #ffffff !important;
+    color: #4b5563 !important;
+    border: 1px solid #dfe5ea !important;
+}
+
+/* =========================================================
+   TOYS NAVBAR DROPDOWN
+   Make dropdown readable on navy
+   ========================================================= */
+
+body.toys-page .mega-menu {
+    background: #071a3d !important;
+}
+
+body.toys-page .mega-menu h4 {
+    color: #ffffff !important;
+}
+
+body.toys-page .mega-menu a {
+    color: #eaf2f8 !important;
+}
+
+body.toys-page .mega-menu a:hover {
+    color: #00b4d8 !important;
+}
+
+/* View All Toys */
+body.toys-page .mega-menu a:hover {
+    background: rgba(255,255,255,0.06) !important;
+}
+
+/* =========================================================
+   SEARCH BAR
+   ========================================================= */
+
+body.toys-page .toys-search-bar input {
+    background: #ffffff !important;
+    color: #172b4d !important;
+}
+
+body.toys-page .toys-search-bar input::placeholder {
+    color: #6b7280 !important;
+}
