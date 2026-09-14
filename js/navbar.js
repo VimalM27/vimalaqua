@@ -63,7 +63,6 @@ function applyUnifiedNavbar() {
                     <div class="menu-column">
                         <h4>Products</h4>
 
-                        <a href="marketplace.html">🛍 Marketplace</a>
                         <a href="foods.html">🍖 Pet Foods</a>
                         <a href="accessories.html">🎯 Accessories</a>
                         <a href="aquariums.html">🐠 Aquariums</a>
@@ -86,9 +85,10 @@ function applyUnifiedNavbar() {
                 <a href="#" onclick="toggleDropdown(event,this)">Become a Partner ▼</a>
 
                 <div class="dropdown-content">
-                    <a href="seller-signup.html">📝 Become a Partner</a>
+                    <a href="seller-signup.html">📝 Partner Signup</a>
                     <a href="seller-login.html">🔑 Partner Login</a>
                     <a href="seller-dashboard.html">📊 Partner Dashboard</a>
+                    <a href="marketplace.html">🛍 Marketplace</a>
                 </div>
             </li>
 
