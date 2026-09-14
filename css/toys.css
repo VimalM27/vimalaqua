@@ -2120,3 +2120,46 @@ body.toys-page .toys-search-bar input {
         border-top-color: rgba(255,255,255,0.15) !important;
     }
 }
+/* ================================================================
+   🖤 TOYS CARD TEXT — DARK & EASY TO READ
+   ================================================================ */
+
+/* Product/category description text */
+body.toys-page .toy-category p {
+    color: #364152 !important;
+    font-weight: 500 !important;
+}
+
+/* Category titles */
+body.toys-page .toy-category h3 {
+    color: #071A3D !important;
+    font-weight: 700 !important;
+}
+
+/* Age badge text */
+body.toys-page .toy-category .age-badge {
+    color: #6b4f00 !important;
+    font-weight: 700 !important;
+}
+
+/* Information/note text inside white box */
+body.toys-page .toys-note {
+    color: #364152 !important;
+}
+
+/* Subcategory description/text */
+body.toys-page .toy-group-desc {
+    color: #d9e4ee !important;
+}
+
+/* Subcategory white buttons */
+body.toys-page .subcat-chip {
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+}
+
+/* Make any normal text inside white toy cards readable */
+body.toys-page .toy-category span,
+body.toys-page .toy-category div {
+    color: #364152;
+}
