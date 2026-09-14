@@ -83,7 +83,7 @@ function applyUnifiedNavbar() {
             </li>
 
             <li class="dropdown">
-                <a href="#" onclick="toggleDropdown(event,this)">Supplier ▼</a>
+                <a href="#" onclick="toggleDropdown(event,this)">Become a Partner ▼</a>
 
                 <div class="dropdown-content">
                     <a href="seller-signup.html">📝 Become a Partner</a>
@@ -104,9 +104,6 @@ function applyUnifiedNavbar() {
             </li>
         </ul>
 
-        <div class="user-actions" id="userActions">
-            <a href="login.html" class="login-link">👤 Login</a>
-        </div>
     `;
 
     let mobileMenu = document.getElementById("mobileMenu");
