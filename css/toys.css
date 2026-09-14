@@ -1593,3 +1593,325 @@ body.toys-page .subcat-chip:hover {
         font-size: 23px !important;
     }
 }
+/* ================================================================
+   🎨 VIMAL TOYS — NEW PREMIUM COLOUR COMBINATION
+   APPEND ONLY — DO NOT DELETE ANYTHING ABOVE
+   ================================================================ */
+
+/* ---------- Main page background ---------- */
+
+body.toys-page {
+    background:
+        radial-gradient(circle at 8% 18%, rgba(0, 180, 216, 0.07), transparent 25%),
+        radial-gradient(circle at 92% 45%, rgba(255, 183, 77, 0.08), transparent 25%),
+        radial-gradient(circle at 15% 85%, rgba(155, 89, 182, 0.06), transparent 25%),
+        #f8fafc !important;
+    color: #172b4d !important;
+}
+
+
+/* ================================================================
+   🌈 HERO COLOUR
+   ================================================================ */
+
+body.toys-page .page-hero::before {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(5, 25, 60, 0.88) 0%,
+            rgba(8, 65, 92, 0.70) 45%,
+            rgba(0, 180, 216, 0.42) 75%,
+            rgba(212, 175, 55, 0.25) 100%
+        ) !important;
+}
+
+
+/* Gold glow on hero */
+
+body.toys-page .page-hero::after {
+    background: rgba(255, 193, 7, 0.20) !important;
+}
+
+
+/* Hero heading */
+
+body.toys-page .page-hero h1 {
+    color: #ffffff !important;
+    text-shadow:
+        0 3px 25px rgba(0,0,0,0.45),
+        0 0 25px rgba(0,180,216,0.20);
+}
+
+
+/* Hero paragraph */
+
+body.toys-page .page-hero p {
+    color: #e7f9ff !important;
+}
+
+
+/* ================================================================
+   🔎 SEARCH BAR
+   ================================================================ */
+
+body.toys-page .toys-search-bar input {
+    background: #ffffff !important;
+    border: 2px solid #e6edf2 !important;
+    color: #102c50 !important;
+    box-shadow:
+        0 15px 40px rgba(7,26,61,0.14),
+        0 0 0 4px rgba(0,180,216,0.04) !important;
+}
+
+body.toys-page .toys-search-bar input:focus {
+    border-color: #00b4d8 !important;
+    box-shadow:
+        0 15px 40px rgba(0,180,216,0.20),
+        0 0 0 4px rgba(0,180,216,0.08) !important;
+}
+
+
+/* ================================================================
+   🏷️ AGE CHIPS
+   ================================================================ */
+
+body.toys-page .age-chip {
+    background: #ffffff !important;
+    color: #17345c !important;
+    border: 1px solid #dbe5ec !important;
+    box-shadow: 0 4px 12px rgba(7,26,61,0.05) !important;
+}
+
+body.toys-page .age-chip:hover {
+    background: linear-gradient(135deg, #00b4d8, #0077b6) !important;
+    color: #ffffff !important;
+    border-color: #00b4d8 !important;
+    box-shadow: 0 10px 22px rgba(0,180,216,0.25) !important;
+}
+
+
+/* ================================================================
+   🧸 CATEGORY CARDS
+   ================================================================ */
+
+body.toys-page a.toy-category {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #fbfdff 70%,
+            #f4fbfd 100%
+        ) !important;
+
+    border: 1px solid #e2eaf0 !important;
+
+    box-shadow:
+        0 8px 24px rgba(7,26,61,0.06) !important;
+}
+
+
+/* Colourful top border */
+
+body.toys-page a.toy-category::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        #00b4d8,
+        #48cae4,
+        #ffd166
+    );
+    opacity: 0.9;
+}
+
+
+/* Hover */
+
+body.toys-page a.toy-category:hover {
+    border-color: #9bddea !important;
+    box-shadow:
+        0 20px 42px rgba(7,26,61,0.13) !important;
+}
+
+
+/* ================================================================
+   🌈 COLOURFUL CATEGORY ICONS
+   ================================================================ */
+
+/* Kids */
+
+body.toys-page
+.toy-category:nth-child(3n+1)
+> span:first-child {
+    background: linear-gradient(135deg, #e0f7ff, #c8f1fa) !important;
+    color: #0077b6;
+}
+
+
+/* Baby */
+
+body.toys-page
+.toy-category:nth-child(3n+2)
+> span:first-child {
+    background: linear-gradient(135deg, #fff4d6, #ffe7a8) !important;
+}
+
+
+/* Third category */
+
+body.toys-page
+.toy-category:nth-child(3n+3)
+> span:first-child {
+    background: linear-gradient(135deg, #f0e9ff, #e3d5ff) !important;
+}
+
+
+/* Additional colour variation */
+
+body.toys-page
+.toy-category:nth-child(4n)
+> span:first-child {
+    background: linear-gradient(135deg, #e0f8ee, #c9f2df) !important;
+}
+
+
+/* ================================================================
+   ✨ CATEGORY TITLES
+   ================================================================ */
+
+body.toys-page .toy-category h3 {
+    color: #0b3157 !important;
+}
+
+
+/* Description */
+
+body.toys-page .toy-category p {
+    color: #667788 !important;
+}
+
+
+/* ================================================================
+   🟡 AGE BADGES
+   ================================================================ */
+
+body.toys-page .toy-category .age-badge {
+    background: linear-gradient(
+        135deg,
+        #fff5d6,
+        #ffe9a8
+    ) !important;
+
+    color: #765600 !important;
+
+    border: 1px solid #f1d98a !important;
+}
+
+
+/* ================================================================
+   💡 INFO NOTE
+   ================================================================ */
+
+body.toys-page .toys-note {
+    background:
+        linear-gradient(
+            135deg,
+            #fffdf5,
+            #ffffff
+        ) !important;
+
+    border: 1px solid #f0dfaa !important;
+
+    color: #596878 !important;
+
+    box-shadow:
+        0 8px 24px rgba(7,26,61,0.05) !important;
+}
+
+
+/* ================================================================
+   🎯 CATEGORY GROUP HEADINGS
+   ================================================================ */
+
+body.toys-page .toy-group {
+    border-top: 1px solid #e2e9ee !important;
+}
+
+body.toys-page .toy-group-head h2 {
+    color: #0b3157 !important;
+}
+
+
+/* Group age badge */
+
+body.toys-page .toy-group-head .age-badge {
+    background: #e1f7fc !important;
+    color: #06738f !important;
+    border: 1px solid #b9eaf3 !important;
+}
+
+
+/* ================================================================
+   🧩 SUBCATEGORY CHIPS
+   ================================================================ */
+
+body.toys-page .subcat-chip {
+    background: #ffffff !important;
+    color: #263b52 !important;
+    border: 1px solid #e1e8ed !important;
+
+    box-shadow:
+        0 4px 12px rgba(7,26,61,0.035) !important;
+}
+
+body.toys-page .subcat-chip:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #effbfe,
+            #e3f8fc
+        ) !important;
+
+    border-color: #00b4d8 !important;
+
+    color: #006b85 !important;
+
+    box-shadow:
+        0 10px 24px rgba(0,180,216,0.14) !important;
+}
+
+
+/* ================================================================
+   🌟 SUBCATEGORY ICONS
+   ================================================================ */
+
+body.toys-page .subcat-icon {
+    filter: saturate(1.15);
+}
+
+
+/* ================================================================
+   📱 MOBILE — KEEP COLOURS CLEAN
+   ================================================================ */
+
+@media (max-width: 640px) {
+
+    body.toys-page a.toy-category {
+        box-shadow:
+            0 6px 18px rgba(7,26,61,0.06) !important;
+    }
+
+    body.toys-page .age-chip {
+        box-shadow:
+            0 3px 10px rgba(7,26,61,0.05) !important;
+    }
+
+    body.toys-page .subcat-chip {
+        box-shadow:
+            0 3px 9px rgba(7,26,61,0.04) !important;
+    }
+}
