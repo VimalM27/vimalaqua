@@ -2163,3 +2163,49 @@ body.toys-page .toy-category span,
 body.toys-page .toy-category div {
     color: #364152;
 }
+/* =========================================================
+   🧸 TOYS NAVBAR MEGA MENU
+   ========================================================= */
+
+nav.navbar .dropdown .mega-menu {
+    min-width: 650px;
+}
+
+nav.navbar .dropdown .mega-menu .menu-column {
+    min-width: 180px;
+}
+
+nav.navbar .dropdown .mega-menu h4 {
+    color: #071A3D;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+nav.navbar .dropdown .mega-menu a {
+    display: block;
+    color: #24364d;
+    text-decoration: none;
+    padding: 7px 0;
+    font-size: 13.5px;
+    transition: all .18s ease;
+}
+
+nav.navbar .dropdown .mega-menu a:hover {
+    color: #00A9C7;
+    transform: translateX(3px);
+}
+
+nav.navbar .dropdown .mega-menu .view-all-toys {
+    margin-top: 12px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    background: #071A3D;
+    color: #ffffff !important;
+    text-align: center;
+}
+
+nav.navbar .dropdown .mega-menu .view-all-toys:hover {
+    background: #00A9C7;
+    transform: none;
+}

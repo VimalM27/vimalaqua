@@ -46,7 +46,45 @@ function applyUnifiedNavbar() {
 
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="toys.html">Toys</a></li>
+            <li class="dropdown">
+    <a href="toys.html" onclick="toggleDropdown(event,this)">
+        Toys ▼
+    </a>
+
+    <div class="mega-menu">
+
+        <div class="menu-column">
+            <h4>Kids & Young</h4>
+
+            <a href="toys.html#kids-toys">🧒 Kids Toys</a>
+            <a href="toys.html#baby-toddler">👶 Baby & Toddler</a>
+            <a href="toys.html#teens">🎮 Teens</a>
+            <a href="toys.html#adults-hobbies">🧑 Adults & Hobbies</a>
+            <a href="toys.html#seniors">👵 Seniors</a>
+        </div>
+
+        <div class="menu-column">
+            <h4>Learning & Creativity</h4>
+
+            <a href="toys.html#art-creativity">🎨 Art & Creativity</a>
+            <a href="toys.html#educational-stem">🧠 Educational & STEM</a>
+            <a href="toys.html#unique-trending">✨ Unique & Trending</a>
+        </div>
+
+        <div class="menu-column">
+            <h4>Fun & Games</h4>
+
+            <a href="toys.html#outdoor-sports">⚽ Outdoor & Sports</a>
+            <a href="toys.html#family-games">👨‍👩‍👧 Family & Group Games</a>
+            <a href="toys.html#pet-toys">🐾 Pet Toys</a>
+
+            <a href="toys.html" class="view-all-toys">
+                🧸 View All Toys →
+            </a>
+        </div>
+
+    </div>
+</li>
 
             <li class="dropdown">
                 <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
@@ -118,7 +156,19 @@ function applyUnifiedNavbar() {
         <span class="close-menu" onclick="closeMenu()">✕</span>
 
         <a href="index.html">🏠 Home</a>
-        <a href="toys.html">🏠 Toys</a>
+        <a href="toys.html">🧸 Toys — All</a>
+
+<a href="toys.html#kids-toys">🧒 Kids Toys</a>
+<a href="toys.html#baby-toddler">👶 Baby & Toddler</a>
+<a href="toys.html#art-creativity">🎨 Art & Creativity</a>
+<a href="toys.html#educational-stem">🧠 Educational & STEM</a>
+<a href="toys.html#outdoor-sports">⚽ Outdoor & Sports</a>
+<a href="toys.html#teens">🎮 Teens</a>
+<a href="toys.html#adults-hobbies">🧑 Adults & Hobbies</a>
+<a href="toys.html#seniors">👵 Seniors</a>
+<a href="toys.html#family-games">👨‍👩‍👧 Family & Group Games</a>
+<a href="toys.html#unique-trending">✨ Unique & Trending</a>
+<a href="toys.html#pet-toys">🐾 Pet Toys</a>
         <a href="fish.html">🐟 Fish</a>
         <a href="birds.html">🦜 Birds</a>
         <a href="dogs.html">🐶 Dogs</a>
