@@ -330,18 +330,27 @@
 
     <picture class="hero-picture">
 
-        <!-- MOBILE IMAGE -->
+    <!-- MOBILE IMAGE -->
+    <source
+        media="(max-width: 768px)"
+        srcset="images/home-mobile.png?v=30">
+
+    <!-- DESKTOP PHOENIX VIDEO -->
+    <video
+        class="hero-background"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto">
+
         <source
-            media="(max-width: 768px)"
-            srcset="images/home-mobile.png?v=30">
+            src="images/vimal_phoenix_hero_v2.mp4"
+            type="video/mp4">
 
-        <!-- DESKTOP IMAGE -->
-        <img
-            src="images/homes.png?v=30"
-            alt="Vimal Pets World"
-            class="hero-background">
+    </video>
 
-    </picture>
+</picture>
 
     <div class="overlay"></div>
 
@@ -389,10 +398,7 @@
         </div>
 
     </div>
-    <!-- PHOENIX -->
-<div id="phoenix-flight">
-    <img src="images/phoenix.png" alt="Phoenix">
-</div>
+
 </section>
 <!-- ================= FIND YOUR PERFECT PET ================= -->
 <section class="xsec xsec-a" id="pet-finder">
@@ -1163,19 +1169,7 @@ document.getElementById("searchInput").addEventListener("keypress", function(e){
     }
 });
 </script>
-<!-- ================= PHOENIX ANIMATION ================= -->
 
-<div id="phoenix-stage">
-
-    <div id="phoenix">
-        <img src="images/phoenix.png" alt="Flying Phoenix">
-    </div>
-
-    <div id="phoenix-embers"></div>
-
-</div>
-
-<!-- ================= END PHOENIX ================= -->
 <script src="js/navbar.js?v=32"></script>
 <script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
