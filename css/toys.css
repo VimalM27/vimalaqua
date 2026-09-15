@@ -1016,22 +1016,25 @@ body.toys-page nav.navbar
     }
 
 
-    /* ---------- Mega Menu ---------- */
-
-    body.toys-page nav.navbar
-    .dropdown
-    .mega-menu {
-        width: 92vw !important;
-        min-width: 0 !important;
-        max-width: 92vw !important;
-
-        grid-template-columns: 1fr 1fr;
-
-        column-gap: 18px;
-        row-gap: 18px;
-    }
-
-
+body.toys-page nav.navbar .dropdown .mega-menu {
+    position: absolute !important;
+    top: 100% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 600px !important;
+    min-width: 600px !important;
+    max-width: 600px !important;
+    box-sizing: border-box;
+    display: grid !important;
+    grid-template-columns: 1fr 1.15fr 1fr;
+    column-gap: 24px;
+    padding: 18px 20px 20px !important;
+    background: #12294f !important;
+    border: none !important;
+    border-radius: 0 0 10px 10px !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+    z-index: 9999 !important;
+}
     body.toys-page nav.navbar
     .dropdown
     .mega-menu
