@@ -708,71 +708,298 @@ document.addEventListener("keydown", function (e) {
         e.preventDefault();
     }
 });
-/* =========================================================
-   PHOENIX FIRE EMBERS
-   ========================================================= */
+/* ============================================================
+   VIMAL PETS WORLD
+   PHOENIX NATURAL FLIGHT SYSTEM
+   ============================================================ */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-    const emberContainer =
-        document.getElementById("phoenix-embers");
+    const phoenix = document.getElementById("phoenix-flight");
+    const hero = document.querySelector(".hero");
 
-    if (!emberContainer) return;
-
-
-    /*
-       Create small glowing fire particles
-    */
-
-    for (let i = 0; i < 30; i++) {
-
-        const ember = document.createElement("span");
-
-        ember.className = "phoenix-ember";
+    if (!phoenix || !hero) return;
 
 
-        /*
-           Random starting position
-        */
-
-        ember.style.left =
-            (20 + Math.random() * 70) + "%";
-
-        ember.style.top =
-            (15 + Math.random() * 55) + "%";
+    const FLIGHT_TIME = 10500;
+    const REST_TIME = 4500;
 
 
-        /*
-           Random movement
-        */
+    function ease(t) {
 
-        ember.style.setProperty(
-            "--ember-x",
-            ((Math.random() - 0.5) * 180) + "px"
-        );
+        return t < 0.5
+            ? 4 * t * t * t
+            : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-        ember.style.setProperty(
-            "--ember-y",
-            (-50 - Math.random() * 150) + "px"
-        );
-
-
-        /*
-           Random animation timing
-        */
-
-        ember.style.setProperty(
-            "--ember-time",
-            (2 + Math.random() * 3) + "s"
-        );
-
-        ember.style.setProperty(
-            "--ember-delay",
-            (Math.random() * 5) + "s"
-        );
-
-
-        emberContainer.appendChild(ember);
     }
+
+
+    function curve(t, p0, p1, p2, p3) {
+
+        const u = 1 - t;
+
+        return {
+
+            x:
+                u*u*u*p0.x +
+                3*u*u*t*p1.x +
+                3*u*t*t*p2.x +
+                t*t*t*p3.x,
+
+            y:
+                u*u*u*p0.y +
+                3*u*u*t*p1.y +
+                3*u*t*t*p2.y +
+                t*t*t*p3.y
+
+        };
+
+    }
+
+
+    function position(x, y, rotation, scale) {
+
+        phoenix.style.transform =
+            `translate3d(${x}px, ${y}px, 0)
+             rotate(${rotation}deg)
+             scale(${scale})`;
+
+    }
+
+
+    function flightPath(t) {
+
+        const W = hero.clientWidth;
+        const H = hero.clientHeight;
+
+
+        /* ================================================
+           0 → 30%
+           ENTER FROM RIGHT
+           ================================================ */
+
+        if (t < 0.30) {
+
+            const p =
+                ease(t / 0.30);
+
+
+            return curve(
+
+                p,
+
+                {
+                    x: W + 200,
+                    y: H * 0.10
+                },
+
+                {
+                    x: W * 0.95,
+                    y: H * -0.05
+                },
+
+                {
+                    x: W * 0.78,
+                    y: H * 0.00
+                },
+
+                {
+                    x: W * 0.65,
+                    y: H * 0.12
+                }
+
+            );
+
+        }
+
+
+        /* ================================================
+           30 → 70%
+           SWEEP AROUND HERO
+           ================================================ */
+
+        if (t < 0.70) {
+
+            const p =
+                ease(
+                    (t - 0.30) / 0.40
+                );
+
+
+            return curve(
+
+                p,
+
+                {
+                    x: W * 0.65,
+                    y: H * 0.12
+                },
+
+                {
+                    x: W * 0.55,
+                    y: H * -0.08
+                },
+
+                {
+                    x: W * 0.30,
+                    y: H * 0.00
+                },
+
+                {
+                    x: W * 0.23,
+                    y: H * 0.18
+                }
+
+            );
+
+        }
+
+
+        /* ================================================
+           70 → 100%
+           LAND ON BOY'S SHOULDER
+           ================================================ */
+
+        const p =
+            ease(
+                (t - 0.70) / 0.30
+            );
+
+
+        return curve(
+
+            p,
+
+            {
+                x: W * 0.23,
+                y: H * 0.18
+            },
+
+            {
+                x: W * 0.27,
+                y: H * 0.06
+            },
+
+            {
+                x: W * 0.43,
+                y: H * 0.20
+            },
+
+            {
+                x: W * 0.49,
+                y: H * 0.34
+            }
+
+        );
+
+    }
+
+
+    function animate(startTime) {
+
+        function frame(now) {
+
+            const elapsed =
+                now - startTime;
+
+            const t =
+                Math.min(
+                    elapsed / FLIGHT_TIME,
+                    1
+                );
+
+
+            const p =
+                flightPath(t);
+
+
+            /*
+               Natural banking movement
+            */
+
+            let rotation =
+                Math.sin(t * Math.PI * 5) * 4;
+
+
+            /*
+               Smaller when approaching shoulder
+            */
+
+            let scale = 0.82;
+
+
+            if (t > 0.70) {
+
+                const landing =
+                    (t - 0.70) / 0.30;
+
+                scale =
+                    0.82 -
+                    landing * 0.44;
+
+                rotation *=
+                    1 - landing;
+
+            }
+
+
+            position(
+                p.x,
+                p.y,
+                rotation,
+                scale
+            );
+
+
+            if (t < 1) {
+
+                requestAnimationFrame(frame);
+
+            } else {
+
+                /* ========================================
+                   REST ON SHOULDER
+                   ======================================== */
+
+                setTimeout(() => {
+
+                    startFlight();
+
+                }, REST_TIME);
+
+            }
+
+        }
+
+
+        requestAnimationFrame(frame);
+
+    }
+
+
+    function startFlight() {
+
+        const W = hero.clientWidth;
+        const H = hero.clientHeight;
+
+
+        position(
+            W + 200,
+            H * 0.10,
+            8,
+            0.75
+        );
+
+
+        requestAnimationFrame(
+            (time) => animate(time)
+        );
+
+    }
+
+
+    /* START */
+
+    startFlight();
 
 });

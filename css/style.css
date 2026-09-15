@@ -4715,365 +4715,94 @@ img {
     -webkit-user-drag: none;
     user-drag: none;
 }
-/* =========================================================
-   PHOENIX FLYING + LANDING ANIMATION
-   ========================================================= */
+/* ============================================================
+   VIMAL PETS WORLD
+   PHOENIX — NATURAL FLIGHT SYSTEM
+   ============================================================ */
 
-#phoenix-stage {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100vh;
+#phoenix-flight {
+    position: absolute;
+
+    width: 155px;
+    height: auto;
+
+    left: 0;
+    top: 0;
+
+    z-index: 6;
 
     pointer-events: none;
 
-    overflow: hidden;
-
-    z-index: 20;
-}
-
-
-/* Phoenix itself */
-
-#phoenix {
-    position: absolute;
-
-    width: 360px;
-
-    right: -450px;
-    top: 18%;
+    will-change: transform;
 
     transform-origin: center center;
-
-    animation:
-        phoenixJourney 14s ease-in-out infinite;
-
-    will-change: transform, right, top;
-
-    filter:
-        drop-shadow(0 0 12px rgba(255, 140, 20, 0.65))
-        drop-shadow(0 0 35px rgba(255, 70, 0, 0.35));
 }
 
 
 /* Phoenix image */
 
-#phoenix img {
-    display: block;
-
+#phoenix-flight img {
     width: 100%;
     height: auto;
 
+    display: block;
+
+    pointer-events: none;
     user-select: none;
 
     /*
-       The generated image has a dark background.
-       SCREEN makes the black area visually disappear.
+       Makes the black/dark background of the generated
+       phoenix blend into the hero.
     */
+    mix-blend-mode: multiply;
 
-    mix-blend-mode: screen;
-
-    animation:
-        phoenixBreathing 2.8s ease-in-out infinite;
+    filter:
+        drop-shadow(0 5px 8px rgba(0,0,0,.22))
+        drop-shadow(0 0 14px rgba(255,120,0,.35));
 }
 
 
-/* =========================================================
-   MAIN PHOENIX MOVEMENT
+/* ============================================================
+   SMALL NATURAL MOVEMENT WHILE FLYING
+   ============================================================ */
 
-   0%     = outside screen
-   20%    = flying into screen
-   38%    = reaches destination
-   55%    = sitting / hovering
-   70%    = takes off
-   100%   = flies away
-   ========================================================= */
-
-@keyframes phoenixJourney {
-
-    /* Start outside right */
+@keyframes phoenix-life {
 
     0% {
-        right: -450px;
-        top: 18%;
-
-        transform:
-            translateY(0)
-            rotate(8deg)
-            scale(0.75);
+        margin-top: 0;
     }
 
-
-    /* Fly into screen */
-
-    15% {
-        right: 22%;
-        top: 16%;
-
-        transform:
-            translateY(-25px)
-            rotate(-4deg)
-            scale(0.95);
-    }
-
-
-    /* Continue flying */
-
-    27% {
-        right: 12%;
-        top: 23%;
-
-        transform:
-            translateY(20px)
-            rotate(4deg)
-            scale(1);
-    }
-
-
-    /* Arrive at resting position */
-
-    38% {
-        right: 8%;
-        top: 20%;
-
-        transform:
-            translateY(0)
-            rotate(0deg)
-            scale(1);
-    }
-
-
-    /* =====================================================
-       SITTING / HOVERING
-       ===================================================== */
-
-    42% {
-        right: 8%;
-        top: 20%;
-
-        transform:
-            translateY(-8px)
-            rotate(-1deg)
-            scale(1);
-    }
-
-    46% {
-        right: 8%;
-        top: 20%;
-
-        transform:
-            translateY(5px)
-            rotate(1deg)
-            scale(1);
+    25% {
+        margin-top: -5px;
     }
 
     50% {
-        right: 8%;
-        top: 20%;
-
-        transform:
-            translateY(-5px)
-            rotate(-1deg)
-            scale(1);
+        margin-top: 3px;
     }
 
-    54% {
-        right: 8%;
-        top: 20%;
-
-        transform:
-            translateY(3px)
-            rotate(0deg)
-            scale(1);
-    }
-
-
-    /* =====================================================
-       TAKE OFF AGAIN
-       ===================================================== */
-
-    62% {
-        right: 13%;
-        top: 15%;
-
-        transform:
-            translateY(-35px)
-            rotate(-6deg)
-            scale(1.04);
-    }
-
-
-    72% {
-        right: 28%;
-        top: 10%;
-
-        transform:
-            translateY(-60px)
-            rotate(-8deg)
-            scale(1.05);
-    }
-
-
-    /* Fly away */
-
-    85% {
-        right: 70%;
-        top: 5%;
-
-        transform:
-            translateY(-80px)
-            rotate(-12deg)
-            scale(0.9);
-    }
-
-
-    100% {
-        right: 120%;
-        top: -10%;
-
-        transform:
-            translateY(-100px)
-            rotate(-15deg)
-            scale(0.7);
-    }
-}
-
-
-/* =========================================================
-   SMALL NATURAL BODY MOVEMENT
-   ========================================================= */
-
-@keyframes phoenixBreathing {
-
-    0% {
-        transform: scaleY(1);
-    }
-
-    50% {
-        transform: scaleY(1.025);
+    75% {
+        margin-top: -4px;
     }
 
     100% {
-        transform: scaleY(1);
+        margin-top: 0;
     }
 }
 
 
-/* =========================================================
-   FIRE EMBERS
-   ========================================================= */
-
-#phoenix-embers {
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-}
-
-.phoenix-ember {
-    position: absolute;
-
-    width: 5px;
-    height: 5px;
-
-    border-radius: 50%;
-
-    background: #ffb52e;
-
-    box-shadow:
-        0 0 6px #ff8c00,
-        0 0 14px #ff4500;
-
-    opacity: 0;
-
-    animation:
-        emberFloat var(--ember-time) ease-out infinite;
-
-    animation-delay: var(--ember-delay);
+#phoenix-flight img {
+    animation: phoenix-life 1.8s ease-in-out infinite;
 }
 
 
-@keyframes emberFloat {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            translate3d(0, 0, 0)
-            scale(0.4);
-    }
-
-    20% {
-        opacity: 1;
-    }
-
-    70% {
-        opacity: 0.8;
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            translate3d(
-                var(--ember-x),
-                var(--ember-y),
-                0
-            )
-            scale(0);
-    }
-}
-
-
-/* =========================================================
+/* ============================================================
    MOBILE
-   ========================================================= */
+   ============================================================ */
 
 @media (max-width: 768px) {
 
-    #phoenix {
-        width: 230px;
-
-        right: -280px;
-
-        top: 22%;
+    #phoenix-flight {
+        width: 100px;
     }
 
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 480px) {
-
-    #phoenix {
-        width: 190px;
-    }
-
-}
-
-
-/* =========================================================
-   ACCESSIBILITY
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    #phoenix {
-        animation: none;
-
-        right: 8%;
-        top: 20%;
-    }
-
-    #phoenix img {
-        animation: none;
-    }
-
-    .phoenix-ember {
-        display: none;
-    }
 }
