@@ -445,7 +445,7 @@
     box-sizing: border-box;
 }
 
-.dropdown:hover .mega-menu {
+.mega-menu.show {
     display: grid;
 }
 
