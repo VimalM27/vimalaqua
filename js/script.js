@@ -708,3 +708,71 @@ document.addEventListener("keydown", function (e) {
         e.preventDefault();
     }
 });
+/* =========================================================
+   PHOENIX FIRE EMBERS
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const emberContainer =
+        document.getElementById("phoenix-embers");
+
+    if (!emberContainer) return;
+
+
+    /*
+       Create small glowing fire particles
+    */
+
+    for (let i = 0; i < 30; i++) {
+
+        const ember = document.createElement("span");
+
+        ember.className = "phoenix-ember";
+
+
+        /*
+           Random starting position
+        */
+
+        ember.style.left =
+            (20 + Math.random() * 70) + "%";
+
+        ember.style.top =
+            (15 + Math.random() * 55) + "%";
+
+
+        /*
+           Random movement
+        */
+
+        ember.style.setProperty(
+            "--ember-x",
+            ((Math.random() - 0.5) * 180) + "px"
+        );
+
+        ember.style.setProperty(
+            "--ember-y",
+            (-50 - Math.random() * 150) + "px"
+        );
+
+
+        /*
+           Random animation timing
+        */
+
+        ember.style.setProperty(
+            "--ember-time",
+            (2 + Math.random() * 3) + "s"
+        );
+
+        ember.style.setProperty(
+            "--ember-delay",
+            (Math.random() * 5) + "s"
+        );
+
+
+        emberContainer.appendChild(ember);
+    }
+
+});
