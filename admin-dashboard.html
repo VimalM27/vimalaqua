@@ -264,6 +264,9 @@ tbody tr:last-child td{border-bottom:0}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2.2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
             Payments
         </button>
+        <button data-target="seller-applications">📝 Seller Applications</button>
+        <button data-target="moderation">🛡️ Moderation</button>
+        <button data-target="admin-tools">⚙️ Admin Tools</button>
         <button data-target="security">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 8.6-8 10.5-4.6-1.9-8-5.5-8-10.5v-6L12 2z"/><path d="M9.5 12l1.8 1.8L14.8 10"/></svg>
             Security
@@ -476,6 +479,9 @@ tbody tr:last-child td{border-bottom:0}
             </div>
         </section>
 
+        <section class="section" id="seller-applications"><div class="section-head"><h2>📝 Seller Applications</h2><span class="count-pill" id="applicationResult">–</span></div><div class="toolbar"><div class="search-wrap"><input class="search" id="applicationSearch" placeholder="Search applicant, shop or email…"></div><select class="filter" id="applicationStatus"><option value="">All statuses</option><option>pending</option><option>under_review</option><option>approved</option><option>rejected</option><option>suspended</option></select></div><div class="table-wrap"><table><thead><tr><th>Applicant</th><th>Shop</th><th>Status</th><th>Submitted</th><th>Note</th><th>Action</th></tr></thead><tbody id="applicationBody"></tbody></table></div><div id="applicationEmpty" class="empty" style="display:none">No seller applications found.</div></section>
+        <section class="section" id="moderation"><div class="section-head"><h2>🛡️ Product Moderation</h2><span class="count-pill" id="moderationResult">–</span></div><div class="toolbar"><div class="search-wrap"><input class="search" id="moderationSearch" placeholder="Search products to review…"></div><select class="filter" id="moderationStatus"><option value="">All visibility</option><option value="true">Published</option><option value="false">Hidden</option></select></div><div class="table-wrap"><table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Visibility</th><th>Action</th></tr></thead><tbody id="moderationBody"></tbody></table></div><div id="moderationEmpty" class="empty" style="display:none">No products found.</div></section>
+        <section class="section" id="admin-tools"><div class="section-head"><h2>⚙️ Admin Tools</h2><span class="count-pill">Utilities</span></div><div class="toolbar"><button class="refresh" id="exportProductsBtn">Export Products CSV</button><button class="refresh" id="exportOrdersBtn">Export Orders CSV</button><button class="refresh" id="exportPaymentsBtn">Export Payments CSV</button><button class="refresh" id="refreshAllBtn">Refresh All Data</button></div><p style="color:var(--muted);font-size:13px;line-height:1.7">Export data for reporting. Never place a service-role key in this page.</p></section>
         <section class="section" id="security">
             <div class="section-head"><h2>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 8.6-8 10.5-4.6-1.9-8-5.5-8-10.5v-6L12 2z"/><path d="M9.5 12l1.8 1.8L14.8 10"/></svg>
@@ -494,8 +500,8 @@ tbody tr:last-child td{border-bottom:0}
 </div>
 
 <script>
-const supabaseUrl = "https://colmyyuwvqijzdeskjmh.supabase.co";
-const supabaseKey = "sb_publishable_59LgUr6efJ4p0mAALpXcnw_omXBSPxF";
+const supabaseUrl = "https://pwgjuwhmbntwjnjzbodb.supabase.co";
+const supabaseKey = "sb_publishable__9E6TuKRM0Eoh3UIplYffg_rtf6Z4Ae";
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 let allProfiles = [];
@@ -503,6 +509,7 @@ let allProducts = [];
 let allPayments = [];
 let allOrders = [];
 let allOrderItems = [];
+let allApplications = [];
 
 function escapeHtml(value) {
     return String(value ?? "-")
@@ -741,6 +748,13 @@ function renderChart() {
     `;
 }
 
+
+function csvDownload(filename, rows) { if (!rows.length) { alert("No data to export."); return; } const keys=[...new Set(rows.flatMap(r=>Object.keys(r)))]; const csv=[keys,...rows.map(r=>keys.map(k=>`"${String(r[k]??"").replace(/"/g,'""')}"`))].map(r=>r.join(",")).join("\n"); const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8;"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=filename; a.click(); URL.revokeObjectURL(a.href); }
+function renderApplications(){const q=document.getElementById("applicationSearch").value.toLowerCase(),st=document.getElementById("applicationStatus").value;const rows=allApplications.filter(a=>(`${a.full_name||a.owner_name||""} ${a.shop_name||""} ${a.email||""}`).toLowerCase().includes(q)&&(!st||a.status===st));document.getElementById("applicationResult").textContent=`${rows.length} application(s)`;document.getElementById("applicationBody").innerHTML=rows.map(a=>`<tr><td><b>${escapeHtml(a.full_name||a.owner_name||a.email||"-")}</b><br><span class="mono">${escapeHtml(a.email||"")}</span></td><td>${escapeHtml(a.shop_name||"-")}</td><td>${statusBadge(a.status)}</td><td class="mono">${escapeHtml(a.created_at?new Date(a.created_at).toLocaleDateString():"-")}</td><td>${escapeHtml(a.admin_note||"-")}</td><td><select class="filter" onchange="changeApplicationStatus('${a.id}',this.value)"><option value="">Change…</option><option value="under_review">Under review</option><option value="approved">Approve</option><option value="rejected">Reject</option><option value="suspended">Suspend</option></select></td></tr>`).join("");document.getElementById("applicationEmpty").style.display=rows.length?"none":"block";}
+async function changeApplicationStatus(id,status){if(!status)return;const note=prompt("Optional admin note:","");const {error}=await supabaseClient.rpc("update_seller_status",{application_id:id,new_status:status,admin_note:note||null});if(error){alert("Could not update status: "+error.message);return;}alert("Seller application updated.");await loadDashboard();}
+function renderModeration(){const q=document.getElementById("moderationSearch").value.toLowerCase(),vis=document.getElementById("moderationStatus").value;const rows=allProducts.filter(p=>(`${p.product_name||""} ${p.category||""}`).toLowerCase().includes(q)&&(!vis||String(p.is_active??p.active??true)===vis));document.getElementById("moderationResult").textContent=`${rows.length} product(s)`;document.getElementById("moderationBody").innerHTML=rows.map(p=>{const active=p.is_active??p.active??true;return `<tr><td><b>${escapeHtml(p.product_name)}</b></td><td>${escapeHtml(p.category)}</td><td class="price">₹${Number(p.price||0).toFixed(2)}</td><td>${escapeHtml(p.stock??0)}</td><td>${active?statusBadge("active"):statusBadge("inactive")}</td><td><button class="refresh" onclick="toggleProductVisibility('${p.id}',${!active})">${active?"Hide":"Publish"}</button></td></tr>`}).join("");document.getElementById("moderationEmpty").style.display=rows.length?"none":"block";}
+async function toggleProductVisibility(id,next){const product=allProducts.find(p=>p.id===id);const column=product&&Object.prototype.hasOwnProperty.call(product,"is_active")?"is_active":"active";const {error}=await supabaseClient.from("products").update({[column]:next}).eq("id",id);if(error){alert("Could not update product: "+error.message);return;}await loadDashboard();}
+
 async function loadDashboard() {
     document.getElementById("sellerLoading").innerHTML = `<table style="width:100%"><tbody>${skeletonRows(6,4)}</tbody></table>`;
     document.getElementById("productLoading").innerHTML = `<table style="width:100%"><tbody>${skeletonRows(6,4)}</tbody></table>`;
@@ -750,12 +764,13 @@ async function loadDashboard() {
     const user = await checkAdmin();
     if (!user) return;
 
-    const [profilesResult, productsResult, paymentsResult, ordersResult, orderItemsResult] = await Promise.all([
+    const [profilesResult, productsResult, paymentsResult, ordersResult, orderItemsResult, applicationsResult] = await Promise.all([
         supabaseClient.from("profiles").select("*"),
         supabaseClient.from("products").select("*"),
         supabaseClient.from("payments").select("*"),
         supabaseClient.from("orders").select("*").order("created_at", { ascending: false }),
-        supabaseClient.from("order_items").select("*")
+        supabaseClient.from("order_items").select("*"),
+        supabaseClient.from("seller_applications").select("*").order("created_at", { ascending: false })
     ]);
 
     allProfiles = profilesResult.data || [];
@@ -763,12 +778,14 @@ async function loadDashboard() {
     allPayments = paymentsResult.data || [];
     allOrders = ordersResult.data || [];
     allOrderItems = orderItemsResult.data || [];
+    allApplications = applicationsResult.data || [];
 
     if (profilesResult.error) console.error("Profiles:", profilesResult.error);
     if (productsResult.error) console.error("Products:", productsResult.error);
     if (paymentsResult.error) console.error("Payments:", paymentsResult.error);
     if (ordersResult.error) console.error("Orders:", ordersResult.error);
     if (orderItemsResult.error) console.error("Order items:", orderItemsResult.error);
+    if (applicationsResult.error) console.error("Applications:", applicationsResult.error);
 
     document.getElementById("sellerCount").textContent = allProfiles.length;
     document.getElementById("productCount").textContent = allProducts.length;
@@ -799,6 +816,8 @@ async function loadDashboard() {
     renderPayments();
     renderOrders();
     renderChart();
+    renderApplications();
+    renderModeration();
 }
 
 document.querySelectorAll(".nav button[data-target]").forEach(btn => {
@@ -837,6 +856,14 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
     await supabaseClient.auth.signOut();
     window.location.href = "login.html";
 });
+
+
+["applicationSearch","applicationStatus"].forEach(id=>document.getElementById(id).addEventListener("input",renderApplications));
+["moderationSearch","moderationStatus"].forEach(id=>document.getElementById(id).addEventListener("input",renderModeration));
+document.getElementById("exportProductsBtn").addEventListener("click",()=>csvDownload("vimal-products.csv",allProducts));
+document.getElementById("exportOrdersBtn").addEventListener("click",()=>csvDownload("vimal-orders.csv",allOrders));
+document.getElementById("exportPaymentsBtn").addEventListener("click",()=>csvDownload("vimal-payments.csv",allPayments));
+document.getElementById("refreshAllBtn").addEventListener("click",loadDashboard);
 
 loadDashboard();
 </script>
