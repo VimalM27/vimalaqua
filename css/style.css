@@ -4828,40 +4828,50 @@ img {
     }
 }
 /* =========================================
-   MOVING PET CATEGORIES
+   HORIZONTAL MOVING PET CATEGORIES
 ========================================= */
 
 .pet-categories {
-    overflow: hidden;
     width: 100%;
-    padding: 30px 0;
+    overflow: hidden !important;
+    padding: 35px 0;
 }
 
-.pet-category-track {
+.pet-categories .pet-grid {
     display: flex !important;
+    flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 24px;
-    width: max-content;
-    animation: movePetCategories 30s linear infinite;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 25px !important;
+    width: max-content !important;
+    max-width: none !important;
+    animation: petCategoriesMove 30s linear infinite;
 }
 
-/* Keep every card in one horizontal row */
-.pet-category-track .pet-item {
-    flex: 0 0 190px;
+/* Keep all cards in one horizontal row */
+.pet-categories .pet-item {
+    display: flex !important;
+    flex: 0 0 190px !important;
+    width: 190px !important;
+    min-width: 190px !important;
+    max-width: 190px !important;
+    flex-direction: column !important;
+    align-items: center !important;
 }
 
-/* Pause movement when the mouse is over the cards */
-.pet-category-track:hover {
+/* Pause when hovering */
+.pet-categories .pet-grid:hover {
     animation-play-state: paused;
 }
 
 /* Card hover effect */
-.pet-category-track .pet-item:hover {
-    transform: translateY(-8px) scale(1.03);
+.pet-categories .pet-item:hover {
+    transform: translateY(-8px);
 }
 
-/* Moving animation */
-@keyframes movePetCategories {
+/* Horizontal movement */
+@keyframes petCategoriesMove {
     from {
         transform: translateX(0);
     }
@@ -4873,21 +4883,15 @@ img {
 
 /* Mobile view */
 @media (max-width: 768px) {
-    .pet-category-track {
-        gap: 15px;
+    .pet-categories .pet-grid {
+        gap: 15px !important;
         animation-duration: 25s;
     }
 
-    .pet-category-track .pet-item {
-        flex: 0 0 150px;
-    }
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .pet-category-track {
-        animation: none;
-        flex-wrap: wrap !important;
-        width: 100%;
+    .pet-categories .pet-item {
+        flex-basis: 150px !important;
+        width: 150px !important;
+        min-width: 150px !important;
+        max-width: 150px !important;
     }
 }
