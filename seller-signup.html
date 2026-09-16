@@ -587,10 +587,17 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     // 1. Create the auth user. A DB trigger (on_auth_user_created) reads this
     // metadata and creates the matching `profiles` row server-side, so it
     // works even before email confirmation / before there's a session.
-    const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+    // 1. Create the authentication user
+const { data: authData, error: authError } =
+    await supabaseClient.auth.signUp({
         email: email,
         password: password,
+
         options: {
+            // Redirect after email confirmation
+            emailRedirectTo:
+                "https://www.vimal27.in/seller-login.html",
+
             data: {
                 business_type: businessType,
                 shop_name: val('shop_name'),
@@ -602,7 +609,9 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
                 pincode: val('pincode'),
                 pan_number: val('pan').toUpperCase(),
                 aadhaar_number: val('aadhaar'),
-                gstin: val('gstin') ? val('gstin').toUpperCase() : null,
+                gstin: val('gstin')
+                    ? val('gstin').toUpperCase()
+                    : null,
                 account_holder: val('account_holder'),
                 account_number: val('account_number'),
                 ifsc: val('ifsc').toUpperCase(),
