@@ -11,7 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop Owner Signup | Vimal Pets World</title>
+<title>Become a Seller | Vimal Pets World</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/navbar-auth.css">
 <link rel="stylesheet" href="css/shop.css">
@@ -23,7 +23,7 @@
         width: 100%;
     }
     .form-card {
-        max-width: 460px !important;
+        max-width: 560px !important;
         width: 90% !important;
         margin: 20px auto 60px !important;
         align-self: center !important;
@@ -49,6 +49,196 @@
         font-weight: bold;
     }
     .home-btn:hover { opacity: 0.9; }
+
+    /* --- Stepper --- */
+    .step-track {
+        display: flex;
+        justify-content: space-between;
+        margin: 6px 0 28px;
+        position: relative;
+    }
+    .step-track::before {
+        content: "";
+        position: absolute;
+        top: 14px;
+        left: 6%;
+        right: 6%;
+        height: 2px;
+        background: #e2e8f0;
+        z-index: 0;
+    }
+    .step-track .fill {
+        position: absolute;
+        top: 14px;
+        left: 6%;
+        height: 2px;
+        background: #0c447c;
+        z-index: 1;
+        transition: width .3s ease;
+    }
+    .step-dot {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        flex: 1;
+    }
+    .step-dot .circle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid #e2e8f0;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 700;
+    }
+    .step-dot.active .circle,
+    .step-dot.done .circle {
+        border-color: #0c447c;
+        color: #0c447c;
+    }
+    .step-dot.done .circle {
+        background: #0c447c;
+        color: #fff;
+    }
+    .step-dot span.label {
+        font-size: 11px;
+        color: #94a3b8;
+        text-align: center;
+    }
+    .step-dot.active span.label,
+    .step-dot.done span.label {
+        color: #0c447c;
+        font-weight: 600;
+    }
+
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+
+    .section-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #0c447c;
+        margin: 0 0 4px;
+    }
+    .section-hint {
+        font-size: 12.5px;
+        color: #64748b;
+        margin: 0 0 16px;
+    }
+
+    .field-row {
+        display: flex;
+        gap: 12px;
+    }
+    .field-row .form-group { flex: 1; min-width: 0; }
+
+    .radio-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+    .radio-card {
+        border: 1.5px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 10px 12px;
+        cursor: pointer;
+        font-size: 13.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: border-color .15s ease, background .15s ease;
+    }
+    .radio-card input { accent-color: #0c447c; margin: 0; }
+    .radio-card.selected {
+        border-color: #0c447c;
+        background: #eef4fb;
+    }
+
+    .upload-box {
+        border: 1.5px dashed #cbd5e1;
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+        font-size: 12.5px;
+        color: #64748b;
+        cursor: pointer;
+        margin-bottom: 4px;
+    }
+    .upload-box:hover { border-color: #0c447c; }
+    .upload-box.has-file { border-color: #0c447c; color: #0c447c; background: #eef4fb; }
+
+    .note-box {
+        background: #f8fafc;
+        border-left: 3px solid #0c447c;
+        border-radius: 6px;
+        padding: 10px 12px;
+        font-size: 12px;
+        color: #475569;
+        margin-bottom: 18px;
+        line-height: 1.5;
+    }
+
+    .step-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 8px;
+    }
+    .btn-secondary {
+        background: #fff;
+        border: 1.5px solid #cbd5e1;
+        color: #475569;
+        border-radius: 8px;
+        padding: 11px 20px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    .btn-secondary:hover { border-color: #0c447c; color: #0c447c; }
+    .step-nav .btn-primary { flex: 1; }
+    .step-nav.single .btn-primary { width: 100%; }
+
+    .review-block {
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin-bottom: 14px;
+    }
+    .review-block h4 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+        color: #94a3b8;
+        margin: 0 0 8px;
+    }
+    .review-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        padding: 3px 0;
+        color: #334155;
+        gap: 12px;
+    }
+    .review-row span:first-child { color: #64748b; }
+    .review-row span:last-child { text-align: right; word-break: break-word; }
+
+    .consent-row {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        font-size: 12.5px;
+        color: #475569;
+        margin: 14px 0 18px;
+    }
+    .consent-row input { margin-top: 3px; accent-color: #0c447c; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -62,96 +252,362 @@
     <h2>🐾 Become a Seller</h2>
     <p class="subtitle">Register your pet shop and start selling on Vimal Pets World</p>
 
+    <div class="step-track" id="stepTrack">
+        <div class="fill" id="stepFill" style="width:0%"></div>
+        <div class="step-dot active" data-step="1"><div class="circle">1</div><span class="label">Business</span></div>
+        <div class="step-dot" data-step="2"><div class="circle">2</div><span class="label">Identity</span></div>
+        <div class="step-dot" data-step="3"><div class="circle">3</div><span class="label">Payout</span></div>
+        <div class="step-dot" data-step="4"><div class="circle">4</div><span class="label">Review</span></div>
+    </div>
+
     <div id="message"></div>
 
-    <form id="signupForm">
-        <div class="form-group">
-            <label>Shop Name</label>
-            <input type="text" id="shop_name" placeholder="e.g. Coimbatore Pet Corner" required>
+    <form id="signupForm" novalidate>
+
+        <!-- STEP 1: Business details -->
+        <div class="form-step active" data-step="1">
+            <p class="section-title">Business details</p>
+            <p class="section-hint">Tell us about the shop you'll be selling as.</p>
+
+            <div class="form-group">
+                <label>Business Type</label>
+                <div class="radio-cards" id="businessTypeCards">
+                    <label class="radio-card" data-value="individual">
+                        <input type="radio" name="business_type" value="individual"> Individual
+                    </label>
+                    <label class="radio-card" data-value="proprietorship">
+                        <input type="radio" name="business_type" value="proprietorship"> Proprietorship
+                    </label>
+                    <label class="radio-card" data-value="partnership">
+                        <input type="radio" name="business_type" value="partnership"> Partnership / LLP
+                    </label>
+                    <label class="radio-card" data-value="company">
+                        <input type="radio" name="business_type" value="company"> Private Limited
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Shop / Brand Name</label>
+                <input type="text" id="shop_name" placeholder="e.g. Coimbatore Pet Corner" required>
+            </div>
+
+            <div class="form-group">
+                <label>Owner / Authorized Signatory Name</label>
+                <input type="text" id="owner_name" placeholder="Your full legal name" required>
+            </div>
+
+            <div class="field-row">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" placeholder="10-digit mobile" maxlength="10" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Registered Shop Address</label>
+                <input type="text" id="shop_address" placeholder="Building, street, area" required>
+            </div>
+
+            <div class="field-row">
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" id="city" placeholder="City" required>
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <input type="text" id="state" placeholder="State" required>
+                </div>
+                <div class="form-group">
+                    <label>PIN Code</label>
+                    <input type="text" id="pincode" placeholder="6-digit" maxlength="6" required>
+                </div>
+            </div>
+
+            <div class="step-nav single">
+                <button type="button" class="btn-primary" onclick="goToStep(2)">Continue</button>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Owner Name</label>
-            <input type="text" id="owner_name" placeholder="Your full name" required>
+        <!-- STEP 2: Identity verification -->
+        <div class="form-step" data-step="2">
+            <p class="section-title">Identity verification</p>
+            <p class="section-hint">Required so we can verify sellers and process payouts correctly.</p>
+
+            <div class="note-box">
+                🔒 Your ID details are used only for seller verification and are never shown publicly. Full numbers are masked once submitted.
+            </div>
+
+            <div class="form-group">
+                <label>PAN Number</label>
+                <input type="text" id="pan" placeholder="e.g. ABCDE1234F" maxlength="10" style="text-transform:uppercase" required>
+            </div>
+
+            <div class="form-group">
+                <label>Aadhaar Number</label>
+                <input type="text" id="aadhaar" placeholder="12-digit Aadhaar number" maxlength="12" inputmode="numeric" required>
+            </div>
+
+            <div class="form-group">
+                <label>GSTIN <span style="color:#94a3b8; font-weight:400;">(optional — only if registered)</span></label>
+                <input type="text" id="gstin" placeholder="15-character GSTIN" maxlength="15" style="text-transform:uppercase">
+            </div>
+
+            <div class="form-group">
+                <label>Upload ID Proof</label>
+                <label class="upload-box" id="idUploadBox">
+                    <span id="idUploadText">📄 Upload PAN or Aadhaar card (JPG, PNG or PDF, max 5MB)</span>
+                    <input type="file" id="id_proof" accept="image/*,.pdf" style="display:none" required>
+                </label>
+            </div>
+
+            <div class="step-nav">
+                <button type="button" class="btn-secondary" onclick="goToStep(1)">Back</button>
+                <button type="button" class="btn-primary" onclick="goToStep(3)">Continue</button>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="email" placeholder="you@example.com" required>
+        <!-- STEP 3: Payout details -->
+        <div class="form-step" data-step="3">
+            <p class="section-title">Payout bank account</p>
+            <p class="section-hint">Where we'll send your earnings after a sale.</p>
+
+            <div class="form-group">
+                <label>Account Holder Name</label>
+                <input type="text" id="account_holder" placeholder="As per bank records" required>
+            </div>
+
+            <div class="form-group">
+                <label>Bank Account Number</label>
+                <input type="text" id="account_number" placeholder="Account number" inputmode="numeric" required>
+            </div>
+
+            <div class="field-row">
+                <div class="form-group">
+                    <label>IFSC Code</label>
+                    <input type="text" id="ifsc" placeholder="e.g. HDFC0001234" maxlength="11" style="text-transform:uppercase" required>
+                </div>
+                <div class="form-group">
+                    <label>Bank Name</label>
+                    <input type="text" id="bank_name" placeholder="e.g. HDFC Bank" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="At least 6 characters" required>
+            </div>
+
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" id="confirm_password" placeholder="Re-enter password" required>
+            </div>
+
+            <div class="step-nav">
+                <button type="button" class="btn-secondary" onclick="goToStep(2)">Back</button>
+                <button type="button" class="btn-primary" onclick="goToReview()">Continue</button>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Phone Number</label>
-            <input type="tel" id="phone" placeholder="10-digit phone number" required>
+        <!-- STEP 4: Review & submit -->
+        <div class="form-step" data-step="4">
+            <p class="section-title">Review your details</p>
+            <p class="section-hint">Check everything looks right before submitting.</p>
+
+            <div id="reviewArea"></div>
+
+            <div class="consent-row">
+                <input type="checkbox" id="consentCheck">
+                <label for="consentCheck">I confirm the details above are accurate and I authorize Vimal Pets World to verify my identity and business documents for seller onboarding.</label>
+            </div>
+
+            <div class="step-nav">
+                <button type="button" class="btn-secondary" onclick="goToStep(3)">Back</button>
+                <button type="submit" class="btn-primary" id="submitBtn">Submit for Verification</button>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Shop Address</label>
-            <input type="text" id="shop_address" placeholder="City, State">
-        </div>
-
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="password" placeholder="At least 6 characters" required>
-        </div>
-
-        <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="password" id="confirm_password" placeholder="Re-enter password" required>
-        </div>
-
-        <button type="submit" class="btn-primary" id="submitBtn">Create Seller Account</button>
     </form>
 
     <div class="switch-link">
-        Already have an account? <a href="login.html">Login here</a>
+        Already have an account? <a href="seller-login.html">Login here</a>
     </div>
 </div>
 
 <script src="js/supabaseClient.js"></script>
 <script>
-const form = document.getElementById("signupForm");
-const messageBox = document.getElementById("message");
-const submitBtn = document.getElementById("submitBtn");
+const TOTAL_STEPS = 4;
+let currentStep = 1;
+let idProofFile = null;
 
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    messageBox.innerHTML = "";
+// business type card selection
+document.querySelectorAll('.radio-card').forEach(card => {
+    card.addEventListener('click', () => {
+        document.querySelectorAll('.radio-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        card.querySelector('input').checked = true;
+    });
+});
 
-    const shop_name = document.getElementById("shop_name").value.trim();
-    const owner_name = document.getElementById("owner_name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const shop_address = document.getElementById("shop_address").value.trim();
-    const password = document.getElementById("password").value;
-    const confirm_password = document.getElementById("confirm_password").value;
+document.getElementById('id_proof').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    const box = document.getElementById('idUploadBox');
+    const text = document.getElementById('idUploadText');
+    if (file) {
+        if (file.size > 5 * 1024 * 1024) {
+            alert('File must be under 5MB.');
+            e.target.value = '';
+            return;
+        }
+        idProofFile = file;
+        box.classList.add('has-file');
+        text.textContent = '✅ ' + file.name;
+    }
+});
 
-    if (password !== confirm_password) {
-        messageBox.innerHTML = `<div class="error-msg">Passwords do not match.</div>`;
+function setStepUI(step) {
+    document.querySelectorAll('.form-step').forEach(s => {
+        s.classList.toggle('active', Number(s.dataset.step) === step);
+    });
+    document.querySelectorAll('.step-dot').forEach(d => {
+        const n = Number(d.dataset.step);
+        d.classList.toggle('active', n === step);
+        d.classList.toggle('done', n < step);
+    });
+    document.getElementById('stepFill').style.width = (((step - 1) / (TOTAL_STEPS - 1)) * 88) + '%';
+    document.getElementById('message').innerHTML = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validateStep(step) {
+    const errs = [];
+    if (step === 1) {
+        if (!document.querySelector('input[name="business_type"]:checked')) errs.push('Select a business type.');
+        if (!val('shop_name')) errs.push('Shop name is required.');
+        if (!val('owner_name')) errs.push('Owner name is required.');
+        if (!val('email')) errs.push('Email is required.');
+        if (!/^\d{10}$/.test(val('phone'))) errs.push('Enter a valid 10-digit phone number.');
+        if (!val('shop_address')) errs.push('Shop address is required.');
+        if (!val('city') || !val('state')) errs.push('City and state are required.');
+        if (!/^\d{6}$/.test(val('pincode'))) errs.push('Enter a valid 6-digit PIN code.');
+    }
+    if (step === 2) {
+        if (!/^[A-Z]{5}\d{4}[A-Z]$/.test(val('pan').toUpperCase())) errs.push('Enter a valid PAN (e.g. ABCDE1234F).');
+        if (!/^\d{12}$/.test(val('aadhaar'))) errs.push('Enter a valid 12-digit Aadhaar number.');
+        if (val('gstin') && val('gstin').length !== 15) errs.push('GSTIN must be 15 characters.');
+        if (!idProofFile) errs.push('Please upload an ID proof document.');
+    }
+    if (step === 3) {
+        if (!val('account_holder')) errs.push('Account holder name is required.');
+        if (!/^\d{9,18}$/.test(val('account_number'))) errs.push('Enter a valid bank account number.');
+        if (!/^[A-Z]{4}0[A-Z0-9]{6}$/.test(val('ifsc').toUpperCase())) errs.push('Enter a valid IFSC code.');
+        if (!val('bank_name')) errs.push('Bank name is required.');
+        if (document.getElementById('password').value.length < 6) errs.push('Password must be at least 6 characters.');
+        if (document.getElementById('password').value !== document.getElementById('confirm_password').value) errs.push('Passwords do not match.');
+    }
+    return errs;
+}
+
+function val(id) { return document.getElementById(id).value.trim(); }
+
+function goToStep(step) {
+    const errs = validateStep(currentStep);
+    if (step > currentStep && errs.length) {
+        document.getElementById('message').innerHTML = `<div class="error-msg">${errs.join('<br>')}</div>`;
         return;
     }
-    if (password.length < 6) {
-        messageBox.innerHTML = `<div class="error-msg">Password must be at least 6 characters.</div>`;
+    currentStep = step;
+    setStepUI(step);
+}
+
+function mask(str, visible) {
+    if (!str) return '—';
+    if (str.length <= visible) return str;
+    return '•'.repeat(str.length - visible) + str.slice(-visible);
+}
+
+function goToReview() {
+    const errs = validateStep(3);
+    if (errs.length) {
+        document.getElementById('message').innerHTML = `<div class="error-msg">${errs.join('<br>')}</div>`;
+        return;
+    }
+    const businessType = document.querySelector('input[name="business_type"]:checked').value;
+    document.getElementById('reviewArea').innerHTML = `
+        <div class="review-block">
+            <h4>Business</h4>
+            <div class="review-row"><span>Type</span><span>${businessType}</span></div>
+            <div class="review-row"><span>Shop name</span><span>${val('shop_name')}</span></div>
+            <div class="review-row"><span>Owner</span><span>${val('owner_name')}</span></div>
+            <div class="review-row"><span>Email</span><span>${val('email')}</span></div>
+            <div class="review-row"><span>Phone</span><span>${val('phone')}</span></div>
+            <div class="review-row"><span>Address</span><span>${val('shop_address')}, ${val('city')}, ${val('state')} - ${val('pincode')}</span></div>
+        </div>
+        <div class="review-block">
+            <h4>Identity</h4>
+            <div class="review-row"><span>PAN</span><span>${mask(val('pan').toUpperCase(), 2)}</span></div>
+            <div class="review-row"><span>Aadhaar</span><span>${mask(val('aadhaar'), 4)}</span></div>
+            <div class="review-row"><span>GSTIN</span><span>${val('gstin') ? val('gstin').toUpperCase() : 'Not provided'}</span></div>
+            <div class="review-row"><span>ID document</span><span>${idProofFile ? idProofFile.name : '—'}</span></div>
+        </div>
+        <div class="review-block">
+            <h4>Payout account</h4>
+            <div class="review-row"><span>Holder name</span><span>${val('account_holder')}</span></div>
+            <div class="review-row"><span>Account no.</span><span>${mask(val('account_number'), 4)}</span></div>
+            <div class="review-row"><span>IFSC</span><span>${val('ifsc').toUpperCase()}</span></div>
+            <div class="review-row"><span>Bank</span><span>${val('bank_name')}</span></div>
+        </div>
+    `;
+    currentStep = 4;
+    setStepUI(4);
+}
+
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const messageBox = document.getElementById('message');
+    const submitBtn = document.getElementById('submitBtn');
+    messageBox.innerHTML = '';
+
+    if (!document.getElementById('consentCheck').checked) {
+        messageBox.innerHTML = `<div class="error-msg">Please confirm the consent checkbox to continue.</div>`;
         return;
     }
 
     submitBtn.disabled = true;
-    submitBtn.textContent = "Creating account...";
+    submitBtn.textContent = 'Submitting...';
 
-    // Create the auth user AND pass shop details as user metadata.
-    // A database trigger (on_auth_user_created) reads this metadata and
-    // creates the matching row in `profiles` automatically — server-side,
-    // so it works even before the user confirms their email and has no
-    // active session yet (which is why the old client-side insert failed).
+    const businessType = document.querySelector('input[name="business_type"]:checked').value;
+    const email = val('email');
+    const password = document.getElementById('password').value;
+
+    // 1. Create the auth user. A DB trigger (on_auth_user_created) reads this
+    // metadata and creates the matching `profiles` row server-side, so it
+    // works even before email confirmation / before there's a session.
     const { data: authData, error: authError } = await supabaseClient.auth.signUp({
         email: email,
         password: password,
         options: {
             data: {
-                shop_name: shop_name,
-                owner_name: owner_name,
-                phone: phone,
-                shop_address: shop_address
+                business_type: businessType,
+                shop_name: val('shop_name'),
+                owner_name: val('owner_name'),
+                phone: val('phone'),
+                shop_address: val('shop_address'),
+                city: val('city'),
+                state: val('state'),
+                pincode: val('pincode'),
+                pan_number: val('pan').toUpperCase(),
+                aadhaar_number: val('aadhaar'),
+                gstin: val('gstin') ? val('gstin').toUpperCase() : null,
+                account_holder: val('account_holder'),
+                account_number: val('account_number'),
+                ifsc: val('ifsc').toUpperCase(),
+                bank_name: val('bank_name'),
+                verification_status: 'pending'
             }
         }
     });
@@ -159,16 +615,31 @@ form.addEventListener("submit", async (e) => {
     if (authError) {
         messageBox.innerHTML = `<div class="error-msg">${authError.message}</div>`;
         submitBtn.disabled = false;
-        submitBtn.textContent = "Create Seller Account";
+        submitBtn.textContent = 'Submit for Verification';
         return;
     }
 
-    // No client-side insert into `profiles` anymore — the trigger handles it.
-    messageBox.innerHTML = `<div class="success-msg">✅ Account created! Check your email to confirm (if required), then <a href="login.html" style="color:#FFD700;">login here</a>.</div>`;
-    form.reset();
+    // 2. Upload ID proof to a private storage bucket, named by the new user's id
+    // so RLS policies can scope access to (a) the owner and (b) admins/verifiers only.
+    if (idProofFile && authData.user) {
+        const ext = idProofFile.name.split('.').pop();
+        const path = `${authData.user.id}/id-proof.${ext}`;
+        const { error: uploadError } = await supabaseClient
+            .storage
+            .from('seller-kyc-docs')
+            .upload(path, idProofFile, { upsert: true });
+
+        if (uploadError) {
+            // Account is already created at this point — surface the issue but
+            // don't block signup completion; document can be re-uploaded from the dashboard.
+            console.error('ID proof upload failed:', uploadError.message);
+        }
+    }
+
+    messageBox.innerHTML = `<div class="success-msg">✅ Application submitted! Check your email to confirm your account (if required). Our team will verify your documents within 1–2 business days before your seller dashboard is fully activated — <a href="seller-login.html" style="color:#FFD700;">login here</a> to check status.</div>`;
 
     submitBtn.disabled = false;
-    submitBtn.textContent = "Create Seller Account";
+    submitBtn.textContent = 'Submit for Verification';
 });
 </script>
 
