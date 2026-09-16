@@ -4827,3 +4827,67 @@ img {
         height: 680px !important;
     }
 }
+/* =========================================
+   MOVING PET CATEGORIES
+========================================= */
+
+.pet-categories {
+    overflow: hidden;
+    width: 100%;
+    padding: 30px 0;
+}
+
+.pet-category-track {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 24px;
+    width: max-content;
+    animation: movePetCategories 30s linear infinite;
+}
+
+/* Keep every card in one horizontal row */
+.pet-category-track .pet-item {
+    flex: 0 0 190px;
+}
+
+/* Pause movement when the mouse is over the cards */
+.pet-category-track:hover {
+    animation-play-state: paused;
+}
+
+/* Card hover effect */
+.pet-category-track .pet-item:hover {
+    transform: translateY(-8px) scale(1.03);
+}
+
+/* Moving animation */
+@keyframes movePetCategories {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .pet-category-track {
+        gap: 15px;
+        animation-duration: 25s;
+    }
+
+    .pet-category-track .pet-item {
+        flex: 0 0 150px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .pet-category-track {
+        animation: none;
+        flex-wrap: wrap !important;
+        width: 100%;
+    }
+}

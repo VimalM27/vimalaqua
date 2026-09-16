@@ -328,30 +328,31 @@
 </div>
     <section class="hero">
 
-    <picture class="hero-picture">
+    <!-- ================= HERO BACKGROUND ================= -->
+<div class="hero-media">
 
-    <!-- MOBILE IMAGE -->
-    <source
-        media="(max-width: 768px)"
-        srcset="images/home-mobile.png?v=30">
-
-    <!-- DESKTOP PHOENIX VIDEO -->
+    <!-- DESKTOP VIDEO -->
     <video
-        class="hero-background"
+        class="hero-desktop-video"
         autoplay
         muted
         loop
         playsinline
-        preload="auto">
+        preload="auto"
+        poster="images/homes.png?v=30">
 
-        <source
-            src="images/vimal_phoenix_hero_v2.mp4"
-            type="video/mp4">
+        <source src="images/vimal_phoenix_hero_v2.mp4" type="video/mp4">
 
+        Your browser does not support video.
     </video>
 
-</picture>
+    <!-- MOBILE IMAGE -->
+    <img
+        src="images/home-mobile.png?v=30"
+        alt="Vimal Pets World"
+        class="hero-mobile-image">
 
+</div>
     <div class="overlay"></div>
 
     <div class="hero-content">
@@ -409,7 +410,7 @@
     </div>
 </section>
 <section class="pet-categories">
-    <div class="pet-grid">
+    <div class="pet-grid pet-category-track"></div>
 
         <a href="dogs.html" class="pet-item">
             <img src="images/Dog-icon.jpg" alt="Dogs">
