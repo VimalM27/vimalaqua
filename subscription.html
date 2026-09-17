@@ -1,264 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-R5NVV7FZB6');
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Subscription Plans | Vimal Pets World</title>
+<title>Seller Plans | Vimal Pets World</title>
 <link rel="stylesheet" href="css/navbar.css">
 <link rel="stylesheet" href="css/navbar-auth.css">
 <link rel="stylesheet" href="css/shop.css">
-    <link rel="stylesheet" href="css/style.css">
-<style>
-body { align-items: flex-start; }
-.trial-card {
-    border: 2px dashed #4ade80;
-}
-.trial-card h3 {
-    color: #4ade80;
-}
-.trial-badge {
-    display: inline-block;
-    background: rgba(74, 222, 128, 0.15);
-    color: #4ade80;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-}
-.trial-card .btn-primary {
-    background: #4ade80;
-    color: #06281a;
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+/* ================= SELLER SUBSCRIPTION PAGE ================= */
+body{align-items:flex-start;min-height:100vh;background:#071a3d;color:#fff}
+.subscription-page{width:min(1240px,calc(100% - 36px));margin:48px auto 70px}
+.subscription-hero{text-align:center;max-width:780px;margin:0 auto 34px}
+.subscription-hero h1{font-size:clamp(28px,4vw,46px);line-height:1.2;margin:0 0 12px;color:#fff}
+.subscription-hero p{margin:0;color:#c4d2e8;font-size:16px;line-height:1.7}
+.plan-status{display:none;margin:0 auto 24px;max-width:760px;padding:14px 18px;border-radius:14px;text-align:center;background:rgba(0,180,216,.14);border:1px solid rgba(0,180,216,.5);color:#e7fbff}
+.plans-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+.plan-card{position:relative;display:flex;flex-direction:column;padding:30px 26px;border:1px solid rgba(177,204,239,.25);border-radius:24px;background:linear-gradient(145deg,#173b78,#0b2452);box-shadow:0 18px 45px rgba(0,0,0,.22);text-align:center;min-height:420px;transition:.2s ease}
+.plan-card:hover{transform:translateY(-5px);border-color:#00b4d8}
+.plan-card.featured{border:2px solid #d4af37;box-shadow:0 0 0 1px rgba(212,175,55,.15),0 18px 50px rgba(0,0,0,.25)}
+.plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#d4af37;color:#10234d;border-radius:999px;padding:6px 16px;font-size:11px;font-weight:800;white-space:nowrap}
+.trial-card{border:2px dashed #4ade80;background:linear-gradient(145deg,#123e49,#092c35)}
+.trial-badge{display:inline-block;margin:0 auto 8px;padding:6px 13px;border-radius:999px;background:rgba(74,222,128,.15);color:#4ade80;font-size:12px;font-weight:800}
+.plan-card h2{margin:10px 0 18px;font-size:26px;color:#fff}
+.plan-price{font-size:42px;font-weight:800;line-height:1.15;color:#00d4f5}
+.trial-card .plan-price{color:#4ade80}
+.plan-price span{display:block;margin-top:8px;color:#c4d2e8;font-size:14px;font-weight:500}
+.plan-description{flex:1;margin:20px 0 18px;color:#d7e3f5;line-height:1.7;font-size:15px}
+.plan-features{list-style:none;padding:0;margin:0 0 26px;color:#d7e3f5;text-align:left;line-height:2;font-size:14px}
+.plan-features li:before{content:'✓';color:#4ade80;font-weight:800;margin-right:9px}
+.plan-button{width:100%;min-height:48px;border:0;border-radius:999px;background:linear-gradient(90deg,#00b4d8,#0096c7);color:#061a3d;font-weight:800;font-size:15px;cursor:pointer}
+.plan-button:hover{filter:brightness(1.08)}
+.trial-card .plan-button{background:#4ade80;color:#06281a}
+.plan-button:disabled{opacity:.6;cursor:not-allowed}
+.loading-state,.error-state{grid-column:1/-1;text-align:center;padding:30px;border-radius:16px;background:rgba(20,52,105,.7);color:#d7e3f5}
+.error-state{color:#ffb4b4;border:1px solid rgba(255,100,100,.4)}
+.back-link{text-align:center;margin-top:32px}.back-link a{color:#00d4f5;font-weight:700;text-decoration:none}
+@media(max-width:980px){.plans-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.trial-card{grid-column:1/-1}}
+@media(max-width:620px){.subscription-page{width:calc(100% - 24px);margin-top:30px}.plans-grid{grid-template-columns:1fr;gap:20px}.trial-card{grid-column:auto}.plan-card{min-height:0;padding:28px 22px}}
+</style>
 </head>
 <body>
- 
 <nav class="navbar">
-    <div class="mobile-menu-btn" onclick="openMenu()">
-        ☰
-    </div>
-
-    <div class="logo">
-    <a href="index.html" class="logo-link">
-        <img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="navbar-logo">
-    </a>
-</div>
-
-    <a href="login.html" class="mobile-login" id="mobileLoginLink">
-        👤
-    </a>
-
-    <div class="search-box">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search pets, foods, accessories...">
-
-        <button onclick="searchWebsite()">🔍</button>
-    </div>
-
-    <ul class="nav-links">
-
-        <li><a href="index.html">Home</a></li>
-        <li><a href="toys.html">Toys</a></li>
-        <!-- SHOP -->
-        <li class="dropdown">
-            <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
-
-            <div class="mega-menu">
-
-                <div class="menu-column">
-                    <h4>Pets</h4>
-
-                    <a href="dogs.html">🐶 Dogs</a>
-                    <a href="cats.html">🐱 Cats</a>
-                    <a href="fish.html">🐟 Fish</a>
-                </div>
-
-                <div class="menu-column">
-                    <h4>Products</h4>
-
-                    <a href="marketplace.html">🛍 Marketplace</a>
-                    <a href="foods.html">🍖 Pet Foods</a>
-                    <a href="accessories.html">🎯 Accessories</a>
-                    <a href="aquariums.html">🐠 Aquariums</a>
-                </div>
-
-                <div class="menu-column">
-                    <h4>Explore</h4>
-
-                    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
-                    <a href="index.html#best-sellers">🔥 Best Sellers</a>
-                    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
-                    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
-                    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
-                    <a href="care-guide.html">📚 Pet Care Guide</a>
-                </div>
-
-            </div>
-        </li>
-
-        <!-- SELLER -->
-        <li class="dropdown">
-            <a href="#" onclick="toggleDropdown(event,this)">Partner Login ▼</a>
-
-            <div class="dropdown-content">
-                <a href="seller-signup.html">📝 Become a Partner</a>
-                <a href="seller-login.html">🔑 Partner Login</a>
-                <a href="seller-dashboard.html">📊 Partner Dashboard</a>
-            </div>
-        </li>
-
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li>
-    <a href="wishlist.html" class="wishlist-link">
-        ♡ <span id="wishlistCount">0</span>
-    </a>
-</li>
-        <li>
-            <a href="cart.html" class="cart-link">🛒</a>
-        </li>
-
-    </ul>
+  <div class="mobile-menu-btn" onclick="openMenu()">☰</div>
+  <div class="logo"><a href="index.html" class="logo-link"><img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="navbar-logo"></a></div>
+  <a href="login.html" class="mobile-login" id="mobileLoginLink">👤</a>
+  <div class="search-box"><input id="searchInput" type="text" placeholder="Search pets, foods, accessories..."><button onclick="searchWebsite()">🔍</button></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="toys.html">Toys</a></li>
+    <li class="dropdown"><a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a><div class="mega-menu"><div class="menu-column"><h4>Pets</h4><a href="dogs.html">🐶 Dogs</a><a href="cats.html">🐱 Cats</a><a href="fish.html">🐟 Fish</a><a href="birds.html">🦜 Birds</a><a href="small-pets.html">🐹 Small Pets</a></div><div class="menu-column"><h4>Products</h4><a href="marketplace.html">🛍 Marketplace</a><a href="foods.html">🍖 Pet Foods</a><a href="accessories.html">🎯 Accessories</a><a href="aquariums.html">🐠 Aquariums</a><a href="toys.html">🧸 Toys</a></div><div class="menu-column"><h4>Explore</h4><a href="index.html#shop-by-category">🗂 Categories</a><a href="care-guide.html">📚 Pet Care Guide</a></div></div></li>
+    <li class="dropdown"><a href="#" onclick="toggleDropdown(event,this)">Partner Login ▼</a><div class="dropdown-content"><a href="seller-signup.html">📝 Become a Partner</a><a href="seller-login.html">🔑 Partner Login</a><a href="seller-dashboard.html">📊 Partner Dashboard</a></div></li>
+    <li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="wishlist.html">♡ <span id="wishlistCount">0</span></a></li><li><a href="cart.html">🛒</a></li>
+  </ul>
 </nav>
+<div id="mobileMenu" class="mobile-menu"><span class="close-menu" onclick="closeMenu()">✕</span><a href="index.html">🏠 Home</a><a href="marketplace.html">🛍 Marketplace</a><a href="seller-signup.html">📝 Become a Partner</a><a href="seller-login.html">🔑 Partner Login</a><a href="seller-dashboard.html">📊 Partner Dashboard</a><a href="about.html">ℹ️ About</a><a href="contact.html">📞 Contact</a><a href="cart.html">🛒 Cart</a></div>
 
-<div id="mobileMenu" class="mobile-menu">
+<main class="subscription-page">
+  <header class="subscription-hero"><h1>🐾 Choose Your Seller Plan</h1><p>Grow your business with Vimal Pets World. Choose a plan to publish products, manage listings and reach more customers.</p></header>
+  <div id="planStatus" class="plan-status" aria-live="polite"></div>
+  <section id="plansGrid" class="plans-grid"><div class="loading-state">Loading seller plans...</div></section>
+  <div class="back-link"><a href="seller-dashboard.html">← Back to Seller Dashboard</a></div>
+</main>
 
-    <span class="close-menu" onclick="closeMenu()">✕</span>
-
-    <a href="index.html">🏠 Home</a>
-    <a href="toys.html">🏠 Toys</a>
-    <a href="fish.html">🐟 Fish</a>
-    <a href="birds.html">🦜 Birds</a>
-    <a href="dogs.html">🐶 Dogs</a>
-    <a href="cats.html">🐱 Cats</a>
-    <a href="small-pets.html">🐹 Small Pets</a>
-    <a href="marketplace.html">🛍️ Marketplace</a>
-    <a href="foods.html">🍖 Pet Foods</a>
-    <a href="accessories.html">🛍 Accessories</a>
-    <a href="aquariums.html">🐠 Aquariums</a>
-    <a href="seller-signup.html">📝 Become a Partner</a>
-    <a href="seller-login.html">🔑 Partner Login</a>
-    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
-    <a href="index.html#best-sellers">🔥 Best Sellers</a>
-    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
-    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
-    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
-    <a href="care-guide.html">📚 Pet Care Guide</a>
-    <a href="about.html">ℹ About</a>
-    <a href="contact.html">📞 Contact</a>
-    <a href="cart.html">🛒 Cart</a>
-
-</div>
- 
-<div class="plans-wrap">
-    <div class="page-title">
-        <h1>🐾 Choose Your Seller Plan</h1>
-        <p>Subscribe to start posting products on Vimal Pets World marketplace</p>
-    </div>
- 
-    <div class="plans-grid" id="plansGrid">Loading plans...</div>
- 
-    <div class="switch-link" style="margin-top:30px;">
-        <a href="seller-dashboard.html">← Back to Dashboard</a>
-    </div>
-</div>
- 
 <script src="js/supabaseClient.js"></script>
 <script>
-let currentUser = null;
- 
-async function init() {
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    if (!session) {
-        window.location.href = "login.html";
-        return;
-    }
-    currentUser = session.user;
- 
-    const { data: plans, error } = await supabaseClient
-        .from("subscription_plans")
-        .select("*")
-        .order("price", { ascending: true });
- 
-    const grid = document.getElementById("plansGrid");
- 
-    if (error || !plans) {
-        grid.innerHTML = `<p style="color:#ff9b9b;">Could not load plans.</p>`;
-        return;
-    }
- 
-    // Free trial card is not stored in subscription_plans — it's a
-    // one-time, zero-cost activation handled entirely client-side.
-    const trialCardHtml = `
-        <div class="plan-card trial-card">
-            <span class="trial-badge">FREE TRIAL</span>
-            <h3>2-Day Trial</h3>
-            <div class="plan-price">₹0 <span>/ 2 days</span></div>
-            <div class="plan-desc">Try posting products and using your dashboard, no payment needed.</div>
-            <button class="btn-primary" id="trialBtn" onclick="startFreeTrial()">Start Free Trial</button>
-        </div>
-    `;
- 
-    const paidPlansHtml = plans.map(plan => `
-        <div class="plan-card ${plan.plan_name === 'Premium' ? 'featured' : ''}">
-            <h3>${plan.plan_name}</h3>
-            <div class="plan-price">₹${Number(plan.price).toFixed(0)} <span>/ ${plan.duration_days} days</span></div>
-            <div class="plan-desc">${plan.description}</div>
-            <button class="btn-primary" onclick="goToCheckout(${plan.id})">Subscribe Now</button>
-        </div>
-    `).join("");
- 
-    grid.innerHTML = trialCardHtml + paidPlansHtml;
+let currentUser=null;
+const $=id=>document.getElementById(id);
+function esc(value=''){const el=document.createElement('div');el.textContent=value;return el.innerHTML;}
+function showStatus(message){$('planStatus').textContent=message;$('planStatus').style.display='block';}
+async function init(){
+  const {data:{session},error:sessionError}=await supabaseClient.auth.getSession();
+  if(sessionError||!session){location.href='seller-login.html';return;}
+  currentUser=session.user;
+  const {data:plans,error}=await supabaseClient.from('subscription_plans').select('*').order('price',{ascending:true});
+  if(error||!plans){$('plansGrid').innerHTML='<div class="error-state">Could not load plans. Please try again later.</div>';return;}
+  const trial=`<article class="plan-card trial-card"><span class="trial-badge">FREE TRIAL</span><h2>2-Day Trial</h2><div class="plan-price">₹0<span>/ 2 days</span></div><p class="plan-description">Test the seller dashboard and publish sample products without making a payment.</p><ul class="plan-features"><li>No payment required</li><li>Dashboard access</li><li>One-time trial option</li></ul><button class="plan-button" id="trialBtn" onclick="startFreeTrial()">Start Free Trial</button></article>`;
+  const paid=plans.map(plan=>{const featured=String(plan.plan_name).toLowerCase()==='premium';return `<article class="plan-card ${featured?'featured':''}">${featured?'<span class="plan-badge">POPULAR PLAN</span>':''}<h2>${esc(plan.plan_name)}</h2><div class="plan-price">₹${Number(plan.price||0).toFixed(0)}<span>/ ${Number(plan.duration_days||0)} days</span></div><p class="plan-description">${esc(plan.description||'Seller marketplace access with product management tools.')}</p><ul class="plan-features"><li>Product publishing</li><li>Seller dashboard</li><li>Manage your listings</li></ul><button class="plan-button" onclick="goToCheckout('${encodeURIComponent(plan.id)}')">Subscribe Now</button></article>`}).join('');
+  $('plansGrid').innerHTML=trial+paid;
 }
- 
-function goToCheckout(planId) {
-    window.location.href = `checkout.html?plan_id=${planId}`;
+function goToCheckout(id){location.href='checkout.html?plan_id='+decodeURIComponent(id);}
+async function startFreeTrial(){
+  const btn=$('trialBtn');if(!btn||!currentUser)return;btn.disabled=true;btn.textContent='Activating...';
+  const {data:profile,error:profileError}=await supabaseClient.from('profiles').select('subscription_status,plan_name,plan_expiry').eq('id',currentUser.id).single();
+  if(profileError){showStatus('Could not verify your seller profile.');btn.disabled=false;btn.textContent='Start Free Trial';return;}
+  if(profile.plan_name==='Free Trial'){showStatus('Your free trial has already been used.');btn.disabled=false;btn.textContent='Trial Already Used';return;}
+  if(profile.subscription_status==='active'&&profile.plan_expiry&&new Date(profile.plan_expiry)>=new Date()){showStatus('You already have an active seller plan.');btn.disabled=false;btn.textContent='Plan Already Active';return;}
+  const expiry=new Date();expiry.setDate(expiry.getDate()+2);
+  const {error}=await supabaseClient.from('profiles').update({subscription_status:'active',plan_name:'Free Trial',plan_expiry:expiry.toISOString().split('T')[0]}).eq('id',currentUser.id);
+  if(error){showStatus('Could not start trial: '+error.message);btn.disabled=false;btn.textContent='Start Free Trial';return;}
+  location.href='seller-dashboard.html?trial=success';
 }
- 
-async function startFreeTrial() {
-    const trialBtn = document.getElementById("trialBtn");
-    trialBtn.disabled = true;
-    trialBtn.textContent = "Activating...";
- 
-    const TRIAL_DAYS = 2; // change to 1 for a 1-day trial
- 
-    const expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getDate() + TRIAL_DAYS);
-    const expiryString = expiryDate.toISOString().split("T")[0];
- 
-    const { error } = await supabaseClient
-        .from("profiles")
-        .update({
-            subscription_status: "active",
-            plan_name: "Free Trial",
-            plan_expiry: expiryString
-        })
-        .eq("id", currentUser.id);
- 
-    if (error) {
-        alert("Could not start trial: " + error.message);
-        trialBtn.disabled = false;
-        trialBtn.textContent = "Start Free Trial";
-        return;
-    }
- 
-    window.location.href = "seller-dashboard.html?trial=success";
-}
- 
 init();
 </script>
- 
 </body>
 </html>
