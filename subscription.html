@@ -14,29 +14,33 @@
 body{align-items:flex-start;min-height:100vh;background:#071a3d;color:#fff}
 .subscription-page{width:min(1240px,calc(100% - 36px));margin:48px auto 70px}
 .subscription-hero{text-align:center;max-width:780px;margin:0 auto 34px}
-.subscription-hero h1{font-size:clamp(28px,4vw,46px);line-height:1.2;margin:0 0 12px;color:#fff}
+.subscription-hero h1{font-size:clamp(28px,4vw,46px);line-height:1.2;margin:0 0 12px;color:#fff;font-weight:800}
 .subscription-hero p{margin:0;color:#c4d2e8;font-size:16px;line-height:1.7}
-.plan-status{display:none;margin:0 auto 24px;max-width:760px;padding:14px 18px;border-radius:14px;text-align:center;background:rgba(0,180,216,.14);border:1px solid rgba(0,180,216,.5);color:#e7fbff}
+.plan-status{display:none;margin:0 auto 24px;max-width:760px;padding:14px 18px;border-radius:14px;text-align:center;background:rgba(0,180,216,.14);border:1px solid rgba(0,180,216,.5);color:#e7fbff;font-weight:600}
+.plan-status.error{background:rgba(255,100,100,.12);border-color:rgba(255,100,100,.4);color:#ffcccc}
+.plan-status.success{background:rgba(74,222,128,.14);border-color:rgba(74,222,128,.5);color:#e9fff1}
 .plans-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
-.plan-card{position:relative;display:flex;flex-direction:column;padding:30px 26px;border:1px solid rgba(177,204,239,.25);border-radius:24px;background:linear-gradient(145deg,#173b78,#0b2452);box-shadow:0 18px 45px rgba(0,0,0,.22);text-align:center;min-height:420px;transition:.2s ease}
-.plan-card:hover{transform:translateY(-5px);border-color:#00b4d8}
-.plan-card.featured{border:2px solid #d4af37;box-shadow:0 0 0 1px rgba(212,175,55,.15),0 18px 50px rgba(0,0,0,.25)}
-.plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#d4af37;color:#10234d;border-radius:999px;padding:6px 16px;font-size:11px;font-weight:800;white-space:nowrap}
-.trial-card{border:2px dashed #4ade80;background:linear-gradient(145deg,#123e49,#092c35)}
-.trial-badge{display:inline-block;margin:0 auto 8px;padding:6px 13px;border-radius:999px;background:rgba(74,222,128,.15);color:#4ade80;font-size:12px;font-weight:800}
-.plan-card h2{margin:10px 0 18px;font-size:26px;color:#fff}
-.plan-price{font-size:42px;font-weight:800;line-height:1.15;color:#00d4f5}
+.plan-card{position:relative;display:flex;flex-direction:column;padding:32px 26px;border:1px solid rgba(177,204,239,.22);border-radius:22px;background:linear-gradient(160deg,#16386f 0%,#0b2452 100%);box-shadow:0 18px 45px rgba(0,0,0,.22);text-align:center;min-height:440px;transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease}
+.plan-card:hover{transform:translateY(-6px);border-color:#00b4d8;box-shadow:0 24px 55px rgba(0,0,0,.3)}
+.plan-card.featured{border:2px solid #d4af37;box-shadow:0 0 0 1px rgba(212,175,55,.15),0 20px 50px rgba(0,0,0,.28)}
+.plan-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#d4af37;color:#10234d;border-radius:999px;padding:6px 18px;font-size:11px;font-weight:800;letter-spacing:.4px;white-space:nowrap;box-shadow:0 4px 12px rgba(212,175,55,.35)}
+.trial-card{border:2px dashed rgba(74,222,128,.55);background:linear-gradient(160deg,#123e49 0%,#092c35 100%)}
+.trial-badge{display:inline-block;margin:0 auto 10px;padding:6px 14px;border-radius:999px;background:rgba(74,222,128,.15);color:#4ade80;font-size:12px;font-weight:800;letter-spacing:.4px}
+.plan-card h2{margin:8px 0 16px;font-size:24px;color:#fff;font-weight:700}
+.plan-price{font-size:40px;font-weight:800;line-height:1.15;color:#00d4f5}
 .trial-card .plan-price{color:#4ade80}
-.plan-price span{display:block;margin-top:8px;color:#c4d2e8;font-size:14px;font-weight:500}
-.plan-description{flex:1;margin:20px 0 18px;color:#d7e3f5;line-height:1.7;font-size:15px}
+.plan-price span{display:block;margin-top:8px;color:#9fb2d0;font-size:13px;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.plan-description{flex:1;margin:20px 0 18px;color:#d7e3f5;line-height:1.65;font-size:14.5px}
 .plan-features{list-style:none;padding:0;margin:0 0 26px;color:#d7e3f5;text-align:left;line-height:2;font-size:14px}
-.plan-features li:before{content:'✓';color:#4ade80;font-weight:800;margin-right:9px}
-.plan-button{width:100%;min-height:48px;border:0;border-radius:999px;background:linear-gradient(90deg,#00b4d8,#0096c7);color:#061a3d;font-weight:800;font-size:15px;cursor:pointer}
-.plan-button:hover{filter:brightness(1.08)}
-.trial-card .plan-button{background:#4ade80;color:#06281a}
-.plan-button:disabled{opacity:.6;cursor:not-allowed}
-.loading-state,.error-state{grid-column:1/-1;text-align:center;padding:30px;border-radius:16px;background:rgba(20,52,105,.7);color:#d7e3f5}
+.plan-features li{display:flex;align-items:flex-start;gap:8px}
+.plan-features li:before{content:'✓';color:#4ade80;font-weight:800;flex-shrink:0}
+.plan-button{width:100%;min-height:48px;border:0;border-radius:999px;background:linear-gradient(90deg,#00b4d8,#0096c7);color:#061a3d;font-weight:800;font-size:15px;cursor:pointer;transition:filter .15s ease, transform .15s ease}
+.plan-button:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.trial-card .plan-button{background:linear-gradient(90deg,#4ade80,#22c55e);color:#06281a}
+.plan-button:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.loading-state,.error-state{grid-column:1/-1;text-align:center;padding:40px 24px;border-radius:16px;background:rgba(20,52,105,.7);color:#d7e3f5}
 .error-state{color:#ffb4b4;border:1px solid rgba(255,100,100,.4)}
+.error-state button{margin-top:14px;padding:10px 22px;border:0;border-radius:999px;background:#00b4d8;color:#061a3d;font-weight:800;cursor:pointer}
 .back-link{text-align:center;margin-top:32px}.back-link a{color:#00d4f5;font-weight:700;text-decoration:none}
 @media(max-width:980px){.plans-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.trial-card{grid-column:1/-1}}
 @media(max-width:620px){.subscription-page{width:calc(100% - 24px);margin-top:30px}.plans-grid{grid-template-columns:1fr;gap:20px}.trial-card{grid-column:auto}.plan-card{min-height:0;padding:28px 22px}}
@@ -69,28 +73,77 @@ body{align-items:flex-start;min-height:100vh;background:#071a3d;color:#fff}
 let currentUser=null;
 const $=id=>document.getElementById(id);
 function esc(value=''){const el=document.createElement('div');el.textContent=value;return el.innerHTML;}
-function showStatus(message){$('planStatus').textContent=message;$('planStatus').style.display='block';}
+function showStatus(message,type){
+  const el=$('planStatus');
+  el.textContent=message;
+  el.className='plan-status'+(type?(' '+type):'');
+  el.style.display='block';
+}
+function renderLoadError(detail){
+  $('plansGrid').innerHTML=`<div class="error-state">
+    <p>Could not load plans. ${esc(detail||'Please try again later.')}</p>
+    <button onclick="init()">Retry</button>
+  </div>`;
+}
 async function init(){
+  $('plansGrid').innerHTML='<div class="loading-state">Loading seller plans...</div>';
   const {data:{session},error:sessionError}=await supabaseClient.auth.getSession();
-  if(sessionError||!session){location.href='seller-login.html';return;}
+  if(sessionError){console.error('Session error:',sessionError);renderLoadError('Could not verify your session.');return;}
+  if(!session){location.href='seller-login.html';return;}
   currentUser=session.user;
+
   const {data:plans,error}=await supabaseClient.from('subscription_plans').select('*').order('price',{ascending:true});
-  if(error||!plans){$('plansGrid').innerHTML='<div class="error-state">Could not load plans. Please try again later.</div>';return;}
-  const trial=`<article class="plan-card trial-card"><span class="trial-badge">FREE TRIAL</span><h2>2-Day Trial</h2><div class="plan-price">₹0<span>/ 2 days</span></div><p class="plan-description">Test the seller dashboard and publish sample products without making a payment.</p><ul class="plan-features"><li>No payment required</li><li>Dashboard access</li><li>One-time trial option</li></ul><button class="plan-button" id="trialBtn" onclick="startFreeTrial()">Start Free Trial</button></article>`;
-  const paid=plans.map(plan=>{const featured=String(plan.plan_name).toLowerCase()==='premium';return `<article class="plan-card ${featured?'featured':''}">${featured?'<span class="plan-badge">POPULAR PLAN</span>':''}<h2>${esc(plan.plan_name)}</h2><div class="plan-price">₹${Number(plan.price||0).toFixed(0)}<span>/ ${Number(plan.duration_days||0)} days</span></div><p class="plan-description">${esc(plan.description||'Seller marketplace access with product management tools.')}</p><ul class="plan-features"><li>Product publishing</li><li>Seller dashboard</li><li>Manage your listings</li></ul><button class="plan-button" onclick="goToCheckout('${encodeURIComponent(plan.id)}')">Subscribe Now</button></article>`}).join('');
+
+  if(error){
+    // Log the real Supabase error to the console so it can be diagnosed —
+    // most commonly this is an RLS policy blocking SELECT on subscription_plans,
+    // or a mismatched table/column name.
+    console.error('Supabase error loading subscription_plans:',error);
+    renderLoadError(error.message?`(${error.message})`:'');
+    return;
+  }
+  if(!plans||plans.length===0){
+    console.warn('subscription_plans query returned no rows.');
+    renderLoadError('No plans are available right now.');
+    return;
+  }
+
+  const trial=`<article class="plan-card trial-card"><span class="trial-badge">FREE TRIAL</span><h2>2-Day Trial</h2><div class="plan-price">₹0<span>2 days</span></div><p class="plan-description">Test the seller dashboard and publish sample products without making a payment.</p><ul class="plan-features"><li>No payment required</li><li>Dashboard access</li><li>One-time trial option</li></ul><button class="plan-button" id="trialBtn" onclick="startFreeTrial()">Start Free Trial</button></article>`;
+
+  const paid=plans.map(plan=>{
+    const featured=String(plan.plan_name).toLowerCase()==='premium';
+    return `<article class="plan-card ${featured?'featured':''}">${featured?'<span class="plan-badge">POPULAR PLAN</span>':''}<h2>${esc(plan.plan_name)}</h2><div class="plan-price">₹${Number(plan.price||0).toFixed(0)}<span>${Number(plan.duration_days||0)} days</span></div><p class="plan-description">${esc(plan.description||'Seller marketplace access with product management tools.')}</p><ul class="plan-features"><li>Product publishing</li><li>Seller dashboard</li><li>Manage your listings</li></ul><button class="plan-button" onclick="goToCheckout('${encodeURIComponent(plan.id)}')">Subscribe Now</button></article>`;
+  }).join('');
+
   $('plansGrid').innerHTML=trial+paid;
 }
 function goToCheckout(id){location.href='checkout.html?plan_id='+decodeURIComponent(id);}
 async function startFreeTrial(){
-  const btn=$('trialBtn');if(!btn||!currentUser)return;btn.disabled=true;btn.textContent='Activating...';
+  const btn=$('trialBtn');if(!btn||!currentUser)return;
+  btn.disabled=true;btn.textContent='Activating...';
   const {data:profile,error:profileError}=await supabaseClient.from('profiles').select('subscription_status,plan_name,plan_expiry').eq('id',currentUser.id).single();
-  if(profileError){showStatus('Could not verify your seller profile.');btn.disabled=false;btn.textContent='Start Free Trial';return;}
-  if(profile.plan_name==='Free Trial'){showStatus('Your free trial has already been used.');btn.disabled=false;btn.textContent='Trial Already Used';return;}
-  if(profile.subscription_status==='active'&&profile.plan_expiry&&new Date(profile.plan_expiry)>=new Date()){showStatus('You already have an active seller plan.');btn.disabled=false;btn.textContent='Plan Already Active';return;}
+  if(profileError){
+    console.error('Profile fetch error:',profileError);
+    showStatus('Could not verify your seller profile.','error');
+    btn.disabled=false;btn.textContent='Start Free Trial';return;
+  }
+  if(profile.plan_name==='Free Trial'){
+    showStatus('Your free trial has already been used.','error');
+    btn.disabled=false;btn.textContent='Trial Already Used';return;
+  }
+  if(profile.subscription_status==='active'&&profile.plan_expiry&&new Date(profile.plan_expiry)>=new Date()){
+    showStatus('You already have an active seller plan.','error');
+    btn.disabled=false;btn.textContent='Plan Already Active';return;
+  }
   const expiry=new Date();expiry.setDate(expiry.getDate()+2);
   const {error}=await supabaseClient.from('profiles').update({subscription_status:'active',plan_name:'Free Trial',plan_expiry:expiry.toISOString().split('T')[0]}).eq('id',currentUser.id);
-  if(error){showStatus('Could not start trial: '+error.message);btn.disabled=false;btn.textContent='Start Free Trial';return;}
-  location.href='seller-dashboard.html?trial=success';
+  if(error){
+    console.error('Trial activation error:',error);
+    showStatus('Could not start trial: '+error.message,'error');
+    btn.disabled=false;btn.textContent='Start Free Trial';return;
+  }
+  showStatus('Free trial activated! Redirecting to your dashboard...','success');
+  setTimeout(()=>{location.href='seller-dashboard.html?trial=success';},700);
 }
 init();
 </script>
