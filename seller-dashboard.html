@@ -140,247 +140,141 @@
 
 </div>
  
-<div class="dashboard-wrap">
- 
-    <div class="dash-header">
-        <div>
-            <h2 id="shopNameHeading">🏪 Loading...</h2>
-            <span class="status-badge" id="statusBadge">Checking...</span>
-        </div>
-        <div style="display:flex; gap:10px;">
-            <a href="subscription.html" class="link-btn outline" id="subscribeBtn">Subscribe to Sell</a>
-            <a href="#" class="logout-btn" id="logoutBtn">Logout</a>
-        </div>
+
+<div class="dashboard-wrap" style="max-width:1400px;margin:40px auto;padding:20px;">
+  <div class="dash-header">
+    <div>
+      <h1 id="shopNameHeading">🏪 Loading your shop...</h1>
+      <p id="sellerEmail"></p>
+      <span class="status-badge" id="statusBadge">Checking...</span>
     </div>
- 
-    <div id="topMessage"></div>
- 
-    <div class="dash-grid">
- 
-        <div class="panel">
-            <h3>➕ Post a New Product</h3>
-            <div id="productFormArea">Loading...</div>
-        </div>
- 
-        <div class="panel">
-            <h3>📦 Your Products (<span id="productCount">0</span>)</h3>
-            <div class="product-list" id="productList">Loading...</div>
-        </div>
- 
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <a href="subscription.html" class="link-btn outline" id="subscribeBtn">Subscription</a>
+      <a href="marketplace.html" class="link-btn outline">View Marketplace</a>
+      <button class="logout-btn" id="logoutBtn">Logout</button>
     </div>
- 
+  </div>
+
+  <div id="topMessage" aria-live="polite"></div>
+
+  <div class="dash-grid">
+    <div class="panel">
+      <h3>📊 Shop Overview</h3>
+      <div class="stats-grid">
+        <div class="stat-card"><small>Total Products</small><strong id="totalProducts">0</strong></div>
+        <div class="stat-card"><small>Active Products</small><strong id="activeProducts">0</strong></div>
+        <div class="stat-card"><small>Low Stock</small><strong id="lowStockProducts">0</strong></div>
+        <div class="stat-card"><small>Total Orders</small><strong id="totalOrders">—</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+    <div class="panel">
+      <h3>➕ Add a New Product</h3>
+      <div id="productFormArea">Loading...</div>
+    </div>
+    <div class="panel">
+      <h3>📦 My Products (<span id="productCount">0</span>)</h3>
+      <input id="productSearch" type="search" placeholder="Search your products...">
+      <select id="stockFilter">
+        <option value="all">All stock</option><option value="available">In stock</option>
+        <option value="low">Low stock</option><option value="out">Out of stock</option>
+      </select>
+      <div class="product-list" id="productList">Loading...</div>
+    </div>
+  </div>
+
+  <div class="dash-grid">
+    <div class="panel">
+      <h3>🛍️ Recent Orders</h3>
+      <div id="ordersArea">Orders will appear here after the seller-order connection is configured.</div>
+    </div>
+    <div class="panel">
+      <h3>🏪 Shop Information</h3>
+      <div id="shopInfoArea">Loading...</div>
+      <a href="seller-profile.html" class="link-btn outline">Edit Shop Profile</a>
+    </div>
+  </div>
 </div>
- 
+
 <script src="js/supabaseClient.js"></script>
 <script>
-let currentUser = null;
-let isActive = false;
- 
-async function init() {
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    if (!session) {
-        window.location.href = "login.html";
-        return;
-    }
-    currentUser = session.user;
- 
-    // load profile
-    const { data: profile, error } = await supabaseClient
-        .from("profiles")
-        .select("*")
-        .eq("id", currentUser.id)
-        .single();
- 
-    if (error || !profile) {
-    document.getElementById("shopNameHeading").textContent = "🏪 Profile not found";
-    document.getElementById("statusBadge").className = "status-badge status-inactive";
-    document.getElementById("statusBadge").textContent = "Error";
-    document.getElementById("productFormArea").innerHTML = "";
-    document.getElementById("productList").innerHTML = "";
-    document.getElementById("topMessage").innerHTML = `<div class="error-msg">Could not load your shop profile. If you just signed up, please contact support — your seller profile wasn't created correctly.</div>`;
-    console.error("Profile fetch error:", error);
-    return;
+let currentUser=null, currentProfile=null, isActive=false, allProducts=[];
+const $=id=>document.getElementById(id);
+function esc(v=""){const d=document.createElement("div");d.textContent=v;return d.innerHTML;}
+function msg(t,type="error"){$("topMessage").innerHTML=`<div class="${type}-msg">${t}</div>`;}
+
+async function init(){
+ const {data:{session}}=await supabaseClient.auth.getSession();
+ if(!session){location.href="seller-login.html";return;}
+ currentUser=session.user;$("sellerEmail").textContent=currentUser.email||"";
+ const {data:p,error}=await supabaseClient.from("profiles").select("*").eq("id",currentUser.id).single();
+ if(error||!p){$("shopNameHeading").textContent="🏪 Seller profile not found";
+   $("productFormArea").innerHTML='<div class="error-msg">Seller profile could not be loaded.</div>';return;}
+ currentProfile=p;$("shopNameHeading").textContent="🏪 "+(p.shop_name||"My Shop");
+ const today=new Date().toISOString().split("T")[0];
+ isActive=p.subscription_status==="active"&&p.plan_expiry&&p.plan_expiry>=today;
+ $("statusBadge").className="status-badge "+(isActive?"status-active":"status-inactive");
+ $("statusBadge").textContent=isActive?`Subscription active — ${p.plan_name||"Plan"} | Expires: ${p.plan_expiry}`:"No active subscription";
+ $("subscribeBtn").textContent=isActive?"Change Plan":"Subscribe to Sell";
+ $("shopInfoArea").innerHTML=`<p><b>Shop:</b> ${esc(p.shop_name||"Not added")}</p>
+ <p><b>Email:</b> ${esc(currentUser.email||"")}</p><p><b>Phone:</b> ${esc(p.phone||"Not added")}</p>
+ <p><b>Address:</b> ${esc(p.address||"Not added")}</p><p><b>Verification:</b> ${esc(p.verification_status||"Pending")}</p>`;
+ renderForm();await loadProducts();await loadOrders();
 }
- 
-    document.getElementById("shopNameHeading").textContent = "🏪 " + profile.shop_name;
- 
-    const today = new Date().toISOString().split("T")[0];
-    isActive = profile.subscription_status === "active" && profile.plan_expiry >= today;
- 
-    const badge = document.getElementById("statusBadge");
-    const subBtn = document.getElementById("subscribeBtn");
- 
-    if (isActive) {
-        badge.className = "status-badge status-active";
-        badge.textContent = `Subscription Active (${profile.plan_name}) — expires ${profile.plan_expiry}`;
-        subBtn.textContent = "Change Plan";
-        subBtn.className = "link-btn outline";
-    } else {
-        badge.className = "status-badge status-inactive";
-        badge.textContent = "No Active Subscription";
-        subBtn.textContent = "Subscribe to Sell";
-        subBtn.className = "link-btn solid";
-    }
- 
-    renderProductForm();
-    loadProducts();
- 
-    // check for payment success flag
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("payment") === "success") {
-        document.getElementById("topMessage").innerHTML = `<div class="success-msg">✅ Payment successful! Your subscription is now active.</div>`;
-    }
+function renderForm(){
+ if(!isActive){$("productFormArea").innerHTML='<div class="error-msg">Active subscription required. <a href="subscription.html">Subscribe now →</a></div>';return;}
+ $("productFormArea").innerHTML=`<form id="productForm">
+ <div class="form-group"><label>Product Name *</label><input id="product_name" required maxlength="120"></div>
+ <div class="form-group"><label>Category *</label><select id="category" required><option value="">Select</option>
+ <option>Dogs</option><option>Cats</option><option>Fish</option><option>Birds</option><option>Small Pets</option>
+ <option>Reptiles</option><option>Pet Food</option><option>Accessories</option><option>Aquariums</option>
+ <option>Toys</option><option>Plants</option><option>Grooming</option></select></div>
+ <div class="form-group"><label>Price (₹) *</label><input id="price" type="number" min="0" step=".01" required></div>
+ <div class="form-group"><label>Stock Quantity *</label><input id="stock" type="number" min="0" required></div>
+ <div class="form-group"><label>Product Image</label><input id="product_image" type="file" accept="image/*"></div>
+ <div class="form-group"><label>Description</label><textarea id="description" rows="4" maxlength="2000"></textarea></div>
+ <button class="btn-primary" id="postBtn" type="submit">Publish Product</button></form>`;
+ $("productForm").addEventListener("submit",addProduct);
 }
- 
-function renderProductForm() {
-    const area = document.getElementById("productFormArea");
- 
-    if (!isActive) {
-        area.innerHTML = `<div class="error-msg">You need an active subscription before you can post products. <a href="subscription.html" style="color:#FFD700;">Subscribe now →</a></div>`;
-        return;
-    }
- 
-    area.innerHTML = `
-        <form id="productForm">
-            <div class="form-group">
-                <label>Product Name</label>
-                <input type="text" id="product_name" placeholder="e.g. Aquarium Filter Pump" required>
-            </div>
-            <div class="form-group">
-                <label>Category</label>
-                <select id="category" required>
-                    <option value="">Select category</option>
-                    <option value="Fish">Fish</option>
-                    <option value="Birds">Birds</option>
-                    <option value="Dogs">Dogs</option>
-                    <option value="Cats">Cats</option>
-                    <option value="Small Pets">Small Pets</option>
-                    <option value="Pet Food">Pet Food</option>
-                    <option value="Accessories">Accessories</option>
-                    <option value="Aquariums">Aquariums</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Price (₹)</label>
-                <input type="number" step="0.01" id="price" placeholder="e.g. 499.00" required>
-            </div>
-            <div class="form-group">
-                <label>Stock Quantity</label>
-                <input type="number" id="stock" placeholder="e.g. 10" required>
-            </div>
-            <div class="form-group">
-                <label>Product Image</label>
-                <input type="file" id="product_image" accept="image/*">
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <textarea id="description" rows="3" placeholder="Short product description"></textarea>
-            </div>
-            <button type="submit" class="btn-primary" id="postBtn">Post Product</button>
-        </form>
-    `;
- 
-    document.getElementById("productForm").addEventListener("submit", handleAddProduct);
+async function addProduct(e){
+ e.preventDefault();const b=$("postBtn");b.disabled=true;b.textContent="Publishing...";
+ try{let image_url="",f=$("product_image").files[0];
+  if(f){let name=`${currentUser.id}/${Date.now()}_${f.name.replace(/[^a-zA-Z0-9._-]/g,"_")}`;
+   let u=await supabaseClient.storage.from("product-images").upload(name,f);if(u.error)throw u.error;
+   image_url=supabaseClient.storage.from("product-images").getPublicUrl(name).data.publicUrl;}
+  let {error}=await supabaseClient.from("products").insert([{shop_owner_id:currentUser.id,
+   product_name:$("product_name").value.trim(),category:$("category").value,price:Number($("price").value),
+   stock:Number($("stock").value),image_url,description:$("description").value.trim()}]);
+  if(error)throw error;msg("✅ Product published successfully!","success");$("productForm").reset();await loadProducts();
+ }catch(e){msg(esc(e.message||"Could not publish product."));}finally{b.disabled=false;b.textContent="Publish Product";}
 }
- 
-async function handleAddProduct(e) {
-    e.preventDefault();
-    const postBtn = document.getElementById("postBtn");
-    postBtn.disabled = true;
-    postBtn.textContent = "Posting...";
- 
-    const product_name = document.getElementById("product_name").value.trim();
-    const category = document.getElementById("category").value;
-    const price = parseFloat(document.getElementById("price").value);
-    const stock = parseInt(document.getElementById("stock").value);
-    const description = document.getElementById("description").value.trim();
-    const imageFile = document.getElementById("product_image").files[0];
- 
-    let image_url = "";
- 
-    if (imageFile) {
-        const fileName = `${currentUser.id}_${Date.now()}_${imageFile.name}`;
-        const { data: uploadData, error: uploadError } = await supabaseClient
-            .storage
-            .from("product-images")
-            .upload(fileName, imageFile);
- 
-        if (uploadError) {
-            document.getElementById("topMessage").innerHTML = `<div class="error-msg">Image upload failed: ${uploadError.message}</div>`;
-        } else {
-            const { data: urlData } = supabaseClient.storage.from("product-images").getPublicUrl(fileName);
-            image_url = urlData.publicUrl;
-        }
-    }
- 
-    const { error } = await supabaseClient.from("products").insert([{
-        shop_owner_id: currentUser.id,
-        product_name, category, price, stock, image_url, description
-    }]);
- 
-    if (error) {
-        document.getElementById("topMessage").innerHTML = `<div class="error-msg">${error.message}</div>`;
-    } else {
-        document.getElementById("topMessage").innerHTML = `<div class="success-msg">✅ Product posted successfully!</div>`;
-        document.getElementById("productForm").reset();
-        loadProducts();
-    }
- 
-    postBtn.disabled = false;
-    postBtn.textContent = "Post Product";
+async function loadProducts(){
+ let {data,error}=await supabaseClient.from("products").select("*").eq("shop_owner_id",currentUser.id).order("created_at",{ascending:false});
+ if(error){$("productList").innerHTML='<div class="error-msg">Could not load products.</div>';return;}
+ allProducts=data||[];$("productCount").textContent=allProducts.length;$("totalProducts").textContent=allProducts.length;
+ $("activeProducts").textContent=allProducts.filter(p=>p.is_active!==false&&p.status!=="rejected").length;
+ $("lowStockProducts").textContent=allProducts.filter(p=>p.stock>0&&p.stock<=5).length;renderProducts();
 }
- 
-async function loadProducts() {
-    const { data: products, error } = await supabaseClient
-        .from("products")
-        .select("*")
-        .eq("shop_owner_id", currentUser.id)
-        .order("created_at", { ascending: false });
- 
-    const list = document.getElementById("productList");
-    document.getElementById("productCount").textContent = products ? products.length : 0;
- 
-    if (error) {
-        list.innerHTML = `<div class="error-msg">Could not load products.</div>`;
-        return;
-    }
- 
-    if (!products || products.length === 0) {
-        list.innerHTML = `<p style="color:#9aa8b8;">You haven't posted any products yet.</p>`;
-        return;
-    }
- 
-    list.innerHTML = products.map(p => `
-        <div class="product-item">
-            <div>
-                <div class="p-name">${escapeHtml(p.product_name)}</div>
-                <div class="p-price">₹${Number(p.price).toFixed(2)} · Stock: ${p.stock} · ${escapeHtml(p.category || "")}</div>
-            </div>
-            <button class="delete-link" onclick="deleteProduct('${p.id}')">Delete</button>
-        </div>
-    `).join("");
+function renderProducts(){
+ let q=$("productSearch").value.toLowerCase(),f=$("stockFilter").value;
+ let ps=allProducts.filter(p=>((p.product_name||"")+" "+(p.category||"")).toLowerCase().includes(q)&&
+ (f==="all"||(f==="available"&&p.stock>0)||(f==="low"&&p.stock>0&&p.stock<=5)||(f==="out"&&p.stock==0)));
+ if(!ps.length){$("productList").innerHTML='<p>No matching products found.</p>';return;}
+ $("productList").innerHTML=ps.map(p=>`<div class="product-item">${p.image_url?`<img src="${esc(p.image_url)}" style="width:70px;height:70px;object-fit:cover;border-radius:8px;">`:""}
+ <div style="flex:1"><div class="p-name">${esc(p.product_name)}</div><div class="p-price">₹${Number(p.price||0).toFixed(2)} · Stock: ${p.stock} · ${esc(p.category||"")}</div>
+ <small>Status: ${esc(p.status||"Pending review")}</small></div><button class="delete-link" onclick="deleteProduct('${p.id}')">Delete</button></div>`).join("");
 }
- 
-async function deleteProduct(id) {
-    if (!confirm("Delete this product?")) return;
-    const { error } = await supabaseClient.from("products").delete().eq("id", id);
-    if (!error) loadProducts();
+async function deleteProduct(id){if(!confirm("Delete this product?"))return;let {error}=await supabaseClient.from("products").delete().eq("id",id).eq("shop_owner_id",currentUser.id);if(error)msg(esc(error.message));else{msg("Product deleted.","success");loadProducts();}}
+async function loadOrders(){
+ let {data,error}=await supabaseClient.from("orders").select("*").eq("seller_id",currentUser.id).limit(5);
+ if(error){$("ordersArea").textContent="Orders will appear after the seller-order connection is configured.";return;}
+ $("totalOrders").textContent=data.length;$("ordersArea").innerHTML=data.length?data.map(o=>`<div class="product-item">Order #${esc(String(o.id).slice(0,8))} — ${esc(o.status||"Pending")} — ₹${Number(o.total_amount||0).toFixed(2)}</div>`).join(""):"No orders yet.";
 }
- 
-function escapeHtml(str) {
-    const div = document.createElement("div");
-    div.textContent = str;
-    return div.innerHTML;
-}
- 
-document.getElementById("logoutBtn").addEventListener("click", async (e) => {
-    e.preventDefault();
-    await supabaseClient.auth.signOut();
-    window.location.href = "login.html";
-});
- 
-init();
+$("productSearch").addEventListener("input",renderProducts);$("stockFilter").addEventListener("change",renderProducts);
+$("logoutBtn").onclick=async()=>{await supabaseClient.auth.signOut();location.href="seller-login.html";};init();
 </script>
- 
+
 </body>
 </html>
