@@ -18,6 +18,138 @@
 <link rel="stylesheet" href="css/style.css">
 <style>body { align-items: flex-start; }</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+/* ===== SELLER DASHBOARD ALIGNMENT FIX ===== */
+.dashboard-wrap {
+  width: min(1400px, 94%);
+  max-width: 1400px !important;
+  margin: 32px auto !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+.dashboard-wrap * { box-sizing: border-box; }
+.dashboard-wrap .dash-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  padding: 28px 32px !important;
+  margin-bottom: 24px !important;
+}
+.dashboard-wrap .dash-header > div:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.dashboard-wrap .dash-header h1,
+.dashboard-wrap .dash-header h2 {
+  margin: 0 0 8px !important;
+  line-height: 1.2 !important;
+}
+.dashboard-wrap #sellerEmail {
+  margin: 0 0 8px !important;
+  line-height: 1.4 !important;
+  overflow-wrap: anywhere;
+}
+.dashboard-wrap .dash-header > div:last-child {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  flex-wrap: wrap;
+  gap: 10px !important;
+}
+.dashboard-wrap .dash-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  align-items: stretch !important;
+  gap: 24px !important;
+  margin: 0 0 24px !important;
+}
+.dashboard-wrap .dash-grid:first-of-type {
+  grid-template-columns: 1fr !important;
+}
+.dashboard-wrap .dash-grid:first-of-type .panel {
+  width: 100% !important;
+}
+.dashboard-wrap .panel {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 100%;
+  padding: 26px !important;
+  border-radius: 16px !important;
+}
+.dashboard-wrap .panel h3 {
+  margin: 0 0 20px !important;
+  line-height: 1.3 !important;
+}
+.dashboard-wrap .stats-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+.dashboard-wrap .stat-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 105px !important;
+  padding: 18px !important;
+  border-radius: 12px !important;
+  text-align: center !important;
+}
+.dashboard-wrap .stat-card small {
+  display: block;
+  line-height: 1.4;
+}
+.dashboard-wrap .stat-card strong {
+  display: block;
+  font-size: 28px;
+  line-height: 1.1;
+}
+.dashboard-wrap #productSearch {
+  width: min(100%, 320px);
+  min-height: 42px;
+  margin: 0 8px 16px 0;
+}
+.dashboard-wrap #stockFilter {
+  min-height: 42px;
+  margin-bottom: 16px;
+}
+.dashboard-wrap .product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.dashboard-wrap .product-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  width: 100% !important;
+  min-width: 0;
+  padding: 14px !important;
+  border-radius: 12px !important;
+}
+.dashboard-wrap .product-item > div { min-width: 0; }
+.dashboard-wrap .p-name {
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+.dashboard-wrap .p-price { line-height: 1.5; }
+@media (max-width: 900px) {
+  .dashboard-wrap .dash-header { align-items: flex-start !important; flex-direction: column !important; }
+  .dashboard-wrap .dash-header > div:last-child { justify-content: flex-start !important; }
+  .dashboard-wrap .dash-grid { grid-template-columns: 1fr !important; }
+  .dashboard-wrap .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 480px) {
+  .dashboard-wrap { width: 94%; }
+  .dashboard-wrap .panel { padding: 18px !important; }
+  .dashboard-wrap .stats-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .dashboard-wrap .stat-card { padding: 12px !important; min-height: 90px !important; }
+  .dashboard-wrap .stat-card strong { font-size: 23px; }
+}
+</style>
+
 </head>
 <body>
  
