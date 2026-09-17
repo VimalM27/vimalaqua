@@ -1,3 +1,4 @@
+
 name: Build Android APK
 
 on:
@@ -5,10 +6,10 @@ on:
     branches: [ main ]
     paths:
       - 'android-app/**'
+      - '.github/workflows/build-apk.yml'
   workflow_dispatch: {}
 
 jobs:
-  # Builds an installable debug APK for testing/sharing.
   build-debug:
     runs-on: ubuntu-latest
 
@@ -27,6 +28,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          accept-android-sdk-licenses: true
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -42,7 +45,6 @@ jobs:
           name: vimal-pets-world-debug-apk
           path: android-app/app/build/outputs/apk/debug/app-debug.apk
 
-  # Release build - leave disabled until Play Store signing is configured.
   build-release:
     if: ${{ vars.ENABLE_RELEASE_BUILD == 'true' }}
     runs-on: ubuntu-latest
@@ -62,6 +64,8 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          accept-android-sdk-licenses: true
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
