@@ -20,6 +20,17 @@
 </head>
 
 <body class="toys-page">
+<!--
+    NOTE: The markup below (search box, nav-links, mega-menus, mobile menu)
+    is a static fallback only. navbar.js OVERWRITES nav.navbar's innerHTML
+    on load via applyUnifiedNavbar(), so the real, live nav is whatever is
+    defined inside that function in js/navbar.js. Keep this fallback in
+    sync with navbar.js manually if you edit menu items, but the actual
+    #toysMenuBtn / #toysDropdown elements that used to live here have been
+    removed — they were dead markup with no matching IDs in the JS-rendered
+    nav, and their toggle script below was a no-op. Do not re-add them
+    without also updating navbar.js to output matching IDs.
+-->
 <nav class="navbar">
     <div class="mobile-menu-btn" onclick="openMenu()">
         ☰
@@ -47,15 +58,7 @@
     <ul class="nav-links">
 
         <li><a href="index.html">Home</a></li>
-        <li class="nav-item toys-nav">
-    <button type="button" id="toysMenuBtn">
-        Toys
-    </button>
 
-    <div class="toys-dropdown" id="toysDropdown">
-        <!-- your dropdown content here -->
-    </div>
-</li>
         <!-- SHOP -->
         <li class="dropdown">
             <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
@@ -530,28 +533,36 @@
 })();
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+// ================= MEGA-MENU / DROPDOWN SAFETY NET =================
+// This does NOT replace toggleDropdown() in js/script.js — it supplements
+// it. Whatever opens a .mega-menu or .dropdown-content by adding the
+// ".show" class, this makes sure it also gets CLOSED in the three cases
+// that were previously left unhandled and made the Toys dropdown look
+// "stuck open" while scrolling:
+//   1. Scrolling the page while a menu is open
+//   2. Clicking anywhere outside the open menu
+//   3. Pressing Escape
+(function () {
+    function closeAllOpenMenus() {
+        document.querySelectorAll(".mega-menu.show, .dropdown-content.show")
+            .forEach(function (el) { el.classList.remove("show"); });
+    }
 
-    const toysBtn = document.getElementById("toysMenuBtn");
-    const toysDropdown = document.getElementById("toysDropdown");
+    // Close on scroll (this is what made it look "stuck" while scrolling)
+    window.addEventListener("scroll", closeAllOpenMenus, { passive: true });
 
-    if (!toysBtn || !toysDropdown) return;
-
-    toysBtn.addEventListener("click", function (event) {
-        event.stopPropagation();
-
-        toysDropdown.classList.toggle("show");
+    // Close on click outside any open dropdown/mega-menu
+    document.addEventListener("click", function (event) {
+        if (!event.target.closest(".dropdown")) {
+            closeAllOpenMenus();
+        }
     });
 
-    toysDropdown.addEventListener("click", function (event) {
-        event.stopPropagation();
+    // Close on Escape key
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeAllOpenMenus();
     });
-
-    document.addEventListener("click", function () {
-        toysDropdown.classList.remove("show");
-    });
-
-});
+})();
 </script>
 </body>
 </html>
