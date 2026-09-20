@@ -548,6 +548,11 @@
             .forEach(function (el) { el.classList.remove("show"); });
     }
 
+    function closeMenusIn(container) {
+        container.querySelectorAll(".mega-menu.show, .dropdown-content.show")
+            .forEach(function (el) { el.classList.remove("show"); });
+    }
+
     // Close on scroll (this is what made it look "stuck" while scrolling)
     window.addEventListener("scroll", closeAllOpenMenus, { passive: true });
 
@@ -561,6 +566,27 @@
     // Close on Escape key
     document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") closeAllOpenMenus();
+    });
+
+    // Close when the cursor leaves the dropdown (trigger + menu) area,
+    // with a short delay so moving from the trigger link into the menu
+    // itself doesn't accidentally close it.
+    var dropdowns = document.querySelectorAll(".navbar .dropdown");
+    var leaveTimer = null;
+
+    dropdowns.forEach(function (dropdown) {
+        dropdown.addEventListener("mouseleave", function () {
+            leaveTimer = setTimeout(function () {
+                closeMenusIn(dropdown);
+            }, 200);
+        });
+
+        dropdown.addEventListener("mouseenter", function () {
+            if (leaveTimer) {
+                clearTimeout(leaveTimer);
+                leaveTimer = null;
+            }
+        });
     });
 })();
 </script>
