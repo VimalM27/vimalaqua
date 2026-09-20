@@ -4827,3 +4827,97 @@ img {
         height: 680px !important;
     }
 }
+/* ================= FIND YOUR PERFECT PET — ANIMATION ================= */
+
+.pet-finder{
+    position: relative;
+    z-index: 1;
+    animation: petFinderFadeIn .8s ease-out both,
+               petFinderGlow 3s ease-in-out infinite;
+}
+
+/* Rotating gradient border glow */
+.pet-finder::before{
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 26px;
+    background: linear-gradient(120deg, #00b4d8, #d4af37, #00b4d8, #d4af37);
+    background-size: 300% 300%;
+    z-index: -1;
+    opacity: .6;
+    animation: petFinderBorderShift 6s linear infinite;
+}
+
+@keyframes petFinderFadeIn{
+    from{ opacity: 0; transform: translateY(30px); }
+    to{ opacity: 1; transform: translateY(0); }
+}
+
+@keyframes petFinderGlow{
+    0%, 100%{ box-shadow: 0 0 25px rgba(0,180,216,.25), 0 0 60px rgba(212,175,55,.15); }
+    50%{ box-shadow: 0 0 40px rgba(0,180,216,.45), 0 0 90px rgba(212,175,55,.3); }
+}
+
+@keyframes petFinderBorderShift{
+    0%{ background-position: 0% 50%; }
+    100%{ background-position: 300% 50%; }
+}
+
+/* Floating paw icon */
+.paw-float{
+    display: inline-block;
+    animation: pawBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes pawBounce{
+    0%, 100%{ transform: translateY(0) rotate(0deg); }
+    25%{ transform: translateY(-6px) rotate(-8deg); }
+    75%{ transform: translateY(-6px) rotate(8deg); }
+}
+
+/* Button: pulse ring + shine sweep */
+.pet-finder-btn{
+    position: relative;
+    overflow: hidden;
+    animation: btnPulse 2.4s ease-in-out infinite;
+    transition: transform .25s ease;
+}
+
+.pet-finder-btn:hover{
+    transform: translateY(-4px) scale(1.05);
+}
+
+@keyframes btnPulse{
+    0%, 100%{ box-shadow: 0 0 0 0 rgba(212,175,55,.55); }
+    50%{ box-shadow: 0 0 0 14px rgba(212,175,55,0); }
+}
+
+.pet-finder-btn::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
+    transform: skewX(-20deg);
+    animation: btnShine 3.2s ease-in-out infinite;
+}
+
+@keyframes btnShine{
+    0%{ left: -150%; }
+    50%{ left: 150%; }
+    100%{ left: 150%; }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+    .pet-finder,
+    .pet-finder::before,
+    .paw-float,
+    .pet-finder-btn,
+    .pet-finder-btn::after{
+        animation: none !important;
+    }
+}
