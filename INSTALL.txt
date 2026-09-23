@@ -1,37 +1,19 @@
-VIMAL NAVBAR REPAIR — ADD-ON ONLY
-=================================
+VIMAL NAVBAR FORCE REPAIR — ADD-ON ONLY
 
-This ZIP does NOT contain your website. It only contains two new add-on files.
+This add-on does NOT replace your existing navbar.js or navbar.css.
+It only activates when <nav class="navbar"> is empty/broken.
 
-1) Copy:
-   css/vimal-navbar-repair.css
-   into your existing project's css/ folder.
-
-2) Copy:
-   js/vimal-navbar-repair.js
-   into your existing project's js/ folder.
-
-3) In each HTML page that already has your navbar, add this AFTER your existing navbar.css line:
-
-<link rel="stylesheet" href="css/vimal-navbar-repair.css?v=1">
-
-4) Add this AFTER your existing navbar.js line:
-
-<script src="js/vimal-navbar-repair.js?v=1"></script>
+1. Copy css/vimal-navbar-force.css into your existing css folder.
+2. Copy js/vimal-navbar-force.js into your existing js folder.
+3. In index.html (and any page where the navbar is empty), add this CSS in <head> AFTER navbar.css:
+   <link rel="stylesheet" href="css/vimal-navbar-force.css?v=1">
+4. Add this JS immediately BEFORE </body>, AFTER your existing navbar.js:
+   <script src="js/vimal-navbar-force.js?v=1"></script>
+5. Save, hard refresh with Ctrl+F5.
 
 IMPORTANT:
-- Do NOT delete navbar.css.
-- Do NOT delete navbar.js.
-- Do NOT replace index.html.
-- Do NOT replace products-data.js.
+- Do not delete navbar.js or navbar.css.
+- Do not add the script twice.
+- If you are testing the Vercel site, commit/push the two files and HTML changes, wait for deployment, then Ctrl+F5.
 
-WHY THIS FIXES THE SCREENSHOT:
-Your current page contains <nav class="navbar"> but the existing navbar JavaScript did not populate it, leaving only the navy background. This add-on checks whether the navbar is empty/broken and rebuilds a safe copy only when needed.
-
-DESKTOP:
-Logo + search + Home + Toys + Pets & Accessories + Partner + About + Contact + Wishlist + Cart.
-
-MOBILE:
-Hamburger + logo + wishlist/cart, with a proper slide-out menu and expandable groups.
-
-If the existing navbar renders correctly, this add-on does not rebuild it.
+The repair creates a desktop navbar and a real mobile drawer if the original navbar is empty. Search uses VPW_PRODUCTS when that file is already loaded, otherwise it falls back to category pages/search-results.html.

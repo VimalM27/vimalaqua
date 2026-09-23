@@ -1,0 +1,33 @@
+/* Vimal Pets & Toys — standalone navbar repair/add-on */
+#vimalForceNavbar{position:fixed;top:0;left:0;width:100%;height:92px;background:#081b3c;color:#fff;display:flex;align-items:center;gap:18px;padding:10px 22px;z-index:2147483000;box-shadow:0 5px 20px rgba(0,0,0,.22);font-family:Arial,sans-serif}
+#vimalForceNavbar *{box-sizing:border-box}
+#vimalForceNavbar .vfn-menu-btn{display:none;border:0;background:transparent;color:#fff;font-size:28px;cursor:pointer;padding:6px}
+#vimalForceNavbar .vfn-logo{width:150px;display:flex;align-items:center;justify-content:center;flex:0 0 150px}
+#vimalForceNavbar .vfn-logo img{display:block;width:auto;height:62px;max-width:150px;object-fit:contain}
+#vimalForceNavbar .vfn-search{display:flex;flex:1;max-width:390px;height:44px}
+#vimalForceNavbar .vfn-search input{flex:1;min-width:0;border:0;outline:0;padding:0 16px;border-radius:24px 0 0 24px;font-size:14px}
+#vimalForceNavbar .vfn-search button{width:52px;border:0;background:#00b4d8;color:#fff;border-radius:0 24px 24px 0;font-size:17px;cursor:pointer}
+#vimalForceNavbar .vfn-links{display:flex;align-items:center;gap:17px;list-style:none;margin:0 0 0 auto;padding:0;white-space:nowrap}
+#vimalForceNavbar .vfn-links a{color:#fff;text-decoration:none;font-size:14px;font-weight:600}
+#vimalForceNavbar .vfn-links a:hover{color:#d4af37}
+#vimalForceNavbar .vfn-actions{display:flex;gap:12px;align-items:center;flex:0 0 auto}
+#vimalForceNavbar .vfn-icon{color:#fff;text-decoration:none;font-size:22px;position:relative}
+#vimalForceNavbar .vfn-count{position:absolute;top:-8px;right:-10px;min-width:16px;height:16px;padding:0 4px;border-radius:10px;background:#e53935;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center}
+.vfn-drawer{position:fixed;top:0;left:-330px;width:310px;max-width:86vw;height:100vh;background:#081b3c;color:#fff;z-index:2147483001;transition:left .25s ease;box-shadow:5px 0 25px rgba(0,0,0,.35);overflow-y:auto;padding:18px 18px 30px}
+.vfn-drawer.open{left:0}
+.vfn-drawer .vfn-close{display:flex;justify-content:flex-end;font-size:28px;cursor:pointer;margin-bottom:8px}
+.vfn-drawer .vfn-mobile-search{display:flex;height:42px;margin:5px 0 14px}
+.vfn-drawer .vfn-mobile-search input{min-width:0;flex:1;border:0;padding:0 12px;border-radius:20px 0 0 20px}
+.vfn-drawer .vfn-mobile-search button{width:45px;border:0;background:#00b4d8;color:#fff;border-radius:0 20px 20px 0}
+.vfn-drawer a{display:block;color:#fff;text-decoration:none;padding:13px 6px;border-bottom:1px solid rgba(255,255,255,.10);font-size:15px}
+.vfn-drawer a:hover{color:#d4af37}
+.vfn-mobile-group{border-bottom:1px solid rgba(255,255,255,.10)}
+.vfn-mobile-group>button{width:100%;border:0;background:transparent;color:#fff;text-align:left;padding:13px 6px;font-size:15px;cursor:pointer}
+.vfn-mobile-sub{display:none;padding:0 0 6px 14px}
+.vfn-mobile-group.open .vfn-mobile-sub{display:block}
+.vfn-mobile-sub a{border:0;padding:9px 6px;font-size:14px}
+.vfn-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:2147483000}
+.vfn-backdrop.show{display:block}
+body.vfn-navbar-active{padding-top:92px!important}
+@media(max-width:1200px){#vimalForceNavbar{gap:12px;padding:10px 14px}.vfn-links{gap:11px!important}.vfn-links a{font-size:12px!important}.vfn-search{max-width:280px!important}.vfn-logo{width:125px!important;flex-basis:125px!important}}
+@media(max-width:900px){#vimalForceNavbar{height:72px;padding:8px 12px;display:grid;grid-template-columns:44px 1fr 78px;gap:8px}.vfn-menu-btn{display:block!important}.vfn-logo{width:auto!important;flex-basis:auto!important}.vfn-logo img{height:50px;max-width:130px}.vfn-search,.vfn-links{display:none!important}.vfn-actions{justify-content:flex-end}.vfn-actions .login{display:none}.vfn-actions .vfn-icon{font-size:22px}.vfn-backdrop{z-index:2147482999}body.vfn-navbar-active{padding-top:72px!important}}
