@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vimal27.in/sitemap.xml

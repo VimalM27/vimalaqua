@@ -8,3 +8,9 @@ node_modules/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Local secrets and signing files
+*.env
+*.jks
+*.keystore
+android-app/release-keystore-base64.txt
