@@ -1,0 +1,37 @@
+VIMAL NAVBAR REPAIR — ADD-ON ONLY
+=================================
+
+This ZIP does NOT contain your website. It only contains two new add-on files.
+
+1) Copy:
+   css/vimal-navbar-repair.css
+   into your existing project's css/ folder.
+
+2) Copy:
+   js/vimal-navbar-repair.js
+   into your existing project's js/ folder.
+
+3) In each HTML page that already has your navbar, add this AFTER your existing navbar.css line:
+
+<link rel="stylesheet" href="css/vimal-navbar-repair.css?v=1">
+
+4) Add this AFTER your existing navbar.js line:
+
+<script src="js/vimal-navbar-repair.js?v=1"></script>
+
+IMPORTANT:
+- Do NOT delete navbar.css.
+- Do NOT delete navbar.js.
+- Do NOT replace index.html.
+- Do NOT replace products-data.js.
+
+WHY THIS FIXES THE SCREENSHOT:
+Your current page contains <nav class="navbar"> but the existing navbar JavaScript did not populate it, leaving only the navy background. This add-on checks whether the navbar is empty/broken and rebuilds a safe copy only when needed.
+
+DESKTOP:
+Logo + search + Home + Toys + Pets & Accessories + Partner + About + Contact + Wishlist + Cart.
+
+MOBILE:
+Hamburger + logo + wishlist/cart, with a proper slide-out menu and expandable groups.
+
+If the existing navbar renders correctly, this add-on does not rebuild it.
