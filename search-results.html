@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search | Vimal Pets & Toys</title>
+<meta name="description" content="Search pets, pet products, aquarium products and toys at Vimal Pets & Toys.">
+<link rel="stylesheet" href="css/navbar.css?v=2">
+<link rel="stylesheet" href="css/navbar-auth.css">
+<link rel="stylesheet" href="css/vimal-mobile-search-addon.css">
+<style>body{margin:0;background:#f7f9fb;font-family:Arial,sans-serif;padding-top:100px}.navbar{z-index:9999}.vp-results-search{max-width:650px;margin:0 auto 28px;display:flex}.vp-results-search input{flex:1;height:48px;border:1px solid #d9e0e7;border-radius:12px 0 0 12px;padding:0 15px;font-size:15px;outline:none}.vp-results-search button{width:56px;border:0;border-radius:0 12px 12px 0;background:#00b4d8;color:#fff;font-size:18px;cursor:pointer}@media(max-width:768px){body{padding-top:68px}}</style>
+</head>
+<body>
+<nav class="navbar"></nav>
+<main class="vp-results-page">
+  <form class="vp-results-search" id="resultsSearch"><input id="resultsInput" type="search" placeholder="Search pets, foods, accessories, toys..." autocomplete="off"><button aria-label="Search">🔍</button></form>
+  <h1 id="resultsTitle">Search</h1>
+  <p class="vp-results-summary" id="resultsSummary"></p>
+  <div class="vp-results-grid" id="resultsGrid"></div>
+</main>
+<script src="js/products-data.js"></script>
+<script src="js/navbar.js?v=32"></script>
+<script src="js/vimal-mobile-search-addon.js"></script>
+<script>
+(function(){
+ var products=Array.isArray(window.VPW_PRODUCTS)?window.VPW_PRODUCTS:[];
+ var params=new URLSearchParams(location.search),q=(params.get('q')||'').trim();
+ var input=document.getElementById('resultsInput'),title=document.getElementById('resultsTitle'),summary=document.getElementById('resultsSummary'),grid=document.getElementById('resultsGrid');
+ input.value=q;
+ function norm(v){return String(v||'').toLowerCase();}
+ function img(p){return (p.images&&p.images[0])||'images/vimallogo.png';}
+ function esc(v){return String(v??'').replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]);});}
+ function url(p){return 'product.html?id='+encodeURIComponent(p.slug||p.id||norm(p.name).replace(/[^a-z0-9]+/g,'-'));}
+ function search(){var words=norm(q).split(/\s+/).filter(Boolean);var hits=products.map(function(p){var t=[p.name,p.category,p.type,p.sku,p.description,p.brand,p.availability].filter(Boolean).join(' ').toLowerCase(),s=0;if(norm(p.name)===norm(q))s+=100;if(norm(p.name).indexOf(norm(q))>=0)s+=60;if(norm(p.category).indexOf(norm(q))>=0)s+=35;words.forEach(function(w){if(t.indexOf(w)>=0)s+=8;});return {p:p,s:s};}).filter(function(x){return x.s>0;}).sort(function(a,b){return b.s-a.s;}).map(function(x){return x.p;});return hits;}
+ function render(){var hits=search();title.textContent=q?'Search results for “'+q+'”':'Search Vimal Pets & Toys';summary.textContent=q?(hits.length+' result'+(hits.length===1?'':'s')+' found'):'Type something above to search our catalogue.';if(!q){grid.innerHTML='<div class="vp-no-results" style="grid-column:1/-1">Try <b>dog</b>, <b>Persian cat</b>, <b>aquarium</b>, <b>food</b>, <b>toy</b> or a product name.</div>';return;}if(!hits.length){grid.innerHTML='<div class="vp-no-results" style="grid-column:1/-1">No matching products found. Try a different name, category or keyword.</div>';return;}grid.innerHTML=hits.map(function(p){return '<article class="vp-result-card"><img loading="lazy" src="'+esc(img(p))+'" alt="'+esc(p.name)+'"><div class="vp-result-body"><h2>'+esc(p.name)+'</h2><div class="vp-result-category">'+esc(p.category||'Product')+'</div>'+(p.price!=null?'<div class="vp-result-price">₹'+Number(p.price).toLocaleString('en-IN')+'</div>':'')+'<a class="vp-result-btn" href="'+esc(url(p))+'">View Details</a></div></article>';}).join('');}
+ document.getElementById('resultsSearch').addEventListener('submit',function(e){e.preventDefault();var v=input.value.trim();location.href='search-results.html'+(v?'?q='+encodeURIComponent(v):'');});
+ render();
+})();
+</script>
+</body>
+</html>

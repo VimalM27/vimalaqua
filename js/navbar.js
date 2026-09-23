@@ -243,3 +243,4 @@ function searchWebsite() {
     }
 
 }
+<script src="js/vimal-mobile-search-addon.js"></script>

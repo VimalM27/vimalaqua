@@ -1,0 +1,50 @@
+VIMAL PETS & TOYS — MOBILE NAV + REAL SEARCH ADD-ON
+====================================================
+
+This package contains ONLY new add-on files. It does NOT replace your existing website files.
+
+FILES
+-----
+css/vimal-mobile-search-addon.css
+js/vimal-mobile-search-addon.js
+search-results.html
+
+INSTALL (IMPORTANT)
+-------------------
+1. Copy the 3 files into the ROOT of your existing Vimal-Aqua project:
+   css/vimal-mobile-search-addon.css
+   js/vimal-mobile-search-addon.js
+   search-results.html
+
+2. In your EXISTING pages, after the existing navbar.css link, add:
+   <link rel="stylesheet" href="css/vimal-mobile-search-addon.css">
+
+3. In your EXISTING pages, AFTER js/navbar.js, add:
+   <script src="js/vimal-mobile-search-addon.js"></script>
+
+4. On pages that already load js/products-data.js, keep it as it is.
+   The add-on uses your existing VPW_PRODUCTS data; it does not duplicate your product catalogue.
+
+5. The new search-results.html already loads products-data.js + navbar.js + the add-on.
+
+EXAMPLE ORDER
+-------------
+<link rel="stylesheet" href="css/navbar.css?v=2">
+<link rel="stylesheet" href="css/navbar-auth.css">
+<link rel="stylesheet" href="css/vimal-mobile-search-addon.css">
+
+...
+<script src="js/products-data.js"></script>   (where the page already uses it)
+<script src="js/navbar.js?v=32"></script>
+<script src="js/vimal-mobile-search-addon.js"></script>
+
+DO NOT REMOVE
+-------------
+Do NOT delete or replace navbar.css, navbar.js, products-data.js, cart.js, wishlist.js, etc.
+The add-on layers on top of your current website.
+
+NOTE
+----
+If some pages have a different relative folder structure, add the same two references using
+that page's correct relative path. Your current Vimal project is root-based, so the paths above
+are correct for the normal root pages.
