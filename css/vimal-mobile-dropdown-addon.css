@@ -1,0 +1,150 @@
+
+/* Vimal Pets & Toys - MOBILE NAV DROPDOWN ADD-ON
+   Desktop navbar is NOT changed by this file.
+*/
+@media (max-width: 768px) {
+  .navbar .mobile-menu-btn {
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .navbar .mobile-menu {
+    width: min(88vw, 360px) !important;
+    max-width: 360px !important;
+    height: 100dvh !important;
+    left: -110vw !important;
+    top: 0 !important;
+    padding: 0 !important;
+    background: #081b3c !important;
+    box-shadow: 8px 0 30px rgba(0,0,0,.35) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    transition: left .28s ease !important;
+    z-index: 100000 !important;
+  }
+
+  .navbar .mobile-menu.active,
+  .navbar .mobile-menu.vimal-mobile-open {
+    left: 0 !important;
+  }
+
+  .vimal-mobile-head {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 8px 14px;
+    background: #081b3c;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+  }
+
+  .vimal-mobile-brand {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .vimal-mobile-brand img {
+    width: 125px;
+    height: 48px;
+    object-fit: contain;
+  }
+
+  .vimal-mobile-close {
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 6px 8px;
+  }
+
+  .vimal-mobile-links {
+    padding: 8px 12px 24px;
+  }
+
+  .vimal-mobile-link,
+  .vimal-mobile-accordion {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 48px;
+    padding: 12px 10px;
+    color: #fff !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(255,255,255,.09);
+    font-size: 15px;
+    font-weight: 600;
+    background: transparent;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .vimal-mobile-accordion .arrow {
+    font-size: 13px;
+    color: #f5c451;
+    transition: transform .2s ease;
+  }
+
+  .vimal-mobile-accordion.open .arrow {
+    transform: rotate(180deg);
+  }
+
+  .vimal-mobile-submenu {
+    display: none;
+    padding: 3px 0 7px 8px;
+    background: rgba(255,255,255,.035);
+    border-radius: 8px;
+  }
+
+  .vimal-mobile-submenu.open {
+    display: block;
+  }
+
+  .vimal-mobile-section-title {
+    padding: 11px 10px 5px;
+    color: #f5c451;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .3px;
+  }
+
+  .vimal-mobile-submenu a {
+    display: block;
+    padding: 10px 10px;
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+
+  .vimal-mobile-submenu a:active,
+  .vimal-mobile-link:active {
+    background: rgba(0,217,255,.12);
+  }
+
+  body.vimal-mobile-menu-open {
+    overflow: hidden !important;
+  }
+
+  .vimal-mobile-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.42);
+    z-index: 99998;
+  }
+
+  .vimal-mobile-backdrop.show {
+    display: block;
+  }
+}
