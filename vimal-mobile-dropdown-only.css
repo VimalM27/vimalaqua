@@ -1,0 +1,90 @@
+/* Vimal Pets & Toys - MOBILE MENU ONLY
+   Desktop navbar is intentionally untouched. */
+@media (max-width: 768px) {
+  .mobile-menu {
+    width: min(340px, 88vw) !important;
+    max-width: 88vw !important;
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 18px 16px 28px !important;
+    gap: 0 !important;
+    box-shadow: 8px 0 28px rgba(0,0,0,.35) !important;
+  }
+
+  .mobile-menu .mobile-menu-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0 14px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgba(255,255,255,.14);
+  }
+
+  .mobile-menu .mobile-menu-title {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .mobile-menu .close-menu {
+    margin: 0 !important;
+    font-size: 28px !important;
+    line-height: 1;
+  }
+
+  .mobile-menu .mobile-item,
+  .mobile-menu .mobile-toggle {
+    width: 100%;
+    min-height: 48px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 4px !important;
+    border-bottom: 1px solid rgba(255,255,255,.09) !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    background: transparent;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    font: inherit;
+    font-size: 15px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mobile-menu .mobile-toggle .arrow {
+    font-size: 12px;
+    transition: transform .2s ease;
+    opacity: .9;
+  }
+
+  .mobile-menu .mobile-toggle.open .arrow {
+    transform: rotate(180deg);
+  }
+
+  .mobile-menu .mobile-submenu {
+    display: none;
+    padding: 3px 0 7px 12px;
+  }
+
+  .mobile-menu .mobile-submenu.open {
+    display: block;
+  }
+
+  .mobile-menu .mobile-submenu a {
+    display: block;
+    padding: 11px 6px !important;
+    min-height: 0 !important;
+    border-bottom: 0 !important;
+    color: rgba(255,255,255,.9) !important;
+    font-size: 14px;
+  }
+
+  .mobile-menu .mobile-divider {
+    height: 8px;
+  }
+}

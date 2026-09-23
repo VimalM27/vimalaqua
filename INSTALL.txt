@@ -1,32 +1,17 @@
-VIMAL MOBILE DROPDOWN ONLY - ADD-ON
+VIMAL PETS & TOYS — MOBILE DROPDOWN ONLY
 
-IMPORTANT:
-- This does NOT replace navbar.js.
-- This does NOT replace navbar.css.
-- Desktop navbar/dropdowns are NOT changed.
-- It only changes the MOBILE slide-out menu at max-width: 768px.
+This add-on changes ONLY the mobile menu.
+Your existing desktop navbar, desktop mega-dropdowns, search, cart and wishlist are NOT replaced.
 
-1. Copy:
-   css/vimal-mobile-dropdown-addon.css
-   into your existing Vimal-Aqua/css/ folder.
-
-2. Copy:
-   js/vimal-mobile-dropdown-addon.js
-   into your existing Vimal-Aqua/js/ folder.
-
-3. In each HTML page that loads the navbar, AFTER your existing:
+1. Copy vimal-mobile-dropdown-only.css into your existing css/ folder.
+2. Copy vimal-mobile-dropdown-only.js into your existing js/ folder.
+3. In index.html (and later the other pages that use the same navbar), after:
    <link rel="stylesheet" href="css/navbar.css?v=2">
-
    add:
-   <link rel="stylesheet" href="css/vimal-mobile-dropdown-addon.css?v=1">
-
-4. AFTER your existing:
+   <link rel="stylesheet" href="css/vimal-mobile-dropdown-only.css?v=1">
+4. Near the bottom, after your existing:
    <script src="js/navbar.js?v=32"></script>
-
    add:
-   <script src="js/vimal-mobile-dropdown-addon.js?v=1"></script>
-
-Do not remove or replace your existing navbar files.
-
-Desktop stays exactly as your current navbar.
-On phones, the hamburger opens grouped dropdowns for Toys, Pets & Accessories, and Become a Partner.
+   <script src="js/vimal-mobile-dropdown-only.js?v=1"></script>
+5. Do NOT remove or edit navbar.js or navbar.css.
+6. Test mobile. Desktop should remain exactly as before.
