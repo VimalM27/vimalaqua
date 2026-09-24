@@ -10,19 +10,23 @@
 // =====================================================================
 
 window.ART_WHATSAPP = "917845452727";   // your WhatsApp number (country code, no +)
-
 window.ART_WORKS = [
   {
-    id: "sample-1",
-    title: "Blue & Gold Mandala",
+    id: "jagannath-mandala",
+    title: "Jagannath Mandala",
     category: "mandala",
-    medium: "Acrylic & gold pen on canvas",
-    size: "12 x 12 in",
-    price: 2500,
+    medium: "markers & colour and glitter on paper",   // <- change to your real medium
+    size: "A3",                        // <- change to your real size
+    price: 5000,                          // <- put your price, e.g. 3500 (0 = price on request)
     status: "available",
-    image: "images/art/sample-mandala-1.svg",
-    description: "SAMPLE - replace me. Hand-drawn mandala with fine gold detailing."
-  },
+    images: [
+      "images/art/jagannath-mandala-1.jpg"
+      "images/art/jagannath-mandala-2.jpg"
+      "images/art/jagannath-mandala-3.jpg"
+    ],
+    description: "Hand-drawn Lord Jagannath mandala in red, black and white with fine detailed patterns and red glitter accents."
+  }
+];
   {
     id: "sample-2",
     title: "Sunset Dot Mandala",
