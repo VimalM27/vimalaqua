@@ -19,16 +19,14 @@ window.ART_WORKS = [
     id: "jagannath-mandala",
     title: "Jagannath Mandala",
     category: "mandala",
-    medium: "Pen & colour on paper",   // <- change to your real medium
+    medium: "Markers" & colour and glitter on paper",   // <- change to your real medium
     size: "A3",                        // <- change to your real size
-    price: 0,                          // <- put your price, e.g. 3500 (0 = price on request)
+    price: 5000,                          // <- put your price, e.g. 3500 (0 = price on request)
     status: "available",
     images: [
       "images/art/jagannath-mandala-1.jpg"
-      // When you have the other 2 photos, save them in images/art/ and
-      // remove the // below (mind the comma after the line above):
-      // ,"images/art/jagannath-mandala-2.jpg"
-      // ,"images/art/jagannath-mandala-3.jpg"
+      "images/art/jagannath-mandala-2.jpg"
+      "images/art/jagannath-mandala-3.jpg"
     ],
     description: "Hand-drawn Lord Jagannath mandala in red, black and white with fine detailed patterns and red glitter accents."
   }
