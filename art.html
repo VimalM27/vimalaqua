@@ -49,7 +49,7 @@
 <div class="art-modal" id="artModal" aria-hidden="true">
     <div class="art-modal-box">
         <button class="art-close" id="artClose" aria-label="Close">&times;</button>
-        <img id="artModalImg" src="" alt="">
+        <div id="artModalGallery" class="art-modal-gallery"></div>
         <div class="art-modal-info" id="artModalInfo"></div>
     </div>
 </div>
@@ -67,7 +67,7 @@
     </div>
 </footer>
 
-<script src="js/art-data.js"></script>
+<script src="js/art-data.js?v=3"></script>
 <script>
 (function () {
     var WORKS = window.ART_WORKS || [];
@@ -83,7 +83,21 @@
     function money(n) { return n > 0 ? "₹" + Number(n).toLocaleString("en-IN") : "Price on request"; }
     function waLink(text) { return "https://wa.me/" + WA + "?text=" + encodeURIComponent(text); }
     function find(id) { return WORKS.filter(function (w) { return w.id === id; })[0]; }
-    function imgSrc(w) { return encodeURI(w.image || ""); }
+    function imgList(w) { var a = (w.images && w.images.length) ? w.images : [w.image]; return a.filter(Boolean); }
+    function cover(w) { return imgList(w)[0] || ""; }
+    function galleryHTML(w, openable) {
+        var list = imgList(w);
+        var slides = list.map(function (src, i) {
+            return '<img class="art-img" loading="' + (i ? "lazy" : "eager") + '" src="' + esc(encodeURI(src)) + '" alt="' + esc(w.title) + (list.length > 1 ? " (" + (i + 1) + " of " + list.length + ")" : "") + '"' + (openable ? ' data-open="' + esc(w.id) + '"' : "") + '>';
+        }).join("");
+        var nav = "";
+        if (list.length > 1) {
+            nav = '<button class="art-nav prev" data-nav="-1" aria-label="Previous photo">&#8249;</button>' +
+                  '<button class="art-nav next" data-nav="1" aria-label="Next photo">&#8250;</button>' +
+                  '<div class="art-dots">' + list.map(function (_, i) { return '<span class="' + (i ? "" : "on") + '"></span>'; }).join("") + '</div>';
+        }
+        return '<div class="art-gallery"><div class="art-track">' + slides + '</div>' + nav + '</div>';
+    }
 
     function getWish() { try { return JSON.parse(localStorage.getItem("vimalWishlist")) || []; } catch (e) { return []; } }
     function isWished(name) { return getWish().some(function (i) { return i.name === name; }); }
@@ -94,7 +108,7 @@
             list = list.filter(function (i) { return i.name !== w.title; });
             btn.textContent = "♡";
         } else {
-            list.push({ name: w.title, price: w.price, image: w.image });
+            list.push({ name: w.title, price: w.price, image: cover(w) });
             btn.textContent = "❤️";
         }
         localStorage.setItem("vimalWishlist", JSON.stringify(list));
@@ -118,12 +132,13 @@
         else if (state.sort === "high") list.sort(function (a, b) { return b.price - a.price; });
         else list.reverse(); // newest = last added shows first
 
+        if (!window.ART_WORKS) { grid.innerHTML = '<p class="art-empty">⚠️ Could not load js/art-data.js (file missing or has a typo).</p>'; return; }
         if (!list.length) { grid.innerHTML = '<p class="art-empty">No artworks here yet — check back soon!</p>'; return; }
 
         grid.innerHTML = list.map(function (w) {
             return '<article class="art-card" data-id="' + esc(w.id) + '">' +
                 '<span class="art-badge' + (w.status === "sold" ? " sold" : "") + '">' + (w.status === "sold" ? "Sold" : LABEL[w.category] || "Art") + '</span>' +
-                '<img class="art-img" loading="lazy" src="' + esc(imgSrc(w)) + '" alt="' + esc(w.title) + '" data-open="' + esc(w.id) + '">' +
+                galleryHTML(w, true) +
                 '<div class="art-body"><h3>' + esc(w.title) + '</h3>' +
                 '<p class="art-meta">' + esc([w.medium, w.size].filter(Boolean).join(" • ")) + '</p>' +
                 '<p class="art-desc">' + esc(w.description) + '</p>' +
@@ -132,16 +147,11 @@
                 actionsHTML(w) + '</div></article>';
         }).join("");
 
-        Array.prototype.forEach.call(grid.querySelectorAll("img.art-img"), function (im) {
-            im.addEventListener("error", function () { im.src = FALLBACK; }, { once: true });
-        });
     }
 
     function openModal(w) {
         var m = document.getElementById("artModal");
-        var img = document.getElementById("artModalImg");
-        img.src = imgSrc(w); img.alt = w.title;
-        img.onerror = function () { img.src = FALLBACK; };
+        document.getElementById("artModalGallery").innerHTML = galleryHTML(w, false);
         document.getElementById("artModalInfo").innerHTML =
             '<h2>' + esc(w.title) + '</h2>' +
             '<p class="art-meta">' + esc(LABEL[w.category] || "Art") + '</p>' +
@@ -153,16 +163,22 @@
     function closeModal() { var m = document.getElementById("artModal"); m.classList.remove("open"); m.setAttribute("aria-hidden", "true"); }
 
     function addToCartSafe(w) {
-        if (typeof addToCart === "function") { addToCart(w.title, w.price, w.image); return; }
+        if (typeof addToCart === "function") { addToCart(w.title, w.price, cover(w)); return; }
         var cart = JSON.parse(localStorage.getItem("cart") || "[]");
         var ex = cart.filter(function (i) { return i.name === w.title; })[0];
-        if (ex) ex.qty += 1; else cart.push({ name: w.title, price: w.price, image: w.image, qty: 1 });
+        if (ex) ex.qty += 1; else cart.push({ name: w.title, price: w.price, image: cover(w), qty: 1 });
         localStorage.setItem("cart", JSON.stringify(cart));
         alert(w.title + " added to cart!");
     }
 
     document.addEventListener("click", function (e) {
         var t = e.target;
+        var nav = t.closest && t.closest("[data-nav]");
+        if (nav) {
+            var track = nav.parentNode.querySelector(".art-track");
+            track.scrollBy({ left: track.clientWidth * Number(nav.getAttribute("data-nav")), behavior: "smooth" });
+            return;
+        }
         var chip = t.closest && t.closest(".art-chip");
         if (chip) {
             state.cat = chip.getAttribute("data-cat");
@@ -177,6 +193,16 @@
         if (op) { var w3 = find(op.getAttribute("data-open")); if (w3) openModal(w3); return; }
         if (t.id === "artClose" || t.id === "artModal") closeModal();
     });
+    document.addEventListener("scroll", function (e) {
+        var tr = e.target;
+        if (!tr.classList || !tr.classList.contains("art-track")) return;
+        var i = Math.round(tr.scrollLeft / tr.clientWidth);
+        Array.prototype.forEach.call(tr.parentNode.querySelectorAll(".art-dots span"), function (d, k) { d.classList.toggle("on", k === i); });
+    }, true);
+    document.addEventListener("error", function (e) {
+        var im = e.target;
+        if (im && im.tagName === "IMG" && im.classList.contains("art-img") && im.src !== FALLBACK) im.src = FALLBACK;
+    }, true);
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
     document.getElementById("artSort").addEventListener("change", function (e) { state.sort = e.target.value; render(); });
     document.getElementById("artCustomLink").href = waLink("Hi! I'd like to order a custom artwork.");
