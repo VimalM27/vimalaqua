@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Studio | Original Pet & Toy Artworks - Vimal Pets & Toys</title>
+    <meta name="description" content="Original hand-made artworks of pets and toys by Vimal. Browse, buy or order a custom piece.">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/wishlist-delivery.css">
+    <link rel="stylesheet" href="css/art.css">
+</head>
+<body>
+<nav class="navbar"></nav>
+
+<main class="art-page">
+    <section class="art-hero">
+        <h1>🎨 Vimal Art Studio</h1>
+        <p>Original hand-made artworks of pets and toys. Every piece is unique — buy one for your home, or order a custom portrait of your own pet.</p>
+    </section>
+
+    <div class="art-toolbar">
+        <div class="art-chips" id="artChips">
+            <button class="art-chip active" data-cat="all">All</button>
+            <button class="art-chip" data-cat="pets">🐾 Pets Art</button>
+            <button class="art-chip" data-cat="toys">🧸 Toys Art</button>
+            <button class="art-chip" data-cat="other">✨ Other</button>
+        </div>
+        <select class="art-sort" id="artSort" aria-label="Sort artworks">
+            <option value="new">Newest first</option>
+            <option value="low">Price: low to high</option>
+            <option value="high">Price: high to low</option>
+        </select>
+    </div>
+
+    <div class="art-grid" id="artGrid"></div>
+
+    <section class="art-custom">
+        <h2>Want a custom artwork?</h2>
+        <p>Send us a photo of your pet or favourite toy and we'll paint it for you.</p>
+        <a id="artCustomLink" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Order on WhatsApp</a>
+    </section>
+</main>
+
+<div class="art-modal" id="artModal" aria-hidden="true">
+    <div class="art-modal-box">
+        <button class="art-close" id="artClose" aria-label="Close">&times;</button>
+        <img id="artModalImg" src="" alt="">
+        <div class="art-modal-info" id="artModalInfo"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p>Your Trusted place for Pets, Accessories &amp; Toys</p>
+        <div class="footer-contact">
+            <p>📞 +91 78 4545 2727</p>
+            <p>📧 vimal@vimal27.in</p>
+            <p>📍 Coimbatore, Tamil Nadu, India</p>
+        </div>
+        <hr>
+        <p class="copyright">© 2026 Vimal Pets &amp; Toys. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="js/art-data.js"></script>
+<script>
+(function () {
+    var WORKS = window.ART_WORKS || [];
+    var WA = window.ART_WHATSAPP || "917845452727";
+    var state = { cat: "all", sort: "new" };
+    var grid = document.getElementById("artGrid");
+    var LABEL = { pets: "Pets Art", toys: "Toys Art", other: "Art" };
+    var FALLBACK = "data:image/svg+xml;utf8," + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><rect width="600" height="600" fill="#e2e8f0"/><text x="300" y="320" font-size="90" text-anchor="middle">🎨</text></svg>');
+
+    function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+    function money(n) { return n > 0 ? "₹" + Number(n).toLocaleString("en-IN") : "Price on request"; }
+    function waLink(text) { return "https://wa.me/" + WA + "?text=" + encodeURIComponent(text); }
+    function find(id) { return WORKS.filter(function (w) { return w.id === id; })[0]; }
+    function imgSrc(w) { return encodeURI(w.image || ""); }
+
+    function getWish() { try { return JSON.parse(localStorage.getItem("vimalWishlist")) || []; } catch (e) { return []; } }
+    function isWished(name) { return getWish().some(function (i) { return i.name === name; }); }
+    function updateWishCount() { var el = document.getElementById("wishlistCount"); if (el) el.textContent = getWish().length; }
+    function toggleWish(w, btn) {
+        var list = getWish();
+        if (isWished(w.title)) {
+            list = list.filter(function (i) { return i.name !== w.title; });
+            btn.textContent = "♡";
+        } else {
+            list.push({ name: w.title, price: w.price, image: w.image });
+            btn.textContent = "❤️";
+        }
+        localStorage.setItem("vimalWishlist", JSON.stringify(list));
+        updateWishCount();
+    }
+
+    function actionsHTML(w) {
+        if (w.status === "sold") return '<div class="art-actions"><button class="art-btn" disabled>Sold</button></div>';
+        if (!(w.price > 0)) {
+            return '<div class="art-actions"><a class="art-btn wa" target="_blank" rel="noopener" href="' +
+                waLink("Hi! I'm interested in the artwork: " + w.title) + '">Ask price</a></div>';
+        }
+        return '<div class="art-actions"><button class="art-btn primary" data-add="' + esc(w.id) + '">Add to Cart</button>' +
+            '<a class="art-btn wa" target="_blank" rel="noopener" href="' +
+            waLink("Hi! I'd like to buy the artwork: " + w.title + " (" + money(w.price) + ")") + '">WhatsApp</a></div>';
+    }
+
+    function render() {
+        var list = WORKS.filter(function (w) { return state.cat === "all" || w.category === state.cat; });
+        if (state.sort === "low") list.sort(function (a, b) { return a.price - b.price; });
+        else if (state.sort === "high") list.sort(function (a, b) { return b.price - a.price; });
+        else list.reverse(); // newest = last added shows first
+
+        if (!list.length) { grid.innerHTML = '<p class="art-empty">No artworks here yet — check back soon!</p>'; return; }
+
+        grid.innerHTML = list.map(function (w) {
+            return '<article class="art-card" data-id="' + esc(w.id) + '">' +
+                '<span class="art-badge' + (w.status === "sold" ? " sold" : "") + '">' + (w.status === "sold" ? "Sold" : LABEL[w.category] || "Art") + '</span>' +
+                '<img class="art-img" loading="lazy" src="' + esc(imgSrc(w)) + '" alt="' + esc(w.title) + '" data-open="' + esc(w.id) + '">' +
+                '<div class="art-body"><h3>' + esc(w.title) + '</h3>' +
+                '<p class="art-meta">' + esc([w.medium, w.size].filter(Boolean).join(" • ")) + '</p>' +
+                '<p class="art-desc">' + esc(w.description) + '</p>' +
+                '<div class="art-row"><span class="art-price">' + money(w.price) + '</span>' +
+                '<button class="art-heart" data-wish="' + esc(w.id) + '" aria-label="Add to wishlist">' + (isWished(w.title) ? "❤️" : "♡") + '</button></div>' +
+                actionsHTML(w) + '</div></article>';
+        }).join("");
+
+        Array.prototype.forEach.call(grid.querySelectorAll("img.art-img"), function (im) {
+            im.addEventListener("error", function () { im.src = FALLBACK; }, { once: true });
+        });
+    }
+
+    function openModal(w) {
+        var m = document.getElementById("artModal");
+        var img = document.getElementById("artModalImg");
+        img.src = imgSrc(w); img.alt = w.title;
+        img.onerror = function () { img.src = FALLBACK; };
+        document.getElementById("artModalInfo").innerHTML =
+            '<h2>' + esc(w.title) + '</h2>' +
+            '<p class="art-meta">' + esc(LABEL[w.category] || "Art") + '</p>' +
+            '<p class="art-price">' + money(w.price) + '</p>' +
+            '<p class="art-meta"><b>Medium:</b> ' + esc(w.medium || "-") + '<br><b>Size:</b> ' + esc(w.size || "-") + '</p>' +
+            '<p class="art-desc" style="-webkit-line-clamp:unset">' + esc(w.description) + '</p>' + actionsHTML(w);
+        m.classList.add("open"); m.setAttribute("aria-hidden", "false");
+    }
+    function closeModal() { var m = document.getElementById("artModal"); m.classList.remove("open"); m.setAttribute("aria-hidden", "true"); }
+
+    function addToCartSafe(w) {
+        if (typeof addToCart === "function") { addToCart(w.title, w.price, w.image); return; }
+        var cart = JSON.parse(localStorage.getItem("cart") || "[]");
+        var ex = cart.filter(function (i) { return i.name === w.title; })[0];
+        if (ex) ex.qty += 1; else cart.push({ name: w.title, price: w.price, image: w.image, qty: 1 });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(w.title + " added to cart!");
+    }
+
+    document.addEventListener("click", function (e) {
+        var t = e.target;
+        var chip = t.closest && t.closest(".art-chip");
+        if (chip) {
+            state.cat = chip.getAttribute("data-cat");
+            Array.prototype.forEach.call(document.querySelectorAll(".art-chip"), function (c) { c.classList.toggle("active", c === chip); });
+            render(); return;
+        }
+        var add = t.closest && t.closest("[data-add]");
+        if (add) { var w = find(add.getAttribute("data-add")); if (w) addToCartSafe(w); return; }
+        var wish = t.closest && t.closest("[data-wish]");
+        if (wish) { var w2 = find(wish.getAttribute("data-wish")); if (w2) toggleWish(w2, wish); return; }
+        var op = t.closest && t.closest("[data-open]");
+        if (op) { var w3 = find(op.getAttribute("data-open")); if (w3) openModal(w3); return; }
+        if (t.id === "artClose" || t.id === "artModal") closeModal();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
+    document.getElementById("artSort").addEventListener("change", function (e) { state.sort = e.target.value; render(); });
+    document.getElementById("artCustomLink").href = waLink("Hi! I'd like to order a custom artwork.");
+
+    render();
+    updateWishCount();
+})();
+</script>
+<script src="js/script.js"></script>
+<script src="js/navbar.js"></script>
+<script src="js/protect.js"></script>
+</body>
+</html>
