@@ -1,11 +1,11 @@
 // =====================================================================
-//  VIMAL ART STUDIO — YOUR ARTWORKS
+//  VIMAL ART STUDIO — YOUR ARTWORKS (mandala, lippan, paintings...)
 //  To add an artwork: copy one block { ... }, paste it in the list,
 //  change the details, and put the photo in  images/art/
 //
-//  category : "pets"  |  "toys"  |  "other"
+//  category : "mandala" | "lippan" | "painting" | "other"
 //  price    : number in rupees (e.g. 1500).  Use 0 for "price on request".
-//  status   : "available"  |  "sold"
+//  status   : "available" | "sold"
 //  Keep every id unique (no spaces).
 // =====================================================================
 
@@ -14,68 +14,68 @@ window.ART_WHATSAPP = "917845452727";   // your WhatsApp number (country code, n
 window.ART_WORKS = [
   {
     id: "sample-1",
-    title: "Golden Retriever Portrait",
-    category: "pets",
-    medium: "Acrylic on canvas",
-    size: "12 x 16 in",
+    title: "Blue & Gold Mandala",
+    category: "mandala",
+    medium: "Acrylic & gold pen on canvas",
+    size: "12 x 12 in",
     price: 2500,
     status: "available",
-    image: "images/art/sample-pet-1.svg",
-    description: "SAMPLE — replace me. A warm, hand-painted portrait of a golden retriever."
+    image: "images/art/sample-mandala-1.svg",
+    description: "SAMPLE - replace me. Hand-drawn mandala with fine gold detailing."
   },
   {
     id: "sample-2",
-    title: "Sleepy Cat",
-    category: "pets",
-    medium: "Watercolour",
-    size: "A4",
-    price: 1200,
+    title: "Sunset Dot Mandala",
+    category: "mandala",
+    medium: "Acrylic dot art",
+    size: "10 x 10 in",
+    price: 1800,
     status: "available",
-    image: "images/art/sample-pet-2.svg",
-    description: "SAMPLE — replace me. Soft watercolour of a cat curled up asleep."
+    image: "images/art/sample-mandala-2.svg",
+    description: "SAMPLE - replace me. Dot mandala in warm sunset colours."
   },
   {
     id: "sample-3",
-    title: "Tropical Fish School",
-    category: "pets",
-    medium: "Acrylic on canvas",
-    size: "10 x 12 in",
-    price: 1800,
-    status: "sold",
-    image: "images/art/sample-pet-3.svg",
-    description: "SAMPLE — replace me. Example of a sold artwork."
+    title: "Lippan Mirror Art",
+    category: "lippan",
+    medium: "Clay, mirrors & acrylic on MDF",
+    size: "12 in round",
+    price: 3200,
+    status: "available",
+    image: "images/art/sample-lippan-1.svg",
+    description: "SAMPLE - replace me. Traditional lippan (clay & mirror) wall art."
   },
   {
     id: "sample-4",
-    title: "Teddy Bear Friends",
-    category: "toys",
-    medium: "Pencil & colour",
-    size: "A4",
-    price: 900,
-    status: "available",
-    image: "images/art/sample-toy-1.svg",
-    description: "SAMPLE — replace me. Cute teddy bear illustration for a kid's room."
+    title: "Floral Abstract Painting",
+    category: "painting",
+    medium: "Acrylic on canvas",
+    size: "16 x 20 in",
+    price: 4500,
+    status: "sold",
+    image: "images/art/sample-painting-1.svg",
+    description: "SAMPLE - replace me. Example of a sold artwork."
   },
   {
     id: "sample-5",
-    title: "Toy Train Adventure",
-    category: "toys",
-    medium: "Poster colour",
+    title: "Green Leaf Painting",
+    category: "painting",
+    medium: "Watercolour",
     size: "A3",
     price: 1500,
     status: "available",
-    image: "images/art/sample-toy-2.svg",
-    description: "SAMPLE — replace me. Colourful toy train scene."
+    image: "images/art/sample-painting-2.svg",
+    description: "SAMPLE - replace me. Calm nature-inspired painting."
   },
   {
     id: "sample-6",
-    title: "Playroom Doodle Set",
-    category: "toys",
-    medium: "Ink & marker",
+    title: "Custom Name Plate Art",
+    category: "other",
+    medium: "Mixed media",
     size: "A4",
-    price: 700,
+    price: 0,
     status: "available",
-    image: "images/art/sample-toy-3.svg",
-    description: "SAMPLE — replace me. A playful doodle print."
+    image: "images/art/sample-other-1.svg",
+    description: "SAMPLE - replace me. Price on request example."
   }
 ];

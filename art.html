@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art Studio | Original Pet & Toy Artworks - Vimal Pets & Toys</title>
+    <title>Art Studio | Original Mandala Art & Paintings - Vimal</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Original hand-made artworks of pets and toys by Vimal. Browse, buy or order a custom piece.">
+    <meta name="description" content="Original hand-made mandala art, lippan art and paintings by Vimal. Browse, buy or order a custom piece.">
     <link rel="icon" type="image/png" href="/icon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -19,14 +19,15 @@
 <main class="art-page">
     <section class="art-hero">
         <h1>🎨 Vimal Art Studio</h1>
-        <p>Original hand-made artworks of pets and toys. Every piece is unique — buy one for your home, or order a custom portrait of your own pet.</p>
+        <p>Original hand-made mandala art, lippan art and paintings. Every piece is unique — bring one home, or order a custom piece made just for you.</p>
     </section>
 
     <div class="art-toolbar">
         <div class="art-chips" id="artChips">
             <button class="art-chip active" data-cat="all">All</button>
-            <button class="art-chip" data-cat="pets">🐾 Pets Art</button>
-            <button class="art-chip" data-cat="toys">🧸 Toys Art</button>
+            <button class="art-chip" data-cat="mandala">🌸 Mandala</button>
+            <button class="art-chip" data-cat="lippan">🪞 Lippan Art</button>
+            <button class="art-chip" data-cat="painting">🖼️ Paintings</button>
             <button class="art-chip" data-cat="other">✨ Other</button>
         </div>
         <select class="art-sort" id="artSort" aria-label="Sort artworks">
@@ -40,7 +41,7 @@
 
     <section class="art-custom">
         <h2>Want a custom artwork?</h2>
-        <p>Send us a photo of your pet or favourite toy and we'll paint it for you.</p>
+        <p>Tell us your idea, size and colours, and we'll create a mandala or painting made just for you.</p>
         <a id="artCustomLink" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Order on WhatsApp</a>
     </section>
 </main>
@@ -73,7 +74,7 @@
     var WA = window.ART_WHATSAPP || "917845452727";
     var state = { cat: "all", sort: "new" };
     var grid = document.getElementById("artGrid");
-    var LABEL = { pets: "Pets Art", toys: "Toys Art", other: "Art" };
+    var LABEL = { mandala: "Mandala", lippan: "Lippan Art", painting: "Painting", other: "Art" };
     var FALLBACK = "data:image/svg+xml;utf8," + encodeURIComponent(
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600"><rect width="600" height="600" fill="#e2e8f0"/><text x="300" y="320" font-size="90" text-anchor="middle">🎨</text></svg>');
 
