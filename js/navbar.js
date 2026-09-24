@@ -46,7 +46,6 @@ function applyUnifiedNavbar() {
 
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="art.html">🎨 Art</a></li>
             <li class="dropdown">
     <a href="toys.html" onclick="toggleDropdown(event,this)">
         Toys ▼
@@ -157,7 +156,6 @@ function applyUnifiedNavbar() {
         <span class="close-menu" onclick="closeMenu()">✕</span>
 
         <a href="index.html">🏠 Home</a>
-        <a href="art.html">🎨 Art Studio</a>
         <a href="toys.html">🧸 Toys — All</a>
 
 <a href="toys.html#kids-toys">🧒 Kids Toys</a>
