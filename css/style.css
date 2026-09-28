@@ -6813,3 +6813,6 @@ nav.navbar::before,
 nav.navbar::after {
     display: none !important;
 }
+.vimal-main-header {
+    margin-top: 0 !important;
+}
