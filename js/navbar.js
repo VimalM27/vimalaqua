@@ -543,227 +543,186 @@ function applyUnifiedNavbar() {
 
     mobileMenu.innerHTML = `
 
-        <!-- CLOSE -->
+    <div class="mobile-menu-header">
+        <span>Vimal Pets & Toys</span>
+        <button onclick="closeMenu()">✕</button>
+    </div>
 
-        <span
-            class="close-menu"
-            onclick="closeMenu()">
 
-            ✕
+    <!-- HOME -->
+    <a href="index.html" class="mobile-main-link">
+        🏠 <span>Home</span>
+    </a>
 
-        </span>
 
+    <!-- TOYS -->
+    <div class="mobile-dropdown">
 
-        <!-- HOME -->
+        <button
+            class="mobile-dropdown-title"
+            onclick="toggleMobileDropdown(this)"
+        >
+            🧸 <span>Toys</span>
+            <b>›</b>
+        </button>
 
-        <a href="index.html">
-            🏠 Home
-        </a>
+        <div class="mobile-submenu">
 
+            <a href="toys.html">🧸 All Toys</a>
 
-        <!-- ==================================================
-             TOYS
-        =================================================== -->
+            <a href="toys.html#kids-toys">
+                🧒 Kids Toys
+            </a>
 
-        <a href="toys.html">
-            🧸 Toys — All
-        </a>
+            <a href="toys.html#baby-toddler">
+                👶 Baby & Toddler
+            </a>
 
+            <a href="toys.html#teens">
+                🎮 Teens
+            </a>
 
-        <a href="toys.html#kids-toys">
-            🧒 Kids Toys
-        </a>
+            <a href="toys.html#adults-hobbies">
+                🧑 Adults & Hobbies
+            </a>
 
+            <a href="toys.html#seniors">
+                👵 Seniors
+            </a>
 
-        <a href="toys.html#baby-toddler">
-            👶 Baby &amp; Toddler
-        </a>
+            <a href="toys.html#art-creativity">
+                🎨 Art & Creativity
+            </a>
 
+            <a href="toys.html#educational-stem">
+                🧠 Educational & STEM
+            </a>
 
-        <a href="toys.html#art-creativity">
-            🎨 Art &amp; Creativity
-        </a>
+            <a href="toys.html#unique-trending">
+                ✨ Unique & Trending
+            </a>
 
+            <a href="toys.html#outdoor-sports">
+                ⚽ Outdoor & Sports
+            </a>
 
-        <a href="toys.html#educational-stem">
-            🧠 Educational &amp; STEM
-        </a>
+            <a href="toys.html#family-games">
+                👨‍👩‍👧 Family & Group Games
+            </a>
 
+            <a href="toys.html#pet-toys">
+                🐾 Pet Toys
+            </a>
 
-        <a href="toys.html#outdoor-sports">
-            ⚽ Outdoor &amp; Sports
-        </a>
+        </div>
 
+    </div>
 
-        <a href="toys.html#teens">
-            🎮 Teens
-        </a>
 
+    <!-- PETS & ACCESSORIES -->
+    <div class="mobile-dropdown">
 
-        <a href="toys.html#adults-hobbies">
-            🧑 Adults &amp; Hobbies
-        </a>
+        <button
+            class="mobile-dropdown-title"
+            onclick="toggleMobileDropdown(this)"
+        >
+            🐶 <span>Pets & Accessories</span>
+            <b>›</b>
+        </button>
 
+        <div class="mobile-submenu">
 
-        <a href="toys.html#seniors">
-            👵 Seniors
-        </a>
+            <a href="dogs.html">🐶 Dogs</a>
 
+            <a href="cats.html">🐱 Cats</a>
 
-        <a href="toys.html#family-games">
-            👨‍👩‍👧 Family &amp; Group Games
-        </a>
+            <a href="birds.html">🦜 Birds</a>
 
+            <a href="fish.html">🐟 Fish</a>
 
-        <a href="toys.html#unique-trending">
-            ✨ Unique &amp; Trending
-        </a>
+            <a href="small-pets.html">🐹 Small Pets</a>
 
+            <a href="foods.html">🍖 Pet Foods</a>
 
-        <a href="toys.html#pet-toys">
-            🐾 Pet Toys
-        </a>
+            <a href="accessories.html">🎯 Accessories</a>
 
+            <a href="aquariums.html">🐠 Aquariums</a>
 
-        <!-- ==================================================
-             PETS
-        =================================================== -->
+            <a href="index.html#shop-by-category">
+                🗂 Shop By Category
+            </a>
 
-        <a href="fish.html">
-            🐟 Fish
-        </a>
+            <a href="index.html#best-sellers">
+                🔥 Best Sellers
+            </a>
 
+            <a href="index.html#new-arrivals-home">
+                🆕 New Arrivals
+            </a>
 
-        <a href="birds.html">
-            🦜 Birds
-        </a>
+            <a href="index.html#pet-care">
+                🩺 Pet Care & Grooming
+            </a>
 
+            <a href="index.html#aquarium-services">
+                🐠 Aquarium Services
+            </a>
 
-        <a href="dogs.html">
-            🐶 Dogs
-        </a>
+            <a href="care-guide.html">
+                📚 Pet Care Guide
+            </a>
 
+        </div>
 
-        <a href="cats.html">
-            🐱 Cats
-        </a>
+    </div>
 
 
-        <a href="small-pets.html">
-            🐹 Small Pets
-        </a>
+    <!-- BECOME A PARTNER -->
+    <div class="mobile-dropdown">
 
+        <button
+            class="mobile-dropdown-title"
+            onclick="toggleMobileDropdown(this)"
+        >
+            🤝 <span>Become a Partner</span>
+            <b>›</b>
+        </button>
 
-        <!-- ==================================================
-             PRODUCTS
-        =================================================== -->
+        <div class="mobile-submenu">
 
-        <a href="marketplace.html">
-            🛍️ Marketplace
-        </a>
+            <a href="seller-signup.html">
+                📝 Partner Signup
+            </a>
 
+            <a href="seller-login.html">
+                🔑 Partner Login
+            </a>
 
-        <a href="foods.html">
-            🍖 Pet Foods
-        </a>
+            <a href="seller-dashboard.html">
+                📊 Partner Dashboard
+            </a>
 
+            <a href="marketplace.html">
+                🛍 Marketplace
+            </a>
 
-        <a href="accessories.html">
-            🛍 Accessories
-        </a>
+        </div>
 
+    </div>
 
-        <a href="aquariums.html">
-            🐠 Aquariums
-        </a>
 
+    <!-- ABOUT -->
+    <a href="about.html" class="mobile-main-link">
+        ℹ️ <span>About</span>
+    </a>
 
-        <!-- ==================================================
-             PARTNER
-        =================================================== -->
 
-        <a href="seller-signup.html">
-            📝 Become a Partner
-        </a>
+    <!-- CONTACT -->
+    <a href="contact.html" class="mobile-main-link">
+        📞 <span>Contact</span>
+    </a>
 
-
-        <a href="seller-login.html">
-            🔑 Partner Login
-        </a>
-
-
-        <a href="seller-dashboard.html">
-            📊 Partner Dashboard
-        </a>
-
-
-        <!-- ==================================================
-             EXPLORE
-        =================================================== -->
-
-        <a href="index.html#shop-by-category">
-            🗂 Shop By Category
-        </a>
-
-
-        <a href="care-guide.html">
-            📚 Pet Care Guide
-        </a>
-
-
-        <a href="index.html#best-sellers">
-            🔥 Best Sellers
-        </a>
-
-
-        <a href="index.html#new-arrivals-home">
-            🆕 New Arrivals
-        </a>
-
-
-        <a href="index.html#pet-care">
-            🩺 Pet Care &amp; Grooming
-        </a>
-
-
-        <a href="index.html#aquarium-services">
-            🐠 Aquarium Services
-        </a>
-
-
-        <!-- ==================================================
-             OTHER
-        =================================================== -->
-
-        <a href="about.html">
-            ℹ About
-        </a>
-
-
-        <a href="contact.html">
-            📞 Contact
-        </a>
-
-
-        <!-- ==================================================
-             ACCOUNT
-        =================================================== -->
-
-        <a href="seller-login.html">
-            👤 Partner Account
-        </a>
-
-
-        <a href="wishlist.html">
-            ♡ Wishlist
-        </a>
-
-
-        <a href="cart.html">
-            🛒 Cart
-        </a>
-
-    `;
+`;
 
 }
 
@@ -1052,7 +1011,42 @@ document.addEventListener(
 
             closeMenu();
 
+        } // ================= MOBILE DROPDOWNS =================
+
+function toggleMobileDropdown(button) {
+
+    const dropdown = button.parentElement;
+
+    const isOpen = dropdown.classList.contains("open");
+
+    // Close all other dropdowns
+    document.querySelectorAll(".mobile-dropdown").forEach(item => {
+
+        item.classList.remove("open");
+
+        const arrow = item.querySelector(
+            ".mobile-dropdown-title b"
+        );
+
+        if (arrow) {
+            arrow.textContent = "›";
         }
+
+    });
+
+    // Open the clicked dropdown
+    if (!isOpen) {
+
+        dropdown.classList.add("open");
+
+        const arrow = button.querySelector("b");
+
+        if (arrow) {
+            arrow.textContent = "⌄";
+        }
+
+    }
+}
 
     }
 );

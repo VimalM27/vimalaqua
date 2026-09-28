@@ -6000,3 +6000,215 @@ nav.navbar {
     }
 
 }
+/* =====================================================
+   MOBILE MENU - CLEAN 6 HEADING DESIGN
+   ===================================================== */
+
+.mobile-menu {
+
+    position: fixed;
+
+    top: 0;
+    left: -100%;
+
+    width: 85%;
+    max-width: 380px;
+
+    height: 100vh;
+
+    background: #071A3D;
+
+    z-index: 999999;
+
+    overflow-y: auto;
+
+    box-shadow: 8px 0 25px rgba(0,0,0,0.35);
+
+    transition: left 0.3s ease;
+
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+/* HEADER */
+
+.mobile-menu-header {
+
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 20px;
+
+    background: #061735;
+
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+
+    color: #ffffff;
+
+    box-sizing: border-box;
+}
+
+.mobile-menu-header span {
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+}
+
+.mobile-menu-header button {
+
+    border: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-size: 32px;
+
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+
+/* =====================================================
+   SIX MAIN HEADINGS
+   ===================================================== */
+
+.mobile-main-link,
+.mobile-dropdown-title {
+
+    width: 100%;
+
+    min-height: 62px;
+
+    padding: 0 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    box-sizing: border-box;
+
+    border: none;
+
+    border-bottom: 1px solid rgba(255,255,255,0.09);
+
+    background: transparent;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+
+.mobile-main-link:hover,
+.mobile-dropdown-title:hover {
+
+    background: rgba(255,255,255,0.06);
+
+}
+
+
+/* arrow */
+
+.mobile-dropdown-title b {
+
+    margin-left: auto;
+
+    font-size: 25px;
+
+    font-weight: 300;
+
+    transition: transform 0.2s ease;
+
+}
+
+
+/* =====================================================
+   SUBMENU
+   ===================================================== */
+
+.mobile-submenu {
+
+    display: none;
+
+    background: #0b234c;
+
+}
+
+
+/* Open submenu */
+
+.mobile-dropdown.open .mobile-submenu {
+
+    display: block;
+
+}
+
+
+/* submenu links */
+
+.mobile-submenu a {
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 48px;
+
+    padding: 0 25px 0 55px;
+
+    color: #e8eef8;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+
+    box-sizing: border-box;
+
+}
+
+
+.mobile-submenu a:hover {
+
+    background: rgba(0,180,216,0.12);
+
+    color: #00B4D8;
+
+}
+
+
+/* =====================================================
+   MOBILE ONLY
+   ===================================================== */
+
+@media (min-width: 901px) {
+
+    .mobile-menu {
+
+        display: none !important;
+
+    }
+
+}
