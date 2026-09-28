@@ -6816,3 +6816,54 @@ nav.navbar::after {
 .vimal-main-header {
     margin-top: 0 !important;
 }
+/* =========================================================
+   REMOVE OLD HEADER / TOP SPACE
+   ========================================================= */
+
+html,
+body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+body > *:first-child {
+    margin-top: 0 !important;
+}
+
+
+/* Common old header/top containers */
+.top,
+.topbar,
+.top-bar,
+.top-header,
+.header-top,
+.header-space,
+.header-spacer,
+.nav-spacer,
+.navbar-spacer,
+.vimal-topbar,
+.vimal-top-bar,
+.vimal-header-top,
+.vimal-header-space {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* Navbar itself */
+nav.navbar {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    transform: none !important;
+}
+
+
+/* Don't let the first navbar element create space */
+nav.navbar:first-child,
+nav.navbar {
+    top: 0 !important;
+}
