@@ -6458,3 +6458,338 @@ nav.navbar {
     }
 
 }
+/* =========================================================
+   VIMAL NAVBAR - FINAL GLOBAL OVERRIDE
+   Applies to ALL pages
+   ========================================================= */
+
+nav.navbar {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: block !important;
+
+    background: #071A3D !important;
+    z-index: 9999 !important;
+
+    transform: none !important;
+}
+
+
+/* =========================================================
+   MAIN HEADER
+   ========================================================= */
+
+nav.navbar .vimal-main-header {
+    width: 100% !important;
+    min-height: 82px !important;
+    height: 82px !important;
+
+    margin: 0 !important;
+    padding: 10px 4% !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    gap: 28px !important;
+
+    background: #071A3D !important;
+    box-sizing: border-box !important;
+
+    position: relative !important;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+nav.navbar .vimal-main-header .logo {
+    flex: 0 0 auto !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+
+nav.navbar .vimal-main-header .logo-link {
+    display: flex !important;
+    align-items: center !important;
+
+    width: auto !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+nav.navbar .vimal-main-header .navbar-logo {
+    display: block !important;
+
+    width: 190px !important;
+    height: auto !important;
+
+    max-width: none !important;
+    max-height: 58px !important;
+
+    object-fit: contain !important;
+
+    margin: 0 !important;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+nav.navbar .vimal-main-header .search-box {
+    flex: 1 1 auto !important;
+
+    width: auto !important;
+    min-width: 250px !important;
+    max-width: 620px !important;
+
+    height: 46px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+
+    border-radius: 25px !important;
+    overflow: hidden !important;
+
+    box-sizing: border-box !important;
+}
+
+nav.navbar .vimal-main-header .search-box input {
+    flex: 1 1 auto !important;
+
+    width: auto !important;
+    min-width: 0 !important;
+
+    height: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 18px !important;
+
+    border: none !important;
+    outline: none !important;
+}
+
+nav.navbar .vimal-main-header .search-box button {
+    flex: 0 0 58px !important;
+
+    width: 58px !important;
+    height: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: none !important;
+}
+
+
+/* =========================================================
+   ACCOUNT / WISHLIST / CART
+   ========================================================= */
+
+nav.navbar .vimal-header-actions {
+    flex: 0 0 auto !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    gap: 22px !important;
+
+    margin-left: auto !important;
+    padding: 0 !important;
+
+    white-space: nowrap !important;
+}
+
+nav.navbar .vimal-header-action {
+    display: flex !important;
+    align-items: center !important;
+
+    position: relative !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #fff !important;
+}
+
+
+/* =========================================================
+   NAVIGATION ROW
+   ========================================================= */
+
+nav.navbar .vimal-navigation {
+    position: relative !important;
+
+    width: 100% !important;
+    height: 48px !important;
+    min-height: 48px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    background: #071A3D !important;
+
+    border-top: 1px solid rgba(255,255,255,.08) !important;
+    box-sizing: border-box !important;
+}
+
+nav.navbar .vimal-navigation .nav-links {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: auto !important;
+    height: 48px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    list-style: none !important;
+}
+
+nav.navbar .vimal-navigation .nav-links > li {
+    position: relative !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+nav.navbar .vimal-navigation .nav-links > li > a {
+    display: flex !important;
+    align-items: center !important;
+
+    height: 48px !important;
+    min-height: 48px !important;
+
+    margin: 0 !important;
+
+    padding: 0 22px !important;
+
+    color: #fff !important;
+
+    text-decoration: none !important;
+    white-space: nowrap !important;
+
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+
+/* =========================================================
+   IMPORTANT - STOP HERO FROM PULLING NAVBAR UP
+   ========================================================= */
+
+nav.navbar + .hero,
+nav.navbar ~ .hero {
+    position: relative !important;
+    top: auto !important;
+    margin-top: 0 !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    nav.navbar {
+        position: relative !important;
+        width: 100% !important;
+    }
+
+    nav.navbar .vimal-main-header {
+        height: auto !important;
+        min-height: 70px !important;
+
+        padding: 9px 14px !important;
+
+        flex-wrap: wrap !important;
+
+        gap: 10px !important;
+    }
+
+    nav.navbar .mobile-menu-btn {
+        display: flex !important;
+
+        flex: 0 0 auto !important;
+
+        width: 40px !important;
+        height: 48px !important;
+
+        align-items: center !important;
+        justify-content: center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        color: #fff !important;
+        background: transparent !important;
+    }
+
+    nav.navbar .vimal-main-header .navbar-logo {
+        width: 125px !important;
+        max-width: 125px !important;
+        max-height: 48px !important;
+    }
+
+    nav.navbar .vimal-main-header .search-box {
+        order: 10 !important;
+
+        flex: 1 0 100% !important;
+
+        width: 100% !important;
+        max-width: none !important;
+        min-width: 0 !important;
+
+        height: 42px !important;
+
+        margin: 5px 0 0 !important;
+    }
+
+    nav.navbar .vimal-header-actions {
+        margin-left: auto !important;
+        gap: 10px !important;
+    }
+
+    nav.navbar .vimal-navigation {
+        display: none !important;
+    }
+}
