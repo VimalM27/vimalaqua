@@ -53,37 +53,6 @@ function applyUnifiedNavbar() {
     // ========================================================
 
     nav.innerHTML = `
-
-        <!-- ==================================================
-             TOP BAR
-        =================================================== -->
-
-        <div class="vimal-topbar">
-
-            <div class="vimal-top-left">
-
-                <a href="contact.html">
-                    Help &amp; Support
-                </a>
-
-            </div>
-
-
-            <div class="vimal-top-right">
-
-                <a href="seller-signup.html">
-                    Partner With Us
-                </a>
-
-                <a href="track-order.html">
-                    Track Order
-                </a>
-
-            </div>
-
-        </div>
-
-
         <!-- ==================================================
              MAIN HEADER
         =================================================== -->

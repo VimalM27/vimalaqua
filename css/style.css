@@ -5309,36 +5309,6 @@ img {
 }
 /* =========================
    VIMAL NEW 3-ROW NAVBAR
-   ========================= */
-
-.vimal-topbar {
-    height: 36px;
-    background: #071A3D;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 28px;
-    font-size: 13px;
-}
-
-.vimal-topbar-left,
-.vimal-topbar-right {
-    display: flex;
-    align-items: center;
-    gap: 25px;
-}
-
-.vimal-topbar a {
-    color: #fff;
-    text-decoration: none;
-    transition: 0.2s;
-}
-
-.vimal-topbar a:hover {
-    color: #00B4D8;
-}
-
 
 /* SECOND ROW */
 
@@ -5958,11 +5928,6 @@ nav.navbar {
     nav.navbar {
         display: block !important;
     }
-
-    .vimal-topbar {
-        display: none !important;
-    }
-
     .vimal-main-header {
         min-height: 70px;
 
