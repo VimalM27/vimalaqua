@@ -7,32 +7,26 @@
 // ============================================================
 // MOBILE MENU
 // ============================================================
+// ================= MOBILE MENU =================
 
 function openMenu() {
 
-    const mobileMenu =
-        document.getElementById("mobileMenu");
+    const mobileMenu = document.getElementById("mobileMenu");
 
     if (mobileMenu) {
-
-        mobileMenu.style.left = "0";
-
-        document.body.classList.add("menu-open");
+        mobileMenu.classList.add("active");
     }
 }
 
 
 function closeMenu() {
 
-    const mobileMenu =
-        document.getElementById("mobileMenu");
+    const mobileMenu = document.getElementById("mobileMenu");
 
     if (mobileMenu) {
-
-        mobileMenu.style.left = "-280px";
-
-        document.body.classList.remove("menu-open");
+        mobileMenu.classList.remove("active");
     }
+
 }
 
 
@@ -989,8 +983,6 @@ document.addEventListener(
 
     }
 );
-
-
 // ============================================================
 // CLOSE MOBILE MENU WHEN CLICKING A LINK
 // ============================================================
@@ -999,54 +991,70 @@ document.addEventListener(
     "click",
     function (event) {
 
-        const target =
-            event.target;
-
+        const target = event.target;
 
         if (
             target &&
             target.closest &&
             target.closest("#mobileMenu a")
         ) {
-
             closeMenu();
+        }
 
-        } // ================= MOBILE DROPDOWNS =================
-// ================= MOBILE DROPDOWNS =================
+    }
+);
+
+
+// ============================================================
+// MOBILE DROPDOWNS
+// ============================================================
 
 function toggleMobileDropdown(button) {
 
-    const dropdown = button.closest(".mobile-dropdown");
+    const dropdown =
+        button.closest(".mobile-dropdown");
 
     if (!dropdown) return;
 
-    const submenu = dropdown.querySelector(".mobile-submenu");
-    const arrow = button.querySelector("b");
+    const submenu =
+        dropdown.querySelector(".mobile-submenu");
+
+    const arrow =
+        button.querySelector("b");
 
     if (!submenu) return;
 
-    const isOpen = dropdown.classList.contains("open");
+    const isOpen =
+        dropdown.classList.contains("open");
 
-    // Close all other dropdowns
-    document.querySelectorAll(".mobile-dropdown").forEach(item => {
 
-        item.classList.remove("open");
+    // Close every other dropdown
+    document
+        .querySelectorAll(".mobile-dropdown")
+        .forEach(function (item) {
 
-        const otherSubmenu =
-            item.querySelector(".mobile-submenu");
+            item.classList.remove("open");
 
-        const otherArrow =
-            item.querySelector(".mobile-dropdown-title b");
+            const otherSubmenu =
+                item.querySelector(".mobile-submenu");
 
-        if (otherSubmenu) {
-            otherSubmenu.style.display = "none";
-        }
+            const otherArrow =
+                item.querySelector(
+                    ".mobile-dropdown-title b"
+                );
 
-        if (otherArrow) {
-            otherArrow.textContent = "›";
-        }
 
-    });
+            if (otherSubmenu) {
+                otherSubmenu.style.display = "none";
+            }
+
+
+            if (otherArrow) {
+                otherArrow.textContent = "›";
+            }
+
+        });
+
 
     // Open clicked dropdown
     if (!isOpen) {
@@ -1055,6 +1063,7 @@ function toggleMobileDropdown(button) {
 
         submenu.style.display = "block";
 
+
         if (arrow) {
             arrow.textContent = "⌄";
         }
@@ -1062,25 +1071,22 @@ function toggleMobileDropdown(button) {
     }
 
 }
+
+
 // ============================================================
 // INITIALIZE NAVBAR
 // ============================================================
 
-if (
-    document.readyState === "loading"
-) {
+if (document.readyState === "loading") {
 
     document.addEventListener(
         "DOMContentLoaded",
         function () {
-
             applyUnifiedNavbar();
-
         }
     );
 
-}
-else {
+} else {
 
     applyUnifiedNavbar();
 

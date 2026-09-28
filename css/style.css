@@ -6212,3 +6212,249 @@ nav.navbar {
     }
 
 }
+/* =====================================================
+   FINAL MOBILE MENU FIX
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .mobile-menu {
+
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        position: fixed !important;
+
+        top: 0 !important;
+
+        left: -100% !important;
+
+        width: 85% !important;
+
+        max-width: 380px !important;
+
+        height: 100vh !important;
+
+        background: #071A3D !important;
+
+        z-index: 999999 !important;
+
+        overflow-y: auto !important;
+
+        padding: 0 !important;
+
+        margin: 0 !important;
+
+        transition: left .3s ease !important;
+
+        box-sizing: border-box !important;
+    }
+
+
+    /* OPEN MENU */
+
+    .mobile-menu.active {
+
+        left: 0 !important;
+
+    }
+
+
+    /* HEADER */
+
+    .mobile-menu-header {
+
+        height: 70px !important;
+
+        min-height: 70px !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: space-between !important;
+
+        padding: 0 20px !important;
+
+        background: #061735 !important;
+
+        color: #fff !important;
+
+        border-bottom: 1px solid rgba(255,255,255,.12) !important;
+
+        flex-shrink: 0 !important;
+    }
+
+
+    .mobile-menu-header span {
+
+        color: #fff !important;
+
+        font-size: 17px !important;
+
+        font-weight: 600 !important;
+
+    }
+
+
+    .mobile-menu-header button {
+
+        background: none !important;
+
+        border: none !important;
+
+        color: #fff !important;
+
+        font-size: 32px !important;
+
+        cursor: pointer !important;
+
+    }
+
+
+    /* MAIN LINKS */
+
+    .mobile-main-link {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        width: 100% !important;
+
+        min-height: 60px !important;
+
+        padding: 0 22px !important;
+
+        box-sizing: border-box !important;
+
+        color: #fff !important;
+
+        background: transparent !important;
+
+        text-decoration: none !important;
+
+        border-bottom: 1px solid rgba(255,255,255,.09) !important;
+
+        font-size: 16px !important;
+
+        gap: 12px !important;
+
+    }
+
+
+    /* DROPDOWN TITLE */
+
+    .mobile-dropdown-title {
+
+        width: 100% !important;
+
+        min-height: 60px !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        padding: 0 22px !important;
+
+        border: none !important;
+
+        border-bottom: 1px solid rgba(255,255,255,.09) !important;
+
+        background: transparent !important;
+
+        color: #fff !important;
+
+        font-size: 16px !important;
+
+        text-align: left !important;
+
+        cursor: pointer !important;
+
+        gap: 12px !important;
+    }
+
+
+    .mobile-dropdown-title span {
+
+        flex: 1 !important;
+
+    }
+
+
+    .mobile-dropdown-title b {
+
+        font-size: 25px !important;
+
+        font-weight: 300 !important;
+
+    }
+
+
+    /* SUBMENU */
+
+    .mobile-submenu {
+
+        display: none !important;
+
+        width: 100% !important;
+
+        background: #0b234c !important;
+
+    }
+
+
+    .mobile-dropdown.open .mobile-submenu {
+
+        display: block !important;
+
+    }
+
+
+    .mobile-submenu a {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        min-height: 48px !important;
+
+        padding: 0 20px 0 52px !important;
+
+        color: #e8eef8 !important;
+
+        background: #0b234c !important;
+
+        text-decoration: none !important;
+
+        font-size: 14px !important;
+
+        border-bottom: 1px solid rgba(255,255,255,.06) !important;
+
+        box-sizing: border-box !important;
+
+    }
+
+
+    /* HAMBURGER */
+
+    .mobile-menu-btn {
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        cursor: pointer !important;
+
+        color: #fff !important;
+
+        font-size: 27px !important;
+
+        z-index: 1000000 !important;
+
+    }
+
+}
