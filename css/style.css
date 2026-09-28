@@ -6793,3 +6793,23 @@ nav.navbar ~ .hero {
         display: none !important;
     }
 }
+/* REMOVE OLD EMPTY TOP SPACE */
+.vimal-topbar,
+.topbar,
+.top,
+.header-spacer,
+.navbar-spacer {
+    display: none !important;
+}
+
+/* Navbar must start at the top */
+nav.navbar {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    top: 0 !important;
+}
+
+nav.navbar::before,
+nav.navbar::after {
+    display: none !important;
+}
