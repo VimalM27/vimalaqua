@@ -5307,3 +5307,224 @@ img {
         transition: none !important;
     }
 }
+/* =========================
+   VIMAL NEW 3-ROW NAVBAR
+   ========================= */
+
+.vimal-topbar {
+    height: 36px;
+    background: #071A3D;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    font-size: 13px;
+}
+
+.vimal-topbar-left,
+.vimal-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.vimal-topbar a {
+    color: #fff;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.vimal-topbar a:hover {
+    color: #00B4D8;
+}
+
+
+/* SECOND ROW */
+
+.vimal-main-header {
+    background: #071A3D;
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 12px 28px;
+}
+
+/* Logo */
+
+.vimal-header-logo {
+    flex-shrink: 0;
+}
+
+.vimal-header-logo img {
+    width: 190px;
+    height: auto;
+    display: block;
+}
+
+
+/* Search */
+
+.vimal-search-box {
+    flex: 1;
+    max-width: 600px;
+    height: 46px;
+    display: flex;
+    background: #fff;
+    border-radius: 25px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.vimal-search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0 18px;
+    font-size: 14px;
+    color: #222;
+    background: #fff;
+}
+
+.vimal-search-box button {
+    width: 58px;
+    border: none;
+    background: #00B4D8;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.vimal-search-box button:hover {
+    background: #009abb;
+}
+
+
+/* Header actions */
+
+.vimal-header-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+}
+
+.vimal-header-action {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.vimal-header-action .action-icon {
+    font-size: 21px;
+    line-height: 1;
+}
+
+.vimal-header-action:hover {
+    color: #00B4D8;
+}
+
+
+/* Cart / wishlist count */
+
+.vimal-count {
+    position: absolute;
+    top: -9px;
+    left: 15px;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    border-radius: 50%;
+    background: #e53935;
+    color: #fff;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* THIRD ROW - YOUR EXISTING NAV */
+
+.vimal-existing-nav {
+    background: #071A3D;
+    border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+
+/* Mobile */
+
+@media (max-width: 900px) {
+
+    .vimal-topbar {
+        padding: 0 15px;
+    }
+
+    .vimal-topbar-right {
+        gap: 12px;
+    }
+
+    .vimal-main-header {
+        flex-wrap: wrap;
+        padding: 12px 15px;
+        gap: 12px;
+    }
+
+    .vimal-header-logo img {
+        width: 150px;
+    }
+
+    .vimal-search-box {
+        order: 3;
+        flex-basis: 100%;
+        max-width: none;
+    }
+
+    .vimal-header-actions {
+        gap: 12px;
+    }
+
+    .vimal-header-action span.action-text {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .vimal-topbar {
+        height: 32px;
+        font-size: 11px;
+    }
+
+    .vimal-topbar-left {
+        gap: 10px;
+    }
+
+    .vimal-topbar-right {
+        gap: 8px;
+    }
+
+    .vimal-main-header {
+        min-height: auto;
+    }
+
+    .vimal-header-logo img {
+        width: 135px;
+    }
+
+    .vimal-header-actions {
+        margin-left: auto;
+        gap: 10px;
+    }
+
+    .vimal-header-action .action-icon {
+        font-size: 19px;
+    }
+}

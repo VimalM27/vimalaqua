@@ -1,245 +1,1114 @@
-// ================= MOBILE MENU =================
+// ============================================================
+// VIMAL PETS & TOYS - UNIVERSAL NAVBAR
+// Desktop + Mobile
+// ============================================================
+
+
+// ============================================================
+// MOBILE MENU
+// ============================================================
 
 function openMenu() {
-    const mobileMenu = document.getElementById("mobileMenu");
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
     if (mobileMenu) {
+
         mobileMenu.style.left = "0";
+
+        document.body.classList.add("menu-open");
     }
 }
+
 
 function closeMenu() {
-    const mobileMenu = document.getElementById("mobileMenu");
+
+    const mobileMenu =
+        document.getElementById("mobileMenu");
+
     if (mobileMenu) {
+
         mobileMenu.style.left = "-280px";
+
+        document.body.classList.remove("menu-open");
     }
 }
 
-// ================= UNIVERSAL NAV BAR =================
+
+// ============================================================
+// UNIVERSAL NAVBAR
+// ============================================================
 
 function applyUnifiedNavbar() {
-    const nav = document.querySelector("nav.navbar");
+
+    const nav =
+        document.querySelector("nav.navbar");
+
     if (!nav) return;
 
+
+    // ========================================================
+    // DESKTOP / MAIN NAVBAR
+    // ========================================================
+
     nav.innerHTML = `
-        <div class="mobile-menu-btn" onclick="openMenu()">
-            ☰
-        </div>
 
-        <div class="logo">
-            <a href="index.html" class="logo-link">
-                <img src="images/vimallogo.png?v=2" alt="Vimal Pets World" class="navbar-logo">
-            </a>
-        </div>
+        <!-- ==================================================
+             TOP BAR
+        =================================================== -->
 
-        <a href="login.html" class="mobile-login" id="mobileLoginLink">
-            👤
-        </a>
+        <div class="vimal-topbar">
 
-        <div class="search-box">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search pets, foods, accessories...">
+            <div class="vimal-top-left">
 
-            <button onclick="searchWebsite()">🔍</button>
-        </div>
-
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li class="dropdown">
-    <a href="toys.html" onclick="toggleDropdown(event,this)">
-        Toys ▼
-    </a>
-
-    <div class="mega-menu">
-
-        <div class="menu-column">
-            <h4>Kids & Young</h4>
-
-            <a href="toys.html#kids-toys">🧒 Kids Toys</a>
-            <a href="toys.html#baby-toddler">👶 Baby & Toddler</a>
-            <a href="toys.html#teens">🎮 Teens</a>
-            <a href="toys.html#adults-hobbies">🧑 Adults & Hobbies</a>
-            <a href="toys.html#seniors">👵 Seniors</a>
-        </div>
-
-        <div class="menu-column">
-            <h4>Learning & Creativity</h4>
-
-            <a href="toys.html#art-creativity">🎨 Art & Creativity</a>
-            <a href="toys.html#educational-stem">🧠 Educational & STEM</a>
-            <a href="toys.html#unique-trending">✨ Unique & Trending</a>
-        </div>
-
-        <div class="menu-column">
-            <h4>Fun & Games</h4>
-
-            <a href="toys.html#outdoor-sports">⚽ Outdoor & Sports</a>
-            <a href="toys.html#family-games">👨‍👩‍👧 Family & Group Games</a>
-            <a href="toys.html#pet-toys">🐾 Pet Toys</a>
-
-            <a href="toys.html" class="view-all-toys">
-                🧸 View All Toys →
-            </a>
-        </div>
-
-    </div>
-</li>
-
-            <li class="dropdown">
-                <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
-
-                <div class="mega-menu">
-                    <div class="menu-column">
-                        <h4>Pets</h4>
-
-                        <a href="dogs.html">🐶 Dogs</a>
-                        <a href="cats.html">🐱 Cats</a>
-                        <a href="fish.html">🐟 Fish</a>
-                    </div>
-
-                    <div class="menu-column">
-                        <h4>Products</h4>
-
-                        <a href="foods.html">🍖 Pet Foods</a>
-                        <a href="accessories.html">🎯 Accessories</a>
-                        <a href="aquariums.html">🐠 Aquariums</a>
-                    </div>
-
-                    <div class="menu-column">
-                        <h4>Explore</h4>
-
-                        <a href="index.html#shop-by-category">🗂 Shop By Category</a>
-                        <a href="index.html#best-sellers">🔥 Best Sellers</a>
-                        <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
-                        <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
-                        <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
-                        <a href="care-guide.html">📚 Pet Care Guide</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="dropdown">
-                <a href="#" onclick="toggleDropdown(event,this)">Become a Partner ▼</a>
-
-                <div class="dropdown-content">
-                    <a href="seller-signup.html">📝 Partner Signup</a>
-                    <a href="seller-login.html">🔑 Partner Login</a>
-                    <a href="seller-dashboard.html">📊 Partner Dashboard</a>
-                    <a href="marketplace.html">🛍 Marketplace</a>
-                </div>
-            </li>
-
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li>
-                <a href="wishlist.html" class="wishlist-link">
-                    ♡ <span id="wishlistCount">0</span>
+                <a href="contact.html">
+                    Help &amp; Support
                 </a>
-            </li>
-            <li>
-                <a href="cart.html" class="cart-link">🛒</a>
-            </li>
-        </ul>
+
+            </div>
+
+
+            <div class="vimal-top-right">
+
+                <a href="seller-signup.html">
+                    Partner With Us
+                </a>
+
+                <a href="track-order.html">
+                    Track Order
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             MAIN HEADER
+        =================================================== -->
+
+        <div class="vimal-main-header">
+
+
+            <!-- MOBILE MENU BUTTON -->
+
+            <button
+                type="button"
+                class="mobile-menu-btn"
+                onclick="openMenu()"
+                aria-label="Open Menu">
+
+                ☰
+
+            </button>
+
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                <a
+                    href="index.html"
+                    class="logo-link">
+
+                    <img
+                        src="images/vimallogo.png?v=2"
+                        alt="Vimal Pets & Toys"
+                        class="navbar-logo">
+
+                </a>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <form
+                class="search-box"
+                onsubmit="searchWebsite(event)">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search pets, foods, accessories..."
+                    autocomplete="off"
+                    aria-label="Search">
+
+                <button
+                    type="submit"
+                    aria-label="Search">
+
+                    🔍
+
+                </button>
+
+            </form>
+
+
+            <!-- HEADER ACTIONS -->
+
+            <div class="vimal-header-actions">
+
+
+                <!-- PARTNER ACCOUNT -->
+
+                <a
+                    href="seller-login.html"
+                    class="vimal-header-action">
+
+                    <span class="action-icon">
+                        👤
+                    </span>
+
+                    <span class="action-text">
+                        Partner Account
+                    </span>
+
+                </a>
+
+
+                <!-- WISHLIST -->
+
+                <a
+                    href="wishlist.html"
+                    class="vimal-header-action wishlist-header-link">
+
+                    <span class="action-icon">
+                        ♡
+                    </span>
+
+                    <span class="action-text">
+                        Wishlist
+                    </span>
+
+                    <span
+                        class="header-count"
+                        id="wishlistCount">
+
+                        0
+
+                    </span>
+
+                </a>
+
+
+                <!-- CART -->
+
+                <a
+                    href="cart.html"
+                    class="vimal-header-action cart-header-link">
+
+                    <span class="action-icon">
+                        🛒
+                    </span>
+
+                    <span class="action-text">
+                        Cart
+                    </span>
+
+                    <span
+                        class="header-count"
+                        id="cartCount">
+
+                        0
+
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             EXISTING NAVIGATION
+        =================================================== -->
+
+        <div class="vimal-navigation">
+
+            <ul class="nav-links">
+
+
+                <!-- HOME -->
+
+                <li>
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+                </li>
+
+
+                <!-- ==================================================
+                     TOYS
+                =================================================== -->
+
+                <li class="dropdown">
+
+                    <a
+                        href="toys.html"
+                        onclick="toggleDropdown(event,this)">
+
+                        Toys ▼
+
+                    </a>
+
+
+                    <div class="mega-menu">
+
+
+                        <!-- KIDS -->
+
+                        <div class="menu-column">
+
+                            <h4>
+                                Kids &amp; Young
+                            </h4>
+
+
+                            <a href="toys.html#kids-toys">
+                                🧒 Kids Toys
+                            </a>
+
+
+                            <a href="toys.html#baby-toddler">
+                                👶 Baby &amp; Toddler
+                            </a>
+
+
+                            <a href="toys.html#teens">
+                                🎮 Teens
+                            </a>
+
+
+                            <a href="toys.html#adults-hobbies">
+                                🧑 Adults &amp; Hobbies
+                            </a>
+
+
+                            <a href="toys.html#seniors">
+                                👵 Seniors
+                            </a>
+
+                        </div>
+
+
+                        <!-- LEARNING -->
+
+                        <div class="menu-column">
+
+                            <h4>
+                                Learning &amp; Creativity
+                            </h4>
+
+
+                            <a href="toys.html#art-creativity">
+                                🎨 Art &amp; Creativity
+                            </a>
+
+
+                            <a href="toys.html#educational-stem">
+                                🧠 Educational &amp; STEM
+                            </a>
+
+
+                            <a href="toys.html#unique-trending">
+                                ✨ Unique &amp; Trending
+                            </a>
+
+                        </div>
+
+
+                        <!-- FUN -->
+
+                        <div class="menu-column">
+
+                            <h4>
+                                Fun &amp; Games
+                            </h4>
+
+
+                            <a href="toys.html#outdoor-sports">
+                                ⚽ Outdoor &amp; Sports
+                            </a>
+
+
+                            <a href="toys.html#family-games">
+                                👨‍👩‍👧 Family &amp; Group Games
+                            </a>
+
+
+                            <a href="toys.html#pet-toys">
+                                🐾 Pet Toys
+                            </a>
+
+
+                            <a
+                                href="toys.html"
+                                class="view-all-toys">
+
+                                🧸 View All Toys →
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </li>
+
+
+                <!-- ==================================================
+                     PETS & ACCESSORIES
+                =================================================== -->
+
+                <li class="dropdown">
+
+                    <a
+                        href="#"
+                        onclick="toggleDropdown(event,this)">
+
+                        Pets &amp; Accessories ▼
+
+                    </a>
+
+
+                    <div class="mega-menu">
+
+
+                        <!-- PETS -->
+
+                        <div class="menu-column">
+
+                            <h4>
+                                Pets
+                            </h4>
+
+
+                            <a href="dogs.html">
+                                🐶 Dogs
+                            </a>
+
+
+                            <a href="cats.html">
+                                🐱 Cats
+                            </a>
+
+
+                            <a href="fish.html">
+                                🐟 Fish
+                            </a>
+
+                        </div>
+
+
+                        <!-- PRODUCTS -->
+
+                        <div class="menu-column">
+
+                            <h4>
+                                Products
+                            </h4>
+
+
+                            <a href="foods.html">
+                                🍖 Pet Foods
+                            </a>
+
+
+                            <a href="accessories.html">
+                                🎯 Accessories
+                            </a>
+
+
+                            <a href="aquariums.html">
+                                🐠 Aquariums
+                            </a>
+
+                        </div>
+
+
+                        <!-- EXPLORE -->
+
+                        <div class="menu-column">
+
+                            <h4>
+                                Explore
+                            </h4>
+
+
+                            <a href="index.html#shop-by-category">
+                                🗂 Shop By Category
+                            </a>
+
+
+                            <a href="index.html#best-sellers">
+                                🔥 Best Sellers
+                            </a>
+
+
+                            <a href="index.html#new-arrivals-home">
+                                🆕 New Arrivals
+                            </a>
+
+
+                            <a href="index.html#pet-care">
+                                🩺 Pet Care &amp; Grooming
+                            </a>
+
+
+                            <a href="index.html#aquarium-services">
+                                🐠 Aquarium Services
+                            </a>
+
+
+                            <a href="care-guide.html">
+                                📚 Pet Care Guide
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </li>
+
+
+                <!-- ==================================================
+                     BECOME A PARTNER
+                =================================================== -->
+
+                <li class="dropdown">
+
+                    <a
+                        href="#"
+                        onclick="toggleDropdown(event,this)">
+
+                        Become a Partner ▼
+
+                    </a>
+
+
+                    <div class="dropdown-content">
+
+
+                        <a href="seller-signup.html">
+                            📝 Partner Signup
+                        </a>
+
+
+                        <a href="seller-login.html">
+                            🔑 Partner Login
+                        </a>
+
+
+                        <a href="seller-dashboard.html">
+                            📊 Partner Dashboard
+                        </a>
+
+
+                        <a href="marketplace.html">
+                            🛍 Marketplace
+                        </a>
+
+                    </div>
+
+                </li>
+
+
+                <!-- ABOUT -->
+
+                <li>
+
+                    <a href="about.html">
+                        About
+                    </a>
+
+                </li>
+
+
+                <!-- CONTACT -->
+
+                <li>
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
 
     `;
 
-    let mobileMenu = document.getElementById("mobileMenu");
+
+    // ========================================================
+    // MOBILE MENU
+    // ========================================================
+
+    let mobileMenu =
+        document.getElementById("mobileMenu");
+
+
     if (!mobileMenu) {
-        mobileMenu = document.createElement("div");
-        mobileMenu.id = "mobileMenu";
-        mobileMenu.className = "mobile-menu";
-        document.body.appendChild(mobileMenu);
+
+        mobileMenu =
+            document.createElement("div");
+
+        mobileMenu.id =
+            "mobileMenu";
+
+        mobileMenu.className =
+            "mobile-menu";
+
+        document.body.appendChild(
+            mobileMenu
+        );
+
     }
 
+
     mobileMenu.innerHTML = `
-        <span class="close-menu" onclick="closeMenu()">✕</span>
 
-        <a href="index.html">🏠 Home</a>
-        <a href="toys.html">🧸 Toys — All</a>
+        <!-- CLOSE -->
 
-<a href="toys.html#kids-toys">🧒 Kids Toys</a>
-<a href="toys.html#baby-toddler">👶 Baby & Toddler</a>
-<a href="toys.html#art-creativity">🎨 Art & Creativity</a>
-<a href="toys.html#educational-stem">🧠 Educational & STEM</a>
-<a href="toys.html#outdoor-sports">⚽ Outdoor & Sports</a>
-<a href="toys.html#teens">🎮 Teens</a>
-<a href="toys.html#adults-hobbies">🧑 Adults & Hobbies</a>
-<a href="toys.html#seniors">👵 Seniors</a>
-<a href="toys.html#family-games">👨‍👩‍👧 Family & Group Games</a>
-<a href="toys.html#unique-trending">✨ Unique & Trending</a>
-<a href="toys.html#pet-toys">🐾 Pet Toys</a>
-        <a href="fish.html">🐟 Fish</a>
-        <a href="birds.html">🦜 Birds</a>
-        <a href="dogs.html">🐶 Dogs</a>
-        <a href="cats.html">🐱 Cats</a>
-        <a href="small-pets.html">🐹 Small Pets</a>
-        <a href="marketplace.html">🛍️ Marketplace</a>
-        <a href="foods.html">🍖 Pet Foods</a>
-        <a href="accessories.html">🛍 Accessories</a>
-        <a href="aquariums.html">🐠 Aquariums</a>
-        <a href="seller-signup.html">📝 Become a Partner</a>
-        <a href="seller-login.html">🔑 Partner Login</a>
-        <a href="index.html#shop-by-category">🗂 Shop By Category</a>
-        <a href="care-guide.html">📚 Pet Care Guide</a>
-        <a href="index.html#best-sellers">🔥 Best Sellers</a>
-        <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
-        <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
-        <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
-        <a href="about.html">ℹ About</a>
-        <a href="contact.html">📞 Contact</a>
-        <a href="cart.html">🛒 Cart</a>
+        <span
+            class="close-menu"
+            onclick="closeMenu()">
+
+            ✕
+
+        </span>
+
+
+        <!-- HOME -->
+
+        <a href="index.html">
+            🏠 Home
+        </a>
+
+
+        <!-- ==================================================
+             TOYS
+        =================================================== -->
+
+        <a href="toys.html">
+            🧸 Toys — All
+        </a>
+
+
+        <a href="toys.html#kids-toys">
+            🧒 Kids Toys
+        </a>
+
+
+        <a href="toys.html#baby-toddler">
+            👶 Baby &amp; Toddler
+        </a>
+
+
+        <a href="toys.html#art-creativity">
+            🎨 Art &amp; Creativity
+        </a>
+
+
+        <a href="toys.html#educational-stem">
+            🧠 Educational &amp; STEM
+        </a>
+
+
+        <a href="toys.html#outdoor-sports">
+            ⚽ Outdoor &amp; Sports
+        </a>
+
+
+        <a href="toys.html#teens">
+            🎮 Teens
+        </a>
+
+
+        <a href="toys.html#adults-hobbies">
+            🧑 Adults &amp; Hobbies
+        </a>
+
+
+        <a href="toys.html#seniors">
+            👵 Seniors
+        </a>
+
+
+        <a href="toys.html#family-games">
+            👨‍👩‍👧 Family &amp; Group Games
+        </a>
+
+
+        <a href="toys.html#unique-trending">
+            ✨ Unique &amp; Trending
+        </a>
+
+
+        <a href="toys.html#pet-toys">
+            🐾 Pet Toys
+        </a>
+
+
+        <!-- ==================================================
+             PETS
+        =================================================== -->
+
+        <a href="fish.html">
+            🐟 Fish
+        </a>
+
+
+        <a href="birds.html">
+            🦜 Birds
+        </a>
+
+
+        <a href="dogs.html">
+            🐶 Dogs
+        </a>
+
+
+        <a href="cats.html">
+            🐱 Cats
+        </a>
+
+
+        <a href="small-pets.html">
+            🐹 Small Pets
+        </a>
+
+
+        <!-- ==================================================
+             PRODUCTS
+        =================================================== -->
+
+        <a href="marketplace.html">
+            🛍️ Marketplace
+        </a>
+
+
+        <a href="foods.html">
+            🍖 Pet Foods
+        </a>
+
+
+        <a href="accessories.html">
+            🛍 Accessories
+        </a>
+
+
+        <a href="aquariums.html">
+            🐠 Aquariums
+        </a>
+
+
+        <!-- ==================================================
+             PARTNER
+        =================================================== -->
+
+        <a href="seller-signup.html">
+            📝 Become a Partner
+        </a>
+
+
+        <a href="seller-login.html">
+            🔑 Partner Login
+        </a>
+
+
+        <a href="seller-dashboard.html">
+            📊 Partner Dashboard
+        </a>
+
+
+        <!-- ==================================================
+             EXPLORE
+        =================================================== -->
+
+        <a href="index.html#shop-by-category">
+            🗂 Shop By Category
+        </a>
+
+
+        <a href="care-guide.html">
+            📚 Pet Care Guide
+        </a>
+
+
+        <a href="index.html#best-sellers">
+            🔥 Best Sellers
+        </a>
+
+
+        <a href="index.html#new-arrivals-home">
+            🆕 New Arrivals
+        </a>
+
+
+        <a href="index.html#pet-care">
+            🩺 Pet Care &amp; Grooming
+        </a>
+
+
+        <a href="index.html#aquarium-services">
+            🐠 Aquarium Services
+        </a>
+
+
+        <!-- ==================================================
+             OTHER
+        =================================================== -->
+
+        <a href="about.html">
+            ℹ About
+        </a>
+
+
+        <a href="contact.html">
+            📞 Contact
+        </a>
+
+
+        <!-- ==================================================
+             ACCOUNT
+        =================================================== -->
+
+        <a href="seller-login.html">
+            👤 Partner Account
+        </a>
+
+
+        <a href="wishlist.html">
+            ♡ Wishlist
+        </a>
+
+
+        <a href="cart.html">
+            🛒 Cart
+        </a>
+
     `;
+
 }
 
-applyUnifiedNavbar();
 
-// ================= SEARCH =================
+// ============================================================
+// SEARCH
+// ============================================================
 
-function searchWebsite() {
+function searchWebsite(event) {
 
-    let search = document.getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
+    if (event) {
+        event.preventDefault();
+    }
+
+
+    const input =
+        document.getElementById("searchInput");
+
+
+    if (!input) return;
+
+
+    const search =
+        input.value
+            .toLowerCase()
+            .trim();
+
+
+    // Empty search
 
     if (search === "") {
-        alert("Please enter something to search.");
+
+        alert(
+            "Please enter something to search."
+        );
+
+        input.focus();
+
         return;
     }
 
-    if (search.includes("fish")) {
-        window.location.href = "fish.html";
+
+    // ========================================================
+    // PETS
+    // ========================================================
+
+    if (
+        search.includes("fish") ||
+        search.includes("fishes")
+    ) {
+
+        window.location.href =
+            "fish.html";
+
+        return;
     }
-    else if (search.includes("bird")) {
-        window.location.href = "birds.html";
+
+
+    if (
+        search.includes("bird") ||
+        search.includes("parrot")
+    ) {
+
+        window.location.href =
+            "birds.html";
+
+        return;
     }
-    else if (search.includes("dog")) {
-        window.location.href = "dogs.html";
+
+
+    if (
+        search.includes("dog") ||
+        search.includes("puppy")
+    ) {
+
+        window.location.href =
+            "dogs.html";
+
+        return;
     }
-    else if (search.includes("cat")) {
-        window.location.href = "cats.html";
+
+
+    if (
+        search.includes("cat") ||
+        search.includes("kitten")
+    ) {
+
+        window.location.href =
+            "cats.html";
+
+        return;
     }
-    else if (search.includes("small")) {
-        window.location.href = "small-pets.html";
+
+
+    if (
+        search.includes("small pet") ||
+        search.includes("small pets") ||
+        search.includes("hamster") ||
+        search.includes("rabbit") ||
+        search.includes("chinchilla")
+    ) {
+
+        window.location.href =
+            "small-pets.html";
+
+        return;
     }
-    else if (search.includes("food")) {
-        window.location.href = "foods.html";
+
+
+    // ========================================================
+    // PRODUCTS
+    // ========================================================
+
+    if (
+        search.includes("food") ||
+        search.includes("pet food") ||
+        search.includes("feed")
+    ) {
+
+        window.location.href =
+            "foods.html";
+
+        return;
     }
-    else if (search.includes("accessory")) {
-        window.location.href = "accessories.html";
+
+
+    if (
+        search.includes("accessor") ||
+        search.includes("collar") ||
+        search.includes("leash") ||
+        search.includes("bowl")
+    ) {
+
+        window.location.href =
+            "accessories.html";
+
+        return;
     }
-    else if (search.includes("aquarium")) {
-        window.location.href = "aquariums.html";
+
+
+    if (
+        search.includes("aquarium") ||
+        search.includes("fish tank") ||
+        search.includes("tank")
+    ) {
+
+        window.location.href =
+            "aquariums.html";
+
+        return;
     }
-    else if (search.includes("about")) {
-        window.location.href = "about.html";
+
+
+    // ========================================================
+    // TOYS
+    // ========================================================
+
+    if (
+        search.includes("toy") ||
+        search.includes("toys") ||
+        search.includes("kids") ||
+        search.includes("baby") ||
+        search.includes("educational") ||
+        search.includes("stem")
+    ) {
+
+        window.location.href =
+            "toys.html";
+
+        return;
     }
-    else if (search.includes("contact")) {
-        window.location.href = "contact.html";
+
+
+    // ========================================================
+    // OTHER PAGES
+    // ========================================================
+
+    if (search.includes("about")) {
+
+        window.location.href =
+            "about.html";
+
+        return;
     }
-    else {
-        alert("No matching products found.");
+
+
+    if (
+        search.includes("contact") ||
+        search.includes("support")
+    ) {
+
+        window.location.href =
+            "contact.html";
+
+        return;
     }
+
+
+    if (
+        search.includes("partner") ||
+        search.includes("seller")
+    ) {
+
+        window.location.href =
+            "seller-login.html";
+
+        return;
+    }
+
+
+    if (
+        search.includes("wishlist") ||
+        search.includes("wish list")
+    ) {
+
+        window.location.href =
+            "wishlist.html";
+
+        return;
+    }
+
+
+    if (search.includes("cart")) {
+
+        window.location.href =
+            "cart.html";
+
+        return;
+    }
+
+
+    // ========================================================
+    // NO RESULT
+    // ========================================================
+
+    alert(
+        "No matching products or categories found."
+    );
+
+}
+
+
+// ============================================================
+// ENTER KEY SEARCH
+// ============================================================
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        const active =
+            document.activeElement;
+
+
+        if (
+            event.key === "Enter" &&
+            active &&
+            active.id === "searchInput"
+        ) {
+
+            searchWebsite(event);
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// CLOSE MOBILE MENU WHEN CLICKING A LINK
+// ============================================================
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const target =
+            event.target;
+
+
+        if (
+            target &&
+            target.closest &&
+            target.closest("#mobileMenu a")
+        ) {
+
+            closeMenu();
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// INITIALIZE NAVBAR
+// ============================================================
+
+if (
+    document.readyState === "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            applyUnifiedNavbar();
+
+        }
+    );
+
+}
+else {
+
+    applyUnifiedNavbar();
 
 }
