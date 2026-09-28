@@ -1012,10 +1012,18 @@ document.addEventListener(
             closeMenu();
 
         } // ================= MOBILE DROPDOWNS =================
+// ================= MOBILE DROPDOWNS =================
 
 function toggleMobileDropdown(button) {
 
-    const dropdown = button.parentElement;
+    const dropdown = button.closest(".mobile-dropdown");
+
+    if (!dropdown) return;
+
+    const submenu = dropdown.querySelector(".mobile-submenu");
+    const arrow = button.querySelector("b");
+
+    if (!submenu) return;
 
     const isOpen = dropdown.classList.contains("open");
 
@@ -1024,34 +1032,36 @@ function toggleMobileDropdown(button) {
 
         item.classList.remove("open");
 
-        const arrow = item.querySelector(
-            ".mobile-dropdown-title b"
-        );
+        const otherSubmenu =
+            item.querySelector(".mobile-submenu");
 
-        if (arrow) {
-            arrow.textContent = "›";
+        const otherArrow =
+            item.querySelector(".mobile-dropdown-title b");
+
+        if (otherSubmenu) {
+            otherSubmenu.style.display = "none";
+        }
+
+        if (otherArrow) {
+            otherArrow.textContent = "›";
         }
 
     });
 
-    // Open the clicked dropdown
+    // Open clicked dropdown
     if (!isOpen) {
 
         dropdown.classList.add("open");
 
-        const arrow = button.querySelector("b");
+        submenu.style.display = "block";
 
         if (arrow) {
             arrow.textContent = "⌄";
         }
 
     }
+
 }
-
-    }
-);
-
-
 // ============================================================
 // INITIALIZE NAVBAR
 // ============================================================
