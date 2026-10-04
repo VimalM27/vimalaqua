@@ -1,47 +1,64 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-R5NVV7FZB6');
-</script>
+
+    <!-- GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-R5NVV7FZB6');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>About Us | Vimal Pets & Toys</title>
-    <meta name="description" content="About Us | Vimal Pets & Toys at Vimal Pets & Toys — explore quality pets, pet products, toys, accessories and helpful resources.">
+
+    <meta name="description" content="Discover Vimal Pets & Toys — a destination inspired by a passion for animals, wildlife, quality products, pet essentials and children's toys.">
+
+    <meta name="robots" content="index, follow">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <meta name="robots" content="index, follow">
-
-
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- NEW ABOUT PAGE CSS -->
+    <link rel="stylesheet" href="css/about.css">
+
+</head>
+
 <body>
+
+<!-- =================================================
+     EXISTING NAVBAR - UNCHANGED
+================================================= -->
+
 <nav class="navbar">
+
     <div class="mobile-menu-btn" onclick="openMenu()">
         ☰
     </div>
 
     <div class="logo">
-    <a href="index.html" class="logo-link">
-        <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="navbar-logo">
-    </a>
-</div>
+        <a href="index.html" class="logo-link">
+            <img src="images/vimallogo.png?v=2"
+            alt="Vimal Pets & Toys" class="navbar-logo">
+        </a>
+    </div>
 
     <a href="login.html" class="mobile-login" id="mobileLoginLink">
         👤
     </a>
 
     <div class="search-box">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search pets, foods, accessories...">
+        <input type="text" id="searchInput"
+        placeholder="Search pets, foods, accessories...">
 
         <button onclick="searchWebsite()">🔍</button>
     </div>
@@ -50,15 +67,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         <li><a href="index.html">Home</a></li>
         <li><a href="toys.html">Toys</a></li>
-        <!-- SHOP -->
+
         <li class="dropdown">
-            <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
+            <a href="#" onclick="toggleDropdown(event,this)">
+                Pets & Accessories ▼
+            </a>
 
             <div class="mega-menu">
 
                 <div class="menu-column">
                     <h4>Pets</h4>
-
                     <a href="dogs.html">🐶 Dogs</a>
                     <a href="cats.html">🐱 Cats</a>
                     <a href="fish.html">🐟 Fish</a>
@@ -66,7 +84,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
                 <div class="menu-column">
                     <h4>Products</h4>
-
                     <a href="marketplace.html">🛍 Marketplace</a>
                     <a href="foods.html">🍖 Pet Foods</a>
                     <a href="accessories.html">🎯 Accessories</a>
@@ -75,7 +92,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
                 <div class="menu-column">
                     <h4>Explore</h4>
-
                     <a href="index.html#shop-by-category">🗂 Shop By Category</a>
                     <a href="index.html#best-sellers">🔥 Best Sellers</a>
                     <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
@@ -87,9 +103,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             </div>
         </li>
 
-        <!-- SELLER -->
         <li class="dropdown">
-            <a href="#" onclick="toggleDropdown(event,this)">Partner Login ▼</a>
+            <a href="#" onclick="toggleDropdown(event,this)">
+                Partner Login ▼
+            </a>
 
             <div class="dropdown-content">
                 <a href="seller-signup.html">📝 Become a Partner</a>
@@ -100,17 +117,23 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
+
         <li>
-    <a href="wishlist.html" class="wishlist-link">
-        ♡ <span id="wishlistCount">0</span>
-    </a>
-</li>
+            <a href="wishlist.html" class="wishlist-link">
+                ♡ <span id="wishlistCount">0</span>
+            </a>
+        </li>
+
         <li>
             <a href="cart.html" class="cart-link">🛒</a>
         </li>
 
     </ul>
+
 </nav>
+
+
+<!-- EXISTING MOBILE MENU - UNCHANGED -->
 
 <div id="mobileMenu" class="mobile-menu">
 
@@ -140,153 +163,426 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     <a href="cart.html">🛒 Cart</a>
 
 </div>
-<section class="about-section">
-    <div class="about-top">
 
-        <h1>About Vimal Pets & Toys</h1>
 
-        <p class="subtitle">
-            Your trusted destination for healthy pets, premium products,
-            and expert pet care.
-        </p>
+<!-- =================================================
+     PREMIUM ABOUT PAGE STARTS
+================================================= -->
 
-    </div>
-    <div class="story-section">
+<main class="about-page">
 
-    <div class="story-image">
-        <video src="videos/your_video.mp4" autoplay muted loop playsinline>
-    Your browser does not support the video tag.
-</video>
-    </div>
+    <!-- HERO -->
 
-    <div class="story-content">
-        <h2>🐍 About Vimal</h2>
+    <section class="ap-hero">
+
+        <div class="ap-hero-content">
+
+            <span class="ap-label">
+                THE STORY OF VIMAL PETS & TOYS
+            </span>
+
+            <h1>
+                A World Built on
+                <span>Passion, Care & Happiness.</span>
+            </h1>
+
+            <p>
+                Bringing together a love for animals, quality products
+                and meaningful experiences for pet lovers and families.
+            </p>
+
+            <a href="#ap-story" class="ap-button">
+                Discover Our Story
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+        <div class="ap-hero-bottom">
+            <span>PASSION</span>
+            <span>QUALITY</span>
+            <span>TRUST</span>
+        </div>
+
+    </section>
+
+
+    <!-- BRAND STORY -->
+
+    <section class="ap-story ap-section" id="ap-story">
+
+        <div class="ap-story-heading">
+
+            <span class="ap-label">OUR STORY</span>
+
+            <h2>
+                More Than a Store.<br>
+                A Passion That Connects.
+            </h2>
+
+            <div class="ap-line"></div>
+
+        </div>
+
+        <div class="ap-story-description">
+
+            <p>
+                Vimal Pets & Toys was born from a genuine passion
+                for animals, a love for quality and a vision to create
+                a destination where pet lovers and families can
+                discover products they value.
+            </p>
+
+            <p>
+                Bringing together pets, pet essentials, aquariums,
+                accessories and toys for children, we aim to make
+                discovering the right products a convenient and
+                enjoyable experience.
+            </p>
+
+            <p>
+                We believe that every interaction matters — from
+                discovering a new product to finding the right
+                essentials for the ones you care about.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOUNDER -->
+
+    <section class="ap-founder">
+
+        <div class="ap-founder-image">
+
+            <video
+                src="videos/your_video.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                controls
+                preload="metadata">
+                Your browser does not support the video.
+            </video>
+
+        </div>
+
+        <div class="ap-founder-content">
+
+            <span class="ap-label">
+                THE PERSON BEHIND THE BRAND
+            </span>
+
+            <h2>
+                Meet Vimal.
+                <span>The Passion Behind the Brand.</span>
+            </h2>
+
+            <p>
+                Driven by a lifelong passion for animals, Vimal is
+                a pet enthusiast, wildlife rescuer and snake rescue
+                expert dedicated to making a difference for both
+                pets and wildlife.
+            </p>
+
+            <p>
+                Through Vimal Pets & Toys, he brings together
+                quality pet supplies, practical knowledge and
+                a growing community of pet lovers and families.
+            </p>
+
+            <p>
+                Beyond business, his involvement in wildlife
+                rescue and awareness reflects his belief in
+                protecting nature and encouraging safe and
+                respectful coexistence between people and wildlife.
+            </p>
+
+            <div class="ap-signature">
+                Passion. Purpose. Responsibility.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MISSION & VISION -->
+
+    <section class="ap-purpose ap-section">
+
+        <div class="ap-purpose-title">
+
+            <span class="ap-label">WHAT DRIVES US</span>
+
+            <h2>Our Mission & Vision</h2>
+
+            <p>
+                Guided by purpose. Inspired by possibilities.
+            </p>
+
+        </div>
+
+        <div class="ap-purpose-content">
+
+            <div class="ap-purpose-item">
+
+                <i class="fa-solid fa-bullseye"></i>
+
+                <div>
+                    <h3>Our Mission</h3>
+
+                    <p>
+                        To provide quality products, reliable support
+                        and a welcoming destination for pet lovers
+                        and families, while encouraging responsible
+                        pet care and meaningful experiences.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="ap-purpose-item">
+
+                <i class="fa-solid fa-eye"></i>
+
+                <div>
+                    <h3>Our Vision</h3>
+
+                    <p>
+                        To grow into a trusted destination for pets,
+                        pet essentials and children's toys, creating
+                        lasting relationships with customers and
+                        business partners.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- EXPLORE OUR WORLD -->
+
+    <section class="ap-world ap-section">
+
+        <div class="ap-world-heading">
+
+            <span class="ap-label">EXPLORE OUR WORLD</span>
+
+            <h2>
+                Everything You Love.<br>
+                Under One Brand.
+            </h2>
+
+            <p>
+                Discover a diverse world of products and experiences
+                brought together by Vimal Pets & Toys.
+            </p>
+
+        </div>
+
+        <div class="ap-world-gallery">
+
+            <a href="dogs.html" class="ap-world-item ap-world-large">
+
+                <img src="images/about-pets.jpg"
+                alt="Pets and animal care">
+
+                <div class="ap-world-overlay">
+                    <span>OUR PETS</span>
+                    <h3>Companionship Begins Here</h3>
+                    <span class="ap-explore">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+
+            </a>
+
+
+            <a href="foods.html" class="ap-world-item">
+
+                <img src="images/about-food.jpg"
+                alt="Pet food and nutrition">
+
+                <div class="ap-world-overlay">
+                    <span>NUTRITION & CARE</span>
+                    <h3>Everyday Essentials</h3>
+                    <span class="ap-explore">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+
+            </a>
+
+
+            <a href="aquariums.html" class="ap-world-item">
+
+                <img src="images/about-aquarium.jpg"
+                alt="Aquariums and aquatic life">
+
+                <div class="ap-world-overlay">
+                    <span>AQUATIC WORLD</span>
+                    <h3>Discover Underwater Beauty</h3>
+                    <span class="ap-explore">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+
+            </a>
+
+
+            <a href="toys.html" class="ap-world-item">
+
+                <img src="images/about-toys.jpg"
+                alt="Toys for children">
+
+                <div class="ap-world-overlay">
+                    <span>FOR LITTLE EXPLORERS</span>
+                    <h3>Play. Imagine. Discover.</h3>
+                    <span class="ap-explore">Explore <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- WILDLIFE STORY -->
+
+    <section class="ap-wildlife">
+
+        <div class="ap-wildlife-content">
+
+            <span class="ap-label">BEYOND BUSINESS</span>
+
+            <h2>
+                A Deep Respect for
+                <span>Wildlife & Nature.</span>
+            </h2>
+
+            <p>
+                Our passion for animals extends beyond domestic
+                pets. Wildlife rescue and awareness play an
+                important part in Vimal's journey.
+            </p>
+
+            <p>
+                Through snake rescue and conservation awareness,
+                he aims to encourage people to understand wildlife,
+                respond responsibly and respect the natural world.
+            </p>
+
+            <div class="ap-wildlife-quote">
+                "Coexistence begins with understanding and respect."
+            </div>
+
+        </div>
+
+        <div class="ap-wildlife-visual">
+
+            <i class="fa-solid fa-leaf"></i>
+
+            <span>RESPECT NATURE</span>
+
+            <h3>Protect. Understand. Coexist.</h3>
+
+        </div>
+
+    </section>
+
+
+    <!-- BRAND VALUES -->
+
+    <section class="ap-values ap-section">
+
+        <div class="ap-values-heading">
+
+            <span class="ap-label">WHAT WE BELIEVE IN</span>
+
+            <h2>The Values That Define Us.</h2>
+
+        </div>
+
+        <div class="ap-values-list">
+
+            <div class="ap-value">
+                <i class="fa-solid fa-heart"></i>
+                <h3>Care & Compassion</h3>
+                <p>Putting care and responsibility at the heart of what we do.</p>
+            </div>
+
+            <div class="ap-value">
+                <i class="fa-solid fa-gem"></i>
+                <h3>Quality & Value</h3>
+                <p>Bringing customers thoughtfully selected products and value.</p>
+            </div>
+
+            <div class="ap-value">
+                <i class="fa-solid fa-handshake"></i>
+                <h3>Trust & Relationships</h3>
+                <p>Building meaningful connections with customers and partners.</p>
+            </div>
+
+            <div class="ap-value">
+                <i class="fa-solid fa-seedling"></i>
+                <h3>Responsible Living</h3>
+                <p>Encouraging respect for animals, nature and our surroundings.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FINAL CTA -->
+
+    <section class="ap-final">
+
+        <span class="ap-label">WELCOME TO OUR WORLD</span>
+
+        <h2>
+            Discover Something
+            <span>Worth Loving.</span>
+        </h2>
+
         <p>
-            Driven by a lifelong passion for animals, Vimal is a pet enthusiast,
-            wildlife rescuer, and snake rescue expert dedicated to making a
-            difference for both pets and wildlife.
+            Whether you're exploring pet essentials, discovering
+            aquariums or finding toys for little ones, we're happy
+            to have you here.
         </p>
-        <p>
-            Through Vimal Pets & Toys, he brings together quality pets, trusted pet
-            supplies, expert advice, and practical knowledge to help pet lovers
-            provide the best care.
-        </p>
-        <p>
-            Beyond pets, he actively rescues and conserves snakes while spreading
-            awareness to encourage safe and respectful coexistence between people
-            and wildlife.
-        </p>
-    </div>
 
-</div>
-    
-</section>
+        <div class="ap-final-buttons">
 
-<!-- ================= FEATURES ================= -->
+            <a href="marketplace.html" class="ap-button">
+                Explore Marketplace
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
 
-<section class="about-features">
+            <a href="contact.html" class="ap-outline-button">
+                Get in Touch
+            </a>
 
-    <div class="info-card">
-        <div class="icon">🐶</div>
-        <h3>Healthy Pets</h3>
-        <p>Healthy and well-cared pets from trusted breeders.</p>
-    </div>
+        </div>
 
-    <div class="info-card">
-        <div class="icon">🍖</div>
-        <h3>Premium Food</h3>
-        <p>High-quality nutrition for every stage of your pet's life.</p>
-    </div>
+    </section>
 
-    <div class="info-card">
-        <div class="icon">🛍️</div>
-        <h3>Accessories</h3>
-        <p>Beds, toys, cages, aquariums and grooming essentials.</p>
-    </div>
+</main>
 
-    <div class="info-card">
-        <div class="icon">💙</div>
-        <h3>Expert Support</h3>
-        <p>Professional guidance whenever you need assistance.</p>
-    </div>
 
-</section>
+<!-- =================================================
+     EXISTING FOOTER - UNCHANGED
+================================================= -->
 
-<!-- ================= WHY CHOOSE ================= -->
-
-<section class="why-us-about">
-
-    <h2>Why Choose Vimal Pets & Toys?</h2>
-
-    <div class="why-grid">
-
-        <div>✔ Healthy & Vet Checked Pets</div>
-
-        <div>✔ Premium Food & Accessories</div>
-
-        <div>✔ Secure Shopping Experience</div>
-
-        <div>✔ Fast Delivery</div>
-
-        <div>✔ Trusted Customer Support</div>
-
-        <div>✔ Affordable Prices</div>
-
-    </div>
-
-</section>
-
-<!-- ================= STATS ================= -->
-
-<section class="stats">
-
-    <div class="stat-box">
-        <h2>500+</h2>
-        <p>Happy Customers</p>
-    </div>
-
-    <div class="stat-box">
-        <h2>100+</h2>
-        <p>Premium Products</p>
-    </div>
-
-    <div class="stat-box">
-        <h2>8+</h2>
-        <p>Pet Categories</p>
-    </div>
-
-    <div class="stat-box">
-        <h2>24/7</h2>
-        <p>Customer Support</p>
-    </div>
-
-</section>
-
-<!-- ================= CTA ================= -->
-
-<section class="about-cta">
-
-    <h2>Ready to Find Your Perfect Pet?</h2>
-
-    <p>
-        Discover healthy pets, premium foods, aquariums and accessories
-        all in one place.
-    </p>
-
-    <a href="pets.html" class="shop-btn">
-        Explore Pets
-    </a>
-
-</section>
-
-<!-- ================= FOOTER ================= -->
 <footer class="footer">
 
     <div class="footer-content">
 
         <div class="footer-brand">
-    <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="footer-brand-img">
-</div>
+            <img src="images/vimallogo.png?v=2"
+            alt="Vimal Pets & Toys" class="footer-brand-img">
+        </div>
 
         <p>Your Trusted Pet Store & Aquarium Destination</p>
 
@@ -295,20 +591,30 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
             <p>📧 vimal@vimal27.in</p>
             <p>📍 Coimbatore, Tamil Nadu, India</p>
         </div>
+
         <div class="social-contact">
-    <a href="https://wa.me/917845452727" target="_blank" class="contact-link whatsapp">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-    <a href="https://t.me/yourtelegramusername" target="_blank" class="contact-link telegram">
-        <i class="fa-brands fa-telegram"></i>
-    </a>
-    <a href="https://www.instagram.com/vimalm27_official/" target="_blank" class="contact-link instagram">
-        <i class="fa-brands fa-instagram"></i>
-    </a>
-    <a href="https://www.youtube.com/@VimalM27" target="_blank" class="contact-link youtube">
-        <i class="fa-brands fa-youtube"></i>
-    </a>
-</div>
+
+            <a href="https://wa.me/917845452727"
+            target="_blank" class="contact-link whatsapp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+            <a href="https://t.me/yourtelegramusername"
+            target="_blank" class="contact-link telegram">
+                <i class="fa-brands fa-telegram"></i>
+            </a>
+
+            <a href="https://www.instagram.com/vimalm27_official/"
+            target="_blank" class="contact-link instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@VimalM27"
+            target="_blank" class="contact-link youtube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+
+        </div>
 
         <hr>
 
@@ -319,9 +625,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     </div>
 
 </footer>
+
+
+<!-- EXISTING JAVASCRIPT - UNCHANGED -->
+
 <script src="js/navbar.js"></script>
 <script src="js/script.js"></script>
 <script src="js/protect.js"></script>
-    <script src="js/vimal27-enhancements.js"></script>
+<script src="js/vimal27-enhancements.js"></script>
+
 </body>
 </html>
