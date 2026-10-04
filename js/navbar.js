@@ -1193,7 +1193,9 @@ function showAppPopup() {
             <button class="app2-close" aria-label="Close">✕</button>
 
             <div class="app2-text">
-                <span class="app2-badge">${APP_TEXT.badge}</span>
+                <div class="app2-logo-wrap">
+    <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="app2-logo">
+</div>
                 <h3>${APP_TEXT.title}</h3>
                 <p>${APP_TEXT.desc}</p>
 
