@@ -50,17 +50,6 @@
     </div>`;
     hero.insertAdjacentElement('afterend',wrap);
   }
-
-  function addWhatsApp(){
-    if(document.querySelector('.v27-whatsapp')) return;
-    const a=document.createElement('a');
-    a.className='v27-whatsapp';
-    a.href='https://wa.me/917845452727?text=Hi%20Vimal%20Pets%20%26%20Toys%2C%20I%20need%20help.';
-    a.target='_blank'; a.rel='noopener noreferrer'; a.setAttribute('aria-label','Chat with Vimal Pets & Toys on WhatsApp');
-    a.textContent='✆';
-    document.body.appendChild(a);
-  }
-
   function addTopButton(){
     if(document.querySelector('.v27-top')) return;
     const b=document.createElement('button'); b.className='v27-top'; b.type='button'; b.textContent='↑'; b.setAttribute('aria-label','Back to top');
@@ -136,7 +125,6 @@
     addSkipLink();
     addBreadcrumb();
     addQuickShop();
-    addWhatsApp();
     addTopButton();
     improveImages();
     improveA11y();
