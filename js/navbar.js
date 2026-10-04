@@ -1173,16 +1173,17 @@ function initLanguage() {
 // ============================================================
 
 const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=YOUR.PACKAGE.NAME"; // <-- your real link
-const APP_POPUP_DAYS = 3;   // don't show again for this many days after closing
 
 function showAppPopup() {
     if (document.getElementById("appPopup")) return;
 
-    const last = localStorage.getItem("appPopupClosed");
-    if (last && Date.now() - Number(last) < APP_POPUP_DAYS * 86400000) return;
+    // Show once per visit (per browser tab)
+    if (sessionStorage.getItem("appPopupShown")) return;
+    sessionStorage.setItem("appPopupShown", "1");
 
     const overlay = document.createElement("div");
     overlay.id = "appPopup";
+    // ... rest stays the same
     overlay.className = "app-popup-overlay";
     overlay.innerHTML = `
         <div class="app-popup-box">
