@@ -137,3 +137,24 @@ footer a:hover{color:#00b4d8!important}
 
 /* ---------- Reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+/* ===== DESKTOP HERO: SHOW FULL VIDEO (no cropping) ===== */
+@media (min-width: 769px) {
+  .hero {
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 9 !important;   /* change if your video is a different shape */
+    overflow: hidden !important;
+  }
+  .hero .hero-media {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .hero .hero-desktop-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;    /* shows the entire frame */
+    object-position: center center !important;
+  }
+}
