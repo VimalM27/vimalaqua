@@ -179,6 +179,19 @@ function applyUnifiedNavbar() {
                     </span>
 
                 </a>
+                <!-- LANGUAGE -->
+<select class="lang-select notranslate" aria-label="Choose language">
+    <option value="en">🌐 English</option>
+    <option value="ta">தமிழ்</option>
+    <option value="hi">हिन्दी</option>
+    <option value="te">తెలుగు</option>
+    <option value="ml">മലയാളം</option>
+    <option value="kn">ಕನ್ನಡ</option>
+    <option value="mr">मराठी</option>
+    <option value="bn">বাংলা</option>
+    <option value="gu">ગુજરાતી</option>
+    <option value="pa">ਪੰਜਾਬੀ</option>
+</select>
 
             </div>
 
@@ -542,7 +555,20 @@ function applyUnifiedNavbar() {
         <button onclick="closeMenu()">✕</button>
     </div>
 
-
+    <div style="padding:10px 16px;">
+    <select class="lang-select notranslate" aria-label="Choose language">
+        <option value="en">🌐 English</option>
+        <option value="ta">தமிழ்</option>
+        <option value="hi">हिन्दी</option>
+        <option value="te">తెలుగు</option>
+        <option value="ml">മലയാളം</option>
+        <option value="kn">ಕನ್ನಡ</option>
+        <option value="mr">मराठी</option>
+        <option value="bn">বাংলা</option>
+        <option value="gu">ગુજરાતી</option>
+        <option value="pa">ਪੰਜਾਬੀ</option>
+    </select>
+</div>
     <!-- HOME -->
     <a href="index.html" class="mobile-main-link">
         🏠 <span>Home</span>
@@ -711,15 +737,16 @@ function applyUnifiedNavbar() {
     </a>
 
 
-    <!-- CONTACT -->
+        <!-- CONTACT -->
     <a href="contact.html" class="mobile-main-link">
         📞 <span>Contact</span>
     </a>
 
 `;
 
-}
+    initLanguage();
 
+}
 
 // ============================================================
 // SEARCH
@@ -1090,4 +1117,54 @@ if (document.readyState === "loading") {
 
     applyUnifiedNavbar();
 
+}
+// ============================================================
+// LANGUAGE (Google Translate)
+// ============================================================
+
+function setLang(code) {
+    const combo = document.querySelector(".goog-te-combo");
+    if (!combo) { setTimeout(() => setLang(code), 300); return; }
+    combo.value = code;
+    combo.dispatchEvent(new Event("change"));
+}
+
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: "en",
+        includedLanguages: "en,ta,hi,te,ml,kn,mr,bn,gu,pa",
+        autoDisplay: false
+    }, "google_translate_element");
+
+    const saved = localStorage.getItem("siteLang");
+    if (saved && saved !== "en") setLang(saved);
+}
+
+function initLanguage() {
+    // Hidden container Google needs
+    if (!document.getElementById("google_translate_element")) {
+        const div = document.createElement("div");
+        div.id = "google_translate_element";
+        div.style.display = "none";
+        document.body.appendChild(div);
+    }
+
+    // Set dropdowns to the saved language and listen for changes
+    const saved = localStorage.getItem("siteLang") || "en";
+    document.querySelectorAll(".lang-select").forEach(function (sel) {
+        sel.value = saved;
+        sel.addEventListener("change", function () {
+            localStorage.setItem("siteLang", this.value);
+            document.querySelectorAll(".lang-select").forEach(s => s.value = this.value);
+            setLang(this.value);
+        });
+    });
+
+    // Load Google Translate once
+    if (!document.getElementById("gt-script")) {
+        const s = document.createElement("script");
+        s.id = "gt-script";
+        s.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        document.body.appendChild(s);
+    }
 }

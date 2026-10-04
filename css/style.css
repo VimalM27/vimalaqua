@@ -8379,3 +8379,26 @@ nav.navbar {
         transition: none !important;
     }
 }
+.lang-select {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.4);
+    border-radius: 20px;
+    padding: 6px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 14px;
+}
+.lang-select option { color: #000; }
+
+/* In the white mobile menu, use dark text instead */
+.mobile-menu .lang-select {
+    color: #0a1a3a;
+    border-color: #ccc;
+    width: 100%;
+    margin: 0;
+}
+
+/* Hide Google's default top bar */
+.skiptranslate iframe, .goog-te-banner-frame { display: none !important; }
+body { top: 0 !important; }
