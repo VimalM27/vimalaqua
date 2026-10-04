@@ -1173,65 +1173,72 @@ function initLanguage() {
 // ============================================================
 
 const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=YOUR.PACKAGE.NAME"; // <-- your real link
+// ===== EDIT THE POPUP TEXT HERE =====
+const APP_TEXT = {
+    badge:   "NEW · ANDROID APP",
+    title:   "Your pet shop,<br><span>now in your pocket</span>",
+    desc:    "Explore pets, food, aquariums & toys in a few taps. Get app-only deals and live order updates.",
+    button:  "Download on Google Play",
+    note:    "Free • Quick install • Made in Coimbatore",
+    later:   "Not now"
+};
 
 function showAppPopup() {
     if (document.getElementById("appPopup")) return;
 
-    // Show once per visit (per browser tab)
+    // Show once per visit
     if (sessionStorage.getItem("appPopupShown")) return;
     sessionStorage.setItem("appPopupShown", "1");
 
     const overlay = document.createElement("div");
     overlay.id = "appPopup";
-    // ... rest stays the same
-    overlay.className = "app-popup-overlay";
+    overlay.className = "app2-overlay";
     overlay.innerHTML = `
-        <div class="app-popup-box">
-            <button class="app-popup-close" aria-label="Close">✕</button>
+        <div class="app2-box">
+            <button class="app2-close" aria-label="Close">✕</button>
 
-            <div class="app-popup-top">
-                <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="app-popup-logo">
-                <h3>Get the Vimal App 📲</h3>
-                <p>Shop pets, foods, accessories &amp; toys faster, with exclusive offers and order updates.</p>
-            </div>
+            <div class="app2-text">
+                <span class="app2-badge">${APP_TEXT.badge}</span>
+                <h3>${APP_TEXT.title}</h3>
+                <p>${APP_TEXT.desc}</p>
 
-            <div class="app-popup-bottom">
-                <ul>
-                    <li>⚡ Faster checkout</li>
-                    <li>🎁 App-only offers</li>
-                    <li>🔔 Instant order updates</li>
-                </ul>
-
-                <a href="${PLAY_STORE_URL}" target="_blank" rel="noopener" class="app-popup-install">
-                    <span class="play-icon">▶</span>
-                    <span>
-                        <small>GET IT ON</small>
-                        <b>Google Play</b>
-                    </span>
+                <a href="${PLAY_STORE_URL}" target="_blank" rel="noopener" class="app2-btn">
+                    <span class="app2-play">▶</span> ${APP_TEXT.button}
                 </a>
 
-                <button class="app-popup-later">Maybe later</button>
+                <small class="app2-note">${APP_TEXT.note}</small>
+                <button class="app2-later">${APP_TEXT.later}</button>
+            </div>
+
+            <div class="app2-visual">
+                <div class="app2-phone">
+                    <div class="app2-notch"></div>
+                    <div class="app2-screen">
+                        <img src="images/vimallogo.png?v=2" alt="">
+                        <div class="app2-bar"></div>
+                        <div class="app2-bar short"></div>
+                        <div class="app2-tiles"><i>🐶</i><i>🐠</i><i>🧸</i><i>🍖</i></div>
+                    </div>
+                </div>
+                <span class="app2-float f1">🐾</span>
+                <span class="app2-float f2">❤️</span>
+                <span class="app2-float f3">⭐</span>
             </div>
         </div>
     `;
     document.body.appendChild(overlay);
 
     function close() {
-        localStorage.setItem("appPopupClosed", Date.now());
         overlay.classList.remove("show");
         setTimeout(() => overlay.remove(), 300);
     }
 
-    overlay.querySelector(".app-popup-close").onclick = close;
-    overlay.querySelector(".app-popup-later").onclick = close;
+    overlay.querySelector(".app2-close").onclick = close;
+    overlay.querySelector(".app2-later").onclick = close;
     overlay.addEventListener("click", e => { if (e.target === overlay) close(); });
-    overlay.querySelector(".app-popup-install").addEventListener("click", () => {
-        localStorage.setItem("appPopupClosed", Date.now());
-    });
 
     requestAnimationFrame(() => overlay.classList.add("show"));
 }
-
 // Wait until the welcome popup is gone, then show the app popup
 // Show the app popup immediately after the welcome popup is closed
 function scheduleAppPopup() {
