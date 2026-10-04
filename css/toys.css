@@ -46,3 +46,82 @@ body.toys-page.toys-storefront .search-hidden{display:none!important}
 @media(max-width:1050px){body.toys-page.toys-storefront .featured-toy-grid{grid-template-columns:repeat(3,1fr)}body.toys-page.toys-storefront .toy-category-grid{grid-template-columns:repeat(2,1fr)}body.toys-page.toys-storefront .collection-link-grid{grid-template-columns:repeat(3,1fr)}body.toys-page.toys-storefront .toy-welcome{min-height:420px}}
 @media(max-width:700px){body.toys-page.toys-storefront .toy-welcome{width:calc(100% - 24px);margin-top:12px;padding:42px 24px 55px;grid-template-columns:1fr;min-height:0;border-radius:18px}.toy-welcome-copy{max-width:none}.toy-welcome h1{font-size:44px!important}.toy-welcome p{font-size:14px!important}.toy-welcome-art{min-height:210px;margin-top:8px}.toy-welcome-art>img{height:200px!important}.toy-orbit{width:260px!important;height:160px!important}.welcome-bottom{left:24px!important;right:24px!important;font-size:7px!important}.toy-search-panel,.toy-section,.toy-promo-row,.toy-collection-banner,.toy-benefits{width:calc(100% - 28px)!important}.toy-search-panel{margin:42px auto 48px!important}.section-heading{align-items:start!important;flex-direction:column}.featured-toy-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}.featured-toy-image{height:135px!important}.toy-promo-row{grid-template-columns:1fr!important;gap:12px!important;margin-bottom:55px!important}.toy-promo{min-height:175px!important}.age-card-grid{grid-template-columns:repeat(2,1fr)!important;gap:11px!important}.age-image-card{height:155px!important}.toy-category-grid{grid-template-columns:1fr!important;gap:11px!important}.toy-category-tile{min-height:150px!important;grid-template-columns:36% 1fr!important}.category-tile-image img{height:115px!important}.category-tile-copy{padding:14px 12px!important}.toy-collection-banner{grid-template-columns:1fr!important;padding:32px 25px!important}.banner-art{height:155px!important}.collection-link-grid{grid-template-columns:repeat(2,1fr)!important}.collection-group-heading{align-items:start!important;flex-direction:column}.toy-benefits{grid-template-columns:1fr!important;padding:20px!important}.popular-searches{gap:6px!important}.popular-searches a{font-size:10px}}
 @media(max-width:380px){body.toys-page.toys-storefront .toy-welcome h1{font-size:37px!important}.collection-link-grid{grid-template-columns:1fr!important}.age-image-card strong{font-size:14px}}
+/* ===== TOYS PAGE: DARK BLUE THEME (matches home page) ===== */
+body.toys-page.toys-storefront{
+  background:linear-gradient(180deg,#041634 0%,#0a2447 45%,#0d2d57 100%) fixed!important;
+  color:#e8f1fa!important;
+}
+body.toys-page.toys-storefront .toy-store{
+  --ink:#ffffff; --muted:#a9bdd3; --line:rgba(255,255,255,.14); --soft:rgba(255,255,255,.06);
+  background:transparent!important; color:#e8f1fa;
+}
+
+/* Headings */
+body.toys-page.toys-storefront .toy-search-heading h2,
+body.toys-page.toys-storefront .section-heading h2,
+body.toys-page.toys-storefront .collection-group-heading h3,
+body.toys-page.toys-storefront .featured-toy-info h3,
+body.toys-page.toys-storefront .category-tile-copy h3{color:#fff!important}
+body.toys-page.toys-storefront .section-heading p,
+body.toys-page.toys-storefront .featured-toy-info p,
+body.toys-page.toys-storefront .category-tile-copy p,
+body.toys-page.toys-storefront .collection-group-heading p{color:#a9bdd3!important}
+body.toys-page.toys-storefront .view-all-link,
+body.toys-page.toys-storefront .category-tile-copy b,
+body.toys-page.toys-storefront .collection-group-heading>a{color:#00d0ff!important}
+
+/* Search box */
+body.toys-page.toys-storefront .toy-search-control{
+  background:rgba(255,255,255,.08)!important;
+  border-color:rgba(255,255,255,.2)!important;
+  box-shadow:0 10px 35px rgba(0,0,0,.25)!important;
+}
+body.toys-page.toys-storefront .toy-search-control input{color:#fff!important}
+body.toys-page.toys-storefront .toy-search-control input::placeholder{color:#8fa6bf}
+body.toys-page.toys-storefront .toy-search-control button{color:#a9bdd3!important}
+body.toys-page.toys-storefront .popular-searches{color:#a9bdd3!important}
+body.toys-page.toys-storefront .popular-searches a{color:#d6e6f5!important;border-color:rgba(255,255,255,.2)!important;background:rgba(255,255,255,.05)}
+body.toys-page.toys-storefront .popular-searches a:hover{border-color:#00d0ff!important;color:#00d0ff!important}
+
+/* Cards */
+body.toys-page.toys-storefront .featured-toy-card,
+body.toys-page.toys-storefront .toy-category-tile{
+  background:rgba(255,255,255,.06)!important;
+  border-color:rgba(255,255,255,.14)!important;
+}
+body.toys-page.toys-storefront .featured-toy-card:hover,
+body.toys-page.toys-storefront .toy-category-tile:hover{
+  border-color:#00aeca!important; box-shadow:0 14px 30px rgba(0,0,0,.35)!important;
+}
+body.toys-page.toys-storefront .featured-toy-image,
+body.toys-page.toys-storefront .category-tile-image{background:rgba(255,255,255,.08)!important}
+body.toys-page.toys-storefront .age-image-card{background:rgba(255,255,255,.08)!important}
+
+/* Promo tiles */
+body.toys-page.toys-storefront .toy-promo{color:#fff!important}
+body.toys-page.toys-storefront .promo-blue{background:rgba(0,174,202,.18)!important}
+body.toys-page.toys-storefront .promo-gold{background:rgba(243,207,102,.16)!important}
+body.toys-page.toys-storefront .promo-mint{background:rgba(60,190,140,.16)!important}
+body.toys-page.toys-storefront .promo-blue span{color:#8eeaff!important}
+body.toys-page.toys-storefront .promo-gold span{color:#f3cf66!important}
+body.toys-page.toys-storefront .promo-mint span{color:#8fe8c0!important}
+body.toys-page.toys-storefront .toy-promo h2,
+body.toys-page.toys-storefront .toy-promo b{color:#fff!important}
+
+/* All collections */
+body.toys-page.toys-storefront .toy-collection-group{border-top-color:rgba(255,255,255,.14)!important}
+body.toys-page.toys-storefront .collection-link{
+  background:rgba(255,255,255,.06)!important;
+  border-color:rgba(255,255,255,.14)!important;
+  color:#d6e6f5!important;
+}
+body.toys-page.toys-storefront .collection-link:hover{
+  background:rgba(0,174,202,.18)!important;
+  border-color:#00d0ff!important; color:#fff!important;
+}
+
+/* Benefits strip */
+body.toys-page.toys-storefront .toy-benefits{background:rgba(255,255,255,.06)!important}
+body.toys-page.toys-storefront .toy-benefits b{color:#fff!important}
+body.toys-page.toys-storefront .toy-benefits small{color:#a9bdd3!important}
+body.toys-page.toys-storefront .toy-benefits>div>i{background:rgba(0,174,202,.2)!important;color:#00d0ff!important}
