@@ -8519,14 +8519,16 @@ body { top: 0 !important; }
 }
 .app2-logo-wrap {
     display: inline-block;
-    background: #0a1a3a;
-    padding: 8px 18px;
-    border-radius: 14px;
+    background: none !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
     margin-bottom: 14px;
-    box-shadow: 0 6px 16px rgba(10,26,58,.3);
 }
 .app2-logo {
     display: block;
-    height: 44px;     /* make bigger or smaller */
+    height: 52px;
     width: auto;
+    background: none;
 }
