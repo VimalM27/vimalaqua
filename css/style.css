@@ -8403,8 +8403,7 @@ nav.navbar {
 body { top: 0 !important; }
 .app2-overlay {
     position: fixed; inset: 0; z-index: 10000;
-    background: rgba(10,26,58,.55);
-    backdrop-filter: blur(4px);
+    background: transparent;  
     display: flex; align-items: center; justify-content: center;
     opacity: 0; transition: opacity .3s;
 }
