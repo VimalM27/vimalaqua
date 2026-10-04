@@ -1132,8 +1132,8 @@ document.getElementById("searchInput").addEventListener("keypress", function(e){
   @keyframes askFloat { 0%,100% {transform:translateX(0)} 50% {transform:translateX(-6px)} }
 
   /* Pulse ring on the chat button: change the selector to match yours */
-  .chatbot-btn { position: fixed; }
-  .chatbot-btn::before {
+  #vf-chat-bubble { position: fixed; }
+  #vf-chat-bubble::before {
     content: "";
     position: absolute; inset: 0;
     border-radius: 50%;
@@ -1146,13 +1146,15 @@ document.getElementById("searchInput").addEventListener("keypress", function(e){
 
 <script>
   const bubble = document.getElementById('askBubble');
-  // Open the chatbot when the bubble is clicked, then hide it
-  bubble.addEventListener('click', () => {
-    document.querySelector('.chatbot-btn')?.click();
-    bubble.style.display = 'none';
-  });
-  // Also hide when the chat button itself is clicked
-  document.querySelector('.chatbot-btn')?.addEventListener('click', () => bubble.style.display = 'none');
+
+  // Clicking the bubble opens the chat
+  bubble.addEventListener('click', () => vfToggleChat());
+
+  // Hide the bubble whenever the chat window is open, show it again when closed
+  const chatWin = document.getElementById('vf-chat-window');
+  new MutationObserver(() => {
+    bubble.style.display = chatWin.classList.contains('vf-open') ? 'none' : '';
+  }).observe(chatWin, { attributes: true, attributeFilter: ['class'] });
 </script>
 
 <script src="js/navbar.js?v=32"></script>

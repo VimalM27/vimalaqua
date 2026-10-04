@@ -1168,3 +1168,83 @@ function initLanguage() {
         document.body.appendChild(s);
     }
 }
+// ============================================================
+// PLAY STORE APP POPUP (shows after welcome popup is closed)
+// ============================================================
+
+const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=YOUR.PACKAGE.NAME"; // <-- your real link
+const APP_POPUP_DAYS = 3;   // don't show again for this many days after closing
+
+function showAppPopup() {
+    if (document.getElementById("appPopup")) return;
+
+    const last = localStorage.getItem("appPopupClosed");
+    if (last && Date.now() - Number(last) < APP_POPUP_DAYS * 86400000) return;
+
+    const overlay = document.createElement("div");
+    overlay.id = "appPopup";
+    overlay.className = "app-popup-overlay";
+    overlay.innerHTML = `
+        <div class="app-popup-box">
+            <button class="app-popup-close" aria-label="Close">✕</button>
+
+            <div class="app-popup-top">
+                <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="app-popup-logo">
+                <h3>Get the Vimal App 📲</h3>
+                <p>Shop pets, foods, accessories &amp; toys faster, with exclusive offers and order updates.</p>
+            </div>
+
+            <div class="app-popup-bottom">
+                <ul>
+                    <li>⚡ Faster checkout</li>
+                    <li>🎁 App-only offers</li>
+                    <li>🔔 Instant order updates</li>
+                </ul>
+
+                <a href="${PLAY_STORE_URL}" target="_blank" rel="noopener" class="app-popup-install">
+                    <span class="play-icon">▶</span>
+                    <span>
+                        <small>GET IT ON</small>
+                        <b>Google Play</b>
+                    </span>
+                </a>
+
+                <button class="app-popup-later">Maybe later</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    function close() {
+        localStorage.setItem("appPopupClosed", Date.now());
+        overlay.classList.remove("show");
+        setTimeout(() => overlay.remove(), 300);
+    }
+
+    overlay.querySelector(".app-popup-close").onclick = close;
+    overlay.querySelector(".app-popup-later").onclick = close;
+    overlay.addEventListener("click", e => { if (e.target === overlay) close(); });
+    overlay.querySelector(".app-popup-install").addEventListener("click", () => {
+        localStorage.setItem("appPopupClosed", Date.now());
+    });
+
+    requestAnimationFrame(() => overlay.classList.add("show"));
+}
+
+// Wait until the welcome popup is gone, then show the app popup
+function scheduleAppPopup() {
+    const timer = setInterval(function () {
+        const welcome = document.getElementById("offerPopup");
+        const welcomeOpen = welcome && getComputedStyle(welcome).display !== "none";
+        if (!welcomeOpen) {
+            clearInterval(timer);
+            setTimeout(showAppPopup, 1500);   // 1.5s after welcome popup closes
+        }
+    }, 500);
+}
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleAppPopup);
+} else {
+    scheduleAppPopup();
+}

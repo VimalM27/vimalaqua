@@ -8401,3 +8401,70 @@ nav.navbar {
 /* Hide Google's default top bar */
 .skiptranslate iframe, .goog-te-banner-frame { display: none !important; }
 body { top: 0 !important; }
+.app-popup-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.6);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10000;
+    opacity: 0; transition: opacity .3s;
+}
+.app-popup-overlay.show { opacity: 1; }
+
+.app-popup-box {
+    position: relative;
+    width: 90%; max-width: 400px;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #fff;
+    transform: translateY(30px) scale(.95);
+    transition: transform .35s ease;
+    box-shadow: 0 20px 50px rgba(0,0,0,.4);
+}
+.app-popup-overlay.show .app-popup-box { transform: none; }
+
+.app-popup-close {
+    position: absolute; top: 12px; right: 12px;
+    width: 32px; height: 32px;
+    border: 0; border-radius: 50%;
+    background: rgba(255,255,255,.2); color: #fff;
+    cursor: pointer; font-size: 14px;
+}
+
+.app-popup-top {
+    background: linear-gradient(160deg, #0a1a3a, #0d2a6b);
+    color: #fff; text-align: center;
+    padding: 28px 24px 24px;
+}
+.app-popup-logo { height: 60px; margin-bottom: 10px; }
+.app-popup-top h3 { margin: 0 0 8px; font-size: 22px; }
+.app-popup-top p  { margin: 0; font-size: 14px; opacity: .9; line-height: 1.5; }
+
+.app-popup-bottom { padding: 20px 24px 22px; text-align: center; }
+.app-popup-bottom ul {
+    list-style: none; padding: 0; margin: 0 0 18px;
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 16px;
+    font-size: 13px; color: #0a1a3a; font-weight: 600;
+}
+
+.app-popup-install {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    background: #000; color: #fff; text-decoration: none;
+    border-radius: 12px; padding: 10px 18px;
+    transition: transform .2s;
+    animation: appPulse 2s infinite;
+}
+.app-popup-install:hover { transform: scale(1.03); }
+.app-popup-install .play-icon { font-size: 26px; color: #00c853; }
+.app-popup-install small { display: block; font-size: 10px; letter-spacing: 1px; text-align: left; }
+.app-popup-install b { display: block; font-size: 18px; text-align: left; }
+
+.app-popup-later {
+    margin-top: 12px; background: none; border: 0;
+    color: #777; font-size: 13px; cursor: pointer;
+}
+
+@keyframes appPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(0,180,216,.6); }
+    70%  { box-shadow: 0 0 0 14px rgba(0,180,216,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,180,216,0); }
+}
