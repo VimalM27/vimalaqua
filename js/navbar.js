@@ -1185,11 +1185,6 @@ const APP_TEXT = {
 
 function showAppPopup() {
     if (document.getElementById("appPopup")) return;
-
-    // Show once per visit
-    if (sessionStorage.getItem("appPopupShown")) return;
-    sessionStorage.setItem("appPopupShown", "1");
-
     const overlay = document.createElement("div");
     overlay.id = "appPopup";
     overlay.className = "app2-overlay";
