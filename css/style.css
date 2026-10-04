@@ -4771,13 +4771,12 @@ img {
     height: 100% !important;
 
     object-fit: cover !important;
-    object-position: center center !important;
+    object-position: center 85% !important;   /* was: center center */
 
     display: block !important;
 
     z-index: 0 !important;
 }
-
 /* MOBILE IMAGE hidden on desktop */
 .hero-mobile-image {
     display: none !important;
