@@ -1233,15 +1233,26 @@ function showAppPopup() {
 }
 
 // Wait until the welcome popup is gone, then show the app popup
+// Show the app popup immediately after the welcome popup is closed
 function scheduleAppPopup() {
-    const timer = setInterval(function () {
-        const welcome = document.getElementById("offerPopup");
-        const welcomeOpen = welcome && getComputedStyle(welcome).display !== "none";
-        if (!welcomeOpen) {
-            clearInterval(timer);
-            setTimeout(showAppPopup, 1500);   // 1.5s after welcome popup closes
+    const welcome = document.getElementById("offerPopup");
+
+    const isOpen = () => welcome && getComputedStyle(welcome).display !== "none";
+
+    // No welcome popup on this page, or it's already closed
+    if (!isOpen()) {
+        showAppPopup();
+        return;
+    }
+
+    // Watch the welcome popup and fire the moment it closes
+    const observer = new MutationObserver(function () {
+        if (!isOpen()) {
+            observer.disconnect();
+            showAppPopup();
         }
-    }, 500);
+    });
+    observer.observe(welcome, { attributes: true, attributeFilter: ["style", "class"] });
 }
 
 if (document.readyState === "loading") {
