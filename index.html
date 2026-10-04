@@ -1116,6 +1116,61 @@ document.getElementById("searchInput").addEventListener("keypress", function(e){
     }
 });
 </script>
+<!-- Ask me bubble -->
+<div id="askBubble">Ask me 👋</div>
+
+<style>
+  /* Bubble: sits to the left of the chat button */
+  #askBubble {
+    position: fixed;
+    right: 100px;      /* distance from the right edge: adjust to your button */
+    bottom: 38px;      /* align vertically with the button: adjust */
+    background: #fff;
+    color: #0a1a3a;
+    font: 600 14px/1 Arial, sans-serif;
+    padding: 10px 16px;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,.25);
+    z-index: 9999;
+    cursor: pointer;
+    opacity: 0;
+    animation: askIn .5s ease 1.5s forwards, askFloat 2s ease-in-out 2s infinite;
+  }
+  /* Little arrow pointing to the button */
+  #askBubble::after {
+    content: "";
+    position: absolute;
+    right: -6px; top: 50%;
+    width: 12px; height: 12px;
+    background: #fff;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  @keyframes askIn    { from {opacity:0; transform:translateX(20px)} to {opacity:1; transform:translateX(0)} }
+  @keyframes askFloat { 0%,100% {transform:translateX(0)} 50% {transform:translateX(-6px)} }
+
+  /* Pulse ring on the chat button: change the selector to match yours */
+  .chatbot-btn { position: fixed; }
+  .chatbot-btn::before {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: rgba(13,71,120,.5);
+    z-index: -1;
+    animation: askPulse 2s ease-out infinite;
+  }
+  @keyframes askPulse { 0% {transform:scale(1); opacity:.7} 100% {transform:scale(1.6); opacity:0} }
+</style>
+
+<script>
+  const bubble = document.getElementById('askBubble');
+  // Open the chatbot when the bubble is clicked, then hide it
+  bubble.addEventListener('click', () => {
+    document.querySelector('.chatbot-btn')?.click();
+    bubble.style.display = 'none';
+  });
+  // Also hide when the chat button itself is clicked
+  document.querySelector('.chatbot-btn')?.addEventListener('click', () => bubble.style.display = 'none');
+</script>
 
 <script src="js/navbar.js?v=32"></script>
 <script src="js/script.js"></script>
