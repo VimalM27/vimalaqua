@@ -1,0 +1,40 @@
+VIMAL PETS & TOYS - HOME PAGE APP DOWNLOAD POPUP (boy & girl + phone)
+======================================================================
+Shows ONLY on the home page. Nothing else on your site is changed.
+
+STEP 1 - Copy the 3 files into your existing project (same folders):
+   css/vimal-home-app-popup.css
+   js/vimal-home-app-popup.js
+   images/app-popup-kids.jpg
+
+STEP 2 - Edit ONLY index.html and add 2 lines:
+
+  (a) in <head>, right after this existing line:
+        <link rel="stylesheet" href="css/vimal27-enhancements.css">
+      add:
+        <link rel="stylesheet" href="css/vimal-home-app-popup.css?v=1">
+
+  (b) near the bottom, right AFTER this existing line:
+        <script src="js/navbar.js?v=32"></script>
+      add:
+        <script src="js/vimal-home-app-popup.js?v=1"></script>
+
+   (It must come AFTER navbar.js. That is how it replaces the older
+    popup on the home page so two popups never appear together.)
+
+STEP 3 - Put your real download link
+   Open js/vimal-home-app-popup.js and change APP_URL at the top.
+   Default is  https://play.google.com/store/apps/details?id=com.vimal27.petsworld
+   (works once the app is live on Play Store). Until then you can use
+   the direct .apk link instead.
+
+TEXT, DELAY and "how many days to hide after closing" are all in the
+EDIT HERE block at the top of the js file.
+
+TESTING
+   - Once someone closes it, it stays hidden for 3 days (per browser).
+     To see it again any time, open:  https://www.vimal27.in/?appPopup=1
+     (or index.html?appPopup=1)
+   - It is skipped for iPhone/iPad (the app is Android only) and for people
+     already inside the installed app.
+   - Hard refresh (Ctrl+F5) after uploading.

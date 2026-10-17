@@ -1,0 +1,120 @@
+/* =========================================================
+   VIMAL - HOME PAGE "DOWNLOAD THE APP" POPUP
+   Self-contained. All classes start with .vhp-
+   ========================================================= */
+.vhp-overlay{
+    position:fixed; inset:0; z-index:100000;
+    display:flex; align-items:center; justify-content:center;
+    padding:16px; box-sizing:border-box;
+    background:rgba(3,12,30,.72);
+    backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+    opacity:0; visibility:hidden; transition:opacity .35s ease, visibility .35s;
+}
+.vhp-overlay.vhp-show{opacity:1; visibility:visible;}
+
+.vhp-card{
+    position:relative; display:flex; width:100%; max-width:780px;
+    max-height:calc(100vh - 32px); max-height:calc(100dvh - 32px);
+    background:linear-gradient(160deg,#0b2a5b 0%,#071a3d 60%,#04112b 100%);
+    border:1px solid rgba(245,196,81,.35);
+    border-radius:26px; overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.55);
+    transform:translateY(24px) scale(.96); transition:transform .4s cubic-bezier(.2,.9,.3,1.2);
+    font-family:'Poppins',Arial,sans-serif; color:#fff;
+}
+.vhp-show .vhp-card{transform:none;}
+
+.vhp-close{
+    position:absolute; top:12px; right:12px; z-index:5;
+    width:38px; height:38px; border:0; border-radius:50%;
+    background:rgba(255,255,255,.92); color:#071a3d; font-size:18px; font-weight:700;
+    cursor:pointer; line-height:1; box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+.vhp-close:hover{background:#fff; transform:scale(1.07);}
+
+/* ---------- picture side ---------- */
+.vhp-photo{
+    position:relative; flex:0 0 44%; min-height:430px;
+    background:#0b2a5b url("../images/app-popup-kids.jpg") center 22%/cover no-repeat;
+}
+.vhp-photo::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(to right,rgba(7,26,61,0) 60%,rgba(7,26,61,.55) 100%);
+}
+
+/* phone mock-up showing the app */
+.vhp-phone{
+    position:absolute; right:-14px; bottom:18px; z-index:2;
+    width:36%; min-width:104px; aspect-ratio:9/18;
+    background:#0a1224; border:4px solid #1b2742; border-radius:20px;
+    box-shadow:0 14px 30px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.12);
+    transform:rotate(7deg); overflow:hidden;
+    animation:vhp-float 3.6s ease-in-out infinite;
+}
+.vhp-notch{position:absolute; top:0; left:50%; transform:translateX(-50%); width:38%; height:6px; background:#1b2742; border-radius:0 0 8px 8px; z-index:3;}
+.vhp-screen{position:absolute; inset:0; background:#f4f9fc; padding:12px 7px 6px; display:flex; flex-direction:column; gap:6px;}
+.vhp-app-head{background:#071a3d; margin:-12px -7px 0; padding:14px 6px 6px; text-align:center;}
+.vhp-app-head img{height:20px; width:auto; max-width:90%; object-fit:contain;}
+.vhp-app-search{height:11px; border-radius:20px; background:#fff; border:1px solid #d8e6ee; position:relative;}
+.vhp-app-search::after{content:""; position:absolute; right:0; top:0; bottom:0; width:16px; border-radius:0 20px 20px 0; background:#00b4d8;}
+.vhp-app-banner{height:30px; border-radius:8px; background:linear-gradient(120deg,#00b4d8,#0b2a5b);}
+.vhp-app-tiles{display:grid; grid-template-columns:1fr 1fr; gap:5px;}
+.vhp-app-tiles i{
+    font-style:normal; font-size:15px; display:flex; align-items:center; justify-content:center;
+    aspect-ratio:1/.82; background:#fff; border-radius:8px; border:1px solid #e3eef4;
+}
+.vhp-app-nav{margin-top:auto; display:flex; justify-content:space-around; padding-top:5px; border-top:1px solid #dbe8ef; font-size:10px;}
+@keyframes vhp-float{0%,100%{transform:rotate(7deg) translateY(0)} 50%{transform:rotate(7deg) translateY(-7px)}}
+
+/* ---------- text side ---------- */
+.vhp-body{
+    flex:1 1 auto; padding:38px 34px 30px 40px; display:flex; flex-direction:column; justify-content:center;
+    overflow-y:auto;
+}
+.vhp-badge{
+    align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.08em;
+    color:#071a3d; background:#f5c451; padding:5px 12px; border-radius:20px; margin-bottom:14px;
+}
+.vhp-title{margin:0 0 12px; font-size:30px; line-height:1.15; font-weight:800; color:#fff;}
+.vhp-title span{color:#f5c451;}
+.vhp-desc{margin:0 0 20px; font-size:15px; line-height:1.55; color:#cfe0ee;}
+.vhp-points{list-style:none; margin:0 0 22px; padding:0; display:grid; gap:8px; font-size:14px; color:#e9f3fb;}
+.vhp-points li::before{content:"✔"; color:#00d9ff; margin-right:9px; font-weight:700;}
+
+.vhp-btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    padding:14px 26px; border-radius:50px; text-decoration:none;
+    background:linear-gradient(135deg,#00d9ff,#00b4d8); color:#04112b;
+    font-weight:800; font-size:16px; box-shadow:0 10px 24px rgba(0,180,216,.4);
+    transition:transform .2s, box-shadow .2s;
+}
+.vhp-btn:hover{transform:translateY(-2px); box-shadow:0 14px 30px rgba(0,180,216,.55);}
+.vhp-btn svg{width:20px; height:20px; flex:none;}
+.vhp-note{margin:10px 0 0; font-size:12px; color:#9fb6cc;}
+.vhp-later{
+    align-self:flex-start; margin-top:12px; padding:6px 0; border:0; background:none;
+    color:#9fb6cc; font-size:13px; text-decoration:underline; cursor:pointer;
+}
+.vhp-later:hover{color:#fff;}
+
+/* ---------- phones: picture on top ---------- */
+@media (max-width:640px){
+    .vhp-overlay{padding:12px; align-items:center;}
+    .vhp-card{flex-direction:column; max-width:400px; border-radius:22px; overflow-y:auto;}
+    .vhp-photo{flex:0 0 auto; min-height:0; height:clamp(220px,38vh,330px); background-position:center 18%;}
+    .vhp-photo::after{background:linear-gradient(to bottom,rgba(7,26,61,0) 60%,rgba(7,26,61,.85) 100%);}
+    .vhp-phone{width:27%; min-width:84px; right:10px; bottom:-18px; border-width:3px; border-radius:16px;}
+    .vhp-body{padding:26px 22px 22px; overflow:visible;}
+    .vhp-title{font-size:24px;}
+    .vhp-desc{font-size:14px; margin-bottom:14px;}
+    .vhp-points{display:none;}
+    .vhp-btn{width:100%; box-sizing:border-box;}
+    .vhp-later{align-self:center;}
+    .vhp-note{text-align:center;}
+}
+@media (max-height:560px) and (max-width:640px){
+    .vhp-photo{height:150px;}
+}
+@media (prefers-reduced-motion:reduce){
+    .vhp-phone{animation:none;} .vhp-card,.vhp-overlay{transition:none;}
+}
