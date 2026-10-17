@@ -1,0 +1,88 @@
+/* =========================================================
+   VIMAL - UNIFIED NAVBAR MEGA MENU (Toys / Pets & Accessories)
+   ---------------------------------------------------------
+   Makes the dropdown on EVERY page look exactly like the home
+   page: white panel, dark navy headings, dark grey links.
+
+   Why this file exists:
+   style.css, navbar.css and extra-sections.css all style
+   .mega-menu. The final look depended on the order they were
+   loaded in, so the home page (style.css last) looked right
+   while other pages (navbar.css last) got gold headings and
+   white links on a white panel, and a 1150px-wide panel that
+   slid off-screen.
+
+   The selectors below are more specific than all of those files,
+   so the result is the same no matter which order they load in.
+   Load this file LAST in <head>.
+   ========================================================= */
+
+@media (min-width: 769px) {
+
+    /* ---------- panel ---------- */
+    nav.navbar .vimal-navigation .nav-links .dropdown .mega-menu {
+        position: absolute;
+        top: 48px;
+        left: 0;
+        transform: translateX(-50%);
+
+        width: 650px;
+        min-width: 650px;
+        max-width: 92vw;
+        max-height: 75vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+        box-sizing: border-box;
+
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 25px;
+        padding: 25px;
+
+        background: #ffffff;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+        z-index: 9999;
+    }
+
+    nav.navbar .vimal-navigation .nav-links .dropdown:hover .mega-menu,
+    nav.navbar .vimal-navigation .nav-links .dropdown .mega-menu.show {
+        display: grid;
+    }
+
+    /* ---------- column headings ---------- */
+    nav.navbar .vimal-navigation .nav-links .dropdown .mega-menu .menu-column h4 {
+        margin: 0 0 12px;
+        padding: 0 0 10px;
+        color: #071A3D;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.2;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    /* ---------- links ---------- */
+    nav.navbar .vimal-navigation .nav-links .dropdown .mega-menu .menu-column a {
+        display: block;
+        padding: 7px 0;
+        color: #333333;
+        font-size: 16px;
+        line-height: 1.4;
+        text-decoration: none;
+        border-radius: 5px;
+        background: transparent;
+        transition: .2s ease;
+    }
+
+    nav.navbar .vimal-navigation .nav-links .dropdown .mega-menu .menu-column a:hover {
+        color: #00B4D8;
+        background: rgba(0, 217, 255, 0.10);
+        padding-left: 11px;
+    }
+}
+
+/* Same 2-column layout the home page uses on smaller laptops */
+@media (min-width: 769px) and (max-width: 1100px) {
+    nav.navbar .vimal-navigation .nav-links .dropdown .mega-menu {
+        grid-template-columns: 1fr 1fr;
+    }
+}

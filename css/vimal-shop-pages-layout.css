@@ -1,0 +1,34 @@
+/* =========================================================
+   VIMAL - navbar layout fix for pages that load css/shop.css
+   ---------------------------------------------------------
+   shop.css is a centred-card stylesheet that sets
+   body { display:flex; padding:40px 20px } for the login/signup
+   forms. On pages that ALSO have the site navbar (marketplace,
+   checkout, seller-dashboard, subscription, wishlist) that
+   squeezed the navbar into a narrow flex item sitting beside the
+   page content, which pushed the dropdown off-screen.
+
+   This makes the navbar a full-width row at the top, exactly like
+   every other page, and leaves the page content where it was.
+   ========================================================= */
+body {
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 0 0 40px;
+}
+
+body > nav.navbar,
+body > .v27-breadcrumb,
+body > footer.footer {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* keep the page's own content centred, with the spacing shop.css gave it */
+body > :not(nav):not(script):not(style):not(footer):not(.v27-breadcrumb):not(.v27-skip-link):not([class*="overlay"]):not([class*="popup"]):not(#mobileMenu):not(.mobile-menu) {
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}

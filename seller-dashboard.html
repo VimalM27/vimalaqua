@@ -152,8 +152,10 @@
 </style>
 
     <meta name="robots" content="index, follow">
-
+
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
+    <link rel="stylesheet" href="css/vimal-shop-pages-layout.css?v=1">
+    <link rel="stylesheet" href="css/vimal-dropdown-unified.css?v=1">
 <body>
  
 <nav class="navbar">
@@ -411,6 +413,19 @@ $("productSearch").addEventListener("input",renderProducts);$("stockFilter").add
 $("logoutBtn").onclick=async()=>{await supabaseClient.auth.signOut();location.href="seller-login.html";};init();
 </script>
 
+    <script src="js/navbar.js?v=32"></script>
+    <script>
+    /* fallback: toggleDropdown normally comes from js/script.js */
+    if (typeof window.toggleDropdown !== "function") {
+        window.toggleDropdown = function (event, trigger) {
+            event.preventDefault(); event.stopPropagation();
+            var c = trigger.nextElementSibling; if (!c) return;
+            var open = c.classList.contains("show");
+            document.querySelectorAll(".dropdown-content.show,.mega-menu.show").forEach(function (el) { el.classList.remove("show"); });
+            if (!open) c.classList.add("show");
+        };
+    }
+    </script>
     <script src="js/vimal27-enhancements.js"></script>
 </body>
 </html>
