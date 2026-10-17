@@ -1,0 +1,44 @@
+VIMAL PETS & TOYS - PHONE FIX (phones only, 768px and below)
+=============================================================
+Desktop is not changed at all (checked pixel-for-pixel).
+
+WHAT IT FIXES
+  - Header: logo + icons on row 1, search bar full-width on row 2
+    (no more overlap, no more search bar running off the screen)
+  - Product cards: 2 per row on every page (home New Arrivals, dogs,
+    cats, fish, foods, accessories, all toy pages, etc.)
+  - Page title banners no longer cut off on the right
+  - Price / Sort filter bar made compact
+  - Home hero: social icons moved off the kids' faces
+  - No sideways scrolling on any page; fixes the product, contact and
+    success pages
+  - success.html had no viewport tag so it looked like a tiny desktop
+    page on phones - fixed automatically
+
+INSTALL (2 files, no HTML editing)
+  1. Copy  css/vimal-mobile-fix.css  into your css/ folder   (NEW file)
+  2. Copy  js/navbar.js              into your js/ folder    (REPLACE)
+     (it is your same navbar.js with one small block added at the top
+      that loads the new CSS on every page)
+  3. Upload, then hard refresh (Ctrl+F5) / clear cache on the phone.
+
+  If you have edited navbar.js since the last zip, do NOT replace it.
+  Instead paste this block at the VERY TOP of your navbar.js:
+
+    (function () {
+        if (document.getElementById("vimalMobileFixCss")) return;
+        var l = document.createElement("link");
+        l.id = "vimalMobileFixCss"; l.rel = "stylesheet";
+        l.href = "css/vimal-mobile-fix.css?v=1";
+        document.head.appendChild(l);
+        if (!document.querySelector('meta[name="viewport"]')) {
+            var m = document.createElement("meta");
+            m.name = "viewport"; m.content = "width=device-width, initial-scale=1.0";
+            document.head.insertBefore(m, document.head.firstChild);
+        }
+    })();
+
+TO CHANGE LATER
+  - Cards per row: in vimal-mobile-fix.css search "repeat(2,"
+  - After editing the CSS, change ?v=1 to ?v=2 in navbar.js so phones
+    load the new version.

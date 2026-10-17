@@ -1,3 +1,22 @@
+/* ===== VIMAL: load phone-fix stylesheet on every page (added) ===== */
+(function () {
+    if (document.getElementById("vimalMobileFixCss")) return;
+    var l = document.createElement("link");
+    l.id = "vimalMobileFixCss";
+    l.rel = "stylesheet";
+    l.href = "css/vimal-mobile-fix.css?v=1";
+    document.head.appendChild(l);   /* appended last, so it wins over other CSS */
+
+    /* safety: a page with no viewport tag shows as a tiny desktop page on phones */
+    if (!document.querySelector('meta[name="viewport"]')) {
+        var m = document.createElement("meta");
+        m.name = "viewport";
+        m.content = "width=device-width, initial-scale=1.0";
+        document.head.insertBefore(m, document.head.firstChild);
+    }
+})();
+/* ================================================================= */
+
 // ============================================================
 // VIMAL PETS & TOYS - UNIVERSAL NAVBAR
 // Desktop + Mobile
