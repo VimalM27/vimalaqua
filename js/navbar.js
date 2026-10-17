@@ -1183,8 +1183,20 @@ const APP_TEXT = {
     later:   "Not now"
 };
 
+// How many days to stay quiet after the visitor dismisses the popup
+const APP_POPUP_HIDE_DAYS = 7;
+const APP_POPUP_KEY = "appPopupDismissedAt";
+
+function appPopupRecentlyDismissed() {
+    try {
+        const t = parseInt(localStorage.getItem(APP_POPUP_KEY), 10);
+        return t && (Date.now() - t) < APP_POPUP_HIDE_DAYS * 86400000;
+    } catch (e) { return false; }
+}
+
 function showAppPopup() {
     if (document.getElementById("appPopup")) return;
+    if (appPopupRecentlyDismissed()) return;
     const overlay = document.createElement("div");
     overlay.id = "appPopup";
     overlay.className = "app2-overlay";
@@ -1226,6 +1238,7 @@ function showAppPopup() {
     document.body.appendChild(overlay);
 
     function close() {
+        try { localStorage.setItem(APP_POPUP_KEY, Date.now()); } catch (e) {}
         overlay.classList.remove("show");
         setTimeout(() => overlay.remove(), 300);
     }
