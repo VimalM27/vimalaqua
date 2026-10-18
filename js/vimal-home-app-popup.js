@@ -20,11 +20,9 @@
         later:  "Maybe later"
     };
     var DELAY_MS    = 1200;  // wait after page / welcome popup before showing
-    var HIDE_DAYS   = 3;     // stay quiet this many days after "Maybe later" or close
-    var SHOW_ON_IOS = false; // the app is Android-only
+    var SHOW_ON_IOS = true;  // show to everyone (set false to hide on iPhone/iPad)
     /* ============================================= */
 
-    var KEY = "vimalHomeAppPopupDismissedAt";
     var params = new URLSearchParams(location.search);
     var force = params.get("appPopup") === "1";           // test: index.html?appPopup=1
 
@@ -44,13 +42,7 @@
     // Hide the older site-wide popup (navbar.js) on the home page so two don't stack
     if (typeof window.showAppPopup === "function") { window.showAppPopup = function () {}; }
 
-    function recentlyDismissed() {
-        try {
-            var t = parseInt(localStorage.getItem(KEY), 10);
-            return !!t && (Date.now() - t) < HIDE_DAYS * 86400000;
-        } catch (e) { return false; }
-    }
-    if (recentlyDismissed() && !force) return;
+    // NOTE: popup now shows on EVERY home-page load/refresh (no "hide for X days" memory)
 
     var PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 2.6v18.8c0 .5.5.8.9.5l15-9.4c.4-.2.4-.8 0-1L5.9 2.1c-.4-.3-.9 0-.9.5z"/></svg>';
 
@@ -94,7 +86,6 @@
         document.body.style.overflow = "hidden";
 
         function close(remember) {
-            if (remember) { try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {} }
             o.classList.remove("vhp-show");
             document.body.style.overflow = prevOverflow;
             document.removeEventListener("keydown", onKey);
