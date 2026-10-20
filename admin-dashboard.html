@@ -234,6 +234,14 @@ tbody tr:last-child td{border-bottom:0}
     .admin-pill span.txt{display:none}
 }
 
+/* SECURITY GATE: keep all admin content hidden until Supabase session + admin role are verified. */
+.layout{visibility:hidden}
+body.auth-verified .layout{visibility:visible}
+#authGate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#071a3d;color:#fff;font-family:Inter,system-ui,sans-serif;padding:24px;text-align:center}
+#authGate .gate-card{max-width:420px;width:100%;padding:30px;border:1px solid rgba(255,255,255,.15);border-radius:20px;background:rgba(255,255,255,.06);box-shadow:0 24px 80px rgba(0,0,0,.25)}
+#authGate .gate-mark{font-size:34px;margin-bottom:12px}
+#authGate p{color:#c8d5e8;line-height:1.6;font-size:14px}
+body.auth-verified #authGate{display:none}
 /* ============ VIMAL27 LUXURY ADMIN POLISH ============ */
 body{background-color:var(--cloud);background-image:radial-gradient(circle at 92% 0%,rgba(0,180,216,.075),transparent 34%),radial-gradient(circle at 0% 85%,rgba(212,175,55,.055),transparent 30%)}
 .sidebar{box-shadow:8px 0 34px rgba(7,26,61,.10);background-image:radial-gradient(circle at 90% 8%,rgba(0,180,216,.15),transparent 38%),radial-gradient(circle at 10% 90%,rgba(212,175,55,.08),transparent 35%)}
@@ -295,6 +303,7 @@ tbody tr:hover{background:#f0fbfd}
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
 </head>
 <body>
+<div id="authGate" role="status" aria-live="polite"><div class="gate-card"><div class="gate-mark">🔐</div><h2>Verifying administrator access</h2><p>Vimal Pets &amp; Toys admin workspace is locked until your signed-in account is verified.</p></div></div>
 <div class="layout">
 
 <aside class="sidebar" id="sidebar">
@@ -338,7 +347,7 @@ tbody tr:hover{background:#f0fbfd}
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
             Logout
         </button>
-        <div class="sidebar-foot">Row Level Security enforced on all tables.</div>
+        <div class="sidebar-foot">Database access is protected by Supabase Row Level Security policies.</div>
     </div>
 </aside>
 
@@ -550,7 +559,7 @@ tbody tr:hover{background:#f0fbfd}
             </h2><span class="count-pill">Admin-only</span></div>
             <div class="activity">
                 <div class="activity-item"><span class="dot"></span><div><strong>Supabase Authentication</strong><p>Your account must be authenticated before the dashboard loads.</p></div></div>
-                <div class="activity-item"><span class="dot"></span><div><strong>Admin role verification</strong><p>Access is checked against the <b>user_roles</b> table with role = admin.</p></div></div>
+                <div class="activity-item"><span class="dot"></span><div><strong>Admin role verification</strong><p>Access is checked against <b>user_roles</b>; only a trusted database administrator should be able to grant the admin role.</p></div></div>
                 <div class="activity-item"><span class="dot"></span><div><strong>Database RLS</strong><p>Keep Row Level Security enabled on your tables. Do not put a service-role key in this HTML file.</p></div></div>
                 <div class="activity-item"><span class="dot"></span><div><strong>MFA</strong><p>Supabase account MFA is enabled separately from this dashboard.</p></div></div>
             </div>
@@ -610,7 +619,7 @@ async function checkAdmin() {
 
     if (error || !user) {
         alert("Please login first.");
-        window.location.href = "login.html";
+        window.location.replace("login.html");
         return null;
     }
 
@@ -624,11 +633,12 @@ async function checkAdmin() {
     if (roleError || !roleData) {
         console.error(roleError);
         alert("Access denied. Admins only.");
-        window.location.href = "index.html";
+        window.location.replace("index.html");
         return null;
     }
 
-    document.getElementById("adminEmail").textContent = "Logged in as: " + user.email;
+    document.getElementById("adminEmail").textContent = "Logged in as: " + (user.email || "verified administrator");
+    document.body.classList.add("auth-verified");
     return user;
 }
 
@@ -959,10 +969,21 @@ document.getElementById("overlay").addEventListener("click", () => {
 });
 
 document.getElementById("logoutBtn").addEventListener("click", async () => {
-    await supabaseClient.auth.signOut();
-    window.location.href = "login.html";
+    document.body.classList.remove("auth-verified");
+    const { error } = await supabaseClient.auth.signOut();
+    if (error) console.error("Sign-out error:", error);
+    window.location.replace("login.html");
 });
 
+// If the session is revoked or signed out in another tab, immediately lock and leave the admin page.
+supabaseClient.auth.onAuthStateChange((event, session) => {
+    if (event === "SIGNED_OUT" || !session) {
+        document.body.classList.remove("auth-verified");
+        if (!window.location.pathname.endsWith("/login.html") && !window.location.pathname.endsWith("login.html")) {
+            window.location.replace("login.html");
+        }
+    }
+});
 
 ["applicationSearch","applicationStatus"].forEach(id=>document.getElementById(id).addEventListener("input",renderApplications));
 ["moderationSearch","moderationStatus"].forEach(id=>document.getElementById(id).addEventListener("input",renderModeration));
