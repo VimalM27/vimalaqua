@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="/icon.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-R5NVV7FZB6');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art Sets | Vimal Pets &amp; Toys</title>
+<meta name="description" content="Art Sets at Vimal Pets & Toys: colourful toys for kids.">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="css/vimal27-enhancements.css">
+<link rel="stylesheet" href="css/vimal-dropdown-unified.css?v=1">
+<link rel="stylesheet" href="css/toys-pages.css?v=1">
+</head>
+<body class="toy-sub" style="--c1:#FFB400;--c2:#1FB6F2;--tint:#FFF3CC;--ink:#6B4A00;--on1:#14213D;--on2:#14213D">
+
+<nav class="navbar">
+    <div class="mobile-menu-btn" onclick="openMenu()">
+        ☰
+    </div>
+
+    <div class="logo">
+    <a href="index.html" class="logo-link">
+        <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="navbar-logo">
+    </a>
+</div>
+
+    <a href="login.html" class="mobile-login" id="mobileLoginLink">
+        👤
+    </a>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search pets, foods, accessories...">
+
+        <button onclick="searchWebsite()">🔍</button>
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="toys.html">Toys</a></li>
+        <!-- SHOP -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
+
+            <div class="mega-menu">
+
+                <div class="menu-column">
+                    <h4>Pets</h4>
+
+                    <a href="dogs.html">🐶 Dogs</a>
+                    <a href="cats.html">🐱 Cats</a>
+                    <a href="fish.html">🐟 Fish</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Products</h4>
+
+                    <a href="marketplace.html">🛍 Marketplace</a>
+                    <a href="foods.html">🍖 Pet Foods</a>
+                    <a href="accessories.html">🎯 Accessories</a>
+                    <a href="aquariums.html">🐠 Aquariums</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Explore</h4>
+
+                    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
+                    <a href="index.html#best-sellers">🔥 Best Sellers</a>
+                    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
+                    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
+                    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
+                    <a href="care-guide.html">📚 Pet Care Guide</a>
+                </div>
+
+            </div>
+        </li>
+
+        <!-- SELLER -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Partner Login ▼</a>
+
+            <div class="dropdown-content">
+                <a href="seller-signup.html">📝 Become a Partner</a>
+                <a href="seller-login.html">🔑 Partner Login</a>
+                <a href="seller-dashboard.html">📊 Partner Dashboard</a>
+            </div>
+        </li>
+
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+    <a href="wishlist.html" class="wishlist-link">
+        ♡ <span id="wishlistCount">0</span>
+    </a>
+</li>
+        <li>
+            <a href="cart.html" class="cart-link">🛒</a>
+        </li>
+
+    </ul>
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+
+    <span class="close-menu" onclick="closeMenu()">✕</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="toys.html">🏠 Toys</a>
+    <a href="fish.html">🐟 Fish</a>
+    <a href="birds.html">🦜 Birds</a>
+    <a href="dogs.html">🐶 Dogs</a>
+    <a href="cats.html">🐱 Cats</a>
+    <a href="small-pets.html">🐹 Small Pets</a>
+    <a href="marketplace.html">🛍️ Marketplace</a>
+    <a href="foods.html">🍖 Pet Foods</a>
+    <a href="accessories.html">🛍 Accessories</a>
+    <a href="aquariums.html">🐠 Aquariums</a>
+    <a href="seller-signup.html">📝 Become a Partner</a>
+    <a href="seller-login.html">🔑 Partner Login</a>
+    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
+    <a href="index.html#best-sellers">🔥 Best Sellers</a>
+    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
+    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
+    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
+    <a href="care-guide.html">📚 Pet Care Guide</a>
+    <a href="about.html">ℹ About</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+
+</div>
+
+<main class="tp">
+<section class="tp-hero">
+<div class="tp-hero-copy">
+<div class="tp-crumbs" role="navigation" aria-label="Breadcrumb"><a href="toys.html">Toys</a><span aria-hidden="true">›</span><a href="toys.html#art-creativity">Art & Creativity</a></div>
+<h1>Art Sets</h1>
+<p>Paint, colour and splash your imagination.</p>
+<div class="tp-hero-tags"><span class="tp-age">Ages 3–12</span><a class="tp-back" href="toys.html#art-creativity">⬅ All Art & Creativity</a></div>
+</div>
+<div class="tp-hero-art"><span class="tp-main" aria-hidden="true">🎨</span><span class="tp-sat s1" aria-hidden="true">🖍️</span><span class="tp-sat s2" aria-hidden="true">🌈</span><span class="tp-sat s3" aria-hidden="true">✨</span><span class="tp-sat s4" aria-hidden="true">🖌️</span></div>
+<svg class="tp-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30C120 60 240 0 360 20s240 40 360 20 240-40 360-20 240 40 360 20V60H0Z" fill="#fff"/></svg>
+</section>
+<section class="tp-shop">
+<h2 class="tp-title">Pick your favourite</h2>
+<div class="products tp-grid">
+<div class="product-card" data-category="art-sets">
+        <a href="#">
+            <img src="images/toys-art/art-sets.svg" alt="Art Sets – Starter Pack">
+            <h2>Art Sets – Starter Pack</h2>
+            <p class="description">A great-value pick to get started.</p>
+            <p class="price">₹249</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
+<div class="product-card" data-category="art-sets">
+        <a href="#">
+            <img src="images/toys-art/art-sets.svg" alt="Art Sets – Classic Edition">
+            <h2>Art Sets – Classic Edition</h2>
+            <p class="description">Our most popular choice, solid quality for everyday play.</p>
+            <p class="price">₹399</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
+<div class="product-card" data-category="art-sets">
+        <a href="#">
+            <img src="images/toys-art/art-sets.svg" alt="Premium Art Sets">
+            <h2>Premium Art Sets</h2>
+            <p class="description">The premium option, with extra features and finish.</p>
+            <p class="price">₹599</p>
+        </a>
+        <button>Add to Cart</button>
+    </div>
+</div>
+</section>
+<section class="tp-more">
+<h2 class="tp-title">More Art & Creativity</h2>
+<div class="tp-chips"><a class="tp-chip" href="clay.html"><span aria-hidden="true">🏺</span>Clay & Modelling</a><a class="tp-chip" href="craft.html"><span aria-hidden="true">✂️</span>Craft Kits</a><a class="tp-chip" href="drawing.html"><span aria-hidden="true">🖍️</span>Drawing Kits</a><a class="tp-chip" href="musical.html"><span aria-hidden="true">🎹</span>Musical Instruments</a><a class="tp-chip" href="sewing.html"><span aria-hidden="true">🧵</span>Sewing & DIY Kits</a></div>
+<a class="tp-cta" href="toys.html">🧸 Back to all toys</a>
+</section>
+</main>
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-brand">
+            <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="footer-brand-img">
+            <span class="footer-brand-text">Farms</span>
+        </div>
+        <p>Your Trusted Pet Store & Aquarium Destination</p>
+        <div class="footer-contact">
+            <p>📞 +91 78 4545 2727</p>
+            <p>📧 vimal@vimal27.in</p>
+            <p>📍 Coimbatore, Tamil Nadu, India</p>
+        </div>
+        <div class="social-contact">
+            <a href="https://wa.me/917845452727" target="_blank" class="contact-link whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://t.me/yourtelegramusername" target="_blank" class="contact-link telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://www.instagram.com/vimalm27_official/" target="_blank" class="contact-link instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@VimalM27" target="_blank" class="contact-link youtube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <hr>
+        <p class="copyright">© 2026 Vimal Pets & Toys. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="js/navbar.js"></script>
+<script src="js/script.js"></script>
+<script src="js/product-link.js"></script>
+<script src="js/protect.js"></script>
+<script src="js/vimal27-enhancements.js"></script>
+</body>
+</html>
