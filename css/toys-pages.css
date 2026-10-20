@@ -28,12 +28,12 @@ body.toy-sub::before,body.toy-sub::after{display:none!important}
 .tp-shop{padding:34px 0 20px}
 .tp-title{text-align:center;font-size:clamp(28px,3.6vw,42px);color:var(--ink);margin-bottom:28px!important;position:relative}
 .tp-title::after{content:"";display:block;width:90px;height:8px;border-radius:8px;background:var(--c2);margin:10px auto 0}
-body.toy-sub .tp-grid.products{max-width:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px}
+body.toy-sub .tp-grid.products{max-width:none;margin:0;padding:0}
 body.toy-sub .tp-grid .product-card{background:var(--tint)!important;border:4px solid var(--c1)!important;border-radius:30px!important;overflow:hidden;box-shadow:0 8px 0 var(--c1)!important;padding:0 0 22px!important;display:flex;flex-direction:column;text-align:center;transition:transform .2s;max-width:420px;width:100%;justify-self:center}
 body.toy-sub .tp-grid .product-card:nth-child(3n+2){border-color:var(--c2)!important;box-shadow:0 8px 0 var(--c2)!important}
 body.toy-sub .tp-grid .product-card:hover{transform:translateY(-6px) rotate(-.8deg)!important}
 body.toy-sub .tp-grid .product-card>a{display:block;color:var(--ink);flex:1}
-body.toy-sub .tp-grid .product-card img{width:100%!important;height:230px!important;object-fit:cover!important;background:var(--tint);border-bottom:4px solid var(--c1);padding:0!important}
+body.toy-sub .tp-grid .product-card .vpw-imgwrap{border-bottom:4px solid var(--c1);background:var(--tint)}
 body.toy-sub .tp-grid .product-card h2{font-size:22px!important;color:var(--ink)!important;margin:16px 18px 6px!important;line-height:1.2}
 body.toy-sub .tp-grid .product-card .description{font-size:15px!important;font-weight:700;color:var(--ink)!important;opacity:.78;margin:0 18px 12px!important}
 body.toy-sub .tp-grid .product-card .price{display:inline-block;background:var(--c2)!important;color:var(--on2)!important;font-family:'Fredoka',sans-serif;font-size:22px!important;font-weight:700;padding:6px 20px!important;border-radius:30px;margin:0 0 4px!important}
@@ -54,11 +54,9 @@ body.toy-sub .tp-grid .product-card button:active{transform:translateY(3px);box-
 .tp-sat{width:60px;height:60px;font-size:30px}
 }
 @media(max-width:520px){
-body.toy-sub .tp-grid.products{grid-template-columns:1fr!important;gap:20px!important;padding:0!important}
 body.toy-sub .tp-grid .product-card{max-width:none!important}
 body.toy-sub .tp-grid .product-card h2{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;display:block!important;-webkit-line-clamp:unset!important}
 body.toy-sub .tp-grid .product-card .description{display:block!important;white-space:normal!important}
-body.toy-sub .tp-grid .product-card img{height:200px!important}
 .tp-chip{font-size:14px;padding:8px 14px}
 .tp-chip span{font-size:20px}
 }
