@@ -199,6 +199,9 @@
     var $ = function (id) { return bar.querySelector('#' + id); };
     var qEl = $('vpwQ'), catEl = $('vpwCat'), minEl = $('vpwMin'), maxEl = $('vpwMax'), avEl = $('vpwAv'), sortEl = $('vpwSort'), countEl = $('vpwCount');
     var pageCat = opts.pageCategory || '';
+    if (!items.some(function (it) { return it.rec._state === 'in_stock'; })) {
+      var opt = bar.querySelector('#vpwAv option[value="in"]'); opt.disabled = true; opt.textContent = 'In stock only (not confirmed here)';
+    }
     if (!globalMode) catEl.value = pageCat;
 
     /* read state from URL */
@@ -276,12 +279,16 @@
 
   /* ---------- 4. collection pages ---------- */
   function initCollection() {
-    var grid = document.querySelector('.products');
-    var cards = hydrateAll();
-    cards.forEach(function () {});
-    var all = document.querySelectorAll('.product-card');
-    all.forEach(function (c) { if (c.parentNode) c.parentNode.classList.add('vpw-grid'); });
+    var grids = Array.prototype.slice.call(document.querySelectorAll('.products'));
+    var grid = grids[0];
+    hydrateAll();
+    document.querySelectorAll('.product-card').forEach(function (c) { if (c.parentNode) c.parentNode.classList.add('vpw-grid'); });
     if (!grid) return;
+    /* some pages (e.g. birds) split one list over several .products sections: merge them so every filter sees every product */
+    grids.slice(1).forEach(function (g) {
+      Array.prototype.slice.call(g.querySelectorAll(':scope > .product-card')).forEach(function (c) { grid.appendChild(c); });
+      if (!g.querySelector('.product-card')) g.parentNode.removeChild(g);
+    });
     var gcards = Array.prototype.slice.call(grid.querySelectorAll(':scope > .product-card'));
     if (!gcards.length) return;
     var first = gcards.filter(function (c) { return c._rec && !c._rec._ghost; })[0];
@@ -291,7 +298,6 @@
     var old = document.querySelector('.filter-section');
     if (old && old.querySelector('#minPrice, #sortFilter')) old.parentNode.removeChild(old);
     var oldEmpty = document.getElementById('noProducts'); if (oldEmpty) oldEmpty.parentNode.removeChild(oldEmpty);
-    if (gcards.length < 2) return;
     mountBar({ grid: grid, pageCategory: PAGE_CATEGORY, items: gcards.map(function (c, i) { return { el: c, rec: c._rec, hay: c._hay, idx: i }; }) });
     /* click anywhere on a card (not a control) opens the right product */
     grid.addEventListener('click', clickCard, true);
