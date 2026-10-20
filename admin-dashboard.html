@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" href="/icon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard | Vimal Pets & Toys</title>
+<title>Dashboard | Vimal Pets &amp; Toys Admin</title>
     <meta name="description" content="Admin Dashboard | Vimal Pets & Toys at Vimal Pets & Toys — explore quality pets, pet products, toys, accessories and helpful resources.">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -296,50 +296,76 @@ tbody tr:hover{background:#f0fbfd}
 @media(max-width:900px){.seller-field-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.seller-field-grid{grid-template-columns:1fr}.panel,.section{padding:17px}.welcome h1{font-size:27px}.stat .num{font-size:29px}}
 
+
+/* Separate-page navigation and page-specific content */
+.nav a.nav-link{border:0;background:transparent;color:#c7d8d0;text-align:left;text-decoration:none;padding:12px 14px;border-radius:10px;font-weight:600;font-size:14px;display:flex;align-items:center;gap:11px;transition:.15s;position:relative}
+.nav a.nav-link:hover{background:var(--canopy-2);color:#fff}
+.nav a.nav-link.active{background:var(--meadow);color:#fff}
+.nav a.nav-link .nav-emoji{width:17px;display:inline-flex;justify-content:center;flex:none}
+.brand{display:flex;align-items:center;gap:11px}
+.brand-logo{width:48px;height:48px;object-fit:contain;border-radius:12px;background:#fff;padding:4px;flex:none}
+.brand-copy{min-width:0}
+.brand h2{font-size:19px;line-height:1.2}
+.brand span{display:block;margin-top:5px;font-size:9px;letter-spacing:1.2px}
+.page-intro{margin:0 0 20px;padding:18px 20px;border:1px solid var(--border);border-radius:var(--radius);background:linear-gradient(120deg,#fff 0%,#f0fbfd 100%);box-shadow:var(--shadow-sm)}
+.page-intro h1{font-family:var(--font-display);font-size:26px;color:var(--canopy);margin-bottom:5px}
+.page-intro p{color:var(--muted);font-size:13px;line-height:1.6}
+
+/* One focused admin page at a time. Hidden sections stay in the DOM for the shared data loader. */
+.container > section{display:none}
+body.page-dashboard .container > section#dashboard{display:block}
+body.page-sellers .container > section#sellers{display:block}
+body.page-products .container > section#products{display:block}
+body.page-orders .container > section#orders{display:block}
+body.page-payments .container > section#payments{display:block}
+body.page-seller-applications .container > section#seller-applications{display:block}
+body.page-moderation .container > section#moderation{display:block}
+body.page-admin-tools .container > section#admin-tools{display:block}
+body.page-security .container > section#security{display:block}
 </style>
     <meta name="robots" content="noindex, nofollow">
 
 
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
 </head>
-<body>
+<body class="page-dashboard">
 <div id="authGate" role="status" aria-live="polite"><div class="gate-card"><div class="gate-mark">🔐</div><h2>Verifying administrator access</h2><p>Vimal Pets &amp; Toys admin workspace is locked until your signed-in account is verified.</p></div></div>
 <div class="layout">
 
 <aside class="sidebar" id="sidebar">
     <div class="brand">
-        <h2>Vimal Pets & Toys</h2>
-        <span>ADMIN CONTROL PANEL</span>
+        <img class="brand-logo" src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys logo">
+        <div class="brand-copy"><h2>Vimal Pets &amp; Toys</h2><span>ADMIN CONTROL PANEL</span></div>
     </div>
 
     <nav class="nav">
-        <button class="active" data-target="dashboard">
+        <a class="nav-link active" href="admin-dashboard.html" aria-current="page">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
             Dashboard
-        </button>
-        <button data-target="sellers">
+        </a>
+        <a class="nav-link" href="admin-sellers.html" aria-current="false">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15.7 13.2c2.7.2 4.8 2.5 4.8 5.3"/></svg>
             Sellers
-        </button>
-        <button data-target="products">
+        </a>
+        <a class="nav-link" href="admin-products.html" aria-current="false">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l2-5h14l2 5"/><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/><path d="M9 12a3 3 0 0 0 6 0"/></svg>
             Products
-        </button>
-        <button data-target="orders">
+        </a>
+        <a class="nav-link" href="admin-orders.html" aria-current="false">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
             Orders
-        </button>
-        <button data-target="payments">
+        </a>
+        <a class="nav-link" href="admin-payments.html" aria-current="false">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2.2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
             Payments
-        </button>
-        <button data-target="seller-applications">📝 Seller Applications</button>
-        <button data-target="moderation">🛡️ Moderation</button>
-        <button data-target="admin-tools">⚙️ Admin Tools</button>
-        <button data-target="security">
+        </a>
+        <a class="nav-link" href="admin-seller-applications.html" aria-current="false">📝 Seller Applications</a>
+        <a class="nav-link" href="admin-moderation.html" aria-current="false">🛡️ Moderation</a>
+        <a class="nav-link" href="admin-tools.html" aria-current="false">⚙️ Admin Tools</a>
+        <a class="nav-link" href="admin-security.html" aria-current="false">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 8.6-8 10.5-4.6-1.9-8-5.5-8-10.5v-6L12 2z"/><path d="M9.5 12l1.8 1.8L14.8 10"/></svg>
             Security
-        </button>
+        </a>
     </nav>
 
     <div class="sidebar-bottom">
@@ -357,7 +383,7 @@ tbody tr:hover{background:#f0fbfd}
     <header class="topbar">
         <div class="topbar-left">
             <button class="menu-btn" id="menuBtn">☰</button>
-            <h3>Vimal Pets & Toys — Admin</h3>
+            <h3>Vimal Pets &amp; Toys — Dashboard</h3>
         </div>
         <span class="admin-pill"><span class="dotlive"></span><span class="txt">ADMIN SESSION</span></span>
     </header>
