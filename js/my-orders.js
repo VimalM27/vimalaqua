@@ -55,7 +55,7 @@
     var canCancel = ['pending_payment', 'confirmed', 'processing'].indexOf(o.order_status) >= 0 && !reqs.some(function (r) { return r.kind === 'cancellation' && (r.status === 'open' || r.status === 'in_review'); });
     var canReport = ['shipped', 'out_for_delivery', 'delivered'].indexOf(o.order_status) >= 0;
     var h = '';
-    if (S.fresh === o.order_no) h += '<div class="vo-alert ok">Thank you! Your order ' + V.esc(o.order_no) + ' has been received. We will contact you shortly.</div>';
+    if (S.fresh === o.order_no) h += '<div class="vo-alert ok">Thank you! Your order ' + V.esc(o.order_no) + ' has been received. We will contact you shortly. <a href="bill.html?id=' + o.id + '"><b>Download your bill</b></a></div>';
     if (o.order_status === 'cancelled') h += '<div class="vo-alert bad">This order was cancelled.' + (o.payment_status === 'refund_pending' ? ' Your refund is pending.' : '') + '</div>';
     if (o.order_status === 'refund_pending') h += '<div class="vo-alert warn">Your refund has been started but is not complete yet.</div>';
     if (o.order_status === 'refunded') h += '<div class="vo-alert info">Your refund has been completed.</div>';
@@ -80,7 +80,7 @@
     h += '<div class="vo-box"><h3>Delivery address</h3><p>' + V.esc(o.customer_name) + '<br>' + V.esc(o.address) + (o.city ? ', ' + V.esc(o.city) : '') + (o.pincode ? ' ' + V.esc(o.pincode) : '') + '<br>' + V.esc(o.phone) + '</p></div>';
     h += '</div></div>';
 
-    h += '<div class="vo-actions">' +
+    h += '<div class="vo-actions"><a class="vo-btn good" href="bill.html?id=' + o.id + '">⬇ Download bill</a>' +
       (canCancel ? '<button class="vo-btn warn" data-act="form" data-form="cancel">Request cancellation</button>' : '') +
       (canReport ? '<button class="vo-btn alt" data-act="form" data-form="issue">Report a problem</button>' : '') +
       '<button class="vo-btn alt" data-act="form" data-form="support">Contact support</button>' +
