@@ -73,6 +73,7 @@ function renderLoggedInNav(user) {
                     <strong>${displayName}</strong>
                     <small>${user.email}</small>
                 </div>
+                <a href="my-orders.html">My Orders</a>
                 <a href="#" onclick="logoutUser(); return false;">Logout</a>
             </div>
         </div>

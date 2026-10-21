@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="/icon.png">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
 <script>
@@ -55,7 +54,6 @@
     <meta name="robots" content="index, follow">
 
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
-</head>
 <body>
 
 <div class="home-btn-wrap">
@@ -92,10 +90,15 @@ const form = document.getElementById("loginForm");
 const messageBox = document.getElementById("message");
 const submitBtn = document.getElementById("submitBtn");
 
+// where to go after login: a safe ?next=page.html, otherwise the default
+function vpwNext(){
+    var n=new URLSearchParams(location.search).get("next");
+    return n && /^[a-z0-9._-]+\.html(\?[a-zA-Z0-9=&_%.-]*)?$/i.test(n) ? n : null;
+}
 // if already logged in, skip straight to home
 (async () => {
     const { data: { session } } = await supabaseClient.auth.getSession();
-    if (session) window.location.href = "index.html";
+    if (session) window.location.href = vpwNext() || "index.html";
 })();
 
 form.addEventListener("submit", async function (e) {
@@ -162,12 +165,12 @@ form.addEventListener("submit", async function (e) {
         if (roleData?.role === "admin") {
 
             // 👑 Admin
-            window.location.href = "admin-dashboard.html";
+            window.location.href = vpwNext() || "admin-dashboard.html";
 
         } else {
 
             // 👤 Normal customer
-            window.location.href = "index.html";
+            window.location.href = vpwNext() || "index.html";
         }
     }
 });</script>
