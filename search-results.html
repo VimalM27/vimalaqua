@@ -1,33 +1,165 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <link rel="icon" type="image/png" href="/icon.png">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Search | Vimal Pets & Toys</title>
-<meta name="description" content="Search pets, pet products, aquarium products and toys at Vimal Pets & Toys.">
-<link rel="stylesheet" href="css/navbar.css?v=2">
-<link rel="stylesheet" href="css/navbar-auth.css">
-<link rel="stylesheet" href="css/vimal-mobile-search-addon.css">
-<style>body{margin:0;background:#f7f9fb;font-family:Arial,sans-serif;padding-top:100px}.navbar{z-index:9999}.vp-results-search{max-width:650px;margin:0 auto 28px;display:flex}.vp-results-search input{flex:1;height:48px;border:1px solid #d9e0e7;border-radius:12px 0 0 12px;padding:0 15px;font-size:15px;outline:none}.vp-results-search button{width:56px;border:0;border-radius:0 12px 12px 0;background:#00b4d8;color:#fff;font-size:18px;cursor:pointer}@media(max-width:768px){body{padding-top:68px}}</style>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R5NVV7FZB6');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search &amp; Shop All Products | Vimal Pets &amp; Toys</title>
+    <meta name="description" content="Search and filter all pets, pet products, aquarium products and toys at Vimal Pets &amp; Toys.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/wishlist-delivery.css">
+    <meta name="robots" content="index, follow">
+
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
     <link rel="stylesheet" href="css/vimal-dropdown-unified.css?v=1">
+<link rel="stylesheet" href="css/vimal-mobile-search-addon.css">
 <link rel="stylesheet" href="css/vpw-catalog.css?v=1">
 </head>
 <body>
-<nav class="navbar"></nav>
-<main class="vp-results-page">
-  <form class="vp-results-search" id="resultsSearch"><input id="resultsInput" type="search" placeholder="Search pets, foods, accessories, toys..." autocomplete="off"><button aria-label="Search">🔍</button></form>
-  <h1 id="resultsTitle">Search</h1>
-  <p class="vp-results-summary" id="resultsSummary"></p>
-  <div class="vp-results-grid" id="resultsGrid"></div>
-</main>
+<nav class="navbar">
+    <div class="mobile-menu-btn" onclick="openMenu()">
+        ☰
+    </div>
+
+    <div class="logo">
+    <a href="index.html" class="logo-link">
+        <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="navbar-logo">
+    </a>
+</div>
+
+    <a href="login.html" class="mobile-login" id="mobileLoginLink">
+        👤
+    </a>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search pets, foods, accessories...">
+
+        <button onclick="searchWebsite()">🔍</button>
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="toys.html">Toys</a></li>
+        <!-- SHOP -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
+
+            <div class="mega-menu">
+
+                <div class="menu-column">
+                    <h4>Pets</h4>
+
+                    <a href="dogs.html">🐶 Dogs</a>
+                    <a href="cats.html">🐱 Cats</a>
+                    <a href="fish.html">🐟 Fish</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Products</h4>
+
+                    <a href="marketplace.html">🛍 Marketplace</a>
+                    <a href="foods.html">🍖 Pet Foods</a>
+                    <a href="accessories.html">🎯 Accessories</a>
+                    <a href="aquariums.html">🐠 Aquariums</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Explore</h4>
+
+                    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
+                    <a href="index.html#best-sellers">🔥 Best Sellers</a>
+                    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
+                    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
+                    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
+                    <a href="care-guide.html">📚 Pet Care Guide</a>
+                </div>
+
+            </div>
+        </li>
+
+        <!-- SELLER -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Partner Login ▼</a>
+
+            <div class="dropdown-content">
+                <a href="seller-signup.html">📝 Become a Partner</a>
+                <a href="seller-login.html">🔑 Partner Login</a>
+                <a href="seller-dashboard.html">📊 Partner Dashboard</a>
+            </div>
+        </li>
+
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+    <a href="wishlist.html" class="wishlist-link">
+        ♡ <span id="wishlistCount">0</span>
+    </a>
+</li>
+        <li>
+            <a href="cart.html" class="cart-link">🛒</a>
+        </li>
+
+    </ul>
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+
+    <span class="close-menu" onclick="closeMenu()">✕</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="toys.html">🏠 Toys</a>
+    <a href="fish.html">🐟 Fish</a>
+    <a href="birds.html">🦜 Birds</a>
+    <a href="dogs.html">🐶 Dogs</a>
+    <a href="cats.html">🐱 Cats</a>
+    <a href="small-pets.html">🐹 Small Pets</a>
+    <a href="marketplace.html">🛍️ Marketplace</a>
+    <a href="foods.html">🍖 Pet Foods</a>
+    <a href="accessories.html">🛍 Accessories</a>
+    <a href="aquariums.html">🐠 Aquariums</a>
+    <a href="seller-signup.html">📝 Become a Partner</a>
+    <a href="seller-login.html">🔑 Partner Login</a>
+    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
+    <a href="index.html#best-sellers">🔥 Best Sellers</a>
+    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
+    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
+    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
+    <a href="care-guide.html">📚 Pet Care Guide</a>
+    <a href="about.html">ℹ About</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+
+</div>
+<section class="page-hero">
+    <div class="hero-content">
+        <h1 id="resultsTitle">Shop all products</h1>
+        <p id="resultsSummary">Search by name, brand or keyword, then filter by category, price and availability.</p>
+        <form class="vp-results-search" id="resultsSearch"><input id="resultsInput" type="search" placeholder="Search pets, foods, accessories, toys..." autocomplete="off" aria-label="Search products"><button aria-label="Search">🔍</button></form>
+    </div>
+</section>
+<div class="products" id="resultsGrid"></div>
+<script src="js/script.js"></script>
+<script src="js/product-link.js"></script>
+<script src="js/vimal-mobile-search-addon.js"></script>
+<script src="js/navbar.js"></script>
+<script src="js/protect.js"></script>
+<script src="js/wishlist.js"></script>
+    <script src="js/vimal27-enhancements.js"></script>
 <script src="js/products-data.js"></script>
 <script src="js/product-meta.js"></script>
 <script src="js/vpw-catalog.js"></script>
-<script src="js/navbar.js?v=32"></script>
-<script src="js/vimal-mobile-search-addon.js"></script>
-
-    <script src="js/vimal27-enhancements.js"></script>
 </body>
 </html>

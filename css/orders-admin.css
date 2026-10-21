@@ -1,0 +1,23 @@
+/* admin-orders.html: same look as admin-dashboard.html (pine green, Fraunces + Inter) */
+body.vo-admin-page{background:#f6f4ee;color:#1c2624;font-family:'Inter',Arial,Helvetica,sans-serif}
+.vo-admin-page .vo{font-family:'Inter',Arial,sans-serif;color:#1c2624}
+.vo-admin-page .vo h1,.vo-admin-page .vo h2,.vo-admin-page .vo h3,.vo-admin-page .vo-no,.vo-admin-page .vo-stat b{font-family:'Fraunces',Georgia,serif;font-weight:600;color:#1c2624}
+.vo-admin-page .vo-head h1{color:#1c2624;text-shadow:none}
+.vo-admin-page .vo-head{justify-content:flex-start;text-align:left}
+.vo-admin-page .vo-head p{color:#6b7570}
+.vo-topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:#132420;color:#fff;padding:14px 22px}
+.vo-topbar b{font-family:'Fraunces',Georgia,serif;font-size:20px;font-weight:600;display:block}
+.vo-topbar span{font-size:11px;letter-spacing:.14em;opacity:.7}
+.vo-topbar nav{display:flex;gap:6px;flex-wrap:wrap}
+.vo-topbar a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:14px;font-weight:600}
+.vo-topbar a:hover{background:#1c332d}.vo-topbar a.on{background:#2f6f5e}
+.vo-admin-page .vo-btn{background:#2f6f5e;border-color:#2f6f5e}
+.vo-admin-page .vo-btn.alt{background:#fff;color:#234f43!important;border-color:#d7d3c6}
+.vo-admin-page .vo-btn.warn{background:#fff;color:#b3432f!important;border-color:#e3b9b0}
+.vo-admin-page .vo-btn.good{background:#2f7a51;border-color:#2f7a51}
+.vo-admin-page .vo-tab.on{background:#132420;border-color:#132420}
+.vo-admin-page .vo-card,.vo-admin-page .vo-stat,.vo-admin-page .vo-filters{border-color:#e5e2d8;box-shadow:0 2px 8px rgba(19,36,32,.06)}
+.vo-admin-page .vo-box{background:#fbfaf6;border-color:#e5e2d8}
+.vo-admin-page .vo-row:hover td{background:#f1f6f3}
+.vo-admin-page .vo-note,.vo-admin-page .vo-meta,.vo-admin-page .vo-kv dt,.vo-admin-page .vo label{color:#6b7570}
+.vo-admin-page .vo input:focus,.vo-admin-page .vo select:focus,.vo-admin-page .vo textarea:focus{outline:3px solid #cfe4dc;border-color:#2f6f5e}

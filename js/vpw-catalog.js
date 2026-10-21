@@ -324,7 +324,7 @@
     var title = document.getElementById('resultsTitle'), sum = document.getElementById('resultsSummary');
     var q = new URLSearchParams(location.search).get('q');
     if (title) title.textContent = q ? 'Search results for “' + q + '”' : 'Shop all products';
-    if (sum) sum.style.display = 'none';
+    
     var ctl = mountBar({ grid: grid, globalMode: true, items: items });
     var form = document.getElementById('resultsSearch');
     if (form) { var inp = document.getElementById('resultsInput'); if (inp) { inp.value = q || ''; } form.addEventListener('submit', function (e) { e.preventDefault(); var v = inp.value.trim(); var qEl = document.getElementById('vpwQ'); qEl.value = v; if (title) title.textContent = v ? 'Search results for “' + v + '”' : 'Shop all products'; ctl.apply(); }); }
