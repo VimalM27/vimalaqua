@@ -34,10 +34,20 @@
   }
 
   function exampleCard() {
-    var o = { order_status: 'processing', payment_method: 'cod', payment_status: 'unpaid', fulfilment: 'shipping', tracking_number: null };
+    var o = { order_status: 'processing', payment_method: 'upi', payment_status: 'paid', fulfilment: 'shipping', tracking_number: null };
     return '<div class="vo-example"><span class="tag">Example design</span>' +
       '<div class="vo-no">Order #VM27001 ' + V.badge('Processing', 'blue') + '</div><div class="vo-meta" style="margin:6px 0 14px"><span>Placed: 20 October 2026</span></div>' +
       V.timeline(o) + '<p class="vo-note">Illustrative example only. This is not a real customer order.</p></div>';
+  }
+
+  /* online-payment verification messages + the form to send / correct the UPI transaction ID */
+  function payNote(o) {
+    if (o.order_status !== 'pending_payment') return '';
+    var canSend = ['unpaid', 'failed', 'pending'].indexOf(o.payment_status) >= 0;
+    var msg = o.payment_status === 'pending' ? 'We received your transaction ID and are verifying it against our bank / UPI records. Your order is confirmed as soon as the payment is verified.'
+      : o.payment_status === 'failed' ? 'We could not verify this payment. Please check the transaction ID and send it again, or contact support.'
+      : 'Send us your UPI transaction ID (UTR) so we can verify your payment. The order is not processed until the payment is verified.';
+    return '<p class="vo-note">' + msg + '</p>' + (canSend ? '<form class="vo-form" data-form-id="payref" data-order="' + o.id + '" style="margin-top:10px"><label>UPI transaction ID / UTR</label><input name="reference" required minlength="8" maxlength="30" autocomplete="off" placeholder="e.g. 412345678901" value="' + V.esc(o.payment_reference || '') + '"><div class="vo-actions"><button class="vo-btn good" type="submit">' + (o.payment_status === 'pending' ? 'Update transaction ID' : 'Submit for verification') + '</button></div></form>' : '');
   }
 
   function orderCard(o) {
@@ -76,7 +86,7 @@
       '</tbody><tfoot><tr><td colspan="3" class="r"><b>Order total</b></td><td class="r"><b>' + V.money(o.total) + '</b></td></tr></tfoot></table></div></div>';
     h += '<div class="vo-box"><h3>Payment</h3><dl class="vo-kv"><dt>Status</dt><dd>' + V.payBadge(o) + '</dd><dt>Method</dt><dd>' + V.esc(V.METHOD[o.payment_method] || o.payment_method) + '</dd>' +
       (o.payment_reference ? '<dt>Reference</dt><dd>' + V.esc(o.payment_reference) + '</dd>' : '') + (o.paid_at ? '<dt>Paid on</dt><dd>' + V.esc(V.date(o.paid_at)) + '</dd>' : '') + '</dl>' +
-      (o.payment_status === 'unpaid' && V.prepaid(o) ? '<p class="vo-note">We will confirm your payment manually. Your order is not marked paid until we verify it.</p>' : '') + '</div>';
+      payNote(o) + '</div>';
     h += '<div class="vo-box"><h3>Delivery address</h3><p>' + V.esc(o.customer_name) + '<br>' + V.esc(o.address) + (o.city ? ', ' + V.esc(o.city) : '') + (o.pincode ? ' ' + V.esc(o.pincode) : '') + '<br>' + V.esc(o.phone) + '</p></div>';
     h += '</div></div>';
 
@@ -148,6 +158,7 @@
       var id = f.getAttribute('data-order'), kind = f.getAttribute('data-form-id'), d = new FormData(f);
       if (kind === 'cancel') await call('vp_request_cancellation', { p_order: id, p_reason: d.get('message') || '' }, 'Cancellation request sent');
       else if (kind === 'issue') await call('vp_report_issue', { p_order: id, p_kind: d.get('kind'), p_item: d.get('item') || null, p_message: d.get('message') }, 'Report sent. We will get back to you.');
+      else if (kind === 'payref') await call('vp_submit_payment_reference', { p_order: id, p_reference: d.get('reference') || '' }, 'Transaction ID received. We are verifying your payment.');
       else if (kind === 'support') await call('vp_contact_support', { p_order: id, p_message: d.get('message') }, 'Message sent to support');
       else if (f.id === 'svcForm') {
         var r = await sb.from('vp_service_requests').insert({ user_id: S.user.id, service: d.get('service'), name: d.get('name'), phone: d.get('phone'), address: d.get('address') || null, preferred_date: d.get('date') || null, details: d.get('details') || null });

@@ -13,7 +13,8 @@
     refunded:         { label: 'Refunded',         tone: 'grey',  hint: 'Refund confirmed' }
   };
   var PAY_TONE = { unpaid: 'amber', pending: 'amber', paid: 'green', failed: 'red', refund_pending: 'amber', refunded: 'grey' };
-  var METHOD = { cod: 'Pay on delivery', pay_at_pickup: 'Pay at pickup', upi: 'UPI / bank transfer', online: 'Online payment' };
+  /* Only online payment is accepted. cod / pay_at_pickup labels exist ONLY so old orders placed before the change still display. */
+  var METHOD = { upi: 'UPI / bank transfer', online: 'Online payment', cod: 'Cash (discontinued)', pay_at_pickup: 'Cash (discontinued)' };
   var NEXT = { /* which statuses an admin may move to (the database enforces this too) */
     pending_payment: ['confirmed', 'cancelled'], confirmed: ['processing', 'cancelled'],
     processing: ['shipped', 'out_for_delivery', 'delivered', 'cancelled'], shipped: ['out_for_delivery', 'delivered'],
@@ -27,15 +28,15 @@
     var x = new Date(d); if (isNaN(x)) return '';
     return x.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' }) + (withTime ? ', ' + x.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' }) : '');
   }
-  function prepaid(o) { return o.payment_method === 'upi' || o.payment_method === 'online'; }
+  function prepaid(o) { return true; } /* every order is now an online-payment order */
   function statusLabel(o) {
-    if (o.order_status === 'pending_payment' && !prepaid(o)) return 'Awaiting confirmation';
+    if (o.order_status === 'pending_payment') return o.payment_status === 'pending' ? 'Payment under verification' : 'Awaiting payment';
     return STATUS[o.order_status] ? STATUS[o.order_status].label : o.order_status;
   }
   function payLabel(o) {
     switch (o.payment_status) {
-      case 'unpaid': return o.payment_method === 'cod' ? 'Pay on delivery' : o.payment_method === 'pay_at_pickup' ? 'Pay at pickup' : 'Awaiting payment';
-      case 'pending': return 'Payment being verified';
+      case 'unpaid': return 'Awaiting payment';
+      case 'pending': return 'Verifying payment';
       case 'paid': return 'Paid';
       case 'failed': return 'Payment failed';
       case 'refund_pending': return 'Refund pending';
@@ -57,7 +58,7 @@
       ['Delivered', 'Confirmed delivery']
     ] : [
       ['Order placed', 'Order received successfully'],
-      ['Processing', st === 'pending_payment' ? (prepaid(o) ? 'Waiting for payment confirmation' : 'Waiting for our confirmation') : 'Preparing the order'],
+      ['Processing', st === 'pending_payment' ? 'Waiting for payment verification' : 'Preparing the order'],
       ['Shipped', o.tracking_number ? 'Tracking details are available' : 'Tracking details appear when available'],
       ['Delivered', 'Confirmed delivery']
     ];

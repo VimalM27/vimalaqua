@@ -23,6 +23,7 @@
     S.orders = r[0].data || []; S.items = group(r[1].data, 'order_id'); S.events = group(r[2].data, 'order_id');
     S.reqAll = r[3].data || []; S.requests = group(S.reqAll, 'order_id'); S.services = r[4].data || [];
     render(); if (keep && S.sel) openDrawer(S.sel);
+    else if (!keep && location.hash.length > 1) { var hn = decodeURIComponent(location.hash.slice(1)); var ho = S.orders.filter(function (x) { return x.order_no === hn; })[0]; if (ho) openDrawer(ho.id); }
   }
 
   function filtered() {
@@ -40,7 +41,8 @@
   function render() {
     var openReq = S.reqAll.filter(function (r) { return r.status === 'open' || r.status === 'in_review'; }).length;
     var h = '<div class="vo-stats">' +
-      stat('Pending payment', count(function (o) { return o.order_status === 'pending_payment'; })) +
+      stat('Payments to verify', count(function (o) { return o.payment_status === 'pending' && o.order_status === 'pending_payment'; })) +
+      stat('Awaiting payment ID', count(function (o) { return o.payment_status === 'unpaid' && o.order_status === 'pending_payment'; })) +
       stat('To prepare', count(function (o) { return o.order_status === 'confirmed' || o.order_status === 'processing'; })) +
       stat('On the way', count(function (o) { return o.order_status === 'shipped' || o.order_status === 'out_for_delivery'; })) +
       stat('Open requests', openReq) +
@@ -100,7 +102,17 @@
     h += '<div class="vo-box"><h3>Customer</h3><dl class="vo-kv"><dt>Name</dt><dd>' + V.esc(o.customer_name) + '</dd><dt>Phone</dt><dd><a href="tel:' + V.esc(o.phone) + '">' + V.esc(o.phone) + '</a> · <a target="_blank" rel="noopener" href="' + V.esc(V.waLink('Hi ' + o.customer_name + ', this is Vimal Pets & Toys about order ' + o.order_no)) + '">WhatsApp</a></dd>' + (o.email ? '<dt>Email</dt><dd>' + V.esc(o.email) + '</dd>' : '') + '<dt>Address</dt><dd>' + V.esc(o.address) + (o.city ? ', ' + V.esc(o.city) : '') + (o.pincode ? ' ' + V.esc(o.pincode) : '') + '</dd>' + (o.customer_note ? '<dt>Customer note</dt><dd>' + V.esc(o.customer_note) + '</dd>' : '') + '</dl></div>';
     h += '<div class="vo-box"><h3>Items</h3><div class="vo-table-wrap"><table class="vo-table"><tbody>' + its.map(function (i) { return '<tr><td>' + V.esc(i.name) + (i.is_live ? ' ' + V.badge('Live', 'blue') : '') + '<br><small>' + V.esc(i.category || '') + '</small></td><td class="r">' + i.qty + ' × ' + V.money(i.unit_price) + '</td><td class="r">' + V.money(i.line_total) + '</td></tr>'; }).join('') + '<tr><td colspan="2" class="r"><b>Total</b></td><td class="r"><b>' + V.money(o.total) + '</b></td></tr></tbody></table></div><p class="vo-note">Prices come from the customer\'s cart. Check them against your price list before you confirm.</p></div>';
 
-    h += '<div class="vo-box"><h3>1. Payment (kept separate from order status)</h3><p class="vo-note" style="margin:0 0 8px">Method: ' + V.esc(V.METHOD[o.payment_method]) + '. Only mark as Paid after the bank, UPI app or payment provider shows the money. Enter that reference.</p><div class="vo-two"><div><label>Payment status</label><select id="payStatus">' + PAYS.map(function (k) { return '<option value="' + k + '"' + (o.payment_status === k ? ' selected' : '') + '>' + k.replace('_', ' ') + '</option>'; }).join('') + '</select></div><div><label>Reference / transaction ID</label><input id="payRef" value="' + V.esc(o.payment_reference || '') + '" maxlength="100"></div></div><div class="vo-actions"><button class="vo-btn" data-act="pay" data-id="' + o.id + '">Save payment</button></div></div>';
+    var dupe = o.payment_reference ? S.orders.filter(function (x) { return x.id !== o.id && x.payment_reference && x.payment_reference.toUpperCase() === o.payment_reference.toUpperCase(); }) : [];
+    var verifying = o.payment_status === 'pending' || o.payment_status === 'unpaid';
+    h += '<div class="vo-box"><h3>1. Payment verification (online payment only)</h3>' +
+      '<div class="vo-alert ' + (o.payment_status === 'paid' ? 'ok' : verifying ? 'warn' : 'info') + '" style="margin-bottom:10px">' +
+      (o.payment_status === 'paid' ? '<b>Verified and paid.</b>' : o.payment_status === 'pending' ? '<b>Needs verification.</b> The customer submitted a transaction ID.' : o.payment_status === 'unpaid' ? '<b>Waiting for the customer\'s transaction ID.</b>' : '<b>Payment status: ' + V.esc(o.payment_status.replace('_', ' ')) + '.</b>') + '</div>' +
+      '<dl class="vo-kv"><dt>Amount to match</dt><dd>' + V.money(o.total) + '</dd><dt>Method</dt><dd>' + V.esc(V.METHOD[o.payment_method] || o.payment_method) + '</dd>' +
+      '<dt>Customer\'s ID</dt><dd>' + (o.payment_reference ? V.esc(o.payment_reference) : 'Not submitted yet') + '</dd></dl>' +
+      (dupe.length ? '<div class="vo-alert bad" style="margin-top:8px"><b>Warning:</b> this transaction ID is also on order ' + dupe.map(function (x) { return V.esc(x.order_no); }).join(', ') + '. Check for a reused ID before verifying.</div>' : '') +
+      '<p class="vo-note">Open your bank or UPI app, find a credit for exactly ' + V.money(o.total) + ' with this ID, then verify. Never mark paid from the customer\'s word alone.</p>' +
+      '<div class="vo-two"><div><label>Payment status</label><select id="payStatus">' + PAYS.map(function (k) { return '<option value="' + k + '"' + (o.payment_status === k ? ' selected' : '') + '>' + k.replace('_', ' ') + '</option>'; }).join('') + '</select></div><div><label>Reference / transaction ID</label><input id="payRef" value="' + V.esc(o.payment_reference || '') + '" maxlength="100"></div></div>' +
+      '<div class="vo-actions">' + (o.payment_status !== 'paid' && o.order_status === 'pending_payment' ? '<button class="vo-btn good" data-act="verify" data-id="' + o.id + '">Verify payment and confirm order</button><button class="vo-btn warn" data-act="reject" data-id="' + o.id + '">Payment not received</button>' : '') + '<button class="vo-btn alt" data-act="pay" data-id="' + o.id + '">Save payment status</button></div></div>';
 
     if (live) h += '<div class="vo-box"><h3>2. Availability and arrangement (live pets / fish)</h3><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="availOk" style="width:auto"' + (o.availability_confirmed ? ' checked' : '') + '> I have confirmed these live items are available</label><label>Pickup or delivery arrangement</label><textarea id="arrNote" maxlength="400" placeholder="e.g. Pickup Saturday 5 pm, bagged with oxygen">' + V.esc(o.arrangement_note || '') + '</textarea><div class="vo-actions"><button class="vo-btn" data-act="arr" data-id="' + o.id + '">Save arrangement</button></div></div>';
     else h += '<div class="vo-box"><h3>2. Tracking</h3><div class="vo-two"><div><label>Carrier</label><input id="trCarrier" value="' + V.esc(o.carrier || '') + '" placeholder="DTDC, India Post…" maxlength="60"></div><div><label>Tracking number</label><input id="trNo" value="' + V.esc(o.tracking_number || '') + '" maxlength="60"></div><div><label>Tracking link (optional)</label><input id="trUrl" value="' + V.esc(o.tracking_url || '') + '" placeholder="https://" maxlength="300"></div><div><label>Expected delivery</label><input type="date" id="trEta" value="' + V.esc(o.estimated_delivery || '') + '"></div></div><div class="vo-actions"><button class="vo-btn" data-act="track" data-id="' + o.id + '">Save tracking</button></div></div>';
@@ -140,6 +152,14 @@
     else if (act === 'csv') csv();
     else if (act === 'rq') { S.rq = b.getAttribute('data-v'); render(); }
     else if (act === 'gotoreq') { closeDrawer(); S.tab = 'requests'; render(); }
+    else if (act === 'verify') {
+      var ref = $('payRef').value.trim(); if (!ref) { alert('Enter the transaction ID you matched in your bank / UPI app.'); return; }
+      if (!confirm('Confirm that you have seen this payment of the full order amount in your bank / UPI records?')) return;
+      var rp = await sb.rpc('vp_admin_set_payment', { p_order: id, p_status: 'paid', p_reference: ref, p_note: 'Payment verified by admin' });
+      if (rp.error) { alert(V.msg(rp.error)); return; }
+      await rpc('vp_admin_set_status', { p_order: id, p_status: 'confirmed', p_note: 'Payment verified. Order confirmed.' }, 'Payment verified and order confirmed');
+    }
+    else if (act === 'reject') { if (!confirm('Mark this payment as not received? The customer will be asked to check and resend the transaction ID.')) return; await rpc('vp_admin_set_payment', { p_order: id, p_status: 'failed', p_reference: null, p_note: 'Payment could not be verified. Please check the transaction ID and send it again.' }, 'Payment marked as not received'); }
     else if (act === 'pay') await rpc('vp_admin_set_payment', { p_order: id, p_status: $('payStatus').value, p_reference: $('payRef').value, p_note: null }, 'Payment saved');
     else if (act === 'arr') await rpc('vp_admin_set_arrangement', { p_order: id, p_available: $('availOk').checked, p_note: $('arrNote').value }, 'Arrangement saved');
     else if (act === 'track') await rpc('vp_admin_set_tracking', { p_order: id, p_carrier: $('trCarrier').value, p_number: $('trNo').value, p_url: $('trUrl').value || null, p_eta: $('trEta').value || null }, 'Tracking saved');
@@ -161,5 +181,6 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeDrawer(); if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('vo-row')) { e.preventDefault(); openDrawer(e.target.getAttribute('data-id')); } });
   el.addEventListener('input', function (e) { var k = e.target.getAttribute('data-f'); if (k) { S.f[k] = e.target.value; if (k === 'q') { clearTimeout(S.t); S.t = setTimeout(function () { var p = e.target.selectionStart; render(); var i = $('fq'); i.focus(); i.setSelectionRange(p, p); }, 250); } else render(); } });
   document.getElementById('voScrim').addEventListener('click', closeDrawer);
+  var lo = document.getElementById('logoutBtn'); if (lo) lo.addEventListener('click', async function () { await sb.auth.signOut(); location.href = 'login.html'; });
   V.requireAdmin().then(function (u) { document.getElementById('voWho').textContent = 'Signed in as ' + u.email; load(); });
 })();

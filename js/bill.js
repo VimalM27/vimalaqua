@@ -28,8 +28,7 @@
     if (o.order_status === 'refund_pending') return ['REFUND PENDING', 'amber'];
     if (o.payment_status === 'paid') return ['PAID', 'green'];
     if (o.payment_status === 'failed') return ['PAYMENT FAILED', 'red'];
-    if (o.payment_method === 'cod') return ['PAY ON DELIVERY', 'amber'];
-    if (o.payment_method === 'pay_at_pickup') return ['PAY AT PICKUP', 'amber'];
+    if (o.payment_status === 'pending') return ['PAYMENT UNDER VERIFICATION', 'amber'];
     return ['PAYMENT PENDING', 'amber'];
   }
 

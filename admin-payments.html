@@ -327,16 +327,15 @@ body.page-security .container > section#security{display:block}
 
 
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
+<script>try{if(localStorage.getItem('vp-admin-theme')==='dark')document.documentElement.setAttribute('data-ap-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="css/admin-pro.css?v=1">
 </head>
 <body class="page-payments">
 <div id="authGate" role="status" aria-live="polite"><div class="gate-card"><div class="gate-mark">🔐</div><h2>Verifying administrator access</h2><p>Vimal Pets &amp; Toys admin workspace is locked until your signed-in account is verified.</p></div></div>
 <div class="layout">
 
 <aside class="sidebar" id="sidebar">
-    <div class="brand">
-        <img class="brand-logo" src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys logo">
-        <div class="brand-copy"><h2>Vimal Pets &amp; Toys</h2><span>ADMIN CONTROL PANEL</span></div>
-    </div>
+    <div class="brand"><a class="brand-logo-link" href="admin-dashboard.html" aria-label="Vimal Pets &amp; Toys admin home"><img class="brand-logo" src="images/vimallogo.png?v=2" alt="Vimal Pets &amp; Toys" width="2172" height="724"></a><span class="brand-tag">ADMIN CONTROL PANEL</span></div>
 
     <nav class="nav">
         <a class="nav-link" href="admin-dashboard.html" aria-current="false">
@@ -1023,5 +1022,6 @@ document.getElementById("refreshAllBtn").addEventListener("click",loadDashboard)
 loadDashboard();
 </script>
     <script src="js/vimal27-enhancements.js"></script>
+<script src="js/admin-pro.js?v=1"></script>
 </body>
 </html>

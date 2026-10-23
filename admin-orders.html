@@ -1,15 +1,71 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><link rel="icon" type="image/png" href="/icon.png"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex, nofollow">
-<title>Order Management | Vimal Pets &amp; Toys</title>
+<title>Order Management | Vimal Pets &amp; Toys Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/orders.css?v=1">
-<link rel="stylesheet" href="css/orders-admin.css?v=1"></head>
-<body class="vo-page vo-admin-page"><header class="vo-topbar"><div><b>Vimal Pets &amp; Toys</b><span>ADMIN CONTROL PANEL</span></div><nav><a href="admin-dashboard.html">Dashboard</a><a href="admin-orders.html" class="on">Orders</a><a href="index.html">View site</a></nav></header>
-<main class="vo vo-admin">
-<div class="vo-head"><div><h1>Order management</h1><p id="voWho">Checking administrator access…</p></div></div>
-<div id="voApp"><p class="vo-empty">Loading…</p></div></main>
+<link rel="stylesheet" href="css/orders-admin.css?v=1">
+<script>try{if(localStorage.getItem('vp-admin-theme')==='dark')document.documentElement.setAttribute('data-ap-theme','dark')}catch(e){}</script>
+<link rel="stylesheet" href="css/admin-pro.css?v=1">
+<style>*{box-sizing:border-box}.layout{display:flex;min-height:100vh}.sidebar{position:fixed;left:0;top:0;bottom:0;z-index:20;display:flex;flex-direction:column;transition:.28s}.nav{display:flex;flex-direction:column}.menu-btn{display:none;border:1px solid var(--border);background:var(--card);padding:9px 11px;border-radius:9px;cursor:pointer}.topbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 30px}.topbar-left{display:flex;align-items:center;gap:14px}.topbar h3{font-size:18px;margin:0}.admin-pill{padding:7px 13px;border-radius:20px;font-size:11.5px;display:flex;align-items:center;gap:6px}.admin-pill .dotlive{width:6px;height:6px;border-radius:50%}.mobile-overlay{display:none}.sidebar-foot{padding:14px 10px 0;font-size:11px;margin-top:10px}@media(max-width:760px){.menu-btn{display:block}.topbar{padding:0 14px}.mobile-overlay.show{display:block;position:fixed;inset:0;background:rgba(4,18,43,.55);z-index:15}}</style>
+</head>
+<body class="vo-page vo-admin-page">
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+    <div class="brand"><a class="brand-logo-link" href="admin-dashboard.html" aria-label="Vimal Pets &amp; Toys admin home"><img class="brand-logo" src="images/vimallogo.png?v=2" alt="Vimal Pets &amp; Toys" width="2172" height="724"></a><span class="brand-tag">ADMIN CONTROL PANEL</span></div>
+
+    <nav class="nav">
+        <a class="nav-link" href="admin-dashboard.html" aria-current="false">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+            Dashboard
+        </a>
+        <a class="nav-link" href="admin-sellers.html" aria-current="false">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.6"/><path d="M15.7 13.2c2.7.2 4.8 2.5 4.8 5.3"/></svg>
+            Sellers
+        </a>
+        <a class="nav-link" href="admin-products.html" aria-current="false">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l2-5h14l2 5"/><path d="M3 8h18v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/><path d="M9 12a3 3 0 0 0 6 0"/></svg>
+            Products
+        </a>
+        <a class="nav-link active" href="admin-orders.html" aria-current="page">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg>
+            Orders
+        </a>
+        <a class="nav-link" href="admin-payments.html" aria-current="false">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2.2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg>
+            Payments
+        </a>
+        <a class="nav-link" href="admin-seller-applications.html" aria-current="false">📝 Seller Applications</a>
+        <a class="nav-link" href="admin-moderation.html" aria-current="false">🛡️ Moderation</a>
+        <a class="nav-link" href="admin-tools.html" aria-current="false">⚙️ Admin Tools</a>
+        <a class="nav-link" href="admin-security.html" aria-current="false">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3.5v6c0 5-3.4 8.6-8 10.5-4.6-1.9-8-5.5-8-10.5v-6L12 2z"/><path d="M9.5 12l1.8 1.8L14.8 10"/></svg>
+            Security
+        </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+        <button class="nav logout" id="logoutBtn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+            Logout
+        </button>
+        <div class="sidebar-foot">Every status change is checked by the database and logged.</div>
+    </div>
+</aside>
+<div class="mobile-overlay" id="overlay"></div>
+<main class="main">
+<header class="topbar"><div class="topbar-left"><button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button><h3>Vimal Pets &amp; Toys — Orders</h3></div><span class="admin-pill"><span class="dotlive"></span><span class="txt">ADMIN SESSION</span></span></header>
+<div class="container">
+<div class="page-intro"><h1>Order management</h1><p id="voWho">Checking administrator access…</p><p class="quick-note">Online payments only. Verify each transaction ID against your bank / UPI records, then confirm the order, add tracking and keep the customer informed.</p></div>
+<div class="vo vo-admin"><div id="voApp"><p class="vo-empty">Loading…</p></div></div>
+</div>
+</main>
+</div>
 <div class="vo-scrim" id="voScrim"></div><aside class="vo-drawer vo" id="voDrawer" aria-label="Order details"></aside>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabaseClient.js"></script>
 <script src="js/vp-orders-common.js"></script>
 <script src="js/admin-orders.js"></script>
+<script>document.getElementById('menuBtn').addEventListener('click',function(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show')});document.getElementById('overlay').addEventListener('click',function(){document.getElementById('sidebar').classList.remove('open');this.classList.remove('show')});</script>
+<script src="js/admin-pro.js?v=1"></script>
 </body></html>

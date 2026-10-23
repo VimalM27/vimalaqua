@@ -5,7 +5,7 @@ BILL / INVOICE: what is in this package
 
 HOW IT WORKS
   The bill is built from the real order in the database, so it always matches My Orders.
-  It shows PAID only when payment is confirmed; otherwise PAYMENT PENDING / PAY ON DELIVERY / PAY AT PICKUP.
+  It shows PAID only when payment is confirmed; otherwise PAYMENT UNDER VERIFICATION / PAYMENT PENDING.
   Cancelled and refunded orders show CANCELLED / REFUNDED.
   Customers can only open their own bills. You (admin) can open any bill from the order panel.
 

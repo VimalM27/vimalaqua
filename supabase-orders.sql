@@ -36,6 +36,7 @@ create table if not exists public.vp_orders (
   fulfilment text not null default 'shipping' check (fulfilment in ('shipping','live_arrangement')),
   order_status text not null default 'pending_payment'
     check (order_status in ('pending_payment','confirmed','processing','shipped','out_for_delivery','delivered','cancelled','refund_pending','refunded')),
+  -- 'cod' and 'pay_at_pickup' stay allowed ONLY so old orders remain valid; vp_place_order rejects them for every new order.
   payment_method text not null check (payment_method in ('cod','pay_at_pickup','upi','online')),
   payment_status text not null default 'unpaid'
     check (payment_status in ('unpaid','pending','paid','failed','refund_pending','refunded')),
@@ -152,8 +153,11 @@ $$;
 revoke all on function public.vp_log(uuid,text,text,text,text,text,boolean) from public, anon, authenticated;
 
 -- CUSTOMER functions -----------------------------------------------------
--- Place an order. Payment always starts as unpaid; only an admin can mark it paid.
-create or replace function public.vp_place_order(p_customer jsonb, p_items jsonb, p_payment_method text)
+-- Place an order. ONLINE PAYMENT ONLY (cash on delivery and pay-at-pickup were removed).
+-- The customer pays by UPI/bank transfer and gives the transaction reference (UTR); the order starts as
+-- payment_status = 'pending' (being verified). Only an admin can mark it paid after checking the bank/UPI app.
+drop function if exists public.vp_place_order(jsonb,jsonb,text);
+create or replace function public.vp_place_order(p_customer jsonb, p_items jsonb, p_payment_method text, p_reference text default null)
 returns jsonb language plpgsql security definer set search_path = public as $$
 declare
   v_user uuid := auth.uid();
@@ -162,9 +166,15 @@ declare
   v_sub numeric(10,2) := 0;
   v_live boolean := false;
   v_qty int; v_price numeric;
+  v_ref text := upper(regexp_replace(coalesce(p_reference,''), '\s', '', 'g'));
 begin
   if v_user is null then raise exception 'Please log in to place an order'; end if;
-  if p_payment_method not in ('cod','pay_at_pickup','upi','online') then raise exception 'Invalid payment method'; end if;
+  if p_payment_method not in ('upi','online') then raise exception 'Cash on delivery is not available. Please pay online (UPI / bank transfer).'; end if;
+  if p_payment_method = 'upi' then
+    if v_ref !~ '^[A-Z0-9]{8,30}$' then raise exception 'Enter the UPI transaction ID / UTR (8 to 30 letters or numbers) from your payment.'; end if;
+    if exists (select 1 from public.vp_orders where upper(payment_reference) = v_ref and order_status not in ('cancelled','refunded')) then
+      raise exception 'This transaction ID has already been used on another order.'; end if;
+  end if;
   if jsonb_typeof(p_items) <> 'array' or jsonb_array_length(p_items) not between 1 and 40 then raise exception 'Your cart is empty or too large'; end if;
   if coalesce(trim(p_customer->>'name'),'') = '' or coalesce(trim(p_customer->>'address'),'') = '' then raise exception 'Name and address are required'; end if;
   if (p_customer->>'phone') !~ '^[0-9]{10}$' then raise exception 'Enter a valid 10-digit mobile number'; end if;
@@ -178,10 +188,10 @@ begin
     if coalesce((v_item->>'is_live')::boolean, false) then v_live := true; end if;
   end loop;
 
-  insert into public.vp_orders(user_id, customer_name, phone, email, address, city, pincode, fulfilment, payment_method, subtotal, total, customer_note)
+  insert into public.vp_orders(user_id, customer_name, phone, email, address, city, pincode, fulfilment, payment_method, payment_status, payment_reference, subtotal, total, customer_note)
   values (v_user, left(trim(p_customer->>'name'),120), p_customer->>'phone', left(p_customer->>'email',160), left(trim(p_customer->>'address'),400),
           left(p_customer->>'city',80), left(p_customer->>'pincode',10), case when v_live then 'live_arrangement' else 'shipping' end,
-          p_payment_method, v_sub, v_sub, left(p_customer->>'note',500))
+          p_payment_method, case when v_ref <> '' then 'pending' else 'unpaid' end, nullif(v_ref,''), v_sub, v_sub, left(p_customer->>'note',500))
   returning * into v_order;
 
   insert into public.vp_order_items(order_id, product_slug, name, category, qty, unit_price, is_live, image)
@@ -190,7 +200,22 @@ begin
   from jsonb_array_elements(p_items) i;
 
   perform public.vp_log(v_order.id, 'placed', null, 'pending_payment', 'Order received successfully', 'customer', true);
+  if v_ref <> '' then perform public.vp_log(v_order.id, 'payment', 'unpaid', 'pending', 'Payment reference submitted: ' || v_ref || '. Verification in progress.', 'customer', true); end if;
   return jsonb_build_object('id', v_order.id, 'order_no', v_order.order_no, 'fulfilment', v_order.fulfilment);
+end $$;
+
+create or replace function public.vp_submit_payment_reference(p_order uuid, p_reference text)
+returns void language plpgsql security definer set search_path = public as $$
+declare o public.vp_orders; v_ref text := upper(regexp_replace(coalesce(p_reference,''), '\s', '', 'g'));
+begin
+  select * into o from public.vp_orders where id = p_order and user_id = auth.uid() for update;
+  if not found then raise exception 'Order not found'; end if;
+  if o.order_status <> 'pending_payment' or o.payment_status not in ('unpaid','failed','pending') then raise exception 'Payment can no longer be changed on this order.'; end if;
+  if v_ref !~ '^[A-Z0-9]{8,30}$' then raise exception 'Enter the UPI transaction ID / UTR (8 to 30 letters or numbers).'; end if;
+  if exists (select 1 from public.vp_orders where upper(payment_reference) = v_ref and id <> p_order and order_status not in ('cancelled','refunded')) then
+    raise exception 'This transaction ID has already been used on another order.'; end if;
+  update public.vp_orders set payment_reference = v_ref, payment_status = 'pending', updated_at = now() where id = p_order;
+  perform public.vp_log(p_order, 'payment', o.payment_status, 'pending', 'Payment reference submitted: ' || v_ref || '. Verification in progress.', 'customer', true);
 end $$;
 
 create or replace function public.vp_request_cancellation(p_order uuid, p_reason text)
@@ -253,7 +278,7 @@ begin
   if not ok then raise exception 'Cannot move an order from % to %', o.order_status, p_status; end if;
 
   if p_status = 'confirmed' then
-    if o.payment_method in ('upi','online') and o.payment_status <> 'paid' then raise exception 'Payment has not been confirmed. Record the payment first.'; end if;
+    if o.payment_status <> 'paid' then raise exception 'Payment has not been verified. Verify the payment first, then confirm the order.'; end if;
     if o.fulfilment = 'live_arrangement' and not o.availability_confirmed then raise exception 'Confirm availability of the live item first.'; end if;
   end if;
   if p_status = 'shipped' then
@@ -281,6 +306,8 @@ begin
   select * into o from public.vp_orders where id = p_order for update;
   if not found then raise exception 'Order not found'; end if;
   if p_status = 'paid' and coalesce(trim(p_reference),'') = '' then raise exception 'Enter the payment reference (UPI/transaction ID or receipt no.) before marking as paid.'; end if;
+  if p_status = 'paid' and exists (select 1 from public.vp_orders where upper(payment_reference) = upper(trim(p_reference)) and id <> p_order and payment_status = 'paid') then
+    raise exception 'This reference is already verified against another order. Check for a duplicate or reused transaction ID.'; end if;
   update public.vp_orders set payment_status = p_status,
     payment_reference = coalesce(nullif(trim(p_reference),''), payment_reference),
     paid_at = case when p_status = 'paid' then now() else paid_at end,
@@ -340,7 +367,7 @@ end $$;
 -- permissions: logged-in users can call the functions; anonymous visitors cannot
 do $$ declare f text; begin
   foreach f in array array[
-    'vp_place_order(jsonb,jsonb,text)','vp_request_cancellation(uuid,text)','vp_report_issue(uuid,text,uuid,text)','vp_contact_support(uuid,text)',
+    'vp_place_order(jsonb,jsonb,text,text)','vp_submit_payment_reference(uuid,text)','vp_request_cancellation(uuid,text)','vp_report_issue(uuid,text,uuid,text)','vp_contact_support(uuid,text)',
     'vp_admin_set_status(uuid,text,text)','vp_admin_set_payment(uuid,text,text,text)','vp_admin_set_tracking(uuid,text,text,text,date)',
     'vp_admin_set_arrangement(uuid,boolean,text)','vp_admin_add_note(uuid,text,boolean)','vp_admin_resolve_request(uuid,text,text)','vp_admin_set_service(uuid,text,timestamptz,text)']
   loop
