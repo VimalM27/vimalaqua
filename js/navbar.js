@@ -471,6 +471,10 @@ function applyUnifiedNavbar() {
                 </li>
 
 
+                <!-- ANTIQUE: placed immediately after Pets & Accessories -->
+                <li><a href="antique.html">Antique</a></li>
+
+
                 <!-- ==================================================
                      BECOME A PARTNER
                 =================================================== -->
@@ -715,6 +719,8 @@ function applyUnifiedNavbar() {
 
     </div>
 
+
+    <a class="mobile-dropdown-title" href="antique.html" style="display:flex;align-items:center;padding:14px 18px;color:inherit;text-decoration:none">🏺 <span>Antique</span></a>
 
     <!-- BECOME A PARTNER -->
     <div class="mobile-dropdown">
