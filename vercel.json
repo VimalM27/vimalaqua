@@ -89,6 +89,11 @@
       "source": "/:path*.keystore",
       "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/tools/:path*",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "rewrites": [

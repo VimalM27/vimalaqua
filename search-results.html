@@ -22,7 +22,6 @@
 
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
     <link rel="stylesheet" href="css/vimal-dropdown-unified.css?v=1">
-<link rel="stylesheet" href="css/vimal-mobile-search-addon.css">
 <link rel="stylesheet" href="css/vpw-catalog.css?v=1">
 </head>
 <body>
@@ -144,17 +143,16 @@
     <a href="cart.html">🛒 Cart</a>
 
 </div>
-<section class="page-hero">
-    <div class="hero-content">
+<main class="vpr">
+    <div class="vpr-hero">
         <h1 id="resultsTitle">Shop all products</h1>
-        <p id="resultsSummary">Search by name, brand or keyword, then filter by category, price and availability.</p>
-        <form class="vp-results-search" id="resultsSearch"><input id="resultsInput" type="search" placeholder="Search pets, foods, accessories, toys..." autocomplete="off" aria-label="Search products"><button aria-label="Search">🔍</button></form>
+        <p id="resultsSummary">Type any word or letters: pets, fish, toys, food, accessories.</p>
+        <form class="vpr-form" id="resultsSearch" role="search"><input id="resultsInput" type="search" placeholder="Search pets, foods, accessories, toys..." autocomplete="off" aria-label="Search products"><button type="submit">Search</button></form>
     </div>
-</section>
-<div class="products" id="resultsGrid"></div>
+    <div id="vpResults"></div>
+</main>
 <script src="js/script.js"></script>
 <script src="js/product-link.js"></script>
-<script src="js/vimal-mobile-search-addon.js"></script>
 <script src="js/navbar.js"></script>
 <script src="js/protect.js"></script>
 <script src="js/wishlist.js"></script>
@@ -162,5 +160,6 @@
 <script src="js/products-data.js"></script>
 <script src="js/product-meta.js"></script>
 <script src="js/vpw-catalog.js"></script>
+<script src="js/vp-search.js?v=1"></script>
 </body>
 </html>

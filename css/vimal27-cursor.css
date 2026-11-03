@@ -1,0 +1,30 @@
+/* VIMAL27 GOLDEN V PHOENIX CURSOR */
+@media (hover: hover) and (pointer: fine) {
+  html.v27-logo-cursor,
+  html.v27-logo-cursor body,
+  html.v27-logo-cursor body * {
+    cursor: none !important;
+  }
+
+  #v27-logo-cursor {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 46px !important;
+    height: 46px !important;
+    object-fit: contain !important;
+    display: block !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+    z-index: 2147483647 !important;
+    opacity: 0;
+    visibility: hidden;
+    will-change: transform;
+  }
+
+  #v27-logo-cursor.v27-cursor-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}

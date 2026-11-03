@@ -176,4 +176,5 @@
  function filter(){const q=input.value.trim().toLowerCase(); searchable.forEach(el=>{const t=((el.dataset.search||'')+' '+el.textContent).toLowerCase();el.classList.toggle('search-hidden',!!q&&!t.includes(q));});groups.forEach(g=>{const links=[...g.querySelectorAll('.collection-link')];const title=(g.querySelector('h3')?.textContent||'').toLowerCase();const any=links.some(a=>!a.classList.contains('search-hidden'));g.classList.toggle('search-hidden',!!q&&!any&&!title.includes(q));});document.querySelectorAll('.toy-category-tile').forEach(el=>{const t=((el.dataset.search||'')+' '+el.textContent).toLowerCase();el.classList.toggle('search-hidden',!!q&&!t.includes(q));});}
  input.addEventListener('input',filter);clear.addEventListener('click',()=>{input.value='';filter();input.focus();});
 })();
-</script></body></html>
+</script><script src="js/vp-search.js?v=1"></script>
+</body></html>

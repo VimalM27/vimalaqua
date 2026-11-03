@@ -530,6 +530,7 @@ function showToast(message) {
 function updateCartBadge() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const totalItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+    document.querySelectorAll('#cartCount').forEach(function (el) { el.textContent = totalItems; });
 
     let badge = document.querySelector('.cart-badge');
     const cartLink = document.querySelector('.cart-link');
