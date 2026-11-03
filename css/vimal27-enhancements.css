@@ -138,27 +138,31 @@ footer a:hover{color:#00b4d8!important}
 /* ---------- Reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
+/* VIMAL27 LOGO CURSOR */
 
-/* ---------- Vimal27 branded mouse cursor ---------- */
 @media (hover: hover) and (pointer: fine) {
-  html.v27-logo-cursor,
-  html.v27-logo-cursor body,
-  html.v27-logo-cursor body * { cursor: none !important; }
+    html.v27-logo-cursor,
+    html.v27-logo-cursor body,
+    html.v27-logo-cursor body * {
+        cursor: none !important;
+    }
 
-  html.v27-logo-cursor input,
-  html.v27-logo-cursor textarea,
-  html.v27-logo-cursor [contenteditable="true"] { cursor: text !important; }
+    #v27-logo-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 70px;
+        height: auto;
+        display: block;
+        pointer-events: none !important;
+        z-index: 2147483647;
+        opacity: 0;
+        visibility: hidden;
+        will-change: transform;
+    }
 
-  #v27-logo-cursor {
-    position: fixed; left: 0; top: 0; width: 72px; height: 24px;
-    object-fit: contain; pointer-events: none !important;
-    z-index: 2147483647; opacity: 0; visibility: hidden;
-    transform: translate3d(-120px, -120px, 0);
-    transition: opacity .16s ease, filter .16s ease;
-    will-change: transform; user-select: none;
-  }
-  #v27-logo-cursor.v27-cursor-visible { opacity: .96; visibility: visible; }
-  #v27-logo-cursor.v27-cursor-link {
-    filter: drop-shadow(0 2px 5px rgba(212,175,55,.55));
-  }
+    #v27-logo-cursor.v27-cursor-visible {
+        opacity: 1;
+        visibility: visible;
+    }
 }

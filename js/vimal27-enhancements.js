@@ -122,38 +122,73 @@
 
 
 
-  // ---------- Vimal27 branded mouse cursor ----------
-  function addVimalLogoCursor(){
-    if(!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    if(document.getElementById('v27-logo-cursor')) return;
+  
+// ---------- Vimal27 branded mouse cursor ----------
+function addVimalLogoCursor() {
 
-    const cursor=document.createElement('img');
-    cursor.id='v27-logo-cursor';
-    cursor.src='/images/vimallogo.png';
-    cursor.alt='';
-    cursor.setAttribute('aria-hidden','true');
-    cursor.draggable=false;
-    cursor.addEventListener('error',()=>{ cursor.remove(); document.documentElement.classList.remove('v27-logo-cursor'); });
-    document.body.appendChild(cursor);
-    document.documentElement.classList.add('v27-logo-cursor');
+    if (!window.matchMedia ||
+        !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        return;
+    }
 
-    document.addEventListener('pointermove',e=>{
-      if(e.pointerType==='touch') return;
-      cursor.style.transform =
-    `translate3d(${lastX}px, ${lastY}px, 0) translate(-50%, -50%)`;
-      cursor.classList.add('v27-cursor-visible');
-      const target=e.target instanceof Element ? e.target : null;
-      if(target && target.closest('a,button,[role="button"],summary,label,select')) cursor.classList.add('v27-cursor-link');
-      else cursor.classList.remove('v27-cursor-link');
-    },{passive:true});
+    if (document.getElementById('v27-logo-cursor')) return;
 
-    document.addEventListener('pointerout',e=>{
-      if(e.relatedTarget===null) cursor.classList.remove('v27-cursor-visible');
-    },{passive:true});
-    window.addEventListener('blur',()=>cursor.classList.remove('v27-cursor-visible'));
-  }
+    const cursor = document.createElement('img');
 
-  ready(function(){
+    cursor.id = 'v27-logo-cursor';
+    cursor.src = '/images/vimallogo.png';
+    cursor.alt = '';
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.draggable = false;
+
+    // Wait until the logo is successfully loaded
+    cursor.onload = function () {
+
+        document.body.appendChild(cursor);
+
+        // Hide normal arrow only after logo loads
+        document.documentElement.classList.add('v27-logo-cursor');
+
+        document.addEventListener('pointermove', function (e) {
+
+            if (e.pointerType === 'touch') return;
+
+            // Use actual mouse coordinates
+            cursor.style.transform =
+                `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+
+            cursor.classList.add('v27-cursor-visible');
+
+            const target = e.target instanceof Element ? e.target : null;
+
+            if (target && target.closest(
+                'a, button, [role="button"], summary, label, select'
+            )) {
+                cursor.classList.add('v27-cursor-link');
+            } else {
+                cursor.classList.remove('v27-cursor-link');
+            }
+
+        }, { passive: true });
+
+        document.addEventListener('pointerout', function (e) {
+            if (e.relatedTarget === null) {
+                cursor.classList.remove('v27-cursor-visible');
+            }
+        });
+
+        window.addEventListener('blur', function () {
+            cursor.classList.remove('v27-cursor-visible');
+        });
+    };
+
+    // Keep normal cursor if logo cannot load
+    cursor.onerror = function () {
+        cursor.remove();
+        console.error('Vimal27 cursor logo failed to load:', cursor.src);
+    };
+}
+ready(function(){
     document.documentElement.dataset.vimal27Enhanced='true';
     addSkipLink();
     addBreadcrumb();
@@ -164,8 +199,11 @@
     syncCounts();
     addSearchEnhancement();
     fixMobileBodyLayout();
+
     addVimalLogoCursor();
+
     window.addEventListener('resize',fixMobileBodyLayout,{passive:true});
     setTimeout(addSearchEnhancement,700);
-  });
+});
+
 })();
