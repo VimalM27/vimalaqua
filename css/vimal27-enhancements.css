@@ -166,3 +166,9 @@ footer a:hover{color:#00b4d8!important}
         visibility: visible;
     }
 }
+#v27-logo-cursor {
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-drag: none !important;
+    z-index: 2147483647;
+}

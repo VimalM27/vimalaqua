@@ -145,7 +145,8 @@ function addVimalLogoCursor() {
     cursor.onload = function () {
 
         document.body.appendChild(cursor);
-
+        cursor.style.pointerEvents = 'none';
+cursor.style.userSelect = 'none';
         // Hide normal arrow only after logo loads
         document.documentElement.classList.add('v27-logo-cursor');
 
