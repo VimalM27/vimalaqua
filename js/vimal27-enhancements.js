@@ -120,6 +120,38 @@
 
   function escapeHtml(s){return String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
 
+
+
+  // ---------- Vimal27 branded mouse cursor ----------
+  function addVimalLogoCursor(){
+    if(!window.matchMedia || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if(document.getElementById('v27-logo-cursor')) return;
+
+    const cursor=document.createElement('img');
+    cursor.id='v27-logo-cursor';
+    cursor.src='/images/vimallogo.png';
+    cursor.alt='';
+    cursor.setAttribute('aria-hidden','true');
+    cursor.draggable=false;
+    cursor.addEventListener('error',()=>{ cursor.remove(); document.documentElement.classList.remove('v27-logo-cursor'); });
+    document.body.appendChild(cursor);
+    document.documentElement.classList.add('v27-logo-cursor');
+
+    document.addEventListener('pointermove',e=>{
+      if(e.pointerType==='touch') return;
+      cursor.style.transform=`translate3d(${e.clientX+12}px, ${e.clientY+12}px, 0)`;
+      cursor.classList.add('v27-cursor-visible');
+      const target=e.target instanceof Element ? e.target : null;
+      if(target && target.closest('a,button,[role="button"],summary,label,select')) cursor.classList.add('v27-cursor-link');
+      else cursor.classList.remove('v27-cursor-link');
+    },{passive:true});
+
+    document.addEventListener('pointerout',e=>{
+      if(e.relatedTarget===null) cursor.classList.remove('v27-cursor-visible');
+    },{passive:true});
+    window.addEventListener('blur',()=>cursor.classList.remove('v27-cursor-visible'));
+  }
+
   ready(function(){
     document.documentElement.dataset.vimal27Enhanced='true';
     addSkipLink();
@@ -131,6 +163,7 @@
     syncCounts();
     addSearchEnhancement();
     fixMobileBodyLayout();
+    addVimalLogoCursor();
     window.addEventListener('resize',fixMobileBodyLayout,{passive:true});
     setTimeout(addSearchEnhancement,700);
   });
