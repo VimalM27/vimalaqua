@@ -139,7 +139,8 @@
 
     document.addEventListener('pointermove',e=>{
       if(e.pointerType==='touch') return;
-      cursor.style.transform=`translate3d(${e.clientX+12}px, ${e.clientY+12}px, 0)`;
+      cursor.style.transform =
+    `translate3d(${lastX}px, ${lastY}px, 0) translate(-50%, -50%)`;
       cursor.classList.add('v27-cursor-visible');
       const target=e.target instanceof Element ? e.target : null;
       if(target && target.closest('a,button,[role="button"],summary,label,select')) cursor.classList.add('v27-cursor-link');
