@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="js/vp-user-storage.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Explore antique-style decor, collectibles and timeless pieces at Vimal Pets & Toys.">
@@ -19,7 +20,6 @@ body.antique-page{background:#f7f8fb;color:var(--ink);font-family:Arial,sans-ser
 @media(max-width:850px){.antique-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.antique-toolbar{grid-template-columns:1fr 1fr}.antique-toolbar input{grid-column:1/-1}}
 @media(max-width:540px){body.antique-page{padding-top:105px}.antique-grid{grid-template-columns:1fr}.antique-art{height:165px}.antique-toolbar{grid-template-columns:1fr}.antique-toolbar input{grid-column:auto}.antique-hero{border-radius:16px}.antique-actions{flex-direction:column}}
 </style>
-    <link rel="stylesheet" href="/css/vimal27-enhancements.css?v=logo-cursor1">
 </head>
 <body class="antique-page">
 <nav class="navbar"></nav>
@@ -62,5 +62,4 @@ body.antique-page{background:#f7f8fb;color:var(--ink);font-family:Arial,sans-ser
  document.querySelectorAll('.antique-card').forEach(card=>{card.querySelector('.details').addEventListener('click',e=>{const p=card.querySelector('.detail-text');p.hidden=!p.hidden;e.currentTarget.textContent=p.hidden?'View details':'Hide details'});card.querySelector('.enquiry').addEventListener('click',e=>{e.preventDefault();const phone='917845452727';const msg='Hi Vimal Pets & Toys, I would like to enquire about: '+card.dataset.name+'. Please share actual photos, price, condition and availability.';window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(msg),'_blank','noopener,noreferrer')})});apply();
 })();
 </script>
-    <script src="/js/vimal27-enhancements.js?v=logo-cursor1"></script>
 </body></html>

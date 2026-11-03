@@ -1,5 +1,131 @@
 {
+  "redirects": [
+    {
+      "source": "/supabase-schema.sql",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/supabase-orders.sql",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/PRODUCT-PAGE-README.md",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/README.md",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/ORDERS-README.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/INSTALL-PHONE-FIX.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/ADD-ON-UPGRADE-README.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/BILL-README.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/INSTALL.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/README.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/LOOK-README.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/INSTALL-APP-POPUP.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/ADD-ON-INSTALL.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/CATALOG-README.txt",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/android-app/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/final-package/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/.github/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/:path*.keystore",
+      "destination": "/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
-    { "source": "/product/:slug", "destination": "/product.html" }
+    {
+      "source": "/product/:slug",
+      "destination": "/product.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
+        }
+      ]
+    }
   ]
 }

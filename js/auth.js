@@ -39,6 +39,10 @@ function logoutUser() {
 }
  
 // ---------- NAVBAR UI (runs on every page) ----------
+function vpEsc(t) {
+    return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; });
+}
+
 function getInitial(nameOrEmail) {
     return (nameOrEmail || "?").trim().charAt(0).toUpperCase();
 }
@@ -56,8 +60,10 @@ function renderLoggedOutNav() {
 }
  
 function renderLoggedInNav(user) {
-    const displayName = (user.user_metadata && user.user_metadata.name) || user.email.split("@")[0];
-    const initial = getInitial(displayName);
+    let displayName = (user.user_metadata && user.user_metadata.name) || user.email.split("@")[0];
+    const initial = vpEsc(getInitial(displayName));
+    displayName = vpEsc(displayName);
+    const safeEmail = vpEsc(user.email);
  
     const desktop = document.getElementById("userActions");
     const mobile = document.getElementById("mobileLoginLink");
@@ -71,7 +77,7 @@ function renderLoggedInNav(user) {
             <div class="profile-dropdown" id="profileDropdown">
                 <div class="profile-info">
                     <strong>${displayName}</strong>
-                    <small>${user.email}</small>
+                    <small>${safeEmail}</small>
                 </div>
                 <a href="my-orders.html">My Orders</a>
                 <a href="#" onclick="logoutUser(); return false;">Logout</a>

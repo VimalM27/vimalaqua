@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="js/vp-user-storage.js"></script>
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
 <script>
@@ -302,9 +303,13 @@ function removeFromWishlist(name) {
 }
 
 function escapeHtml(str) {
-    const div = document.createElement("div");
-    div.textContent = str || "";
-    return div.innerHTML;
+    return String(str == null ? "" : str).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+}
+function safeImg(u) {
+    u = String(u || "");
+    return /^(https?:\/\/|\/|images\/|[\w.-]+\.(png|jpe?g|webp|gif|svg)$)/i.test(u) ? u : "images/placeholder.png";
 }
 
 function renderWishlist() {
@@ -321,19 +326,28 @@ function renderWishlist() {
 
     grid.innerHTML = list.map(item => `
         <div class="wishlist-card">
-            <img src="${item.image || 'images/placeholder.png'}" alt="${escapeHtml(item.name)}"
+            <img src="${escapeHtml(safeImg(item.image))}" alt="${escapeHtml(item.name)}"
                  onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<div style=\'height:180px;display:flex;align-items:center;justify-content:center;background:#f2f2f2;color:#aaa;font-size:40px;\'>🐾</div>');">
             <div class="info">
                 <h4>${escapeHtml(item.name)}</h4>
                 <div class="price">${item.price ? '₹' + Number(item.price).toFixed(2) : ''}</div>
                 <div class="card-actions">
-                    <button class="btn-add" onclick="if(typeof addToCart === 'function'){addToCart('${escapeHtml(item.name)}', ${item.price || 0}, '${item.image || ''}');}">Add to Cart</button>
-                    <button class="btn-remove" onclick="removeFromWishlist('${escapeHtml(item.name)}')">Remove</button>
+                    <button class="btn-add" data-act="add" data-name="${escapeHtml(item.name)}">Add to Cart</button>
+                    <button class="btn-remove" data-act="remove" data-name="${escapeHtml(item.name)}">Remove</button>
                 </div>
             </div>
         </div>
     `).join('');
 }
+
+document.getElementById('wishlistGrid').addEventListener('click', function (e) {
+    const b = e.target.closest('button[data-act]');
+    if (!b) return;
+    const name = b.getAttribute('data-name');
+    if (b.getAttribute('data-act') === 'remove') { removeFromWishlist(name); return; }
+    const item = getWishlist().find(i => i.name === name);
+    if (item && typeof addToCart === 'function') addToCart(item.name, Number(item.price) || 0, item.image || '');
+});
 
 renderWishlist();
 </script>
