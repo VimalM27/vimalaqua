@@ -138,37 +138,14 @@ footer a:hover{color:#00b4d8!important}
 /* ---------- Reduced motion ---------- */
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
 
-/* VIMAL27 LOGO CURSOR */
-
+/* VIMAL27 SMALL V LOGO CURSOR (native cursor, 22x24px, tip of the V is the click point) */
 @media (hover: hover) and (pointer: fine) {
-    html.v27-logo-cursor,
-    html.v27-logo-cursor body,
-    html.v27-logo-cursor body * {
-        cursor: none !important;
-    }
-
-    #v27-logo-cursor {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 70px;
-        height: auto;
-        display: block;
-        pointer-events: none !important;
-        z-index: 2147483647;
-        opacity: 0;
-        visibility: hidden;
-        will-change: transform;
-    }
-
-    #v27-logo-cursor.v27-cursor-visible {
-        opacity: 1;
-        visibility: visible;
-    }
-}
-#v27-logo-cursor {
-    pointer-events: none !important;
-    user-select: none !important;
-    -webkit-user-drag: none !important;
-    z-index: 2147483647;
+  html, body {
+    cursor: url("../images/v-cursor.png") 11 23, auto;
+    cursor: image-set(url("../images/v-cursor.png") 1x, url("../images/v-cursor@2x.png") 2x) 11 23, auto;
+  }
+  a, button, [role="button"], summary, label, select, input[type="submit"], input[type="button"] {
+    cursor: url("../images/v-cursor.png") 11 23, pointer;
+    cursor: image-set(url("../images/v-cursor.png") 1x, url("../images/v-cursor@2x.png") 2x) 11 23, pointer;
+  }
 }

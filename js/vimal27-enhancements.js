@@ -277,76 +277,6 @@
     });
   }
 
-  // ---------- Vimal27 branded mouse cursor ----------
-  function addVimalLogoCursor() {
-    // Keep normal touch behaviour on phones and tablets.
-    if (
-      !window.matchMedia ||
-      !window.matchMedia('(hover: hover) and (pointer: fine)').matches
-    ) {
-      return;
-    }
-
-    if (document.getElementById('v27-logo-cursor')) return;
-
-    const cursor = document.createElement('img');
-    cursor.id = 'v27-logo-cursor';
-    cursor.alt = '';
-    cursor.setAttribute('aria-hidden', 'true');
-    cursor.draggable = false;
-
-    // The logo must NEVER intercept clicks intended for page controls.
-    cursor.style.pointerEvents = 'none';
-    cursor.style.userSelect = 'none';
-    cursor.style.webkitUserDrag = 'none';
-
-    cursor.onload = function () {
-      if (!cursor.isConnected) {
-        document.body.appendChild(cursor);
-      }
-
-      // Hide the normal arrow only after the image has loaded.
-      document.documentElement.classList.add('v27-logo-cursor');
-    };
-
-    cursor.onerror = function () {
-      cursor.remove();
-      document.documentElement.classList.remove('v27-logo-cursor');
-      console.error('Vimal27 cursor logo failed to load:', cursor.src);
-    };
-
-    // Set the source after the load/error handlers are ready.
-    cursor.src = '/icon.png';
-
-    document.body.appendChild(cursor);
-
-    document.addEventListener('pointermove', function (event) {
-      if (event.pointerType === 'touch') return;
-
-      cursor.style.transform =
-        `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate(-50%, -50%)`;
-
-      cursor.classList.add('v27-cursor-visible');
-
-      const target = event.target instanceof Element ? event.target : null;
-      const isInteractive = target && target.closest(
-        'a, button, [role="button"], summary, label, select, input, textarea'
-      );
-
-      cursor.classList.toggle('v27-cursor-link', Boolean(isInteractive));
-    }, { passive: true });
-
-    document.addEventListener('pointerout', function (event) {
-      if (event.relatedTarget === null) {
-        cursor.classList.remove('v27-cursor-visible');
-      }
-    });
-
-    window.addEventListener('blur', function () {
-      cursor.classList.remove('v27-cursor-visible');
-    });
-  }
-
   ready(function () {
     document.documentElement.dataset.vimal27Enhanced = 'true';
 
@@ -359,7 +289,6 @@
     syncCounts();
     addSearchEnhancement();
     fixMobileBodyLayout();
-    addVimalLogoCursor();
 
     window.addEventListener('resize', fixMobileBodyLayout, { passive: true });
 

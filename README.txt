@@ -1,13 +1,8 @@
-VIMAL27 GOLDEN V PHOENIX CURSOR UPDATE
-
-Files in this ZIP:
-- js/vimal27-enhancements.js: corrected add-on JavaScript. It uses /icon.png (the golden V phoenix image in your project root).
-- css/vimal27-cursor.css: cursor CSS patch. Add this at the END of your existing css/vimal27-enhancements.css.
-
-Install:
-1. Replace your existing js/vimal27-enhancements.js with the JS file in this ZIP.
-2. Open css/vimal27-enhancements.css and append the contents of vimal27-cursor.css to the very bottom.
-3. Confirm icon.png is in the website root (same level as index.html).
-4. Redeploy, then hard-refresh with Ctrl+Shift+R.
-
-The cursor image has pointer-events:none so it does not block buttons or links. Touch devices keep their normal touch behaviour.
+SMALL V LOGO CURSOR PATCH
+Extract into the ROOT of Vimal-Aqua and overwrite:
+  css/vimal27-enhancements.css
+  js/vimal27-enhancements.js
+It also adds images/v-cursor.png and images/v-cursor@2x.png.
+Redeploy, then hard refresh (Ctrl+Shift+R).
+Size: 22x24 px (like a normal arrow). The tip of the V is the click point.
+To resize: regenerate the PNGs (keep max 32px wide) and change the hotspot "11 23" in the CSS.
