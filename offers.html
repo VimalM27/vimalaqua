@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="js/vp-user-storage.js"></script>
+    <link rel="icon" type="image/png" href="/icon.png">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R5NVV7FZB6');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Festive Offers & Deals | Vimal Pets & Toys</title>
+    <meta name="description" content="Festival offers on pets, aquariums, pet food, accessories and toys at Vimal Pets & Toys. Diwali, Christmas, Pongal and more.">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/offers.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <meta name="robots" content="index, follow">
+
+
+    <link rel="stylesheet" href="css/vimal27-enhancements.css">
+    <link rel="stylesheet" href="css/vimal-dropdown-unified.css?v=1">
+</head>
+<body>
+<nav class="navbar">
+    <div class="mobile-menu-btn" onclick="openMenu()">
+        ☰
+    </div>
+
+    <div class="logo">
+    <a href="index.html" class="logo-link">
+        <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="navbar-logo">
+    </a>
+</div>
+
+    <a href="login.html" class="mobile-login" id="mobileLoginLink">
+        👤
+    </a>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search pets, foods, accessories...">
+
+        <button onclick="searchWebsite()">🔍</button>
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="toys.html">Toys</a></li>
+        <!-- SHOP -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
+
+            <div class="mega-menu">
+
+                <div class="menu-column">
+                    <h4>Pets</h4>
+
+                    <a href="dogs.html">🐶 Dogs</a>
+                    <a href="cats.html">🐱 Cats</a>
+                    <a href="fish.html">🐟 Fish</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Products</h4>
+
+                    <a href="marketplace.html">🛍 Marketplace</a>
+                    <a href="foods.html">🍖 Pet Foods</a>
+                    <a href="accessories.html">🎯 Accessories</a>
+                    <a href="aquariums.html">🐠 Aquariums</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Explore</h4>
+
+                    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
+                    <a href="index.html#best-sellers">🔥 Best Sellers</a>
+                    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
+                    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
+                    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
+                    <a href="care-guide.html">📚 Pet Care Guide</a>
+                </div>
+
+            </div>
+        </li>
+
+        <!-- SELLER -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Partner Login ▼</a>
+
+            <div class="dropdown-content">
+                <a href="seller-signup.html">📝 Become a Partner</a>
+                <a href="seller-login.html">🔑 Partner Login</a>
+                <a href="seller-dashboard.html">📊 Partner Dashboard</a>
+            </div>
+        </li>
+
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+    <a href="wishlist.html" class="wishlist-link">
+        ♡ <span id="wishlistCount">0</span>
+    </a>
+</li>
+        <li>
+            <a href="cart.html" class="cart-link">🛒</a>
+        </li>
+
+    </ul>
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+
+    <span class="close-menu" onclick="closeMenu()">✕</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="toys.html">🏠 Toys</a>
+    <a href="fish.html">🐟 Fish</a>
+    <a href="birds.html">🦜 Birds</a>
+    <a href="dogs.html">🐶 Dogs</a>
+    <a href="cats.html">🐱 Cats</a>
+    <a href="small-pets.html">🐹 Small Pets</a>
+    <a href="marketplace.html">🛍️ Marketplace</a>
+    <a href="foods.html">🍖 Pet Foods</a>
+    <a href="accessories.html">🛍 Accessories</a>
+    <a href="aquariums.html">🐠 Aquariums</a>
+    <a href="seller-signup.html">📝 Become a Partner</a>
+    <a href="seller-login.html">🔑 Partner Login</a>
+    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
+    <a href="index.html#best-sellers">🔥 Best Sellers</a>
+    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
+    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
+    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
+    <a href="care-guide.html">📚 Pet Care Guide</a>
+    <a href="about.html">ℹ About</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+
+</div>
+<section class="offers-page">
+
+<div class="of-hero" id="ofHero">
+    <span class="of-badge" id="ofBadge">Festive offers</span>
+    <h1 id="ofTitle">Celebrate with Vimal</h1>
+    <p id="ofText">Special deals on pets, aquariums, food, accessories and toys through every festival.</p>
+    <div class="of-count" id="ofCount" aria-live="off"></div>
+    <div class="of-code" id="ofCode" style="display:none">
+        Use code <strong id="ofCodeText"></strong>
+        <button type="button" class="of-copy" id="ofCodeBtn">Copy code</button>
+    </div>
+</div>
+
+<div class="of-bar" role="group" aria-label="Filter offers">
+    <button type="button" class="of-chip active" data-cat="all">All offers</button>
+    <button type="button" class="of-chip" data-cat="pets">Pets</button>
+    <button type="button" class="of-chip" data-cat="aquarium">Fish &amp; Aquarium</button>
+    <button type="button" class="of-chip" data-cat="food">Pet Food</button>
+    <button type="button" class="of-chip" data-cat="accessories">Accessories</button>
+    <button type="button" class="of-chip" data-cat="toys">Toys</button>
+</div>
+
+<div class="of-sec" id="secLive" style="display:none">
+    <h2>Live now</h2>
+    <div class="sub">These offers are running today.</div>
+    <div class="of-grid" id="gridLive"></div>
+</div>
+
+<div class="of-sec" id="secSoon" style="display:none">
+    <h2>Coming up</h2>
+    <div class="sub">Save the dates. Codes work only during the offer period.</div>
+    <div class="of-grid" id="gridSoon"></div>
+</div>
+
+<div class="of-empty" id="ofEmpty">No offers in this category right now. Try another one.</div>
+
+<div class="of-sec">
+    <h2>Offers all year</h2>
+    <div class="sub">No festival needed.</div>
+    <div class="of-always">
+        <div><i class="fa-solid fa-gift"></i><h3>First order welcome</h3><p>New customers get a welcome discount on their first order. Ask us on WhatsApp for your code.</p></div>
+        <div><i class="fa-solid fa-fish"></i><h3>Aquarium starter bundle</h3><p>Buy a tank, filter, light and gravel together and get a bundle price.</p></div>
+        <div><i class="fa-solid fa-user-group"></i><h3>Refer a friend</h3><p>Share your love for pets. You and your friend both get a reward on their first order.</p></div>
+        <div><i class="fa-solid fa-heart-pulse"></i><h3>Free care guidance</h3><p>Every pet comes with advice from our team. Call or WhatsApp anytime.</p></div>
+    </div>
+</div>
+
+<div class="of-sec" id="secPast" style="display:none">
+    <h2>Recently ended</h2>
+    <div class="of-grid" id="gridPast"></div>
+</div>
+
+<div class="of-terms">
+    <strong>Terms:</strong> Coupon codes work only during the offer dates shown and cannot be combined unless stated.
+    Offers apply to listed categories. Live animals are subject to availability and our
+    <a href="pet-purchase-policy.html">Pet Purchase Policy</a>. See
+    <a href="return-refund-policy.html">Return &amp; Refund Policy</a> and
+    <a href="shipping-policy.html">Shipping Policy</a>. Questions? <a href="faq.html">Read the FAQ</a> or
+    <a href="contact.html">contact us</a>.
+</div>
+
+</section>
+
+<script>
+/* =====================================================================
+   EDIT YOUR OFFERS HERE
+   - start / end : YYYY-MM-DD (end date is included)
+   - cats        : pets, aquarium, food, accessories, toys
+   - Pages show Live / Coming up / Recently ended automatically by date.
+   - Festival dates change every year, so check them each season.
+   ===================================================================== */
+var OFFERS = [
+ {name:"Diwali Dhamaka", emoji:"🪔", start:"2026-11-01", end:"2026-11-11", c1:"#ff9933", c2:"#b3122d",
+  deal:"15% off up to ₹5,000", code:"DIWALI15",
+  perks:["Keep pets indoors and calm during crackers","Free pet-safe calming tips with every order","Extra gift on orders above ₹3,000"],
+  cats:["pets","aquarium","food","accessories","toys"], link:"index.html#best-sellers"},
+ {name:"Christmas Joy", emoji:"🎄", start:"2026-12-15", end:"2026-12-26", c1:"#16a34a", c2:"#991b1b",
+  deal:"Flat 12% off + free gift wrap", code:"XMAS12",
+  perks:["Gift-ready toys and soft toys","Festive aquarium lights and decor","Free gift wrap on toys"],
+  cats:["toys","accessories","aquarium"], link:"toys.html"},
+ {name:"New Year Bash", emoji:"🎉", start:"2026-12-28", end:"2027-01-03", c1:"#7c3aed", c2:"#0ea5e9",
+  deal:"Buy 2 accessories, get 1 free", code:"NEWYEAR3",
+  perks:["Start the year with a fresh tank setup","Free water conditioner on aquarium orders above ₹2,500","Lowest-priced item free on 3 accessories"],
+  cats:["accessories","aquarium","food"], link:"accessories.html"},
+ {name:"Pongal Special", emoji:"🌾", start:"2027-01-12", end:"2027-01-17", c1:"#f59e0b", c2:"#15803d",
+  deal:"Up to 20% off pet food", code:"PONGAL20",
+  perks:["Bulk pet food savings","Free delivery in Coimbatore above ₹1,500","Thanks for being part of our family"],
+  cats:["food","pets"], link:"foods.html"},
+ {name:"Republic Day Sale", emoji:"🇮🇳", start:"2027-01-24", end:"2027-01-26", c1:"#f97316", c2:"#16a34a",
+  deal:"3-day sale: flat ₹300 off above ₹2,000", code:"REPUBLIC300",
+  perks:["Works on foods, accessories and toys","Limited to 3 days","One use per customer"],
+  cats:["food","accessories","toys"], link:"marketplace.html"},
+ {name:"Holi Colours", emoji:"🎨", start:"2027-03-20", end:"2027-03-23", c1:"#ec4899", c2:"#f59e0b",
+  deal:"20% off art sets and creative toys", code:"HOLI20",
+  perks:["Colourful art and craft toys","Pet-safe care tips for Holi","Free sketchbook on orders above ₹1,500"],
+  cats:["toys"], link:"art-sets.html"},
+ {name:"Tamil New Year", emoji:"🌸", start:"2027-04-12", end:"2027-04-16", c1:"#eab308", c2:"#059669",
+  deal:"Fresh start fish and aquarium deals", code:"PUTHANDU",
+  perks:["Discounts on tanks and filters","Free aquarium cycling guidance","Combo offers on fish plus food"],
+  cats:["aquarium","food"], link:"aquariums.html"}
+];
+
+(function(){
+    var now = new Date();
+    function d(s, endOfDay){ var p=s.split('-'); return new Date(+p[0], +p[1]-1, +p[2], endOfDay?23:0, endOfDay?59:0, endOfDay?59:0); }
+    var catNames = {pets:"Pets", aquarium:"Fish & Aquarium", food:"Pet Food", accessories:"Accessories", toys:"Toys"};
+    var fmt = {day:"numeric", month:"short"};
+    function range(o){ return d(o.start).toLocaleDateString("en-IN",fmt)+" – "+d(o.end,true).toLocaleDateString("en-IN",fmt); }
+
+    OFFERS.forEach(function(o){
+        o.s = d(o.start); o.e = d(o.end,true);
+        o.state = now > o.e ? "ended" : (now >= o.s ? "live" : "soon");
+    });
+    var live = OFFERS.filter(function(o){return o.state==="live"});
+    var soon = OFFERS.filter(function(o){return o.state==="soon"}).sort(function(a,b){return a.s-b.s});
+    var past = OFFERS.filter(function(o){return o.state==="ended"}).sort(function(a,b){return b.e-a.e}).slice(0,3);
+
+    function esc(t){ var x=document.createElement("div"); x.textContent=t; return x.innerHTML; }
+
+    function card(o){
+        var daysLeft = Math.ceil((o.e-now)/86400000);
+        var status = o.state==="live" ? (daysLeft<=1 ? '<span class="of-status last">Last day</span>' : '<span class="of-status live">Live now</span>')
+                   : o.state==="soon" ? '<span class="of-status soon">Starts '+d(o.start).toLocaleDateString("en-IN",fmt)+'</span>'
+                   : '<span class="of-status">Ended</span>';
+        var perks = o.perks.map(function(p){return "<li>"+esc(p)+"</li>"}).join("");
+        var tags = o.cats.map(function(c){return "<span>"+catNames[c]+"</span>"}).join("");
+        var codeBox = o.state==="ended" ? "" :
+            '<div class="of-mini"><strong>'+esc(o.code)+'</strong><button type="button" class="of-copy" data-code="'+esc(o.code)+'">Copy</button></div>';
+        return '<article class="of-card '+o.state+'" data-cats="'+o.cats.join(",")+'" style="--c1:'+o.c1+';--c2:'+o.c2+'">'+
+            '<div class="of-card-top">'+status+'<span class="emoji" aria-hidden="true">'+o.emoji+'</span><h3>'+esc(o.name)+'</h3><small>'+range(o)+'</small></div>'+
+            '<div class="of-card-body"><div class="of-deal">'+esc(o.deal)+'</div><ul class="of-perks">'+perks+'</ul><div class="of-tags">'+tags+'</div>'+
+            '<div class="of-foot">'+codeBox+(o.state==="ended"?"":'<a class="shop" href="'+o.link+'">Shop this offer</a>')+'</div></div></article>';
+    }
+    function fill(secId, gridId, list){
+        document.getElementById(secId).style.display = list.length ? "" : "none";
+        document.getElementById(gridId).innerHTML = list.map(card).join("");
+    }
+    fill("secLive","gridLive",live);
+    fill("secSoon","gridSoon",soon);
+    fill("secPast","gridPast",past);
+
+    /* ---------- hero: live offer, otherwise the next one ---------- */
+    var hero = live[0] || soon[0];
+    var target;
+    if (hero){
+        document.getElementById("ofHero").style.cssText = "--c1:"+hero.c1+";--c2:"+hero.c2;
+        document.getElementById("ofTitle").textContent = hero.emoji+" "+hero.name;
+        document.getElementById("ofText").textContent = hero.deal+". "+hero.perks[0]+".";
+        if (hero.state==="live"){
+            document.getElementById("ofBadge").textContent = "Live now · ends "+d(hero.end,true).toLocaleDateString("en-IN",fmt);
+            target = hero.e;
+        } else {
+            document.getElementById("ofBadge").textContent = "Next offer · starts "+d(hero.start).toLocaleDateString("en-IN",fmt);
+            target = hero.s;
+        }
+        document.getElementById("ofCode").style.display = "";
+        document.getElementById("ofCodeText").textContent = hero.code;
+        document.getElementById("ofCodeBtn").setAttribute("data-code", hero.code);
+        if (hero.state==="soon") document.getElementById("ofCode").insertAdjacentHTML("beforebegin","");
+
+        var box = document.getElementById("ofCount");
+        function tick(){
+            var ms = Math.max(0, target - new Date());
+            var v = [Math.floor(ms/86400000), Math.floor(ms/3600000)%24, Math.floor(ms/60000)%60, Math.floor(ms/1000)%60];
+            var l = ["days","hours","mins","secs"];
+            box.innerHTML = v.map(function(n,i){return "<div><b>"+String(n).padStart(2,"0")+"</b><span>"+l[i]+"</span></div>"}).join("");
+        }
+        tick(); setInterval(tick,1000);
+    } else {
+        document.getElementById("ofBadge").textContent = "New offers coming";
+        document.getElementById("ofText").textContent = "No festival offers right now. Check back soon or message us on WhatsApp.";
+    }
+
+    /* ---------- copy code ---------- */
+    document.addEventListener("click", function(e){
+        var b = e.target.closest(".of-copy"); if(!b) return;
+        var code = b.getAttribute("data-code");
+        function ok(){ var t=b.textContent; b.textContent="Copied"; b.classList.add("done"); setTimeout(function(){b.textContent=t; b.classList.remove("done")},1500); }
+        if (navigator.clipboard) navigator.clipboard.writeText(code).then(ok, function(){});
+        else { var i=document.createElement("input"); i.value=code; document.body.appendChild(i); i.select(); document.execCommand("copy"); i.remove(); ok(); }
+    });
+
+    /* ---------- filter ---------- */
+    var chips = document.querySelectorAll(".of-chip");
+    chips.forEach(function(c){
+        c.addEventListener("click", function(){
+            chips.forEach(function(x){x.classList.remove("active")}); c.classList.add("active");
+            var cat = c.dataset.cat, shown = 0;
+            document.querySelectorAll(".of-card").forEach(function(card){
+                var ok = cat==="all" || card.dataset.cats.split(",").indexOf(cat) !== -1;
+                card.style.display = ok ? "" : "none";
+                if (ok && !card.classList.contains("ended")) shown++;
+            });
+            document.getElementById("ofEmpty").style.display = shown ? "none" : "block";
+        });
+    });
+})();
+</script>
+
+<script src="js/navbar.js"></script>
+<script src="js/protect.js"></script>
+<script src="js/script.js"></script>
+<script src="js/vimal27-enhancements.js"></script>
+<script src="js/vp-search.js?v=1"></script>
+</body>
+
+</html>

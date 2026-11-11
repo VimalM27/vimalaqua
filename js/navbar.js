@@ -517,6 +517,17 @@ function applyUnifiedNavbar() {
                 </li>
 
 
+                <!-- OFFERS -->
+
+                <li>
+
+                    <a href="offers.html">
+                        🎁 Offers
+                    </a>
+
+                </li>
+
+
                 <!-- ABOUT -->
 
                 <li>
@@ -528,13 +539,30 @@ function applyUnifiedNavbar() {
                 </li>
 
 
-                <!-- CONTACT -->
+                <!-- CONTACT (dropdown: Contact Us + FAQ) -->
 
-                <li>
+                <li class="dropdown">
 
-                    <a href="contact.html">
-                        Contact
+                    <a
+                        href="contact.html"
+                        onclick="toggleDropdown(event,this)">
+
+                        Contact ▼
+
                     </a>
+
+
+                    <div class="dropdown-content dropdown-content-right">
+
+                        <a href="contact.html">
+                            📞 Contact Us
+                        </a>
+
+                        <a href="faq.html">
+                            ❓ FAQ
+                        </a>
+
+                    </div>
 
                 </li>
 
@@ -756,16 +784,41 @@ function applyUnifiedNavbar() {
     </div>
 
 
+    <!-- OFFERS -->
+    <a href="offers.html" class="mobile-main-link">
+        🎁 <span>Offers</span>
+    </a>
+
     <!-- ABOUT -->
     <a href="about.html" class="mobile-main-link">
         ℹ️ <span>About</span>
     </a>
 
 
-        <!-- CONTACT -->
-    <a href="contact.html" class="mobile-main-link">
-        📞 <span>Contact</span>
-    </a>
+    <!-- CONTACT (dropdown: Contact Us + FAQ) -->
+    <div class="mobile-dropdown">
+
+        <button
+            class="mobile-dropdown-title"
+            onclick="toggleMobileDropdown(this)"
+        >
+            📞 <span>Contact</span>
+            <b>›</b>
+        </button>
+
+        <div class="mobile-submenu">
+
+            <a href="contact.html">
+                📞 Contact Us
+            </a>
+
+            <a href="faq.html">
+                ❓ FAQ
+            </a>
+
+        </div>
+
+    </div>
 
 `;
 
@@ -950,6 +1003,35 @@ function searchWebsite(event) {
 
         window.location.href =
             "about.html";
+
+        return;
+    }
+
+
+    if (
+        search.includes("offer") ||
+        search.includes("deal") ||
+        search.includes("discount") ||
+        search.includes("coupon") ||
+        search.includes("diwali") ||
+        search.includes("festival")
+    ) {
+
+        window.location.href =
+            "offers.html";
+
+        return;
+    }
+
+
+    if (
+        search.includes("faq") ||
+        search.includes("question") ||
+        search.includes("help")
+    ) {
+
+        window.location.href =
+            "faq.html";
 
         return;
     }

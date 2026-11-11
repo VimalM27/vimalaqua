@@ -86,3 +86,18 @@
         grid-template-columns: 1fr 1fr;
     }
 }
+
+
+/* =========================================================
+   CONTACT DROPDOWN (Contact Us + FAQ)
+   Contact is the last menu item, so its panel opens toward
+   the left to stay inside the screen.
+   ========================================================= */
+@media (min-width: 769px) {
+    nav.navbar .vimal-navigation .nav-links .dropdown .dropdown-content.dropdown-content-right {
+        left: auto;
+        right: 0;
+        min-width: 180px;
+    }
+}
+.dropdown-content.show { display: block; }

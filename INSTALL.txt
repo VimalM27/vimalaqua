@@ -1,9 +1,12 @@
-VIMAL ANTIQUE PAGE ADD-ON
+Copy these files into your Vimal-Aqua folder (same paths, replace when asked):
 
-Files included:
-1. antique.html — new Antique page. Copy to the same root folder as index.html and pets.html.
-2. js/navbar.js — updated universal navbar. Copy this over your existing js/navbar.js (keep a backup first). It adds Antique after Pets & Accessories on desktop and mobile.
+  offers.html                       NEW   - festive offers page
+  css/offers.css                    NEW   - offers styles
+  faq.html                          NEW   - FAQ page
+  css/faq.css                       NEW   - FAQ styles
+  js/navbar.js                      EDIT  - Offers link + Contact dropdown (Contact Us / FAQ)
+  css/vimal-dropdown-unified.css    EDIT  - Contact dropdown alignment
+  sitemap.xml                       EDIT  - adds faq.html and offers.html
 
-The page uses your existing css/style.css, css/navbar.css, css/vimal-dropdown-unified.css and js/navbar.js. WhatsApp enquiry uses the contact number currently used by your catalogue configuration (917845452727). If your active WhatsApp number differs, change the phone variable near the bottom of antique.html.
-
-Note: the six cards are starter placeholders to demonstrate the layout and working search/category/sort/details/WhatsApp enquiry. Replace them with actual antique inventory/photos/prices before publishing. No existing site files other than js/navbar.js need modification.
+To change offers: open offers.html and edit the OFFERS list near the bottom
+(dates, discount text, coupon code, perks). Statuses update by date automatically.

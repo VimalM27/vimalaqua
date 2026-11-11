@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="js/vp-user-storage.js"></script>
+    <link rel="icon" type="image/png" href="/icon.png">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R5NVV7FZB6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R5NVV7FZB6');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | Vimal Pets & Toys</title>
+    <meta name="description" content="Answers to common questions about ordering, delivery, live fish and pets, returns, payments and partner accounts at Vimal Pets & Toys.">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/faq.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <meta name="robots" content="index, follow">
+
+
+    <link rel="stylesheet" href="css/vimal27-enhancements.css">
+    <link rel="stylesheet" href="css/vimal-dropdown-unified.css?v=1">
+</head>
+<body>
+<nav class="navbar">
+    <div class="mobile-menu-btn" onclick="openMenu()">
+        ☰
+    </div>
+
+    <div class="logo">
+    <a href="index.html" class="logo-link">
+        <img src="images/vimallogo.png?v=2" alt="Vimal Pets & Toys" class="navbar-logo">
+    </a>
+</div>
+
+    <a href="login.html" class="mobile-login" id="mobileLoginLink">
+        👤
+    </a>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search pets, foods, accessories...">
+
+        <button onclick="searchWebsite()">🔍</button>
+    </div>
+
+    <ul class="nav-links">
+
+        <li><a href="index.html">Home</a></li>
+        <li><a href="toys.html">Toys</a></li>
+        <!-- SHOP -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Pets & Accessories ▼</a>
+
+            <div class="mega-menu">
+
+                <div class="menu-column">
+                    <h4>Pets</h4>
+
+                    <a href="dogs.html">🐶 Dogs</a>
+                    <a href="cats.html">🐱 Cats</a>
+                    <a href="fish.html">🐟 Fish</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Products</h4>
+
+                    <a href="marketplace.html">🛍 Marketplace</a>
+                    <a href="foods.html">🍖 Pet Foods</a>
+                    <a href="accessories.html">🎯 Accessories</a>
+                    <a href="aquariums.html">🐠 Aquariums</a>
+                </div>
+
+                <div class="menu-column">
+                    <h4>Explore</h4>
+
+                    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
+                    <a href="index.html#best-sellers">🔥 Best Sellers</a>
+                    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
+                    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
+                    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
+                    <a href="care-guide.html">📚 Pet Care Guide</a>
+                </div>
+
+            </div>
+        </li>
+
+        <!-- SELLER -->
+        <li class="dropdown">
+            <a href="#" onclick="toggleDropdown(event,this)">Partner Login ▼</a>
+
+            <div class="dropdown-content">
+                <a href="seller-signup.html">📝 Become a Partner</a>
+                <a href="seller-login.html">🔑 Partner Login</a>
+                <a href="seller-dashboard.html">📊 Partner Dashboard</a>
+            </div>
+        </li>
+
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+    <a href="wishlist.html" class="wishlist-link">
+        ♡ <span id="wishlistCount">0</span>
+    </a>
+</li>
+        <li>
+            <a href="cart.html" class="cart-link">🛒</a>
+        </li>
+
+    </ul>
+</nav>
+
+<div id="mobileMenu" class="mobile-menu">
+
+    <span class="close-menu" onclick="closeMenu()">✕</span>
+
+    <a href="index.html">🏠 Home</a>
+    <a href="toys.html">🏠 Toys</a>
+    <a href="fish.html">🐟 Fish</a>
+    <a href="birds.html">🦜 Birds</a>
+    <a href="dogs.html">🐶 Dogs</a>
+    <a href="cats.html">🐱 Cats</a>
+    <a href="small-pets.html">🐹 Small Pets</a>
+    <a href="marketplace.html">🛍️ Marketplace</a>
+    <a href="foods.html">🍖 Pet Foods</a>
+    <a href="accessories.html">🛍 Accessories</a>
+    <a href="aquariums.html">🐠 Aquariums</a>
+    <a href="seller-signup.html">📝 Become a Partner</a>
+    <a href="seller-login.html">🔑 Partner Login</a>
+    <a href="index.html#shop-by-category">🗂 Shop By Category</a>
+    <a href="index.html#best-sellers">🔥 Best Sellers</a>
+    <a href="index.html#new-arrivals-home">🆕 New Arrivals</a>
+    <a href="index.html#pet-care">🩺 Pet Care & Grooming</a>
+    <a href="index.html#aquarium-services">🐠 Aquarium Services</a>
+    <a href="care-guide.html">📚 Pet Care Guide</a>
+    <a href="about.html">ℹ About</a>
+    <a href="contact.html">📞 Contact</a>
+    <a href="cart.html">🛒 Cart</a>
+
+</div>
+<section class="faq-page">
+
+<div class="faq-hero">
+    <h1>Frequently Asked Questions</h1>
+    <p>Quick answers about ordering, delivery, pets, aquariums and returns.</p>
+</div>
+
+<div class="faq-search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" id="faqSearch" placeholder="Search questions" aria-label="Search questions">
+</div>
+
+<div class="faq-tabs" role="group" aria-label="FAQ categories">
+        <button type="button" class="faq-tab active" data-filter="all">All</button>
+        <button type="button" class="faq-tab" data-filter="0">Ordering & Payments</button>
+        <button type="button" class="faq-tab" data-filter="1">Delivery</button>
+        <button type="button" class="faq-tab" data-filter="2">Pets & Aquariums</button>
+        <button type="button" class="faq-tab" data-filter="3">Returns & Refunds</button>
+        <button type="button" class="faq-tab" data-filter="4">Partners</button>
+</div>
+
+<div class="faq-list" id="faqList">
+
+    <div class="faq-group" data-cat="0">
+        <h2>Ordering & Payments</h2>
+        <details class="faq-item">
+            <summary>How do I place an order?</summary>
+            <div class="faq-answer">Add the items you want to your cart, open the cart and follow the checkout steps. You can also call or WhatsApp us on +91 78 4545 2727 and we will help you place the order.</div>
+        </details>
+        <details class="faq-item">
+            <summary>How can I cancel an order?</summary>
+            <div class="faq-answer">You can cancel before the order is dispatched. Call or WhatsApp +91 78 4545 2727, or email vimal@vimal27.in with your order details. Once a live animal has been prepared for delivery, cancellation may not be possible. See the <a href="cancellation-policy.html">Cancellation Policy</a>.</div>
+        </details>
+        <details class="faq-item">
+            <summary>Where can I check my order status?</summary>
+            <div class="faq-answer">Sign in and open <a href="my-orders.html">My Orders</a>. You will also get a call or message once your order is out for delivery.</div>
+        </details>
+    </div>
+
+    <div class="faq-group" data-cat="1">
+        <h2>Delivery</h2>
+        <details class="faq-item">
+            <summary>Which areas do you deliver to?</summary>
+            <div class="faq-answer">We deliver within Coimbatore, Tamil Nadu, and to select areas outside the city on request. Contact us to check if we can reach your location.</div>
+        </details>
+        <details class="faq-item">
+            <summary>How long does delivery take?</summary>
+            <div class="faq-answer">Most orders arrive within 2–5 business days, depending on your location and the product type. Shipping charges, if any, are shown at checkout before you confirm. See the <a href="shipping-policy.html">Shipping Policy</a>.</div>
+        </details>
+        <details class="faq-item">
+            <summary>How are live pets and fish delivered?</summary>
+            <div class="faq-answer">They travel in secure, ventilated packaging suited to the species, and delivery is scheduled to keep travel time and stress low.</div>
+        </details>
+    </div>
+
+    <div class="faq-group" data-cat="2">
+        <h2>Pets & Aquariums</h2>
+        <details class="faq-item">
+            <summary>Are your pets healthy?</summary>
+            <div class="faq-answer">Every pet is checked for general health and condition before dispatch. If an animal arrives unwell, contact us within 24 hours.</div>
+        </details>
+        <details class="faq-item">
+            <summary>Can I get help setting up a new aquarium?</summary>
+            <div class="faq-answer">Yes. Read the <a href="guide-aquarium-cycling.html">aquarium cycling guide</a> and the <a href="guide-fish-tank-maintenance.html">tank maintenance guide</a>, or contact us and we will guide you through setup.</div>
+        </details>
+        <details class="faq-item">
+            <summary>Will you help me care for my pet after I buy it?</summary>
+            <div class="faq-answer">Yes. Our team is available for care guidance after your pet comes home. Start with the <a href="care-guide.html">Pet Care Guide</a> or message us on WhatsApp.</div>
+        </details>
+        <details class="faq-item">
+            <summary>Do I need to check any rules before buying a pet?</summary>
+            <div class="faq-answer">Some species are regulated locally or nationally, and it is the buyer's responsibility to make sure they can legally keep them. We also ask buyers to confirm they can provide proper care, housing and time. See the <a href="pet-purchase-policy.html">Pet Purchase Policy</a>.</div>
+        </details>
+    </div>
+
+    <div class="faq-group" data-cat="3">
+        <h2>Returns & Refunds</h2>
+        <details class="faq-item">
+            <summary>Can I return a product?</summary>
+            <div class="faq-answer">Unopened, unused accessories and food can be returned within 7 days of delivery.</div>
+        </details>
+        <details class="faq-item">
+            <summary>Can I return a live pet or fish?</summary>
+            <div class="faq-answer">Live animals are generally not eligible for return once delivered, because of animal welfare and health. If one arrives unwell, contact us within 24 hours.</div>
+        </details>
+        <details class="faq-item">
+            <summary>What if my item is damaged or wrong?</summary>
+            <div class="faq-answer">Send us photos within 48 hours of delivery and we will sort it out. Approved refunds go back to your original payment method in 5–7 business days. See the <a href="return-refund-policy.html">Return &amp; Refund Policy</a>.</div>
+        </details>
+    </div>
+
+    <div class="faq-group" data-cat="4">
+        <h2>Partners</h2>
+        <details class="faq-item">
+            <summary>How do I sell on Vimal Pets & Toys?</summary>
+            <div class="faq-answer">Create an account on the <a href="seller-signup.html">Partner Signup</a> page. Once approved, you can manage listings from your <a href="seller-dashboard.html">Partner Dashboard</a>. Please read the <a href="seller-terms.html">Seller Terms</a> first.</div>
+        </details>
+    </div>
+
+    <div class="faq-empty" id="faqEmpty">
+        No answers match your search. <a href="contact.html">Ask us directly</a>.
+    </div>
+</div>
+
+<div class="faq-help">
+    <h2>Still need help?</h2>
+    <p>Our team is available 24/7.</p>
+    <div class="faq-help-actions">
+        <a href="contact.html">Contact Us</a>
+        <a class="wa" href="https://wa.me/917845452727" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:+917845452727">Call +91 78 4545 2727</a>
+    </div>
+</div>
+
+</section>
+
+<script>
+(function(){
+    var tabs = document.querySelectorAll('.faq-tab');
+    var groups = document.querySelectorAll('.faq-group');
+    var input = document.getElementById('faqSearch');
+    var empty = document.getElementById('faqEmpty');
+    var active = 'all';
+
+    function apply(){
+        var q = input.value.trim().toLowerCase();
+        var shown = 0;
+        groups.forEach(function(g){
+            var catOk = active === 'all' || g.dataset.cat === active;
+            var any = 0;
+            g.querySelectorAll('.faq-item').forEach(function(item){
+                var ok = catOk && (!q || item.textContent.toLowerCase().indexOf(q) !== -1);
+                item.style.display = ok ? '' : 'none';
+                if (ok) any++;
+            });
+            g.style.display = any ? '' : 'none';
+            shown += any;
+        });
+        empty.style.display = shown ? 'none' : 'block';
+    }
+
+    tabs.forEach(function(t){
+        t.addEventListener('click', function(){
+            tabs.forEach(function(x){ x.classList.remove('active'); });
+            t.classList.add('active');
+            active = t.dataset.filter;
+            apply();
+        });
+    });
+    input.addEventListener('input', apply);
+})();
+</script>
+
+<script src="js/navbar.js"></script>
+<script src="js/protect.js"></script>
+<script src="js/script.js"></script>
+<script src="js/vimal27-enhancements.js"></script>
+<script src="js/vp-search.js?v=1"></script>
+</body>
+
+</html>

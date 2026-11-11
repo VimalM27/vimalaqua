@@ -1,0 +1,189 @@
+/* =========================================================
+   FAQ PAGE  (matches the Contact page: navy + cyan)
+   ========================================================= */
+.faq-page{
+    padding:120px 7% 70px;
+    background:#081b3c;
+    color:#fff;
+    min-height:100vh;
+}
+
+.faq-hero{
+    max-width:760px;
+    margin:0 auto 34px;
+    text-align:center;
+}
+.faq-hero h1{
+    font-size:48px;
+    margin-bottom:14px;
+    color:#18c8ff;
+}
+.faq-hero p{
+    font-size:18px;
+    line-height:1.7;
+    color:#dbe7ff;
+}
+
+/* ---------- search ---------- */
+.faq-search{
+    max-width:620px;
+    margin:0 auto 22px;
+    position:relative;
+}
+.faq-search input{
+    width:100%;
+    padding:14px 18px 14px 48px;
+    border-radius:30px;
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    font-size:16px;
+    outline:none;
+}
+.faq-search input::placeholder{ color:#a9c1e8; }
+.faq-search input:focus{
+    border-color:#00c8ff;
+    box-shadow:0 0 0 3px rgba(0,200,255,.25);
+}
+.faq-search i{
+    position:absolute;
+    left:18px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#7fdcff;
+}
+
+/* ---------- category chips ---------- */
+.faq-tabs{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+    max-width:900px;
+    margin:0 auto 34px;
+}
+.faq-tab{
+    padding:9px 18px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.06);
+    color:#dbe7ff;
+    font-size:14px;
+    cursor:pointer;
+    transition:.2s;
+}
+.faq-tab:hover{ background:rgba(0,200,255,.18); }
+.faq-tab.active{
+    background:#00c8ff;
+    border-color:#00c8ff;
+    color:#04203f;
+    font-weight:700;
+}
+.faq-tab:focus-visible,
+.faq-item summary:focus-visible{
+    outline:3px solid #fff;
+    outline-offset:2px;
+}
+
+/* ---------- list ---------- */
+.faq-list{
+    max-width:860px;
+    margin:0 auto;
+}
+.faq-group{ margin-bottom:34px; }
+.faq-group h2{
+    font-size:22px;
+    color:#c9f1ff;
+    margin-bottom:14px;
+}
+
+.faq-item{
+    background:#12386f;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:14px;
+    margin-bottom:10px;
+    overflow:hidden;
+}
+.faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    padding:16px 20px;
+    font-size:16px;
+    font-weight:600;
+    color:#edf7ff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+}
+.faq-item summary::-webkit-details-marker{ display:none; }
+.faq-item summary::after{
+    content:"+";
+    flex:none;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:#00c8ff;
+    color:#04203f;
+    font-size:20px;
+    line-height:28px;
+    text-align:center;
+    transition:transform .2s;
+}
+.faq-item[open] summary::after{
+    content:"–";
+}
+.faq-item[open]{ border-color:rgba(0,200,255,.5); }
+.faq-answer{
+    padding:0 20px 18px;
+    color:#cce8ff;
+    font-size:15px;
+    line-height:1.75;
+}
+.faq-answer a{ color:#7fdcff; }
+
+.faq-empty{
+    display:none;
+    text-align:center;
+    color:#dbe7ff;
+    padding:30px 10px;
+}
+.faq-empty a{ color:#7fdcff; }
+
+/* ---------- still need help ---------- */
+.faq-help{
+    max-width:860px;
+    margin:44px auto 0;
+    background:linear-gradient(180deg,rgba(12,28,70,.96),rgba(3,19,50,.95));
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    padding:28px;
+    text-align:center;
+}
+.faq-help h2{ color:#c9f1ff; margin-bottom:8px; font-size:24px; }
+.faq-help p{ color:#cce8ff; margin-bottom:18px; }
+.faq-help-actions{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+}
+.faq-help-actions a{
+    padding:12px 22px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:700;
+    font-size:15px;
+    color:#04203f;
+    background:#00c8ff;
+}
+.faq-help-actions a.wa{ background:#25D366; color:#fff; }
+.faq-help-actions a:hover{ filter:brightness(1.1); }
+
+@media (max-width:768px){
+    .faq-page{ padding:100px 5% 50px; }
+    .faq-hero h1{ font-size:34px; }
+    .faq-hero p{ font-size:16px; }
+    .faq-item summary{ font-size:15px; padding:14px 16px; }
+    .faq-answer{ padding:0 16px 16px; }
+}
