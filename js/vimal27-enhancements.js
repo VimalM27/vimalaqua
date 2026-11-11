@@ -277,6 +277,162 @@
     });
   }
 
+  /* ------------------------------------------------------------
+     GOLDEN SPARK TRAIL for the V cursor
+     Desktop / mouse only. Skipped for touch and reduced-motion.
+     ------------------------------------------------------------ */
+  function addSparkTrail() {
+    if (document.getElementById('v27-spark-canvas')) return;
+    if (!window.matchMedia) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'v27-spark-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.style.cssText =
+      'position:fixed;top:0;left:0;width:100vw;height:100vh;' +
+      'pointer-events:none;z-index:2147483646;';
+    document.body.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let dpr = 1;
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(window.innerWidth * dpr);
+      canvas.height = Math.round(window.innerHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    // Golden palette taken from the V cursor image
+    const COLORS = [
+      [255, 236, 150],
+      [238, 203, 85],
+      [222, 178, 80],
+      [255, 170, 50]
+    ];
+    const MAX_PARTICLES = 220;
+    const particles = [];
+    let running = false;
+    let lastX = null;
+    let lastY = null;
+    let carry = 0;
+
+    function spawn(x, y, vx, vy, burst) {
+      if (particles.length >= MAX_PARTICLES) particles.shift();
+      const angle = Math.random() * Math.PI * 2;
+      const speed = (burst ? 1.5 + Math.random() * 3.2 : Math.random() * 1.2);
+      particles.push({
+        x: x + (Math.random() - 0.5) * 4,
+        y: y + (Math.random() - 0.5) * 4,
+        vx: vx * 0.12 + Math.cos(angle) * speed,
+        vy: vy * 0.12 + Math.sin(angle) * speed - 0.2,
+        life: 0,
+        max: (burst ? 38 : 24) + Math.random() * 20,
+        size: (burst ? 1.6 : 1.1) + Math.random() * 1.8,
+        color: COLORS[(Math.random() * COLORS.length) | 0],
+        star: Math.random() < 0.35
+      });
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      requestAnimationFrame(tick);
+    }
+
+    function drawStar(x, y, r) {
+      // small 4-point twinkle
+      ctx.beginPath();
+      ctx.moveTo(x, y - r * 2);
+      ctx.quadraticCurveTo(x, y, x + r * 2, y);
+      ctx.quadraticCurveTo(x, y, x, y + r * 2);
+      ctx.quadraticCurveTo(x, y, x - r * 2, y);
+      ctx.quadraticCurveTo(x, y, x, y - r * 2);
+      ctx.fill();
+    }
+
+    function tick() {
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      ctx.globalCompositeOperation = 'lighter';
+
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.life++;
+        if (p.life >= p.max) {
+          particles.splice(i, 1);
+          continue;
+        }
+        p.vx *= 0.96;
+        p.vy = p.vy * 0.96 + 0.045; // slight gravity, sparks drift down
+        p.x += p.vx;
+        p.y += p.vy;
+
+        const t = p.life / p.max;
+        const alpha = (1 - t) * (1 - t);
+        const size = p.size * (1 - t * 0.6);
+        const c = p.color;
+
+        ctx.fillStyle = 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + alpha.toFixed(3) + ')';
+        if (p.star) {
+          drawStar(p.x, p.y, size);
+        } else {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      ctx.globalCompositeOperation = 'source-over';
+
+      if (particles.length) {
+        requestAnimationFrame(tick);
+      } else {
+        running = false;
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      }
+    }
+
+    document.addEventListener('mousemove', function (event) {
+      const x = event.clientX;
+      const y = event.clientY;
+
+      if (lastX !== null) {
+        const dx = x - lastX;
+        const dy = y - lastY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        carry += dist;
+        // one spark roughly every 7px of travel, so fast moves leave more
+        while (carry >= 7) {
+          carry -= 7;
+          const k = Math.random();
+          spawn(lastX + dx * k, lastY + dy * k, dx, dy, false);
+        }
+        if (particles.length) start();
+      }
+
+      lastX = x;
+      lastY = y;
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', function () {
+      lastX = null;
+      lastY = null;
+    });
+
+    // small burst on click
+    document.addEventListener('mousedown', function (event) {
+      for (let i = 0; i < 14; i++) {
+        spawn(event.clientX, event.clientY, 0, 0, true);
+      }
+      start();
+    }, { passive: true });
+  }
+
   ready(function () {
     document.documentElement.dataset.vimal27Enhanced = 'true';
 
@@ -289,6 +445,7 @@
     syncCounts();
     addSearchEnhancement();
     fixMobileBodyLayout();
+    addSparkTrail();
 
     window.addEventListener('resize', fixMobileBodyLayout, { passive: true });
 
