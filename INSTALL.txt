@@ -1,12 +1,19 @@
-Copy these files into your Vimal-Aqua folder (same paths, replace when asked):
+STEP 1 - Database (do this first, once)
+  Supabase > SQL Editor > paste supabase-coupons.sql > Run.
+  (Run supabase-orders.sql first if you have not already; it is already in your project.)
+  This creates the coupon table, the discount columns on orders, and the 7 festive coupons.
 
-  offers.html                       NEW   - festive offers page
-  css/offers.css                    NEW   - offers styles
-  faq.html                          NEW   - FAQ page
-  css/faq.css                       NEW   - FAQ styles
-  js/navbar.js                      EDIT  - Offers link + Contact dropdown (Contact Us / FAQ)
-  css/vimal-dropdown-unified.css    EDIT  - Contact dropdown alignment
-  sitemap.xml                       EDIT  - adds faq.html and offers.html
+STEP 2 - Copy these files into your Vimal-Aqua folder (same paths, replace when asked)
+  NEW   offers.html, faq.html, css/offers.css, css/faq.css, supabase-coupons.sql
+  EDIT  js/order-checkout.js   coupon box + discounted total + UPI QR amount at checkout
+        js/my-orders.js        shows the coupon line on the customer's order
+        js/admin-orders.js     shows the coupon on the admin order ("amount to match" is the discounted total)
+        js/bill.js             coupon line on the bill, GST worked out on the discounted amount
+        cart.html              small "have a coupon?" hint
+        js/navbar.js           Offers link + Contact dropdown (Contact Us / FAQ)
+        css/vimal-dropdown-unified.css, sitemap.xml
 
-To change offers: open offers.html and edit the OFFERS list near the bottom
-(dates, discount text, coupon code, perks). Statuses update by date automatically.
+Changing or adding offers
+  1. Edit/add the coupon row in Supabase (table vp_coupons, or the insert list at the bottom of supabase-coupons.sql).
+  2. Edit the OFFERS list in offers.html so the page shows the same rules.
+  The database is what actually decides the discount; the page is only the display.

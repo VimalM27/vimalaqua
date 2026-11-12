@@ -161,6 +161,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     </div>
 </div>
 
+<div class="of-how">
+    <b>How to use a code:</b> copy it, add your items to the cart, then apply it on the checkout page. The discount comes off your total and the UPI amount updates automatically.
+</div>
+
 <div class="of-bar" role="group" aria-label="Filter offers">
     <button type="button" class="of-chip active" data-cat="all">All offers</button>
     <button type="button" class="of-chip" data-cat="pets">Pets</button>
@@ -201,7 +205,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </div>
 
 <div class="of-terms">
-    <strong>Terms:</strong> Coupon codes work only during the offer dates shown and cannot be combined unless stated.
+    <strong>Terms:</strong> Apply the code on the checkout page. Codes work only during the offer dates shown, only on the categories listed, and one code can be used per order.
     Offers apply to listed categories. Live animals are subject to availability and our
     <a href="pet-purchase-policy.html">Pet Purchase Policy</a>. See
     <a href="return-refund-policy.html">Return &amp; Refund Policy</a> and
@@ -221,34 +225,39 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
    ===================================================================== */
 var OFFERS = [
  {name:"Diwali Dhamaka", emoji:"🪔", start:"2026-11-01", end:"2026-11-11", c1:"#ff9933", c2:"#b3122d",
-  deal:"15% off up to ₹5,000", code:"DIWALI15",
-  perks:["Keep pets indoors and calm during crackers","Free pet-safe calming tips with every order","Extra gift on orders above ₹3,000"],
-  cats:["pets","aquarium","food","accessories","toys"], link:"index.html#best-sellers"},
+  deal:"15% off, up to ₹5,000", code:"DIWALI15", pct:15, max:5000, min:0, shop:["pets","aquarium","food","accessories","toys"], extra:"Keep pets indoors and calm during crackers",
+  cats:["pets","aquarium","food","accessories","toys"], link:"pets.html"},
  {name:"Christmas Joy", emoji:"🎄", start:"2026-12-15", end:"2026-12-26", c1:"#16a34a", c2:"#991b1b",
-  deal:"Flat 12% off + free gift wrap", code:"XMAS12",
-  perks:["Gift-ready toys and soft toys","Festive aquarium lights and decor","Free gift wrap on toys"],
+  deal:"12% off, up to ₹1,500", code:"XMAS12", pct:12, max:1500, min:0, on:"Toys, Accessories and Aquariums",
   cats:["toys","accessories","aquarium"], link:"toys.html"},
  {name:"New Year Bash", emoji:"🎉", start:"2026-12-28", end:"2027-01-03", c1:"#7c3aed", c2:"#0ea5e9",
-  deal:"Buy 2 accessories, get 1 free", code:"NEWYEAR3",
-  perks:["Start the year with a fresh tank setup","Free water conditioner on aquarium orders above ₹2,500","Lowest-priced item free on 3 accessories"],
-  cats:["accessories","aquarium","food"], link:"accessories.html"},
+  deal:"10% off, up to ₹1,000", code:"NEWYEAR10", pct:10, max:1000, min:999, on:"Accessories and Pet Foods",
+  cats:["accessories","food"], link:"accessories.html"},
  {name:"Pongal Special", emoji:"🌾", start:"2027-01-12", end:"2027-01-17", c1:"#f59e0b", c2:"#15803d",
-  deal:"Up to 20% off pet food", code:"PONGAL20",
-  perks:["Bulk pet food savings","Free delivery in Coimbatore above ₹1,500","Thanks for being part of our family"],
-  cats:["food","pets"], link:"foods.html"},
+  deal:"20% off pet food, up to ₹1,000", code:"PONGAL20", pct:20, max:1000, min:0, on:"Pet Foods",
+  cats:["food"], link:"foods.html"},
  {name:"Republic Day Sale", emoji:"🇮🇳", start:"2027-01-24", end:"2027-01-26", c1:"#f97316", c2:"#16a34a",
-  deal:"3-day sale: flat ₹300 off above ₹2,000", code:"REPUBLIC300",
-  perks:["Works on foods, accessories and toys","Limited to 3 days","One use per customer"],
+  deal:"Flat ₹300 off orders above ₹2,000", code:"REPUBLIC300", flat:300, min:2000, on:"Pet Foods, Accessories and Toys",
   cats:["food","accessories","toys"], link:"marketplace.html"},
  {name:"Holi Colours", emoji:"🎨", start:"2027-03-20", end:"2027-03-23", c1:"#ec4899", c2:"#f59e0b",
-  deal:"20% off art sets and creative toys", code:"HOLI20",
-  perks:["Colourful art and craft toys","Pet-safe care tips for Holi","Free sketchbook on orders above ₹1,500"],
-  cats:["toys"], link:"art-sets.html"},
+  deal:"20% off toys, up to ₹1,000", code:"HOLI20", pct:20, max:1000, min:0, on:"Toys",
+  cats:["toys"], link:"toys.html"},
  {name:"Tamil New Year", emoji:"🌸", start:"2027-04-12", end:"2027-04-16", c1:"#eab308", c2:"#059669",
-  deal:"Fresh start fish and aquarium deals", code:"PUTHANDU",
-  perks:["Discounts on tanks and filters","Free aquarium cycling guidance","Combo offers on fish plus food"],
-  cats:["aquarium","food"], link:"aquariums.html"}
+  deal:"10% off aquarium range, up to ₹2,000", code:"PUTHANDU", pct:10, max:2000, min:0, on:"Aquariums, Fish, Plants and Accessories",
+  cats:["aquarium","accessories"], link:"aquariums.html"}
 ];
+
+/* Perks are built from the coupon rules so the page never promises more than checkout gives.
+   Keep these numbers identical to the coupon rows in supabase-coupons.sql. */
+function money(n){ return "₹" + Number(n).toLocaleString("en-IN"); }
+OFFERS.forEach(function(o){
+    o.perks = [];
+    o.perks.push(o.flat ? "Flat " + money(o.flat) + " off at checkout" : o.pct + "% off at checkout" + (o.max ? ", up to " + money(o.max) : ""));
+    o.perks.push(o.on ? "Applies to " + o.on : "Applies to everything in the store");
+    if (o.min) o.perks.push("Minimum order " + money(o.min));
+    o.perks.push("One use per customer");
+    if (o.extra) o.perks.push(o.extra);
+});
 
 (function(){
     var now = new Date();
@@ -325,6 +334,7 @@ var OFFERS = [
     document.addEventListener("click", function(e){
         var b = e.target.closest(".of-copy"); if(!b) return;
         var code = b.getAttribute("data-code");
+        try { localStorage.setItem("vp_pending_coupon", code); } catch (x) {}
         function ok(){ var t=b.textContent; b.textContent="Copied"; b.classList.add("done"); setTimeout(function(){b.textContent=t; b.classList.remove("done")},1500); }
         if (navigator.clipboard) navigator.clipboard.writeText(code).then(ok, function(){});
         else { var i=document.createElement("input"); i.value=code; document.body.appendChild(i); i.select(); document.execCommand("copy"); i.remove(); ok(); }

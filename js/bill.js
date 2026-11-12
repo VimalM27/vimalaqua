@@ -37,7 +37,8 @@
 
   function sheet(o, its) {
     var st = stamp(o), sub = Number(o.subtotal) || its.reduce(function (n, i) { return n + Number(i.line_total); }, 0), ship = Number(o.shipping_fee) || 0;
-    var gstItems = r2(its.reduce(function (n, i) { return n + gstOn(i.line_total); }, 0)), gstShip = gstOn(ship), gstTotal = r2(gstItems + gstShip), total = r2(sub + ship + gstTotal);
+    var disc = Number(o.discount) || 0, ratio = sub > 0 ? Math.max(0, sub - disc) / sub : 1;
+    var gstItems = r2(its.reduce(function (n, i) { return n + gstOn(i.line_total); }, 0) * ratio), gstShip = gstOn(ship), gstTotal = r2(gstItems + gstShip), total = r2(sub - disc + ship + gstTotal);
     var pay = V.METHOD[o.payment_method] || o.payment_method;
     var h = '<div id="billSheet"><div class="vb-head"><img src="images/vimallogo.png" alt="' + V.esc(CFG.name) + '" crossorigin="anonymous"><div class="vb-title"><h1>BILL / INVOICE</h1><p>Bill no. ' + V.esc(o.order_no) + '</p><span class="vb-stamp vb-' + st[1] + '">' + st[0] + '</span></div></div>' +
       '<div class="vb-body">' +
@@ -47,7 +48,7 @@
       '<table class="vb-table"><thead><tr><th style="width:34px">#</th><th>Product</th><th class="n">Qty</th><th class="n">Rate</th><th class="n">Amount</th><th class="n">GST ' + GST + '%</th><th class="n">Total</th></tr></thead><tbody>' +
       its.map(function (i, k) { return '<tr><td>' + (k + 1) + '</td><td>' + V.esc(i.name) + (i.category ? '<small>' + V.esc(i.category) + (i.is_live ? ' · Live' : '') + '</small>' : '') + '</td><td class="n">' + i.qty + '</td><td class="n">' + V.money(i.unit_price) + '</td><td class="n">' + V.money(i.line_total) + '</td><td class="n">' + V.money(gstOn(i.line_total)) + '</td><td class="n">' + V.money(r2(Number(i.line_total) + gstOn(i.line_total))) + '</td></tr>'; }).join('') +
       '</tbody></table>' +
-      '<div class="vb-sum"><div class="vb-words"><b>Amount in words</b><br>' + V.esc(words(total)) + '</div><div class="vb-totals"><div><span>Subtotal</span><span>' + V.money(sub) + '</span></div>' + (ship ? '<div><span>Delivery</span><span>' + V.money(ship) + '</span></div>' : '') + '<div><span>GST (' + GST + '%)</span><span>' + V.money(gstTotal) + '</span></div><div class="grand"><span>Total</span><span>' + V.money(total) + '</span></div></div></div>' +
+      '<div class="vb-sum"><div class="vb-words"><b>Amount in words</b><br>' + V.esc(words(total)) + '</div><div class="vb-totals"><div><span>Subtotal</span><span>' + V.money(sub) + '</span></div>' + (disc ? '<div><span>Coupon ' + V.esc(o.coupon_code || '') + '</span><span>−' + V.money(disc) + '</span></div>' : '') + (ship ? '<div><span>Delivery</span><span>' + V.money(ship) + '</span></div>' : '') + '<div><span>GST (' + GST + '%)</span><span>' + V.money(gstTotal) + '</span></div><div class="grand"><span>Total</span><span>' + V.money(total) + '</span></div></div></div>' +
       (o.fulfilment === 'live_arrangement' ? '<div class="vb-note"><b>Live pets and fish:</b> pickup or delivery is arranged with you by our team after availability is confirmed.</div>' : '') +
       '<div class="vb-note">Returns and refunds follow our Return &amp; Refund Policy at ' + V.esc(CFG.website) + '. Please keep this bill for your reference. Contact us on ' + V.esc(CFG.phone) + ' for any help with order ' + V.esc(o.order_no) + '.</div></div>' +
       '<div class="vb-foot"><b>Thank you for shopping with ' + V.esc(CFG.name) + '!</b><br>This is a computer-generated bill and does not need a signature.</div></div>';

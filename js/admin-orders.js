@@ -107,7 +107,7 @@
     h += '<div class="vo-box"><h3>1. Payment verification (online payment only)</h3>' +
       '<div class="vo-alert ' + (o.payment_status === 'paid' ? 'ok' : verifying ? 'warn' : 'info') + '" style="margin-bottom:10px">' +
       (o.payment_status === 'paid' ? '<b>Verified and paid.</b>' : o.payment_status === 'pending' ? '<b>Needs verification.</b> The customer submitted a transaction ID.' : o.payment_status === 'unpaid' ? '<b>Waiting for the customer\'s transaction ID.</b>' : '<b>Payment status: ' + V.esc(o.payment_status.replace('_', ' ')) + '.</b>') + '</div>' +
-      '<dl class="vo-kv"><dt>Amount to match</dt><dd>' + V.money(o.total) + '</dd><dt>Method</dt><dd>' + V.esc(V.METHOD[o.payment_method] || o.payment_method) + '</dd>' +
+      '<dl class="vo-kv"><dt>Amount to match</dt><dd>' + V.money(o.total) + (Number(o.discount) > 0 ? ' <small>(after coupon ' + V.esc(o.coupon_code || '') + ', −' + V.money(o.discount) + ' from ' + V.money(o.subtotal) + ')</small>' : '') + '</dd><dt>Method</dt><dd>' + V.esc(V.METHOD[o.payment_method] || o.payment_method) + '</dd>' +
       '<dt>Customer\'s ID</dt><dd>' + (o.payment_reference ? V.esc(o.payment_reference) : 'Not submitted yet') + '</dd></dl>' +
       (dupe.length ? '<div class="vo-alert bad" style="margin-top:8px"><b>Warning:</b> this transaction ID is also on order ' + dupe.map(function (x) { return V.esc(x.order_no); }).join(', ') + '. Check for a reused ID before verifying.</div>' : '') +
       '<p class="vo-note">Open your bank or UPI app, find a credit for exactly ' + V.money(o.total) + ' with this ID, then verify. Never mark paid from the customer\'s word alone.</p>' +

@@ -22,7 +22,21 @@
     var L = lines();
     if (!L.length) { root.innerHTML = '<div class="vo-empty">Your cart is empty.<div class="vo-actions" style="justify-content:center;margin-top:12px"><a class="vo-btn" href="index.html">Continue shopping</a></div></div>'; return; }
     var bad = L.filter(function (l) { return l.problem; });
-    var total = L.reduce(function (n, l) { return n + (l.unit_price || 0) * l.qty; }, 0), live = L.some(function (l) { return l.is_live; });
+    var subtotal = L.reduce(function (n, l) { return n + (l.unit_price || 0) * l.qty; }, 0), live = L.some(function (l) { return l.is_live; });
+    var applied = null; /* { code, discount } once a coupon has been checked by the server */
+    function payable() { return Math.max(0, subtotal - (applied ? applied.discount : 0)); }
+    var total = subtotal;
+    function totalsHtml() {
+      if (!applied) return '<tr><td><b>Total</b></td><td class="r"><b>' + V.money(subtotal) + '</b></td></tr>';
+      return '<tr><td>Subtotal</td><td class="r">' + V.money(subtotal) + '</td></tr>' +
+        '<tr><td style="color:#4ade80">Coupon ' + V.esc(applied.code) + '</td><td class="r" style="color:#4ade80">−' + V.money(applied.discount) + '</td></tr>' +
+        '<tr><td><b>You pay</b></td><td class="r"><b>' + V.money(payable()) + '</b></td></tr>';
+    }
+    var couponBox = '<div class="vo-box" id="coCouponBox" style="margin-top:14px"><h3 style="margin-top:0">Have a coupon code?</h3>' +
+      '<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="coCoupon" maxlength="30" autocomplete="off" autocapitalize="characters" placeholder="e.g. DIWALI15" aria-label="Coupon code" style="flex:1;min-width:140px;text-transform:uppercase">' +
+      '<button type="button" class="vo-btn" id="coCouponBtn">Apply</button><button type="button" class="vo-btn alt" id="coCouponRm" style="display:none">Remove</button></div>' +
+      '<p id="coCouponMsg" class="vo-note" role="status" style="margin:8px 0 0"></p>' +
+      '<p class="vo-note" style="margin:6px 0 0">See live deals on the <a href="offers.html">Offers page</a>.</p></div>';
     var meta = user.user_metadata || {};
     var upiId = CFG.upiId || 'vimalfarms@upi', payee = CFG.payeeName || 'Vimal Pets & Toys';
     var upiUrl = 'upi://pay?pa=' + encodeURIComponent(upiId) + '&pn=' + encodeURIComponent(payee) + '&am=' + total.toFixed(2) + '&cu=INR&tn=' + encodeURIComponent('Vimal order');
@@ -37,16 +51,49 @@
       '<div class="vo-two"><div><label for="coCity">City</label><input id="coCity" name="city" maxlength="80" value="Coimbatore"></div><div><label for="coPin">Pincode</label><input id="coPin" name="pincode" maxlength="10" inputmode="numeric"></div></div>' +
       '<label for="coNote">Note for us (optional)</label><textarea id="coNote" name="note" maxlength="500"></textarea>' +
       '<h3 style="margin-top:16px">Online payment (UPI / bank transfer)</h3>' +
-      '<div class="vo-box" style="text-align:center"><p class="vo-note" style="margin:0 0 8px"><b>Online payment only.</b> Pay <b>' + V.money(total) + '</b> online, then enter the transaction ID below.</p>' +
-      '<img src="' + qr + '" alt="UPI QR code for ' + V.esc(V.money(total)) + '" width="200" height="200" style="max-width:100%;border-radius:10px;background:#fff;padding:6px">' +
+      '<div class="vo-box" style="text-align:center"><p class="vo-note" style="margin:0 0 8px"><b>Online payment only.</b> Pay <b id="coPayAmt">' + V.money(total) + '</b> online, then enter the transaction ID below.</p>' +
+      '<img id="coQr" src="' + qr + '" alt="UPI QR code for ' + V.esc(V.money(total)) + '" width="200" height="200" style="max-width:100%;border-radius:10px;background:#fff;padding:6px">' +
       '<p style="margin-top:8px">Scan with GPay, PhonePe, Paytm or any UPI app<br>or pay to UPI ID <b id="coUpi">' + V.esc(upiId) + '</b> <button type="button" class="vo-btn alt" id="coCopy" style="padding:3px 10px;font-size:12px">Copy</button></p>' +
-      '<a class="vo-btn alt" href="' + V.esc(upiUrl) + '" style="margin-top:6px;display:inline-block">Open UPI app</a></div>' +
+      '<a class="vo-btn alt" id="coUpiBtn" href="' + V.esc(upiUrl) + '" style="margin-top:6px;display:inline-block">Open UPI app</a></div>' +
       '<label for="coRef">UPI transaction ID / UTR (from your payment confirmation)</label><input id="coRef" name="reference" required minlength="8" maxlength="30" autocomplete="off" placeholder="e.g. 412345678901">' +
       '<p class="vo-note">Your order is placed as <b>payment under verification</b>. It is never marked paid automatically: our team checks the transaction ID against our bank / UPI records first, and only then confirms your order.</p>' +
       '<div class="vo-actions"><button class="vo-btn good" id="coBtn" type="submit"' + (bad.length ? ' disabled' : '') + '>I have paid. Place order</button><a class="vo-btn alt" href="cart.html">Back to cart</a></div></form>' +
-      '<div class="vo-box"><h3>Your order</h3><div class="vo-table-wrap"><table class="vo-table"><tbody>' + L.map(function (l) { return '<tr><td>' + V.esc(l.name) + (l.is_live ? ' <span class="vo-badge vo-blue">Live</span>' : '') + '<br><small>Qty ' + l.qty + ' × ' + (l.unit_price == null ? 'price on request' : V.money(l.unit_price)) + '</small></td><td class="r">' + (l.unit_price == null ? '' : V.money(l.unit_price * l.qty)) + '</td></tr>'; }).join('') + '<tr><td><b>Total</b></td><td class="r"><b>' + V.money(total) + '</b></td></tr></tbody></table></div></div></div>';
+      '<div class="vo-box"><h3>Your order</h3><div class="vo-table-wrap"><table class="vo-table"><tbody>' + L.map(function (l) { return '<tr><td>' + V.esc(l.name) + (l.is_live ? ' <span class="vo-badge vo-blue">Live</span>' : '') + '<br><small>Qty ' + l.qty + ' × ' + (l.unit_price == null ? 'price on request' : V.money(l.unit_price)) + '</small></td><td class="r">' + (l.unit_price == null ? '' : V.money(l.unit_price * l.qty)) + '</td></tr>'; }).join('') + '</tbody><tbody id="coTotals">' + totalsHtml() + '</tbody></table></div>' + couponBox + '</div></div>';
     root.innerHTML = h;
     document.getElementById('coCopy').addEventListener('click', function () { try { navigator.clipboard.writeText(upiId); V.toast('UPI ID copied'); } catch (e) { alert(upiId); } });
+    function itemsPayload() {
+      return L.filter(function (l) { return l.unit_price != null; }).map(function (l) { return { slug: l.slug, name: l.name, category: l.category, qty: l.qty, unit_price: l.unit_price, is_live: l.is_live, image: l.image }; });
+    }
+    function refreshTotals() {
+      var t = payable(), up = 'upi://pay?pa=' + encodeURIComponent(upiId) + '&pn=' + encodeURIComponent(payee) + '&am=' + t.toFixed(2) + '&cu=INR&tn=' + encodeURIComponent('Vimal order');
+      document.getElementById('coTotals').innerHTML = totalsHtml();
+      document.getElementById('coPayAmt').textContent = V.money(t);
+      var q = document.getElementById('coQr'); q.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(up); q.alt = 'UPI QR code for ' + V.money(t);
+      document.getElementById('coUpiBtn').href = up;
+    }
+    var cIn = document.getElementById('coCoupon'), cBtn = document.getElementById('coCouponBtn'), cRm = document.getElementById('coCouponRm'), cMsg = document.getElementById('coCouponMsg');
+    function cNote(text, good) { cMsg.textContent = text; cMsg.style.color = good ? '#4ade80' : '#fca5a5'; }
+    async function applyCoupon(code) {
+      code = String(code || '').trim().toUpperCase();
+      if (!code) { cNote('Enter a coupon code.', false); return; }
+      cBtn.disabled = true; cBtn.textContent = 'Checking…';
+      var r = await sb.rpc('vp_quote_coupon', { p_code: code, p_items: itemsPayload() });
+      cBtn.disabled = false; cBtn.textContent = 'Apply';
+      if (r.error || !r.data || !r.data.ok) {
+        applied = null; cIn.readOnly = false; cRm.style.display = 'none';
+        cNote(r.error ? V.msg(r.error) : r.data.message, false); refreshTotals(); return;
+      }
+      applied = { code: r.data.code, discount: Number(r.data.discount) };
+      cIn.value = applied.code; cIn.readOnly = true; cRm.style.display = '';
+      cNote(applied.code + ' applied. You save ' + V.money(applied.discount) + '.', true); refreshTotals();
+    }
+    cBtn.addEventListener('click', function () { applyCoupon(cIn.value); });
+    cIn.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); applyCoupon(cIn.value); } });
+    cRm.addEventListener('click', function () { applied = null; cIn.readOnly = false; cIn.value = ''; cRm.style.display = 'none'; cNote('Coupon removed.', true); refreshTotals(); });
+    /* a code copied from the Offers page is applied automatically */
+    var pending = ''; try { pending = localStorage.getItem('vp_pending_coupon') || ''; } catch (e) {}
+    if (pending && !bad.length) { cIn.value = pending; applyCoupon(pending); }
+
     document.getElementById('coForm').addEventListener('submit', async function (e) {
       e.preventDefault();
       var f = e.target, d = new FormData(f), btn = document.getElementById('coBtn');
@@ -55,10 +102,10 @@
       var ref = String(d.get('reference') || '').replace(/\s+/g, '').toUpperCase();
       if (!/^[A-Z0-9]{8,30}$/.test(ref)) { alert('Enter the UPI transaction ID / UTR from your payment (8 to 30 letters or numbers).'); return; }
       btn.disabled = true; btn.textContent = 'Placing order…';
-      var items = L.map(function (l) { return { slug: l.slug, name: l.name, category: l.category, qty: l.qty, unit_price: l.unit_price, is_live: l.is_live, image: l.image }; });
-      var r = await sb.rpc('vp_place_order', { p_customer: { name: d.get('name'), phone: d.get('phone'), email: d.get('email'), address: d.get('address'), city: d.get('city'), pincode: d.get('pincode'), note: d.get('note') }, p_items: items, p_payment_method: 'upi', p_reference: ref });
+      var items = itemsPayload();
+      var r = await sb.rpc('vp_place_order', { p_customer: { name: d.get('name'), phone: d.get('phone'), email: d.get('email'), address: d.get('address'), city: d.get('city'), pincode: d.get('pincode'), note: d.get('note') }, p_items: items, p_payment_method: 'upi', p_reference: ref, p_coupon: applied ? applied.code : null });
       if (r.error) { alert(V.msg(r.error)); btn.disabled = false; btn.textContent = 'I have paid. Place order'; return; }
-      localStorage.removeItem('cart'); localStorage.removeItem('currentOrder');
+      localStorage.removeItem('cart'); localStorage.removeItem('currentOrder'); try { localStorage.removeItem('vp_pending_coupon'); } catch (x) {}
       location.href = 'my-orders.html?new=' + encodeURIComponent(r.data.order_no);
     });
   }

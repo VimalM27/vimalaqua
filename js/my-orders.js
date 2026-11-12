@@ -83,7 +83,7 @@
     h += '</div><div>';
     h += '<div class="vo-box"><h3>Items</h3><div class="vo-table-wrap"><table class="vo-table"><thead><tr><th>Product</th><th class="r">Qty</th><th class="r">Price</th><th class="r">Total</th></tr></thead><tbody>' +
       its.map(function (i) { return '<tr><td>' + V.esc(i.name) + '</td><td class="r">' + i.qty + '</td><td class="r">' + V.money(i.unit_price) + '</td><td class="r">' + V.money(i.line_total) + '</td></tr>'; }).join('') +
-      '</tbody><tfoot><tr><td colspan="3" class="r"><b>Order total</b></td><td class="r"><b>' + V.money(o.total) + '</b></td></tr></tfoot></table></div></div>';
+      '</tbody><tfoot>' + (Number(o.discount) > 0 ? '<tr><td colspan="3" class="r">Subtotal</td><td class="r">' + V.money(o.subtotal) + '</td></tr><tr><td colspan="3" class="r">Coupon ' + V.esc(o.coupon_code || '') + '</td><td class="r">−' + V.money(o.discount) + '</td></tr>' : '') + '<tr><td colspan="3" class="r"><b>Order total</b></td><td class="r"><b>' + V.money(o.total) + '</b></td></tr></tfoot></table></div></div>';
     h += '<div class="vo-box"><h3>Payment</h3><dl class="vo-kv"><dt>Status</dt><dd>' + V.payBadge(o) + '</dd><dt>Method</dt><dd>' + V.esc(V.METHOD[o.payment_method] || o.payment_method) + '</dd>' +
       (o.payment_reference ? '<dt>Reference</dt><dd>' + V.esc(o.payment_reference) + '</dd>' : '') + (o.paid_at ? '<dt>Paid on</dt><dd>' + V.esc(V.date(o.paid_at)) + '</dd>' : '') + '</dl>' +
       payNote(o) + '</div>';
