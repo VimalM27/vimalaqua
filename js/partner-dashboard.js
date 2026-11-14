@@ -335,17 +335,21 @@ async function loadOrders() {
 }
 
 /* ---------- profile ---------- */
+let revealed = false;
 function renderProfile() {
   const p = profile, lock = `<span class="ptn-lock" title="Locked after submission">🔒</span>`;
+  const m = (v, n) => revealed ? (v || "—") : mask(v, n);
   const rows = [
     ["Business type", p.business_type], ["Shop name", p.shop_name], ["Owner", p.owner_name], ["Email", user.email],
     ["Phone", p.phone], ["Address", [p.shop_address || p.address, p.city, p.state, p.pincode].filter(Boolean).join(", ")],
-    ["PAN", mask(p.pan_number, 2)], ["Aadhaar", mask(p.aadhaar_number, 4)], ["GSTIN", p.gstin || "Not provided"],
-    ["Bank", p.bank_name], ["Account holder", p.account_holder], ["Account no.", mask(p.account_number, 4)], ["IFSC", p.ifsc]
+    ["PAN", m(p.pan_number, 2)], ["Aadhaar", m(p.aadhaar_number, 4)], ["GSTIN", p.gstin || "Not provided"],
+    ["Bank", p.bank_name], ["Account holder", p.account_holder], ["Account no.", m(p.account_number, 4)], ["IFSC", p.ifsc]
   ];
   $("lockedInfo").innerHTML = rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v || "—")} ${v ? lock : ""}</dd>`).join("");
   $("p_site").value = p.shop_website || ""; $("p_wa").value = p.whatsapp || ""; $("p_about").value = p.shop_description || "";
+  $("revealBtn").textContent = revealed ? "🙈 Hide full numbers" : "👁 Show full numbers";
 }
+$("revealBtn").addEventListener("click", () => { revealed = !revealed; renderProfile(); });
 $("profileForm").addEventListener("submit", async e => {
   e.preventDefault();
   const site = $("p_site").value.trim(), wa = $("p_wa").value.trim();

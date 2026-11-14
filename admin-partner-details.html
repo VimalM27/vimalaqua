@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Partner Details & Documents | Admin</title>
+<link rel="icon" type="image/png" href="/icon.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#07162e;--card:#0f2547;--line:rgba(255,255,255,.12);--txt:#e8f1fb;--mute:#9fb2c8;--acc:#22c1c3;--gold:#FFD700}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Arial,sans-serif}
+body{background:var(--bg);color:var(--txt);min-height:100vh}
+header{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:16px 24px;border-bottom:1px solid var(--line);background:#081b3c}
+header h1{font-size:18px;color:var(--gold)}
+header a{color:var(--acc);text-decoration:none;font-size:14px;margin-right:14px}
+.wrap{max-width:1280px;margin:0 auto;padding:22px;display:grid;grid-template-columns:340px minmax(0,1fr);gap:20px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+input,select,textarea{width:100%;padding:10px 12px;border-radius:9px;border:1px solid var(--line);background:#0a1c3a;color:#fff;font-size:14px}
+.list{display:flex;flex-direction:column;gap:8px;margin-top:12px;max-height:72vh;overflow:auto}
+.row{padding:11px 12px;border-radius:10px;border:1px solid var(--line);cursor:pointer;background:rgba(255,255,255,.03)}
+.row:hover{background:rgba(255,255,255,.08)}.row.on{border-color:var(--acc);background:rgba(34,193,195,.12)}
+.row b{display:block;font-size:14px}.row small{color:var(--mute);font-size:12px;overflow-wrap:anywhere}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid;margin-top:6px}
+.ok{color:#22c1c3;border-color:#22c1c3;background:rgba(34,193,195,.12)}.warn{color:#ffd36b;border-color:#ffd36b;background:rgba(255,211,107,.1)}
+.bad{color:#ff9b9b;border-color:#ff9b9b;background:rgba(255,80,80,.12)}.mute{color:#cfd8e3;border-color:rgba(255,255,255,.3)}
+h2{font-size:20px;margin-bottom:4px}h3{font-size:15px;color:var(--acc);margin:0 0 12px}
+.sec{margin-bottom:18px}
+dl{display:grid;grid-template-columns:170px minmax(0,1fr);gap:8px 14px;font-size:14px}
+dt{color:var(--mute)}dd{overflow-wrap:anywhere;font-family:inherit}dd.mono{font-family:ui-monospace,Menlo,monospace;letter-spacing:.3px}
+.docs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.doc{border:1px solid var(--line);border-radius:12px;padding:14px;background:rgba(255,255,255,.03)}
+.doc h4{font-size:14px;display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px}
+.doc p{font-size:12.5px;color:var(--mute);margin-bottom:8px;overflow-wrap:anywhere}
+.btn{padding:7px 13px;border-radius:8px;border:1px solid var(--acc);background:transparent;color:var(--acc);cursor:pointer;font-size:13px;font-weight:600;margin:0 6px 6px 0}
+.btn:hover{background:rgba(34,193,195,.14)}.btn.r{border-color:#ff9b9b;color:#ff9b9b}.btn.s{background:var(--acc);color:#06232f}
+.empty{padding:30px;text-align:center;color:var(--mute);border:1px dashed var(--line);border-radius:12px}
+.note{font-size:12px;color:#ffe3a1;background:rgba(255,211,107,.1);border:1px solid rgba(255,211,107,.35);border-radius:10px;padding:10px 12px;margin-bottom:14px}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}.docs{grid-template-columns:1fr}dl{grid-template-columns:1fr}.list{max-height:320px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🗂️ Partner Details &amp; Documents</h1>
+  <div><a href="admin-dashboard.html">← Dashboard</a><a href="admin-seller-applications.html">Seller Applications</a></div>
+</header>
+
+<div class="wrap">
+  <aside class="card">
+    <input id="q" type="search" placeholder="Search shop, owner, email, phone…">
+    <select id="st" style="margin-top:8px">
+      <option value="">All verification statuses</option><option>pending</option><option>under_review</option>
+      <option>approved</option><option>rejected</option><option>suspended</option>
+    </select>
+    <div class="list" id="list"><div class="empty">Loading…</div></div>
+  </aside>
+  <main class="card" id="detail"><div class="empty">Select a partner to see everything they submitted.</div></main>
+</div>
+
+<script src="js/supabaseClient.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const esc = v => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const DOCS = { id_proof: "ID Proof (PAN / Aadhaar)", bank_proof: "Bank Proof", gst_certificate: "GST Certificate", shop_license: "Shop / Trade Licence" };
+let profiles = [], apps = [], docs = [], selected = null, me = null;
+
+async function guard() {
+  const { data: { user } } = await supabaseClient.auth.getUser();
+  if (!user) { location.replace("login.html"); return false; }
+  const { data } = await supabaseClient.from("user_roles").select("role").eq("user_id", user.id).eq("role", "admin").maybeSingle();
+  if (!data) { document.body.innerHTML = '<p style="padding:40px;color:#ff9b9b">Admins only.</p>'; return false; }
+  me = user; return true;
+}
+async function load() {
+  const [p, a, d] = await Promise.all([
+    supabaseClient.from("profiles").select("*"),
+    supabaseClient.from("seller_applications").select("*"),
+    supabaseClient.from("seller_documents").select("*")
+  ]);
+  profiles = (p.data || []).filter(x => x.shop_name || x.owner_name);
+  apps = a.data || []; docs = d.data || [];
+  if (p.error) $("list").innerHTML = `<div class="empty">Could not load partners: ${esc(p.error.message)}</div>`;
+  else renderList();
+}
+const appFor = p => apps.find(a => a.user_id === p.id || a.seller_id === p.id || a.id === p.id) || {};
+const get = (p, ...keys) => { const a = appFor(p); for (const k of keys) { const v = p[k] ?? a[k]; if (v !== null && v !== undefined && v !== "") return v; } return ""; };
+const vstat = p => String(p.verification_status || appFor(p).status || "pending").toLowerCase();
+const cls = s => ["approved", "verified"].includes(s) ? "ok" : ["rejected", "suspended"].includes(s) ? "bad" : "warn";
+
+function renderList() {
+  const q = $("q").value.toLowerCase(), st = $("st").value;
+  const rows = profiles.filter(p => (`${p.shop_name} ${p.owner_name} ${get(p, "email")} ${p.phone}`).toLowerCase().includes(q) && (!st || vstat(p) === st))
+    .sort((a, b) => String(b.created_at || "").localeCompare(String(a.created_at || "")));
+  $("list").innerHTML = rows.length ? rows.map(p => `<div class="row ${selected === p.id ? "on" : ""}" data-id="${esc(p.id)}">
+      <b>${esc(p.shop_name || "(no shop name)")}</b><small>${esc(p.owner_name || "")} · ${esc(p.phone || "")}</small><br>
+      <span class="badge ${cls(vstat(p))}">${esc(vstat(p))}</span>
+      <span class="badge mute">${docs.filter(d => d.seller_id === p.id).length}/4 docs</span></div>`).join("") : `<div class="empty">No partners found.</div>`;
+}
+$("q").oninput = renderList; $("st").onchange = renderList;
+$("list").addEventListener("click", e => { const r = e.target.closest(".row"); if (r) openPartner(r.dataset.id); });
+
+function dl(rows) { return `<dl>${rows.map(([k, v, m]) => `<dt>${esc(k)}</dt><dd class="${m ? "mono" : ""}">${esc(v || "—")}</dd>`).join("")}</dl>`; }
+
+async function openPartner(id) {
+  selected = id; renderList();
+  const p = profiles.find(x => x.id === id); if (!p) return;
+  const mine = docs.filter(d => d.seller_id === id);
+  // files uploaded at signup that were never recorded in seller_documents
+  let extra = [];
+  try {
+    const { data: files } = await supabaseClient.storage.from("seller-kyc-docs").list(id);
+    extra = (files || []).filter(f => f.name && !mine.some(d => d.file_path === `${id}/${f.name}`));
+  } catch (e) {}
+  const addr = [get(p, "shop_address", "address"), get(p, "city"), get(p, "state"), get(p, "pincode")].filter(Boolean).join(", ");
+  $("detail").innerHTML = `
+    <h2>${esc(p.shop_name || "Partner")}</h2>
+    <span class="badge ${cls(vstat(p))}">${esc(vstat(p))}</span>
+    <span class="badge ${p.subscription_status === "active" ? "ok" : "mute"}">Subscription: ${esc(p.subscription_status || "inactive")}${p.plan_name ? " · " + esc(p.plan_name) : ""}</span>
+    <div class="note" style="margin-top:14px">🔒 Sensitive identity and bank details. Do not copy, screenshot or share outside verification.</div>
+    <div class="sec"><h3>Business</h3>${dl([
+      ["Business type", get(p, "business_type")], ["Shop / brand", p.shop_name], ["Owner / signatory", p.owner_name],
+      ["Email", get(p, "email", "full_email")], ["Phone", p.phone], ["Address", addr],
+      ["Website", p.shop_website], ["Registered on", p.created_at ? new Date(p.created_at).toLocaleString("en-IN") : ""]])}</div>
+    <div class="sec"><h3>Identity</h3>${dl([
+      ["PAN", get(p, "pan_number", "pan"), 1], ["Aadhaar", get(p, "aadhaar_number", "aadhaar"), 1], ["GSTIN", get(p, "gstin"), 1]])}</div>
+    <div class="sec"><h3>Payout bank account</h3>${dl([
+      ["Account holder", get(p, "account_holder")], ["Account number", get(p, "account_number"), 1],
+      ["IFSC", get(p, "ifsc"), 1], ["Bank", get(p, "bank_name")]])}</div>
+    <div class="sec"><h3>Documents</h3><div class="docs">
+      ${Object.entries(DOCS).map(([k, label]) => {
+        const d = mine.find(x => x.doc_type === k);
+        if (!d) return `<div class="doc"><h4>${esc(label)} <span class="badge mute">Not submitted</span></h4><p>Partner has not uploaded this yet.</p></div>`;
+        return `<div class="doc"><h4>${esc(label)} <span class="badge ${d.review_status === "approved" ? "ok" : d.review_status === "rejected" ? "bad" : "warn"}">${esc(d.review_status)}</span></h4>
+          <p>📎 ${esc(d.file_name || d.file_path)}<br>Submitted ${esc(new Date(d.uploaded_at).toLocaleString("en-IN"))}${d.admin_note ? `<br>Note: ${esc(d.admin_note)}` : ""}</p>
+          <button class="btn" data-view="${esc(d.file_path)}">👁 View file</button>
+          <button class="btn s" data-review="${esc(d.id)}|approved">Approve</button>
+          <button class="btn r" data-review="${esc(d.id)}|rejected">Reject</button>
+          <button class="btn r" data-unlock="${esc(d.id)}|${esc(d.file_path)}">Unlock for re-upload</button></div>`;
+      }).join("")}
+      ${extra.map(f => `<div class="doc"><h4>Signup file <span class="badge warn">Unrecorded</span></h4><p>📎 ${esc(f.name)}<br>Uploaded during signup. It will be recorded when the partner opens their dashboard.</p>
+        <button class="btn" data-view="${esc(id + "/" + f.name)}">👁 View file</button></div>`).join("")}
+    </div></div>`;
+}
+
+$("detail").addEventListener("click", async e => {
+  const v = e.target.closest("[data-view]"), r = e.target.closest("[data-review]"), u = e.target.closest("[data-unlock]");
+  if (v) {
+    const { data, error } = await supabaseClient.storage.from("seller-kyc-docs").createSignedUrl(v.dataset.view, 120);
+    if (error) return alert("Could not open file: " + error.message);
+    window.open(data.signedUrl, "_blank", "noopener");
+  }
+  if (r) {
+    const [id, status] = r.dataset.review.split("|");
+    const note = status === "rejected" ? prompt("Reason shown to the partner:", "") : null;
+    if (status === "rejected" && note === null) return;
+    const { error } = await supabaseClient.from("seller_documents").update({ review_status: status, admin_note: note || null }).eq("id", id);
+    if (error) return alert(error.message);
+    await load(); openPartner(selected);
+  }
+  if (u) {
+    if (!confirm("Delete this document so the partner can upload a new one?")) return;
+    const [id, path] = u.dataset.unlock.split("|");
+    await supabaseClient.storage.from("seller-kyc-docs").remove([path]);
+    const { error } = await supabaseClient.from("seller_documents").delete().eq("id", id);
+    if (error) return alert(error.message);
+    await load(); openPartner(selected);
+  }
+});
+
+(async () => { if (await guard()) await load(); })();
+</script>
+</body>
+</html>

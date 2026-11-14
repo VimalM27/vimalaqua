@@ -27,3 +27,8 @@ PAN, Aadhaar, GSTIN, bank details, verification + subscription status, all docum
 EDITABLE by partner: website link, WhatsApp number, shop description, product price/stock/description/link.
 To let a partner re-upload a wrong document, an admin deletes that row in the
 seller_documents table (and the file in Storage). Partners cannot do this themselves.
+
+ADMIN PAGE (new)
+   Copy admin-partner-details.html to the project root and add a link to it in your admin menu, e.g.
+   <a class="nav-link" href="admin-partner-details.html">🗂️ Partner Details</a>
+   Re-run supabase-partner-upgrade.sql (safe) so admins can read all profiles and emails.

@@ -150,3 +150,21 @@ end $$;
 drop trigger if exists vp_lock_product_visibility on public.products;
 create trigger vp_lock_product_visibility before update on public.products
   for each row execute function public.vp_lock_product_visibility();
+
+-- 8. Admin can read every partner profile (needed by admin-partner-details.html)
+drop policy if exists "profiles admin read" on public.profiles;
+create policy "profiles admin read" on public.profiles for select to authenticated
+  using (public.vp_is_admin());
+
+-- 9. Keep each partner's email on their profile so admins can see it (auth.users isn't readable from the browser)
+alter table public.profiles add column if not exists email text;
+update public.profiles p set email = u.email from auth.users u where u.id = p.id and p.email is null;
+create or replace function public.vp_set_profile_email() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if new.email is null then select email into new.email from auth.users where id = new.id; end if;
+  return new;
+end $$;
+drop trigger if exists vp_set_profile_email on public.profiles;
+create trigger vp_set_profile_email before insert on public.profiles
+  for each row execute function public.vp_set_profile_email();
