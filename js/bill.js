@@ -37,8 +37,7 @@
 
   function sheet(o, its) {
     var st = stamp(o), sub = Number(o.subtotal) || its.reduce(function (n, i) { return n + Number(i.line_total); }, 0), ship = Number(o.shipping_fee) || 0;
-    var disc = Number(o.discount) || 0, ratio = sub > 0 ? Math.max(0, sub - disc) / sub : 1;
-    var gstItems = r2(its.reduce(function (n, i) { return n + gstOn(i.line_total); }, 0) * ratio), gstShip = gstOn(ship), gstTotal = r2(gstItems + gstShip), total = r2(sub - disc + ship + gstTotal);
+    var gstItems = r2(its.reduce(function (n, i) { return n + gstOn(i.line_total); }, 0)), gstShip = gstOn(ship), gstTotal = r2(gstItems + gstShip), total = r2(sub + ship + gstTotal);
     var pay = V.METHOD[o.payment_method] || o.payment_method;
     var h = '<div id="billSheet"><div class="vb-head"><img src="images/vimallogo.png" alt="' + V.esc(CFG.name) + '" crossorigin="anonymous"><div class="vb-title"><h1>BILL / INVOICE</h1><p>Bill no. ' + V.esc(o.order_no) + '</p><span class="vb-stamp vb-' + st[1] + '">' + st[0] + '</span></div></div>' +
       '<div class="vb-body">' +
@@ -48,7 +47,7 @@
       '<table class="vb-table"><thead><tr><th style="width:34px">#</th><th>Product</th><th class="n">Qty</th><th class="n">Rate</th><th class="n">Amount</th><th class="n">GST ' + GST + '%</th><th class="n">Total</th></tr></thead><tbody>' +
       its.map(function (i, k) { return '<tr><td>' + (k + 1) + '</td><td>' + V.esc(i.name) + (i.category ? '<small>' + V.esc(i.category) + (i.is_live ? ' · Live' : '') + '</small>' : '') + '</td><td class="n">' + i.qty + '</td><td class="n">' + V.money(i.unit_price) + '</td><td class="n">' + V.money(i.line_total) + '</td><td class="n">' + V.money(gstOn(i.line_total)) + '</td><td class="n">' + V.money(r2(Number(i.line_total) + gstOn(i.line_total))) + '</td></tr>'; }).join('') +
       '</tbody></table>' +
-      '<div class="vb-sum"><div class="vb-words"><b>Amount in words</b><br>' + V.esc(words(total)) + '</div><div class="vb-totals"><div><span>Subtotal</span><span>' + V.money(sub) + '</span></div>' + (disc ? '<div><span>Coupon ' + V.esc(o.coupon_code || '') + '</span><span>−' + V.money(disc) + '</span></div>' : '') + (ship ? '<div><span>Delivery</span><span>' + V.money(ship) + '</span></div>' : '') + '<div><span>GST (' + GST + '%)</span><span>' + V.money(gstTotal) + '</span></div><div class="grand"><span>Total</span><span>' + V.money(total) + '</span></div></div></div>' +
+      '<div class="vb-sum"><div class="vb-words"><b>Amount in words</b><br>' + V.esc(words(total)) + '</div><div class="vb-totals"><div><span>Subtotal</span><span>' + V.money(sub) + '</span></div>' + (ship ? '<div><span>Delivery</span><span>' + V.money(ship) + '</span></div>' : '') + '<div><span>GST (' + GST + '%)</span><span>' + V.money(gstTotal) + '</span></div><div class="grand"><span>Total</span><span>' + V.money(total) + '</span></div></div></div>' +
       (o.fulfilment === 'live_arrangement' ? '<div class="vb-note"><b>Live pets and fish:</b> pickup or delivery is arranged with you by our team after availability is confirmed.</div>' : '') +
       '<div class="vb-note">Returns and refunds follow our Return &amp; Refund Policy at ' + V.esc(CFG.website) + '. Please keep this bill for your reference. Contact us on ' + V.esc(CFG.phone) + ' for any help with order ' + V.esc(o.order_no) + '.</div></div>' +
       '<div class="vb-foot"><b>Thank you for shopping with ' + V.esc(CFG.name) + '!</b><br>This is a computer-generated bill and does not need a signature.</div></div>';
@@ -71,18 +70,46 @@
     btn.disabled = false; btn.textContent = label;
   }
 
+  async function isAdmin() {
+    try {
+      var u = (await sb.auth.getUser()).data.user; if (!u) return false;
+      var r = await sb.from('user_roles').select('role').eq('user_id', u.id).eq('role', 'admin').maybeSingle();
+      return !!(r.data);
+    } catch (e) { return false; }
+  }
+
   async function init() {
-    var id = new URLSearchParams(location.search).get('id');
-    if (!id) { root.innerHTML = '<div class="vo-empty">No order selected. <a href="my-orders.html">Go to My Orders</a></div>'; return; }
-    var r = await Promise.all([sb.from('vp_orders').select('*').eq('id', id).maybeSingle(), sb.from('vp_order_items').select('*').eq('order_id', id)]);
-    var o = r[0].data;
-    if (r[0].error || !o) { root.innerHTML = '<div class="vo-empty">We could not find this order. <a href="my-orders.html">Go to My Orders</a></div>'; return; }
-    var its = r[1].data || [];
-    root.innerHTML = '<div class="vb-bar"><button class="vo-btn" id="vbDl">⬇ Download PDF</button><button class="vo-btn alt" id="vbPrint">Print</button><a class="vo-btn alt" href="my-orders.html">Back to My Orders</a></div><div class="vb-wrap">' + sheet(o, its) + '</div>';
+    var qs = new URLSearchParams(location.search), token = qs.get('t'), id = qs.get('id'), o, its;
+    if (token) {
+      /* opened from the SMS / WhatsApp link: no login needed, the long private token is the key */
+      var tr = await sb.rpc('vp_get_invoice', { p_token: token });
+      if (tr.error || !tr.data || !tr.data.order) { root.innerHTML = '<div class="vo-empty">This bill link is not valid. Please contact us on ' + V.esc(CFG.phone) + '.</div>'; return; }
+      o = tr.data.order; its = tr.data.items || [];
+    } else {
+      if (!id) { root.innerHTML = '<div class="vo-empty">No order selected. <a href="my-orders.html">Go to My Orders</a></div>'; return; }
+      var r = await Promise.all([sb.from('vp_orders').select('*').eq('id', id).maybeSingle(), sb.from('vp_order_items').select('*').eq('order_id', id)]);
+      o = r[0].data;
+      if (r[0].error || !o) { root.innerHTML = '<div class="vo-empty">We could not find this order. <a href="my-orders.html">Go to My Orders</a></div>'; return; }
+      its = r[1].data || [];
+    }
+    var admin = await isAdmin();
+    root.innerHTML = '<div class="vb-bar"><button class="vo-btn" id="vbDl">⬇ Download PDF</button><button class="vo-btn alt" id="vbPrint">Print</button>' +
+      (token ? '' : '<a class="vo-btn alt" href="my-orders.html">Back to My Orders</a>') +
+      (admin ? '<button class="vo-btn alt" id="vbSend">📲 Send to customer’s phone</button>' : '') +
+      '</div><div class="vb-wrap">' + sheet(o, its) + '</div>';
     document.title = 'Bill ' + o.order_no + ' | Vimal Pets & Toys';
     document.getElementById('vbDl').addEventListener('click', function () { download(o, this); });
     document.getElementById('vbPrint').addEventListener('click', function () { window.print(); });
-    if (new URLSearchParams(location.search).get('download') === '1') document.getElementById('vbDl').click();
+    var sendBtn = document.getElementById('vbSend');
+    if (sendBtn) sendBtn.addEventListener('click', async function () {
+      if (!confirm('Send the bill link to ' + o.phone + ' now?')) return;
+      sendBtn.disabled = true;
+      var res = await sb.functions.invoke('send-invoice', { body: { order_id: o.id, resend: true } });
+      sendBtn.disabled = false;
+      if (res.error || !res.data || !res.data.ok) alert('Could not send. Check the message log (vp_invoice_messages) and your WhatsApp / SMS settings.');
+      else V.toast('Bill sent by ' + res.data.channel);
+    });
+    if (qs.get('download') === '1') document.getElementById('vbDl').click();
   }
-  V.requireUser().then(init);
+  if (new URLSearchParams(location.search).get('t')) init(); else V.requireUser().then(init);
 })();

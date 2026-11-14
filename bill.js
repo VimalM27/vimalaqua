@@ -70,18 +70,46 @@
     btn.disabled = false; btn.textContent = label;
   }
 
+  async function isAdmin() {
+    try {
+      var u = (await sb.auth.getUser()).data.user; if (!u) return false;
+      var r = await sb.from('user_roles').select('role').eq('user_id', u.id).eq('role', 'admin').maybeSingle();
+      return !!(r.data);
+    } catch (e) { return false; }
+  }
+
   async function init() {
-    var id = new URLSearchParams(location.search).get('id');
-    if (!id) { root.innerHTML = '<div class="vo-empty">No order selected. <a href="my-orders.html">Go to My Orders</a></div>'; return; }
-    var r = await Promise.all([sb.from('vp_orders').select('*').eq('id', id).maybeSingle(), sb.from('vp_order_items').select('*').eq('order_id', id)]);
-    var o = r[0].data;
-    if (r[0].error || !o) { root.innerHTML = '<div class="vo-empty">We could not find this order. <a href="my-orders.html">Go to My Orders</a></div>'; return; }
-    var its = r[1].data || [];
-    root.innerHTML = '<div class="vb-bar"><button class="vo-btn" id="vbDl">⬇ Download PDF</button><button class="vo-btn alt" id="vbPrint">Print</button><a class="vo-btn alt" href="my-orders.html">Back to My Orders</a></div><div class="vb-wrap">' + sheet(o, its) + '</div>';
+    var qs = new URLSearchParams(location.search), token = qs.get('t'), id = qs.get('id'), o, its;
+    if (token) {
+      /* opened from the SMS / WhatsApp link: no login needed, the long private token is the key */
+      var tr = await sb.rpc('vp_get_invoice', { p_token: token });
+      if (tr.error || !tr.data || !tr.data.order) { root.innerHTML = '<div class="vo-empty">This bill link is not valid. Please contact us on ' + V.esc(CFG.phone) + '.</div>'; return; }
+      o = tr.data.order; its = tr.data.items || [];
+    } else {
+      if (!id) { root.innerHTML = '<div class="vo-empty">No order selected. <a href="my-orders.html">Go to My Orders</a></div>'; return; }
+      var r = await Promise.all([sb.from('vp_orders').select('*').eq('id', id).maybeSingle(), sb.from('vp_order_items').select('*').eq('order_id', id)]);
+      o = r[0].data;
+      if (r[0].error || !o) { root.innerHTML = '<div class="vo-empty">We could not find this order. <a href="my-orders.html">Go to My Orders</a></div>'; return; }
+      its = r[1].data || [];
+    }
+    var admin = await isAdmin();
+    root.innerHTML = '<div class="vb-bar"><button class="vo-btn" id="vbDl">⬇ Download PDF</button><button class="vo-btn alt" id="vbPrint">Print</button>' +
+      (token ? '' : '<a class="vo-btn alt" href="my-orders.html">Back to My Orders</a>') +
+      (admin ? '<button class="vo-btn alt" id="vbSend">📲 Send to customer’s phone</button>' : '') +
+      '</div><div class="vb-wrap">' + sheet(o, its) + '</div>';
     document.title = 'Bill ' + o.order_no + ' | Vimal Pets & Toys';
     document.getElementById('vbDl').addEventListener('click', function () { download(o, this); });
     document.getElementById('vbPrint').addEventListener('click', function () { window.print(); });
-    if (new URLSearchParams(location.search).get('download') === '1') document.getElementById('vbDl').click();
+    var sendBtn = document.getElementById('vbSend');
+    if (sendBtn) sendBtn.addEventListener('click', async function () {
+      if (!confirm('Send the bill link to ' + o.phone + ' now?')) return;
+      sendBtn.disabled = true;
+      var res = await sb.functions.invoke('send-invoice', { body: { order_id: o.id, resend: true } });
+      sendBtn.disabled = false;
+      if (res.error || !res.data || !res.data.ok) alert('Could not send. Check the message log (vp_invoice_messages) and your WhatsApp / SMS settings.');
+      else V.toast('Bill sent by ' + res.data.channel);
+    });
+    if (qs.get('download') === '1') document.getElementById('vbDl').click();
   }
-  V.requireUser().then(init);
+  if (new URLSearchParams(location.search).get('t')) init(); else V.requireUser().then(init);
 })();
