@@ -1,0 +1,95 @@
+/* Partner dashboard — all classes prefixed ptn- so nothing fights shop.css / style.css */
+body.ptn-page{display:block !important;padding:0 !important;align-items:initial !important;justify-content:initial !important}
+.ptn-wrap{width:min(1240px,calc(100% - 28px));margin:0 auto !important;padding:12px 0 60px;color:#e8f1fb;font-family:'Segoe UI',Arial,sans-serif}
+.ptn-wrap *{box-sizing:border-box}
+.ptn-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:22px}
+.ptn-head{display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px}
+.ptn-head h1{margin:0 0 6px;font-size:26px;color:#FFD700;line-height:1.2}
+.ptn-head p{margin:0 0 10px;color:#b9c8da;font-size:14px;overflow-wrap:anywhere}
+.ptn-badges{display:flex;gap:8px;flex-wrap:wrap}
+.ptn-badge{display:inline-block;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid}
+.ptn-badge.ok{background:rgba(34,193,195,.15);color:#22c1c3;border-color:#22c1c3}
+.ptn-badge.warn{background:rgba(255,193,7,.12);color:#ffd36b;border-color:#ffd36b}
+.ptn-badge.bad{background:rgba(255,80,80,.14);color:#ff9b9b;border-color:#ff9b9b}
+.ptn-badge.mute{background:rgba(255,255,255,.07);color:#cfd8e3;border-color:rgba(255,255,255,.25)}
+.ptn-actions{display:flex;gap:10px;flex-wrap:wrap}
+.ptn-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 18px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;border:1px solid #22c1c3;background:transparent;color:#22c1c3;font-family:inherit;line-height:1.2}
+.ptn-btn:hover{background:rgba(34,193,195,.12)}
+.ptn-btn.solid{background:#22c1c3;color:#06232f}.ptn-btn.solid:hover{background:#1da3a5}
+.ptn-btn.danger{border-color:#ff9b9b;color:#ff9b9b}.ptn-btn.danger:hover{background:rgba(255,80,80,.12)}
+.ptn-btn.sm{padding:6px 12px;font-size:13px}
+.ptn-btn:disabled{opacity:.55;cursor:not-allowed}
+.ptn-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:20px;align-items:start}
+.ptn-nav{position:sticky;top:150px;display:flex;flex-direction:column;gap:6px;padding:12px}
+.ptn-nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:11px 14px;border-radius:10px;border:0;background:transparent;color:#cfd8e3;font-size:14px;font-family:inherit;cursor:pointer}
+.ptn-nav button:hover{background:rgba(255,255,255,.07)}
+.ptn-nav button.on{background:rgba(34,193,195,.18);color:#22c1c3;font-weight:600}
+.ptn-nav .dot{margin-left:auto;width:8px;height:8px;border-radius:50%;background:#ffd36b}
+.ptn-main{min-width:0;padding:0 !important;margin:0 !important;width:auto !important;max-width:none !important}
+.ptn-sec{display:none}.ptn-sec.on{display:block}
+.ptn-sec>h2{margin:0 0 4px;font-size:20px;color:#fff}
+.ptn-sub{margin:0 0 18px;color:#9fb2c8;font-size:13.5px;line-height:1.5}
+.ptn-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.ptn-stat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px;text-align:center}
+.ptn-stat small{display:block;color:#9fb2c8;font-size:12.5px;margin-bottom:6px}
+.ptn-stat strong{font-size:28px;color:#fff;line-height:1}
+.ptn-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.ptn-card h3{margin:0 0 14px;font-size:16px;color:#22c1c3}
+.ptn-check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ptn-check li{display:flex;gap:10px;align-items:center;font-size:14px;color:#cfd8e3}
+.ptn-check .t{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;background:rgba(255,255,255,.1)}
+.ptn-check li.done .t{background:#22c1c3;color:#06232f}
+.ptn-check a{color:#22c1c3}
+.ptn-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.ptn-tools input,.ptn-tools select{flex:1 1 200px;min-height:42px}
+.ptn-in,.ptn-wrap input[type=text],.ptn-wrap input[type=url],.ptn-wrap input[type=number],.ptn-wrap input[type=tel],.ptn-wrap input[type=search],.ptn-wrap select,.ptn-wrap textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(8,27,60,.7);color:#fff;font-size:14px;font-family:inherit}
+.ptn-wrap textarea{resize:vertical}
+.ptn-wrap input:focus,.ptn-wrap select:focus,.ptn-wrap textarea:focus{outline:2px solid rgba(34,193,195,.55);border-color:#22c1c3}
+.ptn-field{margin-bottom:14px}
+.ptn-field label{display:block;margin-bottom:6px;font-size:13px;color:#cfd8e3}
+.ptn-field small{display:block;margin-top:4px;color:#8da2ba;font-size:12px}
+.ptn-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ptn-seg{display:flex;gap:6px;background:rgba(0,0,0,.25);padding:5px;border-radius:12px;margin-bottom:18px;flex-wrap:wrap}
+.ptn-seg button{flex:1 1 140px;padding:10px 12px;border:0;border-radius:9px;background:transparent;color:#cfd8e3;cursor:pointer;font-size:13.5px;font-family:inherit}
+.ptn-seg button.on{background:#22c1c3;color:#06232f;font-weight:700}
+.ptn-panel{display:none}.ptn-panel.on{display:block}
+.ptn-list{display:flex;flex-direction:column;gap:10px}
+.ptn-item{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.ptn-item img,.ptn-item .ph{width:64px;height:64px;border-radius:10px;object-fit:cover;background:#0b1f3a;display:grid;place-items:center;font-size:24px}
+.ptn-item .n{font-weight:600;overflow-wrap:anywhere;line-height:1.3}
+.ptn-item .m{font-size:13px;color:#9fb2c8;margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ptn-item .m b{color:#FFD700}
+.ptn-item .btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.ptn-empty{padding:26px;text-align:center;color:#9fb2c8;border:1px dashed rgba(255,255,255,.2);border-radius:12px;font-size:14px}
+.ptn-docs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ptn-doc{padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+.ptn-doc.locked{border-color:rgba(34,193,195,.55);background:rgba(34,193,195,.06)}
+.ptn-doc h4{margin:0 0 4px;font-size:15px;color:#fff;display:flex;gap:8px;align-items:center;justify-content:space-between}
+.ptn-doc p{margin:0 0 12px;color:#9fb2c8;font-size:12.5px}
+.ptn-doc .file{font-size:13px;color:#cfd8e3;margin-bottom:10px;overflow-wrap:anywhere}
+.ptn-note{padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.5;margin-bottom:16px;background:rgba(255,211,107,.1);border:1px solid rgba(255,211,107,.35);color:#ffe3a1}
+.ptn-kv{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 14px;font-size:14px;margin:0}
+.ptn-kv dt{color:#9fb2c8}.ptn-kv dd{margin:0;overflow-wrap:anywhere;display:flex;gap:6px;align-items:center}
+.ptn-lock{font-size:12px;opacity:.7}
+.ptn-msg{padding:12px 14px;border-radius:12px;margin-bottom:16px;font-size:14px}
+.ptn-msg.ok{background:rgba(34,193,195,.14);border:1px solid #22c1c3;color:#b8f3f4}
+.ptn-msg.err{background:rgba(255,80,80,.12);border:1px solid #ff9b9b;color:#ffc1c1}
+.ptn-dlg{border:1px solid rgba(255,255,255,.2);border-radius:16px;background:#0d2347;color:#fff;padding:22px;width:min(480px,92vw)}
+.ptn-dlg::backdrop{background:rgba(0,0,0,.6)}
+.ptn-dlg h3{margin:0 0 14px;color:#FFD700}
+.ptn-csvbox{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:rgba(0,0,0,.3);border-radius:10px;padding:10px;overflow-x:auto;white-space:pre;margin:8px 0 14px;color:#b8f3f4}
+@media(max-width:900px){
+  .ptn-layout{grid-template-columns:1fr}
+  .ptn-nav{position:static;flex-direction:row;overflow-x:auto;padding:8px;gap:4px}
+  .ptn-nav button{white-space:nowrap;width:auto;padding:9px 14px}
+  .ptn-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ptn-two,.ptn-docs,.ptn-row{grid-template-columns:1fr}
+  .ptn-wrap{padding-top:8px}
+}
+@media(max-width:560px){
+  .ptn-item{grid-template-columns:56px minmax(0,1fr)}
+  .ptn-item img,.ptn-item .ph{width:56px;height:56px}
+  .ptn-item .btns{grid-column:1/-1;justify-content:flex-start}
+  .ptn-kv{grid-template-columns:1fr}
+  .ptn-head h1{font-size:22px}
+}

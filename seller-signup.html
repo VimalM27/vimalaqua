@@ -642,7 +642,7 @@ const { data: authData, error: authError } =
         const { error: uploadError } = await supabaseClient
             .storage
             .from('seller-kyc-docs')
-            .upload(path, idProofFile, { upsert: true });
+            .upload(path, idProofFile, { upsert: false });
 
         if (uploadError) {
             // Account is already created at this point — surface the issue but
