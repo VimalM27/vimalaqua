@@ -1,19 +1,29 @@
-STEP 1 - Database (do this first, once)
-  Supabase > SQL Editor > paste supabase-coupons.sql > Run.
-  (Run supabase-orders.sql first if you have not already; it is already in your project.)
-  This creates the coupon table, the discount columns on orders, and the 7 festive coupons.
+VIMAL PARTNER UPGRADE - HOW TO INSTALL
+======================================
 
-STEP 2 - Copy these files into your Vimal-Aqua folder (same paths, replace when asked)
-  NEW   offers.html, faq.html, css/offers.css, css/faq.css, supabase-coupons.sql
-  EDIT  js/order-checkout.js   coupon box + discounted total + UPI QR amount at checkout
-        js/my-orders.js        shows the coupon line on the customer's order
-        js/admin-orders.js     shows the coupon on the admin order ("amount to match" is the discounted total)
-        js/bill.js             coupon line on the bill, GST worked out on the discounted amount
-        cart.html              small "have a coupon?" hint
-        js/navbar.js           Offers link + Contact dropdown (Contact Us / FAQ)
-        css/vimal-dropdown-unified.css, sitemap.xml
+1. SUPABASE (do this first)
+   Supabase > SQL Editor > paste all of supabase-partner-upgrade.sql > Run.
+   (supabase-orders.sql must already be run - it creates vp_is_admin().)
+   Then Storage > Policies: delete any OLD policy on the bucket "seller-kyc-docs"
+   that lets everyone read or update files. The bucket must show as Private.
 
-Changing or adding offers
-  1. Edit/add the coupon row in Supabase (table vp_coupons, or the insert list at the bottom of supabase-coupons.sql).
-  2. Edit the OFFERS list in offers.html so the page shows the same rules.
-  The database is what actually decides the discount; the page is only the display.
+2. COPY FILES into your Vimal-Aqua project (replace when asked)
+   css/partner-dashboard.css     NEW
+   js/partner-dashboard.js       NEW
+   seller-dashboard.html         REPLACES old file
+   marketplace.html              REPLACES old file
+   seller-signup.html            REPLACES old file (only change: upsert true -> false)
+
+3. Commit + push. Vercel deploys.
+
+4. Test with a partner account:
+   - Dashboard > My Documents: upload a file -> it shows "Locked", Upload button is gone.
+   - Dashboard > Add Products: try "Link from my website" and "Bulk upload (CSV)".
+   - Open marketplace.html: product shows "Buy on <shop> ↗" (website products)
+     or "Enquire on WhatsApp" (manual products).
+
+LOCKED after submission (partner cannot change): shop name, owner, phone, address,
+PAN, Aadhaar, GSTIN, bank details, verification + subscription status, all documents.
+EDITABLE by partner: website link, WhatsApp number, shop description, product price/stock/description/link.
+To let a partner re-upload a wrong document, an admin deletes that row in the
+seller_documents table (and the file in Storage). Partners cannot do this themselves.
