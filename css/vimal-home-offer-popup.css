@@ -15,7 +15,7 @@
 
 /* ---------- left: the big offer ---------- */
 .vop-hero{position:relative;flex:0 0 40%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:34px 16px;overflow:hidden;
-  background:radial-gradient(circle at 30% 20%,rgba(255,215,0,.28),transparent 55%),linear-gradient(160deg,#00b4d8 0%,#0b2a5b 85%)}
+  background:radial-gradient(circle at 30% 20%,rgba(255,215,0,.28),transparent 55%),linear-gradient(160deg,var(--c1,#00b4d8) 0%,var(--c2,#0b2a5b) 85%)}
 .vop-hero::before,.vop-hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
 .vop-hero::before{width:190px;height:190px;top:-60px;left:-70px}.vop-hero::after{width:150px;height:150px;bottom:-50px;right:-40px}
 .vop-ribbon{position:relative;z-index:1;background:#FFD700;color:#071a3d;font-weight:800;font-size:12px;letter-spacing:1.5px;padding:5px 16px;border-radius:999px;margin-bottom:14px}
@@ -44,7 +44,7 @@
 .vop-btn{flex:1 1 150px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:0;font-family:inherit;line-height:1.2}
 .vop-btn.main{background:linear-gradient(135deg,#00b4d8,#22c1c3);color:#04233a;box-shadow:0 10px 24px rgba(0,180,216,.35)}
 .vop-btn.main:hover{transform:translateY(-1px)}
-.vop-btn.wa{background:#25D366;color:#06301a}
+.vop-btn.alt{background:transparent;color:#FFD700;border:1.5px solid rgba(245,196,81,.7)}.vop-btn.alt:hover{background:rgba(255,215,0,.1)}
 .vop-terms{margin:12px 0 0;font-size:11.5px;color:#8da2ba;line-height:1.45}
 .vop-later{align-self:center;margin-top:10px;background:none;border:0;color:#9fb2c8;font-size:13px;text-decoration:underline;cursor:pointer;font-family:inherit}
 

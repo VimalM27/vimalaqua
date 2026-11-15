@@ -1,4 +1,4 @@
-/* ===== OFFERS menu item: opens the offer popup on the home page, otherwise goes to the home page ===== */
+/* ===== OFFERS menu item: link to offers.html (list of offers) ===== */
 (function () {
     if (!document.getElementById("vimalNavOffersStyle")) {
         var st = document.createElement("style");
@@ -9,15 +9,6 @@
             "@keyframes vimalOfferPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}";
         document.head.appendChild(st);
     }
-    window.openOffersPopup = function (e) {
-        if (typeof window.vimalOpenOffer === "function") {
-            if (e && e.preventDefault) e.preventDefault();
-            try { if (typeof closeMenu === "function") closeMenu(); } catch (err) {}
-            window.vimalOpenOffer();
-            return false;
-        }
-        return true;   /* not on a page with the popup: follow the link to index.html?offerPopup=1 */
-    };
 })();
 
 /* ===== VIMAL: load phone-fix stylesheet on every page (added) ===== */
@@ -263,7 +254,7 @@ function applyUnifiedNavbar() {
 
                 <li>
 
-                    <a href="index.html?offerPopup=1" class="nav-offers" onclick="return openOffersPopup(event)">
+                    <a href="offers.html" class="nav-offers">
                         🔥 Offers
                     </a>
 
@@ -646,7 +637,7 @@ function applyUnifiedNavbar() {
         🏠 <span>Home</span>
     </a>
 
-    <a href="index.html?offerPopup=1" class="mobile-main-link nav-offers" onclick="return openOffersPopup(event)">
+    <a href="offers.html" class="mobile-main-link nav-offers">
         🔥 <span>Offers</span>
     </a>
 
