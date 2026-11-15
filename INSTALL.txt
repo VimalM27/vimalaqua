@@ -1,34 +1,31 @@
-VIMAL PARTNER UPGRADE - HOW TO INSTALL
-======================================
+VIMAL HOME PAGE OFFER POPUP
+===========================
 
-1. SUPABASE (do this first)
-   Supabase > SQL Editor > paste all of supabase-partner-upgrade.sql > Run.
-   (supabase-orders.sql must already be run - it creates vp_is_admin().)
-   Then Storage > Policies: delete any OLD policy on the bucket "seller-kyc-docs"
-   that lets everyone read or update files. The bucket must show as Private.
+1. Copy into your project:
+     css/vimal-home-offer-popup.css
+     js/vimal-home-offer-popup.js
 
-2. COPY FILES into your Vimal-Aqua project (replace when asked)
-   css/partner-dashboard.css     NEW
-   js/partner-dashboard.js       NEW
-   seller-dashboard.html         REPLACES old file
-   marketplace.html              REPLACES old file
-   seller-signup.html            REPLACES old file (only change: upsert true -> false)
+2. In index.html ONLY, add these two lines:
 
-3. Commit + push. Vercel deploys.
+   In <head>, right after the app-popup stylesheet line:
+     <link rel="stylesheet" href="css/vimal-home-offer-popup.css?v=1">
 
-4. Test with a partner account:
-   - Dashboard > My Documents: upload a file -> it shows "Locked", Upload button is gone.
-   - Dashboard > Add Products: try "Link from my website" and "Bulk upload (CSV)".
-   - Open marketplace.html: product shows "Buy on <shop> ↗" (website products)
-     or "Enquire on WhatsApp" (manual products).
+   At the bottom, right after the app-popup script line:
+     <script src="js/vimal-home-offer-popup.js?v=1"></script>
 
-LOCKED after submission (partner cannot change): shop name, owner, phone, address,
-PAN, Aadhaar, GSTIN, bank details, verification + subscription status, all documents.
-EDITABLE by partner: website link, WhatsApp number, shop description, product price/stock/description/link.
-To let a partner re-upload a wrong document, an admin deletes that row in the
-seller_documents table (and the file in Storage). Partners cannot do this themselves.
+3. Open js/vimal-home-offer-popup.js and edit the block marked "EDIT HERE":
+   offer text, big number (20%), coupon code, start/end dates, buttons, WhatsApp number.
+   (The text in there is SAMPLE content. Replace it with your real offer.)
 
-ADMIN PAGE (new)
-   Copy admin-partner-details.html to the project root and add a link to it in your admin menu, e.g.
-   <a class="nav-link" href="admin-partner-details.html">🗂️ Partner Details</a>
-   Re-run supabase-partner-upgrade.sql (safe) so admins can read all profiles and emails.
+HOW IT BEHAVES
+ - Home page only. Order: welcome popup -> app popup -> offer popup. It waits until the
+   others are closed, so they never stack.
+ - Shows once every 24 hours per visitor (change FREQUENCY to "session" or "always").
+ - After the "end" date it stops showing by itself. The countdown follows the same date.
+ - Close with X, "No thanks", Escape, or tapping outside.
+ - Test any time, ignoring dates and the once-a-day rule:  yourwebsite/index.html?offerPopup=1
+ - To switch it off: set enabled: false.
+
+NOTE: your site has no coupon/discount system at checkout yet. The code is shown for the
+customer to quote on WhatsApp, by phone or in the store. Tell me if you want the code to
+apply automatically in the cart.
