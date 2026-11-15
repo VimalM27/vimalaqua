@@ -28,18 +28,15 @@
         laterText: "No thanks",
         showTimer: true                         // countdown to "end"
     };
-    var FREQUENCY  = "day";   // "session" = once per visit, "day" = once every 24 h, "always" = every page load
-    var DELAY_MS   = 1000;    // wait after the other popups are closed
+    var FREQUENCY  = "always"; // "always" = every home-page load (same as your app popup), "session" = once per visit, "day" = once every 24 h
+    var SHOW_FIRST = true;    // true = appears up front right after the page loads, IN FRONT of the welcome / app popups
+                              // false = waits until the welcome and app popups are closed
+    var DELAY_MS   = 700;     // delay after the page loads (milliseconds)
     /* ========================================================================================= */
 
     var params = new URLSearchParams(location.search), force = params.get("offerPopup") === "1";
-    var path = location.pathname.replace(/\/+$/, "");
-    var isHome = path === "" || /\/index(\.html)?$/i.test(path);
-    if (!isHome && !force) return;
-    if (!OFFER.enabled && !force) return;
-
+    function why(msg) { try { console.info("[Vimal offer popup] not shown: " + msg); } catch (e) {} }
     var now = Date.now(), t0 = OFFER.start ? Date.parse(OFFER.start) : NaN, t1 = OFFER.end ? Date.parse(OFFER.end) : NaN;
-    if (!force && ((!isNaN(t0) && now < t0) || (!isNaN(t1) && now > t1))) return;
 
     var KEY = "vopSeen:" + (OFFER.code || OFFER.big) + ":" + (OFFER.end || "");
     function store(kind) { try { return window[kind]; } catch (e) { return null; } }
@@ -49,11 +46,11 @@
         var v = s.getItem(KEY); if (!v) return false;
         return FREQUENCY === "session" ? true : (now - Number(v) < 24 * 3600 * 1000);
     }
+    var manual = false;
     function remember() {
-        if (FREQUENCY === "always") return;
+        if (force || manual || FREQUENCY === "always") return;
         var s = store(FREQUENCY === "session" ? "sessionStorage" : "localStorage"); try { s && s.setItem(KEY, String(Date.now())); } catch (e) {}
     }
-    if (seen()) return;
 
     function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
     function two(n) { return n < 10 ? "0" + n : "" + n; }
@@ -82,12 +79,11 @@
                 '<button type="button" class="vop-later">' + OFFER.laterText + '</button>' +
               '</div></div>';
         document.body.appendChild(o);
-        var prev = document.body.style.overflow; document.body.style.overflow = "hidden";
         var timer = null;
 
         function close() {
             remember(); clearInterval(timer);
-            o.classList.remove("vop-show"); document.body.style.overflow = prev;
+            o.classList.remove("vop-show");
             document.removeEventListener("keydown", onKey);
             setTimeout(function () { if (o.parentNode) o.parentNode.removeChild(o); }, 400);
         }
@@ -119,19 +115,33 @@
         o.querySelector(".vop-btn.main").focus({ preventScroll: true });
     }
 
-    /* Never stack with the welcome popup (#offerPopup) or the app popup (#vhpOverlay):
-       show ours only after both have been closed for ~1.5 seconds. */
+    /* Menu item "Offers" calls this: opens the popup right now, on any page that has this script. */
+    window.vimalOpenOffer = function () {
+        var old = document.getElementById("vopOverlay"); if (old) return;
+        manual = true; build();
+    };
+
+    /* ---------- automatic show: home page only ---------- */
+    var path = location.pathname.replace(/\/+$/, "");
+    var isHome = path === "" || /\/index(\.html)?$/i.test(path);
+    if (!isHome && !force) { why("this is not the home page (" + location.pathname + ")"); return; }
+    if (!OFFER.enabled && !force) { why("enabled is false"); return; }
+    if (!force && !isNaN(t0) && now < t0) { why("offer has not started yet (start date " + OFFER.start + ")"); return; }
+    if (!force && !isNaN(t1) && now > t1) { why("offer has ended (end date " + OFFER.end + "). Change the end date."); return; }
+    if (seen()) { why("already shown (" + FREQUENCY + "). Open ?offerPopup=1 to preview, or set FREQUENCY to \"always\"."); return; }
+
     function blocked() {
         var w = document.getElementById("offerPopup");
         var welcomeOpen = w && getComputedStyle(w).display !== "none" && getComputedStyle(w).visibility !== "hidden";
         return welcomeOpen || !!document.getElementById("vhpOverlay");
     }
     function start() {
+        if (SHOW_FIRST) { setTimeout(build, DELAY_MS); return; }
         var quiet = 0, waited = 0;
         var iv = setInterval(function () {
             waited += 500;
             quiet = blocked() ? 0 : quiet + 500;
-            if (quiet >= 1500 + DELAY_MS - 1000 || waited > 90000) { clearInterval(iv); if (!blocked()) build(); }
+            if (quiet >= 1500 || waited > 90000) { clearInterval(iv); if (!blocked()) build(); }
         }, 500);
     }
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();

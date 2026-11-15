@@ -1,0 +1,34 @@
+VIMAL OFFER POPUP + "OFFERS" MENU ITEM
+======================================
+
+FILES (copy / replace in your project)
+  css/vimal-home-offer-popup.css     NEW
+  js/vimal-home-offer-popup.js       NEW
+  js/navbar.js                       REPLACE (this one already includes the Contact > Careers dropdown too)
+
+index.html  (ONLY this page) - add these two lines:
+  in <head>, after the app-popup stylesheet:
+     <link rel="stylesheet" href="css/vimal-home-offer-popup.css?v=2">
+  at the bottom, after the app-popup script:
+     <script src="js/vimal-home-offer-popup.js?v=2"></script>
+
+CACHE: your pages load navbar.js?v=32 (or 33 if you already changed it). Change it to v=34 in every page,
+otherwise browsers keep the old menu. In a terminal inside the project:
+     sed -i -E 's/navbar\.js\?v=[0-9]+/navbar.js?v=34/g' *.html
+
+WHAT YOU GET
+  * Menu: "🔥 Offers" (gold, with a NEW tag) right after Home, on desktop and mobile.
+      - On the home page it opens the offer popup straight away.
+      - On any other page it takes the visitor to the home page, where the popup opens.
+  * Popup: appears up front about 0.7 seconds after the home page loads, IN FRONT of the welcome and
+    app popups. Set SHOW_FIRST to false in the JS if you prefer it to wait until those are closed.
+  * Shows on every home-page load. Change FREQUENCY to "session" (once per visit) or "day" (once per 24 h).
+  * Edit the offer text, code, dates, buttons and WhatsApp number in the "EDIT HERE" block at the top of
+    js/vimal-home-offer-popup.js. The text there is SAMPLE content.
+  * After the "end" date the popup stops by itself (the menu item stays, so update or remove it when a sale ends).
+  * Preview any time: yourwebsite/index.html?offerPopup=1
+
+IF YOU STILL DON'T SEE IT
+  1. Both index.html lines above must be present and the two files uploaded to css/ and js/.
+  2. Hard refresh (Ctrl+F5).
+  3. F12 > Console: a line starting "[Vimal offer popup] not shown:" gives the exact reason.

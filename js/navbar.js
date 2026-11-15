@@ -1,3 +1,25 @@
+/* ===== OFFERS menu item: opens the offer popup on the home page, otherwise goes to the home page ===== */
+(function () {
+    if (!document.getElementById("vimalNavOffersStyle")) {
+        var st = document.createElement("style");
+        st.id = "vimalNavOffersStyle";
+        st.textContent =
+            "nav.navbar .vimal-navigation .nav-links li > a.nav-offers, a.nav-offers{color:#FFD700 !important;font-weight:700 !important}" +
+            "a.nav-offers::after{content:'NEW';display:inline-block;vertical-align:middle;margin-left:7px;background:#e63946;color:#fff;font-size:9px;font-weight:800;letter-spacing:.5px;padding:2px 6px;border-radius:6px;line-height:1.2;animation:vimalOfferPulse 1.6s ease-in-out infinite}" +
+            "@keyframes vimalOfferPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}";
+        document.head.appendChild(st);
+    }
+    window.openOffersPopup = function (e) {
+        if (typeof window.vimalOpenOffer === "function") {
+            if (e && e.preventDefault) e.preventDefault();
+            try { if (typeof closeMenu === "function") closeMenu(); } catch (err) {}
+            window.vimalOpenOffer();
+            return false;
+        }
+        return true;   /* not on a page with the popup: follow the link to index.html?offerPopup=1 */
+    };
+})();
+
 /* ===== VIMAL: load phone-fix stylesheet on every page (added) ===== */
 (function () {
     if (document.getElementById("vimalMobileFixCss")) return;
@@ -232,6 +254,17 @@ function applyUnifiedNavbar() {
 
                     <a href="index.html">
                         Home
+                    </a>
+
+                </li>
+
+
+                <!-- OFFERS (opens the offer popup; goes to the home page if not already there) -->
+
+                <li>
+
+                    <a href="index.html?offerPopup=1" class="nav-offers" onclick="return openOffersPopup(event)">
+                        🔥 Offers
                     </a>
 
                 </li>
@@ -611,6 +644,10 @@ function applyUnifiedNavbar() {
     <!-- HOME -->
     <a href="index.html" class="mobile-main-link">
         🏠 <span>Home</span>
+    </a>
+
+    <a href="index.html?offerPopup=1" class="mobile-main-link nav-offers" onclick="return openOffersPopup(event)">
+        🔥 <span>Offers</span>
     </a>
 
 
