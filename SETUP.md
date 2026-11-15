@@ -1,52 +1,20 @@
-# Auto-send the bill link to the customer's phone
+# Careers: setup (5 minutes)
 
-**What happens:** customer places an order → within seconds their phone gets a WhatsApp message (or normal SMS if WhatsApp isn't set up / fails) with a link. Tapping it opens their bill; **Download PDF** is one tap. No login needed. When you mark the payment *Paid*, they get a second message and the same link now shows **PAID**.
+**What visitors get:** Contact ▼ → **Careers**. They see open roles, tap *View & apply*, fill a short form, upload a resume (PDF/DOC/DOCX, 5 MB) and receive a **tracking code**. Under *Track my application* they enter the code + mobile number to see their status (Applied → Under review → Shortlisted → Interview → Interviewed → Offer → Hired / Not selected) and, once you schedule it, the **interview date, time, mode and address or link**.
 
-A browser page cannot send messages safely, so this uses a small server function (Supabase Edge Function) plus a WhatsApp or SMS provider. I could not test against real providers from here, so do the test in step 6.
+**What you get (admin-careers.html):** post / edit / close roles, see all applications, open the resume, set status, schedule the interview, write a message the applicant can see, keep private notes, and tap **WhatsApp applicant** to message them with the interview details pre-filled.
 
-## 1. Choose how to send (you can set up one or both)
+## Steps
+1. Supabase → SQL Editor → run `supabase-careers.sql` (safe to re-run). It adds one sample role; delete it in the admin page if you don't want it.
+2. Copy into your project: `careers.html`, `admin-careers.html`, `css/careers.css`, `js/careers.js`, and **replace** `js/navbar.js` (adds Contact ▼ → Contact Us / Careers on desktop and mobile).
+3. Add a link to `admin-careers.html` in your admin menu.
+4. Pages load `js/navbar.js?v=32`. To make browsers fetch the new menu straight away, change `v=32` to `v=33` in your pages. In a terminal inside the project:
+   `sed -i 's/navbar\.js?v=32/navbar.js?v=33/g' *.html`
+5. Push. Test: apply with a test number, then in admin set it to *Interview scheduled* and check the Track box.
 
-**WhatsApp (recommended, cheapest per message).** WhatsApp Cloud API from Meta (developers.facebook.com → your app → WhatsApp). You need a business number, a permanent access token and the *Phone number ID*. Create a **Utility** message template named e.g. `vimal_invoice`, language English, body:
-
-```
-Hi {{1}}, thank you for your order {{2}} at Vimal Pets & Toys. Download your bill here: {{3}}
-```
-Meta must approve the template (usually minutes to a day). Business-initiated messages can only be sent with an approved template.
-
-**Normal SMS (India).** Use MSG91 (or similar). TRAI rules require DLT registration of your sender ID and message template. Template text (variables must be named `name`, `order`, `link`):
-```
-Hi ##name##, thank you for your order ##order## at Vimal Pets & Toys. Download your bill: ##link##
-```
-Create a *Flow* in MSG91 with this template and note its Template ID and your Auth Key. Check MSG91's current docs if their API fields changed.
-
-## 2. Database
-Supabase → SQL Editor → run `supabase-invoice-link.sql` (safe to re-run).
-
-## 3. Deploy the function (Supabase CLI)
-Copy the `supabase/functions/send-invoice` folder into your project, then:
-```
-supabase functions deploy send-invoice --no-verify-jwt
-supabase secrets set WEBHOOK_SECRET="<long random text>" SITE_URL="https://www.vimal27.in" \
-  WA_TOKEN="<meta token>" WA_PHONE_ID="<phone number id>" WA_TEMPLATE="vimal_invoice" \
-  MSG91_AUTHKEY="<authkey>" MSG91_TEMPLATE_ID="<template id>"
-```
-Leave out the WA_* lines to use SMS only, or the MSG91_* lines to use WhatsApp only.
-`--no-verify-jwt` is needed because the database trigger has no login; the function instead checks `WEBHOOK_SECRET` (or that the caller is an admin).
-
-## 4. Connect the trigger
-Back in the SQL Editor, run the last block of the SQL file (the `insert into vp_private_settings…`), using the **same** secret as `WEBHOOK_SECRET`.
-
-## 5. Website files
-Replace `js/bill.js` (and the duplicate `bill.js` in the project root, if you keep it). `bill.html` needs no change.
-
-## 6. Test
-Place a test order with your own phone number. Check:
-- message arrives; link opens the bill without logging in; Download PDF works.
-- if nothing arrives: `select * from vp_invoice_messages order by created_at desc;` shows what each provider answered.
-Admins also get a **📲 Send to customer's phone** button on any bill (login required) to resend.
-
-## Good to know
-- The link contains a 64-character random key. Anyone who has the link can see that bill (name, address, items), so it is only sent to the order's phone. To disable a link: `update vp_orders set invoice_token = replace(gen_random_uuid()::text||gen_random_uuid()::text,'-','') where order_no='VM27xxx';`
-- Each automatic message is sent once per order per event. Providers charge per message.
-- To stop the second "paid" message: `drop trigger vp_notify_invoice_paid on public.vp_orders;`
-- The message has no amount on purpose; the bill is the source of truth.
+## Privacy and safety
+- Resumes are in a **private** bucket. Visitors can upload but never read, replace or delete files; only admins can open them (60–120 second links).
+- Applications can't be read by the public. Tracking needs both the code and the phone number used.
+- A hidden field blocks simple bots; one application per role per phone number; max 3 per phone per day.
+- Applicant data (name, phone, email, resume) is personal data. Delete applications you no longer need (Delete button also removes the resume file).
+- Applicants are not notified automatically. Use the WhatsApp button, or ask me to wire it into the same WhatsApp/SMS sender used for bills.

@@ -517,17 +517,6 @@ function applyUnifiedNavbar() {
                 </li>
 
 
-                <!-- OFFERS -->
-
-                <li>
-
-                    <a href="offers.html">
-                        🎁 Offers
-                    </a>
-
-                </li>
-
-
                 <!-- ABOUT -->
 
                 <li>
@@ -539,27 +528,26 @@ function applyUnifiedNavbar() {
                 </li>
 
 
-                <!-- CONTACT (dropdown: Contact Us + FAQ) -->
+                <!-- CONTACT -->
 
                 <li class="dropdown">
 
                     <a
-                        href="contact.html"
+                        href="#"
                         onclick="toggleDropdown(event,this)">
 
                         Contact ▼
 
                     </a>
 
-
-                    <div class="dropdown-content dropdown-content-right">
+                    <div class="dropdown-content">
 
                         <a href="contact.html">
                             📞 Contact Us
                         </a>
 
-                        <a href="faq.html">
-                            ❓ FAQ
+                        <a href="careers.html">
+                            💼 Careers
                         </a>
 
                     </div>
@@ -784,18 +772,13 @@ function applyUnifiedNavbar() {
     </div>
 
 
-    <!-- OFFERS -->
-    <a href="offers.html" class="mobile-main-link">
-        🎁 <span>Offers</span>
-    </a>
-
     <!-- ABOUT -->
     <a href="about.html" class="mobile-main-link">
         ℹ️ <span>About</span>
     </a>
 
 
-    <!-- CONTACT (dropdown: Contact Us + FAQ) -->
+        <!-- CONTACT -->
     <div class="mobile-dropdown">
 
         <button
@@ -812,8 +795,8 @@ function applyUnifiedNavbar() {
                 📞 Contact Us
             </a>
 
-            <a href="faq.html">
-                ❓ FAQ
+            <a href="careers.html">
+                💼 Careers
             </a>
 
         </div>
@@ -1009,29 +992,14 @@ function searchWebsite(event) {
 
 
     if (
-        search.includes("offer") ||
-        search.includes("deal") ||
-        search.includes("discount") ||
-        search.includes("coupon") ||
-        search.includes("diwali") ||
-        search.includes("festival")
+        search.includes("career") ||
+        search.includes("job") ||
+        search.includes("hiring") ||
+        search.includes("vacancy")
     ) {
 
         window.location.href =
-            "offers.html";
-
-        return;
-    }
-
-
-    if (
-        search.includes("faq") ||
-        search.includes("question") ||
-        search.includes("help")
-    ) {
-
-        window.location.href =
-            "faq.html";
+            "careers.html";
 
         return;
     }
