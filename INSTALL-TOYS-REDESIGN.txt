@@ -1,0 +1,25 @@
+VIMAL27 TOYS PAGE REDESIGN — INSTALL
+====================================
+Copy these into your project (same folders), replacing toys.html:
+
+  toys.html                  (REPLACES existing toys.html — back it up first)
+  css/toys-redesign.css      (new)
+  js/toys-redesign.js        (new)
+
+Nothing else changes. Navbar + footer markup in toys.html is copied unchanged from your old file,
+so js/navbar.js still builds the same navbar. Other pages are untouched.
+(css/toys-colorful.css and js/toys-filter.js are no longer used by toys.html; leave or delete.)
+
+DATA
+- Popular Picks / New Arrivals use ONLY real data:
+  * js/products-data.js products where category = "Toys"  (currently your 6 pet toys)
+  * Supabase `products` table (same query as marketplace.html), filtered to toy-like names/categories
+- No sales data exists, so "Popular Picks" = available toys, newest first.
+- "New Arrivals" shows only products with a real date (createdAt in js/product-meta.js, or Supabase created_at).
+  The section hides itself if none exist. "New" badge only if added within 30 days.
+- Discounts show only if a real original price exists. No ratings/reviews/fake stock.
+
+ADDING YOUR PHOTOS (optional)
+Upload photos to images/toys-redesign/ then list them in the PHOTOS block at the top of js/toys-redesign.js.
+Until then the page uses your existing images/about-toys.jpg and images/toys-art/*.svg (no missing files).
+The "Where Imagination Comes to Life" section stays hidden until you add at least one life photo.

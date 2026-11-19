@@ -1,0 +1,200 @@
+/* Vimal27 Toys page redesign — every rule is scoped under .v27t (no global leakage). */
+body.v27-toys-page{overflow-x:hidden;background:#fff}
+.v27t{--navy:#071A3D;--cyan:#00B4D8;--gold:#D4AF37;--white:#fff;--sky:#EAF8FF;--cream:#FFF8EA;--yellow:#FFF1B8;--pink:#FFE8EF;--lav:#F0EDFF;--mint:#E8F8EF;--grey:#F5F7FA;--ink:#172033;
+ --r:24px;--shadow:0 10px 30px rgba(7,26,61,.08);--shadow-h:0 18px 40px rgba(7,26,61,.16);
+ font-family:'Inter','DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:var(--ink);line-height:1.6;background:#fff;scroll-behavior:smooth}
+.v27t *,.v27t *::before,.v27t *::after{box-sizing:border-box}
+.v27t img{max-width:100%;display:block}
+.v27t a{color:inherit;text-decoration:none}
+.v27t h1,.v27t h2,.v27t h3,.v27t h4{font-family:'Poppins','Manrope',system-ui,sans-serif;color:var(--navy);margin:0;line-height:1.18}
+.v27t p{margin:0}
+.v27t .wrap{width:min(1240px,100% - 40px);margin-inline:auto}
+.v27t section{padding:clamp(40px,6vw,72px) 0}
+.v27t .eyebrow{display:inline-block;font:600 12px/1 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+.v27t .sec-head{text-align:center;max-width:680px;margin:0 auto clamp(28px,4vw,48px)}
+.v27t .sec-head h2{font-size:clamp(26px,3.6vw,40px);font-weight:700}
+.v27t .sec-head p{margin-top:10px;color:#4a5670;font-size:clamp(15px,1.6vw,17px)}
+.v27t :focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:8px}
+
+/* Buttons */
+.v27t .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font:600 15px/1 'Poppins',sans-serif;border:2px solid transparent;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s,color .25s;white-space:nowrap}
+.v27t .btn:hover{transform:translateY(-2px)}
+.v27t .btn-primary{background:var(--cyan);color:#fff;box-shadow:0 8px 20px rgba(0,180,216,.35)}
+.v27t .btn-primary:hover{background:#0097b8;box-shadow:0 12px 26px rgba(0,180,216,.45)}
+.v27t .btn-ghost{background:#fff;color:var(--navy);border-color:rgba(7,26,61,.16)}
+.v27t .btn-ghost:hover{border-color:var(--navy)}
+.v27t .btn-gold{background:var(--gold);color:var(--navy)}
+.v27t .btn-gold:hover{background:#c29c25}
+.v27t .btn-white{background:#fff;color:var(--navy)}
+.v27t .btn-sm{padding:11px 16px;font-size:13.5px}
+
+/* Hero */
+.v27t .hero{padding:clamp(16px,3vw,32px) 0 0}
+.v27t .hero-card{position:relative;overflow:hidden;border-radius:32px;background:linear-gradient(135deg,var(--sky) 0%,#fff 48%,var(--yellow) 100%);display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:32px;padding:clamp(28px,5vw,64px);min-height:520px}
+.v27t .hero h1{font-size:clamp(34px,5.4vw,64px);font-weight:800;letter-spacing:-.02em}
+.v27t .hero h1 span{color:var(--cyan)}
+.v27t .hero-copy p.lead{margin:18px 0 28px;font-size:clamp(16px,1.8vw,19px);color:#3c4965;max-width:520px}
+.v27t .hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.v27t .hero-art{position:relative;justify-self:center;width:min(100%,520px)}
+.v27t .hero-photo{border-radius:28px;aspect-ratio:1/1;object-fit:cover;width:100%;box-shadow:0 24px 60px rgba(7,26,61,.22);border:6px solid #fff}
+.v27t .label{position:absolute;background:var(--navy);color:#fff;font:700 11px/1 'Poppins',sans-serif;letter-spacing:.14em;padding:10px 14px;border-radius:999px;box-shadow:var(--shadow)}
+.v27t .label.l1{top:6%;left:-6%;animation:v27float 6s ease-in-out infinite}
+.v27t .label.l2{top:46%;right:-5%;background:var(--gold);color:var(--navy);animation:v27float 7s ease-in-out -2s infinite}
+.v27t .label.l3{bottom:7%;left:-4%;background:var(--cyan);animation:v27float 6.5s ease-in-out -4s infinite}
+.v27t .shape{position:absolute;border-radius:50%;pointer-events:none;opacity:.55}
+.v27t .shape.s1{width:180px;height:180px;background:var(--yellow);top:-50px;right:30%;animation:v27float 9s ease-in-out infinite}
+.v27t .shape.s2{width:110px;height:110px;background:rgba(0,180,216,.18);bottom:-30px;left:36%;animation:v27float 8s ease-in-out -3s infinite}
+.v27t .shape.s3{width:70px;height:70px;border:8px solid rgba(212,175,55,.45);top:14%;left:46%;background:none;animation:v27float 10s ease-in-out -5s infinite}
+@keyframes v27float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* Categories */
+.v27t .cats{background:#fff}
+.v27t .cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.v27t .cat-card{position:relative;display:flex;flex-direction:column;border-radius:var(--r);background:var(--bg,var(--sky));overflow:hidden;transition:transform .35s,box-shadow .35s}
+.v27t .cat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-h)}
+.v27t .cat-img{aspect-ratio:1/1;overflow:hidden;margin:10px 10px 0;border-radius:calc(var(--r) - 8px);background:rgba(255,255,255,.6)}
+.v27t .cat-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.v27t .cat-card:hover .cat-img img{transform:scale(1.08)}
+.v27t .cat-name{padding:14px 12px 18px;text-align:center;font:600 15px/1.3 'Poppins',sans-serif;color:var(--navy)}
+.v27t .cat-more{text-align:center;margin-top:30px}
+
+/* Collections */
+.v27t .collections{background:var(--grey)}
+.v27t .col-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.v27t .col-card{position:relative;overflow:hidden;border-radius:28px;min-height:340px;display:flex;align-items:flex-end;color:#fff;background:var(--navy);isolation:isolate}
+.v27t .col-card:nth-child(1){grid-column:span 7}
+.v27t .col-card:nth-child(2){grid-column:span 5}
+.v27t .col-card:nth-child(3){grid-column:span 5}
+.v27t .col-card:nth-child(4){grid-column:span 7}
+.v27t .col-bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.v27t .col-card:hover .col-bg{transform:scale(1.06)}
+.v27t .col-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,26,61,0) 25%,rgba(7,26,61,.86) 100%)}
+.v27t .col-body{padding:clamp(20px,3vw,32px)}
+.v27t .col-body h3{color:#fff;font-size:clamp(22px,2.4vw,30px);font-weight:700}
+.v27t .col-body p{margin:8px 0 16px;color:rgba(255,255,255,.86);max-width:420px;font-size:15px}
+.v27t .col-tag{display:inline-block;margin-bottom:10px;font:600 11px/1 'Poppins',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+
+/* Products */
+.v27t .picks{background:#fff}
+.v27t .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.v27t .prod-card{position:relative;display:flex;flex-direction:column;background:#fff;border-radius:20px;border:1px solid #e9edf3;box-shadow:var(--shadow);overflow:hidden;transition:transform .3s,box-shadow .3s}
+.v27t .prod-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-h)}
+.v27t .prod-img{position:relative;aspect-ratio:1/1;background:var(--grey);overflow:hidden;display:block}
+.v27t .prod-img img{width:100%;height:100%;object-fit:contain;padding:10px;transition:transform .5s}
+.v27t .prod-card:hover .prod-img img{transform:scale(1.07)}
+.v27t .badge{position:absolute;top:12px;left:12px;background:var(--gold);color:var(--navy);font:700 11px/1 'Poppins',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:999px}
+.v27t .wish{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:0;background:#fff;box-shadow:var(--shadow);cursor:pointer;font-size:18px;line-height:1;color:var(--navy);transition:transform .2s}
+.v27t .wish:hover{transform:scale(1.12)}
+.v27t .wish.on{color:#e0245e}
+.v27t .prod-body{display:flex;flex-direction:column;gap:8px;padding:16px;flex:1}
+.v27t .prod-name{font:600 16px/1.35 'Poppins',sans-serif;color:var(--navy);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
+.v27t .prod-price{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.v27t .price{font:700 20px/1 'Poppins',sans-serif;color:var(--navy)}
+.v27t .price-old{color:#8a94a8;text-decoration:line-through;font-size:14px}
+.v27t .price-off{color:#0a8f5b;font-weight:600;font-size:13px}
+.v27t .stock{font-size:13px;font-weight:600}
+.v27t .stock.in{color:#0a8f5b}.v27t .stock.out{color:#c0392b}.v27t .stock.ask{color:#7a6a1f}
+.v27t .prod-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto;padding-top:6px}
+.v27t .prod-actions .btn{padding:11px 8px;font-size:13px;width:100%}
+.v27t .prod-actions .btn:only-child{grid-column:1/-1}
+.v27t .btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+.v27t .empty-note{grid-column:1/-1;text-align:center;color:#5a6680;padding:30px 12px;background:var(--grey);border-radius:20px}
+
+/* Promo */
+.v27t .promo{padding:0}
+.v27t .promo-card{position:relative;overflow:hidden;border-radius:32px;background:var(--navy);color:#fff;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;min-height:380px}
+.v27t .promo-copy{padding:clamp(28px,5vw,64px);position:relative;z-index:1}
+.v27t .promo-copy h2{color:#fff;font-size:clamp(28px,4vw,46px);font-weight:800}
+.v27t .promo-copy h2 em{font-style:normal;color:var(--gold)}
+.v27t .promo-copy p{margin:14px 0 26px;color:rgba(255,255,255,.85);max-width:480px}
+.v27t .promo-img{align-self:stretch;background:url(../images/about-toys.jpg) center/cover;min-height:260px;clip-path:ellipse(100% 120% at 100% 50%)}
+.v27t .promo-card::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:var(--cyan);opacity:.25;left:-80px;bottom:-110px}
+
+/* Carousel */
+.v27t .arrivals{background:var(--cream)}
+.v27t .car-wrap{position:relative}
+.v27t .carousel{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:6px 4px 18px;scrollbar-width:thin}
+.v27t .carousel .prod-card{flex:0 0 calc((100% - 60px)/4);scroll-snap-align:start;min-width:230px}
+.v27t .car-btn{position:absolute;top:38%;width:46px;height:46px;border-radius:50%;border:0;background:var(--navy);color:#fff;cursor:pointer;font-size:18px;box-shadow:var(--shadow);transition:background .2s,transform .2s;z-index:2}
+.v27t .car-btn:hover{background:var(--cyan);transform:scale(1.08)}
+.v27t .car-btn.prev{left:-18px}.v27t .car-btn.next{right:-18px}
+
+/* Why */
+.v27t .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.v27t .why-card{padding:28px 24px;border-radius:var(--r);background:var(--bg);transition:transform .3s}
+.v27t .why-card:hover{transform:translateY(-4px)}
+.v27t .why-ic{width:54px;height:54px;border-radius:16px;background:#fff;display:grid;place-items:center;color:var(--cyan);font-size:22px;box-shadow:var(--shadow);margin-bottom:16px}
+.v27t .why-card h3{font-size:18px;font-weight:600;margin-bottom:8px}
+.v27t .why-card p{color:#4a5670;font-size:15px}
+
+/* Lifestyle */
+.v27t .life{background:var(--grey)}
+.v27t .life-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;gap:18px}
+.v27t .life-tile{position:relative;border-radius:24px;overflow:hidden;background:var(--bg,var(--sky));isolation:isolate}
+.v27t .life-tile:nth-child(1){grid-row:span 2}
+.v27t .life-tile:nth-child(4){grid-column:span 2}
+.v27t .life-tile .col-bg{z-index:0}
+.v27t [hidden]{display:none!important}
+.v27t .life-tile span{position:absolute;left:16px;bottom:14px;z-index:2;background:rgba(255,255,255,.92);color:var(--navy);font:600 13px/1 'Poppins',sans-serif;padding:9px 13px;border-radius:999px}
+
+/* Final CTA */
+.v27t .final{padding-top:0}
+.v27t .final-card{border-radius:32px;text-align:center;padding:clamp(40px,6vw,76px) 24px;background:linear-gradient(120deg,var(--cyan),#0a6fb5 60%,var(--navy));color:#fff;position:relative;overflow:hidden}
+.v27t .final-card h2{color:#fff;font-size:clamp(28px,4.4vw,48px);font-weight:800}
+.v27t .final-card p{margin:12px auto 28px;max-width:520px;color:rgba(255,255,255,.9)}
+
+/* All collections directory */
+.v27t .dir details{background:#fff;border:1px solid #e9edf3;border-radius:18px;margin-bottom:12px;overflow:hidden}
+.v27t .dir summary{cursor:pointer;list-style:none;padding:16px 20px;font:600 16px/1.3 'Poppins',sans-serif;color:var(--navy);display:flex;justify-content:space-between;align-items:center}
+.v27t .dir summary::-webkit-details-marker{display:none}
+.v27t .dir summary::after{content:"+";font-size:22px;color:var(--cyan)}
+.v27t .dir details[open] summary::after{content:"–"}
+.v27t .dir .chips{display:flex;flex-wrap:wrap;gap:10px;padding:0 20px 20px}
+.v27t .dir .chips a{padding:9px 14px;border-radius:999px;background:var(--sky);font-size:14px;font-weight:500;color:var(--navy);transition:background .2s,color .2s}
+.v27t .dir .chips a:hover{background:var(--cyan);color:#fff}
+
+/* Reveal */
+.v27t .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.v27t .reveal.in{opacity:1;transform:none}
+.v27t.no-js .reveal{opacity:1;transform:none}
+
+/* Responsive */
+@media (max-width:1100px){
+ .v27t .cat-grid{grid-template-columns:repeat(3,1fr)}
+ .v27t .prod-grid{grid-template-columns:repeat(3,1fr)}
+ .v27t .carousel .prod-card{flex-basis:calc((100% - 40px)/3)}
+ .v27t .why-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+ .v27t .hero-card{grid-template-columns:1fr;min-height:0;text-align:center}
+ .v27t .hero-copy p.lead{margin-inline:auto}
+ .v27t .hero-cta{justify-content:center}
+ .v27t .hero-art{order:-1;width:min(88%,420px)}
+ .v27t .label.l1{left:-2%}.v27t .label.l2{right:-2%}.v27t .label.l3{left:-1%}
+ .v27t .col-card:nth-child(n){grid-column:span 12;min-height:280px}
+ .v27t .promo-card{grid-template-columns:1fr}
+ .v27t .promo-img{clip-path:none;min-height:220px;order:-1}
+ .v27t .life-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}
+ .v27t .life-tile:nth-child(1){grid-row:auto}
+ .v27t .life-tile:nth-child(4){grid-column:span 2}
+ .v27t .car-btn{display:none}
+}
+@media (max-width:640px){
+ .v27t .wrap{width:calc(100% - 28px)}
+ .v27t .cat-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+ .v27t .prod-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+ .v27t .carousel .prod-card{flex-basis:62%;min-width:0}
+ .v27t .why-grid{grid-template-columns:1fr}
+ .v27t .prod-body{padding:12px}
+ .v27t .prod-name{font-size:14px}
+ .v27t .price{font-size:17px}
+ .v27t .prod-actions{grid-template-columns:1fr}
+ .v27t .btn{padding:13px 20px}
+ .v27t .hero-cta .btn{flex:1 1 100%}
+ .v27t .label{font-size:10px;padding:8px 10px}
+}
+@media (prefers-reduced-motion:reduce){
+ .v27t,.v27t .carousel{scroll-behavior:auto}
+ .v27t *,.v27t *::before,.v27t *::after{animation:none!important;transition:none!important}
+ .v27t .reveal{opacity:1;transform:none}
+}
