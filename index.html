@@ -282,6 +282,65 @@ body .hero .hero-content .contact-link.hv-pre.hv-pre{
 @media (prefers-reduced-motion: reduce){
   body .hero .hero-content .hv-pre.hv-pre{opacity:1 !important;transform:none !important;}
 }
+
+/* ===== PREMIUM SCROLL REVEAL (whole home page) ===== */
+:root{--rv-ease:cubic-bezier(.16,1,.3,1);--rv-gold:#d4af37;}
+
+/* already-handled elements: stop the old load-time animation, we control it now */
+.pet-item.rv{animation:none !important;opacity:1;}
+
+/* hidden (before reveal) states */
+body .rv-pre.rv-pre{opacity:0 !important;}
+body .rv-pre.rv-up.rv-up{transform:translate3d(0,48px,0) scale(.97) !important;}
+body .rv-pre.rv-head.rv-head{transform:translate3d(0,30px,0) !important;filter:blur(8px) !important;}
+body .rv-pre.rv-pop.rv-pop{transform:translate3d(0,26px,0) scale(.5) !important;filter:blur(6px) !important;}
+body .rv-pre.rv-zoom.rv-zoom{transform:scale(.88) !important;}
+body .rv-pre.rv-left.rv-left{transform:translate3d(-60px,0,0) !important;}
+body .rv-pre.rv-right.rv-right{transform:translate3d(60px,0,0) !important;}
+
+/* the smooth, slow, luxurious transition (removed again after the reveal) */
+body .rv-anim.rv-anim{
+  transition:opacity 1.1s var(--rv-ease), transform 1.25s var(--rv-ease), filter 1s var(--rv-ease) !important;
+}
+
+/* premium hover for cards once revealed */
+body .product-card.rv:not(.rv-anim),
+body .service-card.rv:not(.rv-anim),
+body .feature-card.rv:not(.rv-anim),
+body .review-card.rv:not(.rv-anim),
+body .youtube-item.rv:not(.rv-anim),
+body .stat-box.rv:not(.rv-anim){
+  transition:transform .5s var(--rv-ease), box-shadow .5s var(--rv-ease), border-color .5s ease;
+}
+body .product-card.rv:not(.rv-anim):hover,
+body .service-card.rv:not(.rv-anim):hover,
+body .feature-card.rv:not(.rv-anim):hover,
+body .review-card.rv:not(.rv-anim):hover,
+body .youtube-item.rv:not(.rv-anim):hover,
+body .stat-box.rv:not(.rv-anim):hover{
+  transform:translateY(-8px);
+  box-shadow:0 22px 44px rgba(7,26,61,.18), 0 0 0 1px rgba(212,175,55,.45);
+}
+
+/* category circles: golden ring + gentle floating */
+.pet-item.rv:not(.rv-pre):hover img{
+  box-shadow:0 0 0 4px rgba(212,175,55,.65), 0 16px 32px rgba(0,0,0,.28);
+}
+@keyframes rvFloat{0%,100%{translate:0 0;}50%{translate:0 -6px;}}
+.pet-item.rv:not(.rv-pre) img{animation:rvFloat 5s ease-in-out infinite;}
+.pet-grid .pet-item:nth-child(2n) img{animation-delay:-1.2s;}
+.pet-grid .pet-item:nth-child(3n) img{animation-delay:-2.4s;}
+.pet-grid .pet-item:nth-child(5n) img{animation-delay:-3.6s;}
+
+/* gold scroll-progress line at the very top */
+#rvProgress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:100000;pointer-events:none;
+  transform-origin:0 50%;transform:scaleX(0);
+  background:linear-gradient(90deg,#b8860b,#ffd966,#d4af37);box-shadow:0 0 10px rgba(212,175,55,.7);}
+
+@media (prefers-reduced-motion: reduce){
+  body .rv-pre.rv-pre{opacity:1 !important;transform:none !important;filter:none !important;}
+  .pet-item.rv:not(.rv-pre) img{animation:none;}
+}
 </style>
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
     <link rel="stylesheet" href="css/vimal-dropdown-unified.css?v=1">
@@ -1229,5 +1288,79 @@ document.getElementById("searchInput").addEventListener("keypress", function(e){
 <script src="js/product-meta.js"></script>
 <script src="js/vpw-catalog.js"></script>
 <script src="js/vp-search.js?v=1"></script>
+<script>
+/* Premium scroll-reveal for the home page */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // [selector, effect, stagger(ms)]
+  var groups=[
+    ['#pet-finder .pet-finder','rv-zoom',0],
+    ['.xsec-head','rv-head',0],
+    ['.youtube-section > h2, .youtube-subtitle, .why-us > h2, .reviews > h2','rv-head',90],
+    ['.pet-item','rv-pop',90],
+    ['.product-card','rv-up',130],
+    ['.service-card','rv-up',130],
+    ['.youtube-item','rv-zoom',130],
+    ['.feature-card','rv-up',130],
+    ['.stat-box','rv-zoom',130],
+    ['.review-card','rv-up',140],
+    ['.xsec-cta','rv-up',0],
+    ['.footer-content > *','rv-up',110]
+  ];
+
+  var seen = new WeakSet();
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      var el = en.target; io.unobserve(el);
+      var delay = parseInt(el.getAttribute('data-rv-d')||'0',10);
+      setTimeout(function(){
+        el.classList.remove('rv-pre');
+        setTimeout(function(){ el.classList.remove('rv-anim'); }, 1500);
+      }, delay);
+    });
+  },{threshold:0.12, rootMargin:'0px 0px -6% 0px'});
+
+  function register(el, effect, step, idx){
+    if(seen.has(el)) return; seen.add(el);
+    el.classList.add('rv', effect);
+    if(reduce) return;
+    el.classList.add('rv-pre','rv-anim');
+    el.setAttribute('data-rv-d', String((idx % 6) * step));
+    io.observe(el);
+  }
+
+  function scan(root){
+    groups.forEach(function(g){
+      var list = (root||document).querySelectorAll(g[0]);
+      list.forEach(function(el,i){ register(el,g[1],g[2],i); });
+    });
+  }
+  scan();
+
+  // products can be injected later by other scripts: animate those too
+  var mo = new MutationObserver(function(muts){
+    var hit=false;
+    muts.forEach(function(m){ if(m.addedNodes && m.addedNodes.length) hit=true; });
+    if(hit) scan();
+  });
+  document.querySelectorAll('.product-grid, .youtube-grid, .pet-grid').forEach(function(n){
+    mo.observe(n,{childList:true});
+  });
+
+  // gold scroll progress bar
+  var bar=document.createElement('div'); bar.id='rvProgress'; document.body.appendChild(bar);
+  var tick=false;
+  function upd(){
+    var h=document.documentElement.scrollHeight-innerHeight;
+    bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')';
+    tick=false;
+  }
+  addEventListener('scroll',function(){ if(!tick){tick=true;requestAnimationFrame(upd);} },{passive:true});
+  upd();
+})();
+</script>
 </body>
 </html>
