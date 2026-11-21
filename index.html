@@ -41,7 +41,6 @@
 <link rel="stylesheet" href="css/navbar-auth.css">
 <link rel="stylesheet" href="css/extra-sections.css">
 <link rel="stylesheet" href="css/vimal-home-app-popup.css?v=1">
-<link rel="stylesheet" href="css/vimal-home-offer-popup.css?v=3">
 <link rel="stylesheet" href="css/style.css?v=3">
 
     <!-- Page-specific inline overrides load after everything -->
@@ -267,6 +266,22 @@
   }
 }
 
+
+/* ===== HERO TEXT: APPEAR ONE BY ONE ===== */
+.hero .hero-content .hv-l2{display:block;}
+body .hero .hero-content .hv-item{
+  transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1) !important;
+}
+body .hero .hero-content .hv-pre.hv-pre{
+  opacity:0 !important;
+  transform:translateY(26px) !important;
+}
+body .hero .hero-content .contact-link.hv-pre.hv-pre{
+  transform:scale(.4) !important;
+}
+@media (prefers-reduced-motion: reduce){
+  body .hero .hero-content .hv-pre.hv-pre{opacity:1 !important;transform:none !important;}
+}
 </style>
     <link rel="stylesheet" href="css/vimal27-enhancements.css">
     <link rel="stylesheet" href="css/vimal-dropdown-unified.css?v=1">
@@ -377,7 +392,7 @@
 
         <h1>
             <span class="accent">Your Trusted place for</span>
-            Pets, Accessories & Toys
+            <span class="hv-l2">Pets, Accessories &amp; Toys</span>
         </h1>
 
         <p id="heroTagline">
@@ -417,6 +432,32 @@
         </div>
 
     </div>
+
+    <script>
+    (function(){
+        var hc=document.querySelector('.hero .hero-content');
+        if(!hc) return;
+        var items=[
+            hc.querySelector('h1 .accent'),
+            hc.querySelector('h1 .hv-l2'),
+            hc.querySelector('#heroTagline'),
+            hc.querySelector('.shop-btn')
+        ];
+        hc.querySelectorAll('.social-contact .contact-link').forEach(function(a){items.push(a);});
+        items=items.filter(Boolean);
+        items.forEach(function(el){el.classList.add('hv-item','hv-pre');});
+
+        var START=400, GAP=750, ICON_GAP=170;
+        items.forEach(function(el,i){
+            var t = i<4 ? START+i*GAP : START+4*GAP+(i-4)*ICON_GAP;
+            setTimeout(function(){
+                el.classList.remove('hv-pre');
+                // after the fade finishes, restore the element's original hover transitions
+                setTimeout(function(){el.classList.remove('hv-item');},1000);
+            },t);
+        });
+    })();
+    </script>
 
 </section>
 <!-- ================= FIND YOUR PERFECT PET ================= -->
@@ -1176,7 +1217,6 @@ document.getElementById("searchInput").addEventListener("keypress", function(e){
 
 <script src="js/navbar.js?v=32"></script>
 <script src="js/vimal-home-app-popup.js?v=1"></script>
-<script src="js/vimal-home-offer-popup.js?v=3"></script>
 <script src="js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabaseClient.js"></script>
