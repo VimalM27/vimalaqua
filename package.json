@@ -1,0 +1,9 @@
+{
+  "name": "vimal27-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Static storefront + single-owner admin portal (Vercel serverless functions)",
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node tests/admin.test.js", "init-owner": "node scripts/init-owner.js", "reset-owner-password": "node scripts/reset-owner-password.js" },
+  "dependencies": { "@node-rs/argon2": "^2.0.2" }
+}

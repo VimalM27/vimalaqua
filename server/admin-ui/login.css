@@ -1,0 +1,11 @@
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#071A3D,#0b2a5c 60%,#0a3d6b);font-family:Inter,system-ui,sans-serif;color:#172033;padding:16px}
+.card{width:min(420px,100%);background:#fff;border-radius:22px;padding:34px 30px;box-shadow:0 30px 80px rgba(0,0,0,.35);border-top:4px solid #D4AF37}
+.logo{display:block;margin:0 auto 14px;height:auto;max-width:180px;background:#071A3D;border-radius:10px;padding:8px 14px}
+h1{font:700 24px Poppins,sans-serif;color:#071A3D;margin:6px 0 2px;text-align:center}.sub{margin:0 0 22px;text-align:center;color:#5a6680;font-size:14px}
+label{display:block;font-weight:600;font-size:13px;margin:14px 0 6px;color:#071A3D}
+input{width:100%;padding:13px 14px;border:1.5px solid #d7deea;border-radius:12px;font:inherit;transition:border .2s,box-shadow .2s}
+input:focus{outline:0;border-color:#00B4D8;box-shadow:0 0 0 4px rgba(0,180,216,.18)}
+.pw{position:relative}.pw button{position:absolute;right:8px;top:7px;border:0;background:#EAF8FF;color:#071A3D;border-radius:8px;padding:7px 10px;font-size:12px;font-weight:600;cursor:pointer}
+.err{margin-top:14px;background:#fdecea;color:#a12622;border-radius:10px;padding:10px 12px;font-size:14px}
+.go{margin-top:20px;width:100%;border:0;border-radius:999px;background:#00B4D8;color:#fff;font:600 15px Poppins,sans-serif;padding:14px;cursor:pointer;transition:background .2s}
+.go:hover{background:#0097b8}.go[disabled]{opacity:.6;cursor:wait}.foot{text-align:center;font-size:12px;color:#8a94a8;margin:18px 0 0}

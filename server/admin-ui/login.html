@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Owner Sign in | Vimal27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap">
+<link rel="stylesheet" href="/admin/assets/login.css"></head>
+<body><main class="card">
+  <img src="/images/vimallogo.png" alt="Vimal27" class="logo" width="200">
+  <h1>Owner sign in</h1><p class="sub">Restricted area. Authorised owner only.</p>
+  <form id="f" autocomplete="on" novalidate>
+    <label for="u">Username or email</label><input id="u" name="username" autocomplete="username" required maxlength="200" autofocus>
+    <label for="p">Password</label><div class="pw"><input id="p" name="password" type="password" autocomplete="current-password" required maxlength="400"><button type="button" id="t" aria-label="Show password">Show</button></div>
+    <div id="err" class="err" role="alert" aria-live="polite" hidden></div>
+    <button class="go" id="go" type="submit">Sign in</button>
+  </form>
+  <p class="foot">Sessions end automatically after inactivity.</p>
+</main><script src="/admin/assets/login.js"></script></body></html>

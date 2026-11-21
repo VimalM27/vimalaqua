@@ -94,9 +94,87 @@
       "source": "/tools/:path*",
       "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/admin-dashboard.html",
+      "destination": "/admin",
+      "permanent": false
+    },
+    {
+      "source": "/admin-orders.html",
+      "destination": "/admin/orders",
+      "permanent": false
+    },
+    {
+      "source": "/admin-products.html",
+      "destination": "/admin/products",
+      "permanent": false
+    },
+    {
+      "source": "/admin-payments.html",
+      "destination": "/admin/payments",
+      "permanent": false
+    },
+    {
+      "source": "/admin-sellers.html",
+      "destination": "/admin/sellers",
+      "permanent": false
+    },
+    {
+      "source": "/admin-seller-applications.html",
+      "destination": "/admin/sellers",
+      "permanent": false
+    },
+    {
+      "source": "/server/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/scripts/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/tests/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/package.json",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/package-lock.json",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/node_modules/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/:path*.sql",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/DEPLOY-ADMIN-PORTAL.md",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "rewrites": [
+    {
+      "source": "/admin",
+      "destination": "/api/admin/page?p="
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/api/admin/page?p=:path*"
+    },
     {
       "source": "/product/:slug",
       "destination": "/product.html"
@@ -131,6 +209,25 @@
           "value": "frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
         }
       ]
+    },
+    {
+      "source": "/admin/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
-  ]
+  ],
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "{js/products-data.js,js/toys-defaults.js,server/admin-ui/**}",
+      "maxDuration": 30
+    }
+  }
 }
